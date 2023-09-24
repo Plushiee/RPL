@@ -30,64 +30,81 @@
 
     <main>
         <!-- Login -->
-        <div class="form container-lg rounded px-0 mx-0">
-            <div class="border p-5">
-
-                <div class="row mb-5 text-center">
-                    <div class="col">
-                        <h1 class="title">Masuk Akun</h1>
-                    </div>
-                </div>
-                <form action="">
-                    <div class="row mb-3">
-                        <div class="col">
-                            <input type="email" class="form-control" id="emailLogin" placeholder="Email">
+        <div class="form container-lg rounded px-0 mx-0 pt-sm-5 mt-sm-5 pt-md-5 mt-md-5">
+            <div class="card-group">
+                <div class="card">
+                    <center>
+                        <div class="card-body m-0 p-0">
+                            <img src="assets/navbar/logo.png" alt="logo" class="m-0 p-0" height="100%">
+                            <h3 class="m-0 p-0">Buang Sampah Mudah dengan MoneyTrash</h1>
+                            <p>Trash Me! It’s Work</p>
                         </div>
-                    </div>
+                    </center>
+                </div>
 
-                    <div class="row">
-                        <div class="col">
-                            <div class="input-group px-0">
-                                <input type="password" class="form-control" id="passwordLogin" placeholder="Kata Sandi">
-                                <div class="input-group-append">
-                                    <span class="input-group-text">
-                                        <i class="bi bi-eye-fill" id="showPass"></i>
-                                        <i class="bi bi-eye-slash-fill" id="hidePass"></i>
-                                    </span>
+                <div class="card">
+                    <div class="card-body p-0 m-0">
+                        <div class="border p-5">
+                            <div class="row mb-5 text-center">
+                                <div class="col">
+                                    <h1 class="title">Masuk Akun</h1>
                                 </div>
                             </div>
+                            <form action="">
+                                <div class="row mb-3">
+                                    <div class="col">
+                                        <input type="email" class="form-control" id="emailLogin" placeholder="Email">
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="input-group px-0">
+                                            <input type="password" class="form-control" id="passwordLogin"
+                                                placeholder="Kata Sandi">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">
+                                                    <i class="bi bi-eye-fill" id="showPass"></i>
+                                                    <i class="bi bi-eye-slash-fill" id="hidePass"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="row text-end mb-3">
+                                    <div class="col">
+                                        <a href="">Lupa Kata Sandi?</a>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <div class="d-grid">
+                                        <button type="submit" class="btn btn-success submit">Masuk</button>
+                                    </div>
+                                </div>
+
+                                <div class="row text-center">
+                                    <div class="col">
+                                        <p>Belum Punya Akun? <a href="">Mendaftar</a></p>
+                                    </div>
+                                </div>
+
+                                <div class="divider d-flex align-items-center mb-3">
+                                    <p class="text-center fw-bold mx-3 mb-0">atau menggunakan</p>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <div class="d-grid">
+                                        <button type="submit" class="btn btn-primary login"><i
+                                                class="bi bi-google float-start"></i>Google</button>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
-
-
-                    <div class="row text-end mb-3">
-                        <div class="col">
-                            <a href="">Lupa Kata Sandi?</a>
-                        </div>
-                    </div>
-
-                    <div class="row mb-3">
-                        <div class="d-grid">
-                            <button type="submit" class="btn btn-success submit">Masuk</button>
-                        </div>
-                    </div>
-
-                    <div class="row text-center">
-                        <div class="col">
-                            <p>Belum Punya Akun? <a href="">Mendaftar</a></p>
-                        </div>
-                    </div>
-
-                    <div class="divider d-flex align-items-center mb-3">
-                        <p class="text-center fw-bold mx-3 mb-0">atau</p>
-                    </div>
-
-                    <div class="row mb-3">
-                        <div class="d-grid">
-                            <button type="submit" class="btn btn-primary login"><i class="bi bi-google float-start"></i> Login Menggunakan Google</button>
-                        </div>
-                    </div>
-                </form>
+                </div>
             </div>
         </div>
     </main>
