@@ -18,33 +18,23 @@
 </head>
 
 <body>
-    <header>
-        <div class="container-fluid container-nav">
-            <nav class="navbar bg-body-tertiary">
-                <a class="navbar-brand float-start mx-4" href="#">
-                    <img src="assets/navbar/logo.png" alt="logo" height="50px">
-                </a>
-            </nav>
-        </div>
-    </header>
-
     <main>
         <!-- Login -->
-        <div class="form container-lg rounded px-0 mx-0 pt-sm-5 mt-sm-5 pt-md-5 mt-md-5">
+        <div class="container-lg rounded d-flex justify-content-center mt-2 pt-0 mt-sm-3 mt-md-4 pt-lg-5 pt-xxl-5 ">
             <div class="card-group">
-                <div class="card">
+                <div class="card mx-5">
                     <center>
-                        <div class="card-body m-0 p-0">
-                            <img src="assets/navbar/logo.png" alt="logo" class="m-0 p-0" height="100%">
-                            <h3 class="m-0 p-0">Buang Sampah Mudah dengan MoneyTrash</h1>
+                        <div class="card-body form-logo">
+                            <img src="assets/navbar/logo.png" alt="logo" class="img-fluid" class="m-3">
+                            <h3 class="m-0 p-0">Buang Sampah Mudah dengan MoneyTrash</h3>
                             <p>Trash Me! It’s Work</p>
                         </div>
                     </center>
                 </div>
 
-                <div class="card">
+                <div class="card mx-5 rounded border">
                     <div class="card-body p-0 m-0">
-                        <div class="border p-5">
+                        <div class="form form-login p-5">
                             <div class="row mb-5 text-center">
                                 <div class="col">
                                     <h1 class="title">Masuk Akun</h1>
