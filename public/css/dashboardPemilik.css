@@ -13,6 +13,11 @@ a:focus {
     text-decoration: none;
 }
 
+#map {
+    height: 400px;
+    width: 100%;
+}
+
 #wrapper {
     padding-left: 0;
     transition: all 0.5s ease;
@@ -28,7 +33,7 @@ a:focus {
     margin-left: -250px;
     overflow-y: auto;
     overflow-x: hidden;
-    background: #222;
+    background: white;
     transition: all 0.5s ease;
 }
 
@@ -42,6 +47,7 @@ a:focus {
     width: 250px;
     text-align: center;
     padding: 20px 0;
+    z-index: -1;
 }
 
 .sidebar-brand h2 {
@@ -77,7 +83,7 @@ a:focus {
 .sidebar-nav>li.active>a {
     text-decoration: none;
     color: #fff;
-    background: #F8BE12;
+    background: #1DB964;
 }
 
 .sidebar-nav>li>a i.fa {
@@ -119,12 +125,18 @@ a:focus {
     top: 100px;
 }
 
+#close-sidebar {
+    background-color: transparent;
+    border: none;
+    z-index: 2;
+}
+
 #wrapper.toggled #content-wrapper {
     position: absolute;
     margin-right: -250px;
 }
 
-@media (min-width: 992px) {
+@media (min-width: 0px) {
     #wrapper {
         padding-left: 250px;
     }
@@ -168,87 +180,5 @@ a:focus {
     #wrapper.toggled #content-wrapper {
         position: relative;
         margin-right: 60px;
-    }
-}
-
-@media (min-width: 768px) and (max-width: 991px) {
-    #wrapper {
-        padding-left: 60px;
-    }
-
-    #sidebar-wrapper {
-        width: 60px;
-    }
-
-    #wrapper.toggled #navbar-wrapper {
-        position: absolute;
-        margin-right: -250px;
-    }
-
-    #wrapper.toggled #content-wrapper {
-        position: absolute;
-        margin-right: -250px;
-    }
-
-    #navbar-wrapper {
-        position: relative;
-    }
-
-    #wrapper.toggled {
-        padding-left: 250px;
-    }
-
-    #content-wrapper {
-        position: relative;
-        top: 0;
-    }
-
-    #wrapper.toggled #navbar-wrapper,
-    #wrapper.toggled #content-wrapper {
-        position: relative;
-        margin-right: 250px;
-    }
-}
-
-@media (max-width: 767px) {
-    #wrapper {
-        padding-left: 0;
-    }
-
-    #sidebar-wrapper {
-        width: 0;
-    }
-
-    #wrapper.toggled #sidebar-wrapper {
-        width: 250px;
-    }
-
-    #wrapper.toggled #navbar-wrapper {
-        position: absolute;
-        margin-right: -250px;
-    }
-
-    #wrapper.toggled #content-wrapper {
-        position: absolute;
-        margin-right: -250px;
-    }
-
-    #navbar-wrapper {
-        position: relative;
-    }
-
-    #wrapper.toggled {
-        padding-left: 250px;
-    }
-
-    #content-wrapper {
-        position: relative;
-        top: 0;
-    }
-
-    #wrapper.toggled #navbar-wrapper,
-    #wrapper.toggled #content-wrapper {
-        position: relative;
-        margin-right: 250px;
     }
 }

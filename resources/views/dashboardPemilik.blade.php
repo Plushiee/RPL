@@ -23,22 +23,33 @@
 <body>
     <main>
         <div id="wrapper">
-
             <aside id="sidebar-wrapper">
-                <div class="sidebar-brand">
-                    <h2><img src="assets/navbar/logo.png" alt="Logo" width="30" height="24"
-                            class="d-inline-block align-text-top">
-                        MONEYTRASH</h2>
+                <button class="float-end align-text-top pe-1" id="close-sidebar">
+                    <i class="bi bi-x" style="color: black"></i>
+                </button>
+
+                <div class="sidebar-brand p-0 mt-2">
+                    <div class="m-0 p-0 d-flex align-items-center">
+                        <img src="assets/navbar/logo.png" alt="Logo" width="50" height="50"
+                            class="d-inline-block ms-1 float-start">
+                        <h2 class="m-0 p-0 ms-2 align-middle" style="color: BLACK"> MONEYTRASH</h2>
+                    </div>
+
                 </div>
+
                 <ul class="sidebar-nav">
                     <li class="active">
-                        <a href="#"><i class="fa fa-home"></i>Home</a>
+                        <a href="#"><i class="bi bi-house"></i> <span id="icon-home"> Home</span></a>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-plug"></i>Plugins</a>
+                        <a href="#"><i class="bi bi-activity"></i><span id="icon-pembayaran">
+                                Pembayaran</span></a>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-user"></i>Users</a>
+                        <a href="#"><i class="bi bi-clock-history"></i><span id="icon-riwayat"> Riwayat</span></a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="bi bi-person"></i><span id="icon-pengaturan"> Pengaturan</span></a>
                     </li>
                 </ul>
             </aside>
@@ -53,11 +64,60 @@
                 </nav>
             </div>
 
+            {{-- Jenis Layanan --}}
             <section id="content-wrapper">
                 <div class="row">
-                    <div class="col-lg-12">
-                        <h2 class="content-title">Test</h2>
-                        <p>Lorem ipsum...</p>
+                    <div class="col-lg-12 mb-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <h1>Jenis Layanan</h1>
+                                    </div>
+                                    <div class="row m-0 p-0 border">
+                                        <div class="col-6">
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">Special title treatment</h5>
+                                                    <p class="card-text">With supporting text below as a natural
+                                                        lead-in
+                                                        to
+                                                        additional content.</p>
+                                                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">Special title treatment</h5>
+                                                    <p class="card-text">With supporting text below as a natural
+                                                        lead-in
+                                                        to
+                                                        additional content.</p>
+                                                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {{-- Maps --}}
+                <div class="row">
+                    <div class="col-lg-12 mb-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                    <h1>Peta</h1>
+                                </div>
+                                <div class="row m-0 p-0 border">
+                                    <div id="map"></div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -77,11 +137,15 @@
         integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
     </script>
 
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBPCyuCDP-NsuKm_SVIyga-LHZilnWyzmo&callback=initMap"></script>
+
     <!-- jQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
     <!-- JavaScript -->
-    <script type="text/javascript" src="{{ URL::asset('js/dashboard.js') }}"></script>
+    <script src="javascript/dashboard.js"></script>
+
 </body>
 
 </html>

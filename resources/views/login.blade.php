@@ -32,9 +32,9 @@
                     </center>
                 </div>
 
-                <div class="card mx-5 rounded border">
+                <div class="card mx-5 rounded border form-login">
                     <div class="card-body p-0 m-0">
-                        <div class="form form-login p-5">
+                        <div class="form p-5">
                             <div class="row mb-5 text-center">
                                 <div class="col">
                                     <h1 class="title">Masuk Akun</h1>
