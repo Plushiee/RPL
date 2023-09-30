@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PilihAkunController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,3 +25,6 @@ Route::get('/register', [RegisterController::class, 'register']);
 
 // Dashboard Controller
 Route::get('/pemilik', [DashboardController::class, 'pemilik']);
+
+// Pilih Akun Controller
+Route::get('/pilih-akun', [PilihAkunController::class, 'pilihAkun']);
