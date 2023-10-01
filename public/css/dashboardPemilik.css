@@ -4,6 +4,15 @@ body {
     min-height: 100%;
 }
 
+.ambil {
+    width: 80%;
+    padding: 5% 0;
+}
+
+.antar {
+    width: 80%;
+}
+
 a {
     transition: background 0.2s, color 0.2s;
 }
@@ -123,17 +132,13 @@ a:focus {
     position: absolute;
     padding: 15px;
     top: 100px;
+    padding-left: 75px;
 }
 
 #close-sidebar {
     background-color: transparent;
     border: none;
     z-index: 2;
-}
-
-#wrapper.toggled #content-wrapper {
-    position: absolute;
-    margin-right: -250px;
 }
 
 @media (min-width: 0px) {
