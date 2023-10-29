@@ -7,6 +7,6 @@ use Illuminate\Http\Request;
 class DashboardController extends Controller
 {
     public function pemilik() {
-        return view('dashboardPemilik');
+        return view('dashboard');
     }
 }

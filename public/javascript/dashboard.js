@@ -1,44 +1,4 @@
 $(document).ready(function () {
-    const $button = document.querySelector('#sidebar-toggle');
-    const $sidebarWraper = document.querySelector('#sidebar-wraper');
-    const $wrapper = document.querySelector('#wrapper');
-    const $icon = document.getElementById('icon')
-    var $window = $(window)
-
-    if ($window.width() < 768) {
-        $wrapper.classList.add('toggled');
-        toogleNavbar();
-    }
-
-    function toogleNavbar() {
-        if($wrapper.className === 'toggled') {
-            document.getElementById('icon-home').style.display = 'none';
-            document.getElementById('icon-pembayaran').style.display = 'none';
-            document.getElementById('icon-riwayat').style.display = 'none';
-            document.getElementById('icon-pengaturan').style.display = 'none';
-            document.getElementById('close-sidebar').style.display = 'none';
-        } else {
-            document.getElementById('icon-home').style.display = 'inline';
-            document.getElementById('icon-pembayaran').style.display = 'inline';
-            document.getElementById('icon-riwayat').style.display = 'inline';
-            document.getElementById('icon-pengaturan').style.display = 'inline';
-            document.getElementById('close-sidebar').style.display = 'inline';
-        }
-    }
-
-    $button.addEventListener('click', (e) => {
-        e.preventDefault();
-        $wrapper.classList.toggle('toggled');
-        toogleNavbar();
-    });
-
-    $('#close-sidebar').click(function (e) {
-        e.preventDefault();
-        $wrapper.classList.toggle('toggled');
-        toogleNavbar();
-
-    });
-
     // Map
     function initMap(latitude, longitude) {
         // Coordinat awal (default jika geolokasi tidak diizinkan)
