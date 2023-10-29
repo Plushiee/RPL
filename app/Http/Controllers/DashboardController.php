@@ -9,4 +9,7 @@ class DashboardController extends Controller
     public function pemilik() {
         return view('dashboardPemilik');
     }
+    public function pemilikTemplate() {
+        return view('dashboard');
+    }
 }
