@@ -3,18 +3,28 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>Dashboard | Simple - Responsive Bootstrap 4 Admin Dashboard</title>
+    <title>@yield('title')</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Responsive bootstrap 4 admin template" name="description" />
     <meta content="Coderthemes" name="author" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <!-- App favicon -->
-    <link rel="shortcut icon" href="assets/images/favicon.ico">
+    <link rel="shortcut icon" href="/assets/navbar/logo.png">
     <!-- App css -->
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" id="bootstrap-stylesheet" />
-    <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
-    <link href="assets/css/app.min.css" rel="stylesheet" type="text/css" id="app-stylesheet" />
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" id="bootstrap-stylesheet" />
+    <link href="/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/css/app.min.css" rel="stylesheet" type="text/css" id="app-stylesheet" />
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBPCyuCDP-NsuKm_SVIyga-LHZilnWyzmo"></script>
+
+    <!-- CSS per Page-->
+    @yield('css')
+
 </head>
 
 <body>
@@ -63,7 +73,7 @@
                 <li class="dropdown notification-list">
                     <a class="nav-link dropdown-toggle nav-user mr-0" data-toggle="dropdown" href="#"
                         role="button" aria-haspopup="false" aria-expanded="false">
-                        <img src="assets/images/users/avatar-1.jpg" alt="user-image" class="rounded-circle">
+                        <img src="/assets/images/users/avatar-1.jpg" alt="user-image" class="rounded-circle">
                         <span class="pro-user-name ml-1">
                             Maxine K <i class="mdi mdi-chevron-down"></i>
                         </span>
@@ -107,12 +117,12 @@
             <div class="logo-box">
                 <a href="pemilik" class="logo text-center logo-dark">
                     <span class="logo-lg">
-                        <img src="assets/navbar/logo.png" alt="" height="40">
+                        <img src="/assets/navbar/logo-long.png" alt="" height="40">
                         <!-- <span class="logo-lg-text-dark">Simple</span> -->
                     </span>
                     <span class="logo-sm">
                         <!-- <span class="logo-lg-text-dark">S</span> -->
-                        <img src="assets/navbar/logo.png" alt="" height="22">
+                        <img src="/assets/navbar/logo.png" alt="" height="22">
                     </span>
                 </a>
             </div>
@@ -130,7 +140,7 @@
         <div class="left-side-menu">
             <div class="user-box">
                 <div class="float-left">
-                    <img src="assets/images/users/avatar-1.jpg" alt="" class="avatar-md rounded-circle">
+                    <img src="/assets/images/users/avatar-1.jpg" alt="" class="avatar-md rounded-circle">
                 </div>
                 <div class="user-info">
                     <a href="#">Stanley Jones</a>
@@ -145,31 +155,31 @@
 
                     <li class="menu-title">Navigasi</li>
 
-                    <li>
-                        <a href="index.html">
-                            <i class="bi bi-house"></i>
-                            <span> Home </span>
+                    <li class="@if(request()->is('pemilik/dashboard*')) active-class @endif">
+                        <a href="dashboard">
+                            <i class="bi bi-house @if(request()->is('pemilik/dashboard*')) active-txt @endif"></i>
+                            <span class="@if(request()->is('pemilik/dashboard*')) active-txt @endif"> Home </span>
                         </a>
                     </li>
 
-                    <li>
-                        <a href="ui-elements.html">
-                            <i class="bi bi-cash-stack"></i>
-                            <span> Pembayaran </span>
+                    <li class="@if(request()->is('pemilik/pembayaran*')) active-class @endif">
+                        <a href="pembayaran">
+                            <i class="bi bi-cash-stack @if(request()->is('pemilik/pembayaran*')) active-txt @endif"></i>
+                            <span class="@if(request()->is('pemilik/pembayaran*')) active-txt @endif"> Pembayaran </span>
                             <span class="badge badge-primary float-right">11</span>
                         </a>
                     </li>
 
-                    <li>
-                        <a href="typography.html">
-                            <i class="bi bi-clock-history"></i>
-                            <span> Riwayat </span>
+                    <li class="@if(request()->is('pemilik/riwayat*')) active-class @endif">
+                        <a href="riwayat">
+                            <i class="bi bi-clock-history @if(request()->is('pemilik/riwayat*')) active-txt @endif"></i>
+                            <span class="@if(request()->is('pemilik/riwayat*')) active-txt @endif"> Riwayat </span>
                         </a>
                     </li>
-                    <li>
-                        <a href="typography.html">
-                            <i class="mdi mdi-settings-outline noti-ico"></i>
-                            <span> Akun </span>
+                    <li class="@if(request()->is('pemilik/akun*')) active-class @endif">
+                        <a href="akun">
+                            <i class="mdi mdi-settings-outline noti-ico @if(request()->is('pemilik/akun*')) active-txt @endif"></i>
+                            <span class="@if(request()->is('pemilik/akun*')) active-txt @endif"> Akun </span>
                         </a>
                     </li>
                 </ul>
@@ -199,20 +209,20 @@
     </script>
 
     <!-- Vendor js -->
+    <script src="/assets/js/vendor.min.js"></script>
 
-    <script src="assets/js/vendor.min.js"></script>
+    <script src="/assets/libs/morris-js/morris.min.js"></script>
+    <script src="/assets/libs/raphael/raphael.min.js"></script>
 
-    <script src="assets/libs/morris-js/morris.min.js"></script>
-    <script src="assets/libs/raphael/raphael.min.js"></script>
-
-    <script src="assets/js/pages/dashboard.init.js"></script>
+    <script src="/assets/js/pages/dashboard.init.js"></script>
 
     <!-- App js -->
-    <script src="assets/js/app.min.js"></script>
-    <script src="javascript/dashboard.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="/assets/js/app.min.js"></script>
+    <script src="/javascript/dashboard.js"></script>
 
-    @yield('scripts')
+    <!-- Script per page -->
+    @yield('script')
 
 </body>
 

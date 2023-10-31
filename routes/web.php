@@ -24,7 +24,10 @@ Route::get('/', [LoginController::class, 'login']);
 Route::get('/register', [RegisterController::class, 'register']);
 
 // Dashboard Controller
-Route::get('/pemilik', [DashboardController::class, 'pemilik']);
+Route::get('/pemilik/dashboard', [DashboardController::class, 'dashboard']); //default pemilik
+Route::get('/pemilik/dashboard/ambil', [DashboardController::class, 'ambil']); //default pemilik
+
+
 
 // Pilih Akun Controller
 Route::get('/pilih-akun', [PilihAkunController::class, 'pilihAkun']);
