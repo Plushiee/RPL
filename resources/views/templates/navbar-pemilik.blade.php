@@ -19,8 +19,7 @@
     <link href="/assets/css/app.min.css" rel="stylesheet" type="text/css" id="app-stylesheet" />
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-
-    {{-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBPCyuCDP-NsuKm_SVIyga-LHZilnWyzmo"></script> --}}
+    <link rel="stylesheet" href="/assets/styles/navbar-css.css">
 
     <!-- CSS per Page-->
     @yield('css')

@@ -11,11 +11,3 @@
 .btn-success:hover {
     box-shadow: 0 0 10px #4fc55b;
 }
-
-.active-class {
-    background-color: #f5f5f5 !important;
-}
-
-.active-txt {
-    color: #458bcd !important;
-}
