@@ -5,6 +5,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PilihAkunController;
+use App\Http\Controllers\DefaultController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,12 +19,15 @@ use App\Http\Controllers\PilihAkunController;
 */
 
 // Login Controller
-Route::get('/', [LoginController::class, 'login']);
+Route::get('/', [DefaultController::class, 'index']);
 
 // Register Controller
 Route::get('/register', [RegisterController::class, 'register']);
 
-// Dashboard Controller
+// Login Controller
+Route::get('/login', [LoginController::class, 'login']);
+
+// Pemilik Controller
 Route::get('/pemilik/dashboard', [DashboardController::class, 'dashboard']); //default pemilik
 Route::get('/pemilik/dashboard/ambil', [DashboardController::class, 'ambil']); //default pemilik
 
