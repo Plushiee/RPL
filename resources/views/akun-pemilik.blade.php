@@ -110,7 +110,7 @@
                             <p class="m-0 p-0">Alamat</p>
                         </div>
                         <div class="col-9">
-                            <p class="m-0 p-0">: StanleyJones@gmail.com</p>
+                            <p class="m-0 p-0">: Jalan</p>
                         </div>
                     </div>
                     <div class="row ms-2 p-0 my-0">

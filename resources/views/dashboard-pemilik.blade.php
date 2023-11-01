@@ -168,7 +168,7 @@
 @endsection
 
 @section('scripts')
-    <script src="/javascript/dashboard.js"></script>
+    <script src="/javascript/gps-map.js"></script>
     <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBPCyuCDP-NsuKm_SVIyga-LHZilnWyzmo&callback=initMap"></script>
 @endsection
