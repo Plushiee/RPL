@@ -2,7 +2,7 @@
 
 @section('title', 'MoneyTrash! - Dashboard')
 @section('css')
-    <link rel="stylesheet" href="/assets/styles/dashboard-pengguna.css">
+    <link rel="stylesheet" href="/assets/styles/akun-pengguna.css">
 @endsection
 
 @section('contents')
@@ -15,8 +15,7 @@
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb" style="background-color: transparent !important">
                 <li class="breadcrumb-item"><a href="pemilik">Pemilik Sampah</a></li>
-                <li class="breadcrumb-item"><a href="dashboard">Dashboard</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Ambil di Rumah</li>
+                <li class="breadcrumb-item active" aria-current="page">Akun</li>
             </ol>
         </nav>
         <!-- End Breadcrumb -->
@@ -68,8 +67,10 @@
                     </div>
                 </div>
                 <div class="row mt-3">
-                    <h5 class="mt-0 mb-2 font-14">Data Akun</h5>
-                    <div class="row ms-2 p-0 my-0 ">
+                    <h5 class="mt-0 mb-0 font-14">Data Akun
+                        <button class="btn btn-primary float-end edit-btn py-1 px-2"><i class="mdi mdi-settings-outline"></i> &nbsp;Edit Data Akun</button>
+                    </h5>
+                    <div class="row ms-2 p-0 my-0">
                         <div class="col-3">
                             <p class="m-0 p-0">Nama Akun</p>
                         </div>
@@ -93,10 +94,29 @@
                             <p class="m-0 p-0">: +62-812-8993-6969</p>
                         </div>
                     </div>
+                    <div class="row ms-2 p-0 my-0">
+                        <div class="col-3">
+                            <p class="m-0 p-0">Status Verifikasi</p>
+                        </div>
+                        <div class="col-9">
+                            <p class="m-0 p-0">: <span style="color: red;"><i class="bi bi-ban"></i>&nbsp; Belum
+                                    Terverivikasi! </span> <a href="">&nbsp;&nbsp; Verifikasi Sekarang!</a></p>
+                        </div>
+                    </div>
+                    <div class="row ms-2 p-0 my-0">
+                        <div class="col-3">
+                            <p class="m-0 p-0">Password</p>
+                        </div>
+                        <div class="col-9">
+                            <p class="m-0 p-0">: ***********</p>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="row mt-3">
-                    <h5 class="mt-0 mb-2 font-14">Data Pengguna</h5>
+                    <h5 class="mt-0 mb-0 font-14">Data Pengguna
+                        <button class="btn btn-primary float-end edit-btn py-1 px-2"><i class="mdi mdi-settings-outline"></i> &nbsp;Edit Data Pengguna</button>
+                    </h5>
                     <div class="row ms-2 p-0 my-0 ">
                         <div class="col-3">
                             <p class="m-0 p-0">Nama Lengkap</p>
@@ -107,18 +127,50 @@
                     </div>
                     <div class="row ms-2 p-0 my-0">
                         <div class="col-3">
-                            <p class="m-0 p-0">Alamat</p>
+                            <p class="m-0 p-0">Alamat Lengkap</p>
                         </div>
                         <div class="col-9">
-                            <p class="m-0 p-0">: Jalan</p>
+                            <p class="m-0 p-0">: Jl. Dr. Wahidin Sudirohusodo No.5-25, Kotabaru</p>
                         </div>
                     </div>
                     <div class="row ms-2 p-0 my-0">
                         <div class="col-3">
-                            <p class="m-0 p-0">Nomor Handphone</p>
+                            <p class="m-0 p-0">Kecamatan</p>
                         </div>
                         <div class="col-9">
-                            <p class="m-0 p-0">: +62-812-8993-6969</p>
+                            <p class="m-0 p-0">: Gondokusuman</p>
+                        </div>
+                    </div>
+                    <div class="row ms-2 p-0 my-0">
+                        <div class="col-3">
+                            <p class="m-0 p-0">Kota</p>
+                        </div>
+                        <div class="col-9">
+                            <p class="m-0 p-0">: Kota Yogyakarta</p>
+                        </div>
+                    </div>
+                    <div class="row ms-2 p-0 my-0">
+                        <div class="col-3">
+                            <p class="m-0 p-0">Provinsi</p>
+                        </div>
+                        <div class="col-9">
+                            <p class="m-0 p-0">: Daerah Istimewa Yogyakarta</p>
+                        </div>
+                    </div>
+                    <div class="row ms-2 p-0 my-0">
+                        <div class="col-3">
+                            <p class="m-0 p-0">Kode Pos</p>
+                        </div>
+                        <div class="col-9">
+                            <p class="m-0 p-0">: 55224</p>
+                        </div>
+                    </div>
+                    <div class="row ms-2 p-0 my-0">
+                        <div class="col-3">
+                            <p class="m-0 p-0">Catatan Tambahan (Cth: Blok / Unit, No., Patokan)</p>
+                        </div>
+                        <div class="col-9">
+                            <p class="m-0 p-0">: Gedung Agape</p>
                         </div>
                     </div>
                 </div>
