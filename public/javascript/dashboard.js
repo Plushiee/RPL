@@ -20,7 +20,7 @@ $(document).ready(function () {
             position: initialLocation,
             map: map,
             icon: {
-                url: 'assets/images/dot-map.png',
+                url: '/assets/images/dot-map.png',
                 scaledSize: new google.maps.Size(iconSize.width, iconSize.height),
             },
             title: 'You are here!'
@@ -44,7 +44,6 @@ $(document).ready(function () {
                     initMap(0, 0);
                 }
             );
-            console.log (navigator.geolocation.getCurrentPosition)
         } else {
             // Geolokasi tidak didukung oleh browser
             console.error('Geolocation is not supported by your browser.');

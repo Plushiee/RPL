@@ -13,4 +13,8 @@ class DashboardController extends Controller
     public function ambil() {
         return view('ambil-pemilik');
     }
+
+    public function akun() {
+        return view('akun-pemilik');
+    }
 }

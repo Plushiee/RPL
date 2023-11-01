@@ -20,7 +20,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBPCyuCDP-NsuKm_SVIyga-LHZilnWyzmo"></script>
+    {{-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBPCyuCDP-NsuKm_SVIyga-LHZilnWyzmo"></script> --}}
 
     <!-- CSS per Page-->
     @yield('css')
@@ -152,34 +152,40 @@
             <div id="sidebar-menu">
 
                 <ul class="metismenu" id="side-menu">
-
                     <li class="menu-title">Navigasi</li>
-
-                    <li class="@if(request()->is('pemilik/dashboard*')) active-class @endif">
-                        <a href="dashboard">
-                            <i class="bi bi-house @if(request()->is('pemilik/dashboard*')) active-txt @endif"></i>
-                            <span class="@if(request()->is('pemilik/dashboard*')) active-txt @endif"> Home </span>
+                    <li>
+                        <a class="@if (request()->is('pemilik/dashboard*')) active-class active-txt @endif mb-0">
+                            <i class="bi bi-house"></i>
+                            <span> Home</span>
                         </a>
+                        <ul class="nav-second-level" aria-expanded="false">
+                            <li><a href="/pemilik/dashboard" class="mt-0 @if (request()->is('pemilik/dashboard')) active-class active-txt @endif"><i class="bi bi-speedometer2"></i>&nbsp; Dashboard</a></li>
+                            <li><a href="/pemilik/dashboard/ambil" class="@if (request()->is('pemilik/dashboard/ambil*')) active-class active-txt @endif"><i
+                                class="bi bi-truck"></i>&nbsp; Ambil Di Rumah</a></li>
+                            <li><a href="/pemilik/dashboard/antar" class="@if (request()->is('pemilik/dashboard/antar*')) active-class active-txt @endif"><i
+                                class="bi bi-box-seam"></i>&nbsp; Antar Sendiri</a></li>
+                        </ul>
                     </li>
 
-                    <li class="@if(request()->is('pemilik/pembayaran*')) active-class @endif">
-                        <a href="pembayaran">
-                            <i class="bi bi-cash-stack @if(request()->is('pemilik/pembayaran*')) active-txt @endif"></i>
-                            <span class="@if(request()->is('pemilik/pembayaran*')) active-txt @endif"> Pembayaran </span>
+                    <li class="@if (request()->is('pemilik/pembayaran*')) active-class @endif">
+                        <a href="/pemilik/pembayaran">
+                            <i class="bi bi-cash-stack @if (request()->is('pemilik/pembayaran*')) active-txt @endif"></i>
+                            <span class="@if (request()->is('pemilik/pembayaran*')) active-txt @endif"> Pembayaran </span>
                             <span class="badge badge-primary float-right">11</span>
                         </a>
                     </li>
 
-                    <li class="@if(request()->is('pemilik/riwayat*')) active-class @endif">
-                        <a href="riwayat">
-                            <i class="bi bi-clock-history @if(request()->is('pemilik/riwayat*')) active-txt @endif"></i>
-                            <span class="@if(request()->is('pemilik/riwayat*')) active-txt @endif"> Riwayat </span>
+                    <li class="@if (request()->is('pemilik/riwayat*')) active-class @endif">
+                        <a href="/pemilik/riwayat">
+                            <i class="bi bi-clock-history @if (request()->is('pemilik/riwayat*')) active-txt @endif"></i>
+                            <span class="@if (request()->is('pemilik/riwayat*')) active-txt @endif"> Riwayat </span>
                         </a>
                     </li>
-                    <li class="@if(request()->is('pemilik/akun*')) active-class @endif">
-                        <a href="akun">
-                            <i class="mdi mdi-settings-outline noti-ico @if(request()->is('pemilik/akun*')) active-txt @endif"></i>
-                            <span class="@if(request()->is('pemilik/akun*')) active-txt @endif"> Akun </span>
+                    <li class="@if (request()->is('pemilik/akun*')) active-class @endif">
+                        <a href="/pemilik/akun">
+                            <i
+                                class="mdi mdi-settings-outline noti-ico @if (request()->is('pemilik/akun*')) active-txt @endif"></i>
+                            <span class="@if (request()->is('pemilik/akun*')) active-txt @endif"> Akun </span>
                         </a>
                     </li>
                 </ul>
@@ -219,10 +225,9 @@
     <!-- App js -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="/assets/js/app.min.js"></script>
-    <script src="/javascript/dashboard.js"></script>
 
     <!-- Script per page -->
-    @yield('script')
+    @yield('scripts')
 
 </body>
 
