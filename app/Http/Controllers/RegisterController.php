@@ -33,35 +33,7 @@ class RegisterController extends Controller
 
         var_dump($client);
 
-        if (isset($_GET['access_token'])) {
-            $code = $_GET['access_token'];
-
-            $googleUser = $this->getGoogleUser($code);
-
-            if (!$googleUser) {
-                return 'Gagal mendapatkan token akses.';
-            }
-
-            // Cari pengguna berdasarkan Google ID
-            $user = UserGoogleModel::where('google_id', $googleUser['id'])->first();
-
-            if (!$user) {
-                // Buat pengguna baru jika tidak ditemukan
-                $user = new UserGoogleModel();
-                $user->google_id = $googleUser['id'];
-                $user->email = $googleUser['email'];
-                $user->name = $googleUser['name'];
-                $user->profile_picture = $googleUser['picture'];
-                $user->save();
-            }
-
-            // Otentikasi pengguna di dalam Laravel
-            Auth::login($user);
-
-            return redirect('/pemilik/dashboard'); // Sesuaikan dengan rute dashboard Anda
-        } else {
-            return 'Kode otorisasi tidak ditemukan.';
-        }
+        $login_url = $client->createAuthUrl();
     }
 
     private function getGoogleUser($code)

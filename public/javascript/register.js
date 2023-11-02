@@ -59,7 +59,7 @@ $(document).ready(function () {
             `scope=openid%20profile%20email&response_type=token&prompt=select_account`;
 
         // Buka jendela otorisasi Google
-        window.location.href = authUrl;
+        window.location.href = redirectUri;
     });
 });
 
