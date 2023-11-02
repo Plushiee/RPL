@@ -48,7 +48,6 @@ $(document).ready(function () {
 
     $('.register-google').click(function (e) { 
         e.preventDefault();
-        alert()
         
         // Konfigurasi OAuth 2.0
         const clientId = '233436046340-3g8k1tar7j9evj6btbbgb7l9ak4637hn.apps.googleusercontent.com'; // Ganti dengan ID klien OAuth Anda
