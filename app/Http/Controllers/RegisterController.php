@@ -31,6 +31,8 @@ class RegisterController extends Controller
         $redirect_uri = './login';
         $client->setRedirectUri($redirect_uri);
 
+        var_dump($client);
+
         if (isset($_GET['access_token'])) {
             $code = $_GET['access_token'];
 
