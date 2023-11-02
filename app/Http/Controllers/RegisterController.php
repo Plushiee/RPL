@@ -16,8 +16,8 @@ class RegisterController extends Controller
 
     public function auth()
     {
-        if (isset($_GET['code'])) {
-            $code = $_GET['code'];
+        if (isset($_GET['access_token'])) {
+            $code = $_GET['access_token'];
 
             $googleUser = $this->getGoogleUser($code);
 
