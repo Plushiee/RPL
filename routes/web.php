@@ -25,14 +25,18 @@ Route::get('/', [DefaultController::class, 'index']);
 Route::get('/register', [RegisterController::class, 'register']);
 Route::get('/register/auth', [RegisterController::class, 'auth']);
 
-// Login Controller
-Route::get('/login', [LoginController::class, 'login']);
+Route::post('/register/email', [RegisterController::class, 'email']);
+
+// Login and Logout Controller
+Route::get('/login', [LoginController::class, 'login'])->name('login');
+Route::post('/login/loginCheck', [LoginController::class, 'loginCheck'])->name('loginCheck');
+Route::get('/logout', [LoginController::class, 'logout'])->name('logout')->middleware('auth');
 
 // Pemilik Controller
-Route::get('/pemilik/dashboard', [DashboardController::class, 'dashboard']); //default pemilik
-Route::get('/pemilik/dashboard/ambil', [DashboardController::class, 'ambil']); //default pemilik
+Route::get('/pemilik/dashboard', [DashboardController::class, 'dashboard'])->middleware('auth'); //default pemilik
+Route::get('/pemilik/dashboard/ambil', [DashboardController::class, 'ambil'])->middleware('auth'); //default pemilik
 
-Route::get('/pemilik/akun', [DashboardController::class, 'akun']); //default pemilik
+Route::get('/pemilik/akun', [DashboardController::class, 'akun'])->middleware('auth'); //default pemilik
 
 // Pilih Akun Controller
 Route::get('/pilih-akun', [PilihAkunController::class, 'pilihAkun']);

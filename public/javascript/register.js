@@ -22,7 +22,7 @@ $(document).ready(function () {
         x.type = "text";
         show_eye.style.display = "block";
         hide_eye.style.display = "none";
-        pass.style.backgroundColor = "rgb(206, 208, 209)";0
+        pass.style.backgroundColor = "rgb(206, 208, 209)"; 0
     });
 
     $('.input-group-text.pass').mouseup(function () {
@@ -46,10 +46,36 @@ $(document).ready(function () {
         conf.style.backgroundColor = "rgb(233, 236, 239)";
     });
 
-    $('.register-google').click(function (e) { 
+    $('.register-google').click(function (e) {
         e.preventDefault();
         const redirectUri = 'https://rpl.plushiee.my.id/register/auth';
         window.location.href = redirectUri;
     });
+
+    // Validasi
+    var $passwordRegister = $('#passwordRegister');
+    var $passwordConfirmation = $('#passwordConformation');
+    var $daftarButton = $('.submit');
+    var $samaText = $('#sama');
+
+    $passwordRegister.on('keyup', checkPasswordMatch);
+    $passwordConfirmation.on('keyup', checkPasswordMatch);
+
+    function checkPasswordMatch() {
+        var passwordValue = $passwordRegister.val();
+        var confirmationValue = $passwordConfirmation.val();
+
+        if (passwordValue === confirmationValue && passwordValue.length >= 8) {
+            $daftarButton.prop('disabled', false);
+            $samaText.addClass('d-none');
+        } else {
+            if(passwordValue === confirmationValue || passwordValue.length === 0) {
+                $samaText.addClass('d-none');
+                $daftarButton.prop('disabled', true);
+            } else {
+                $samaText.removeClass('d-none');
+            }
+        }
+    }
 });
 

@@ -40,16 +40,20 @@
                                     <h1 class="title">Daftar Akun</h1>
                                 </div>
                             </div>
-                            <form action="">
+
+                            <form action="/register/email" method="POST">
+                                @csrf
                                 <div class="row mb-3">
                                     <div class="col">
-                                        <input type="text" class="form-control" id="namaRegister" placeholder="Nama" minlength="3">
+                                        <input type="text" class="form-control" id="namaRegister" name="namaRegister"
+                                            placeholder="Nama" minlength="3" required>
                                     </div>
                                 </div>
 
                                 <div class="row mb-3">
                                     <div class="col">
-                                        <input type="email" class="form-control" id="emailRegister" placeholder="Email" autocomplete="email" required>
+                                        <input type="email" class="form-control" id="emailRegister"
+                                            name="emailRegister" placeholder="Email" autocomplete="email" required>
                                     </div>
                                 </div>
 
@@ -57,7 +61,8 @@
                                     <div class="col">
                                         <div class="input-group px-0">
                                             <input type="password" class="form-control" id="passwordRegister"
-                                                placeholder="Kata Sandi" autocomplete="new-password">
+                                                name="passwordRegister" placeholder="Kata Sandi" minlength="8"
+                                                autocomplete="new-password">
                                             <div class="input-group-append">
                                                 <span class="input-group-text pass" id="pass">
                                                     <i class="bi bi-eye-fill" id="showPass"></i>
@@ -72,7 +77,8 @@
                                     <div class="col">
                                         <div class="input-group px-0">
                                             <input type="password" class="form-control" id="passwordConformation"
-                                                placeholder="Ulangi Kata Sandi" autocomplete="new-conf-password">
+                                                name="passwordConformation" placeholder="Ulangi Kata Sandi"
+                                                autocomplete="new-conf-password">
                                             <div class="input-group-append">
                                                 <span class="input-group-text conf" id="conf">
                                                     <i class="bi bi-eye-fill" id="showPassConf"></i>
@@ -82,17 +88,17 @@
                                         </div>
                                     </div>
                                 </div>
-
-
                                 <div class="row mb-3">
                                     <div class="d-grid">
-                                        <button type="submit" class="btn btn-success submit">Masuk</button>
+                                        <button type="submit" class="btn btn-success submit" disabled>Daftar</button>
+                                        <p class="mb-0 text-center d-none" id="sama"
+                                            style="color: red; font-weight: bold">Password Tidak Sama!</p>
                                     </div>
                                 </div>
 
                                 <div class="row text-center">
                                     <div class="col">
-                                        <p>Sudah Memiliki Akun? <a href="/">Daftar</a></p>
+                                        <p>Sudah Memiliki Akun? <a href="/login">Login</a></p>
                                     </div>
                                 </div>
 
@@ -119,7 +125,7 @@
 
     {{-- Javascript  --}}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="/javascript/register.js"></script>
 
     <!-- Bootstrap JavaScript Libraries -->
@@ -130,6 +136,33 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
         integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
     </script>
+
+    {{-- Alert --}}
+    @if(session('error'))
+    <script>
+        $(document).ready(function() {
+            // Alert
+            var toastMixin = Swal.mixin({
+                toast: true,
+                icon: 'error',
+                title: 'General Title',
+                position: 'top-right',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            });
+
+            toastMixin.fire({
+                animation: true,
+                title: 'Email atau Nama Sudah Terdaftar'
+            });
+        });
+    </script>
+    @endif
 </body>
 
 </html>

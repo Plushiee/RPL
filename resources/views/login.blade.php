@@ -40,10 +40,12 @@
                                     <h1 class="title">Masuk Akun</h1>
                                 </div>
                             </div>
-                            <form action="">
+                            <form action="/login/loginCheck" method="POST">
+                                @csrf
                                 <div class="row mb-3">
                                     <div class="col">
-                                        <input type="email" class="form-control" id="emailLogin" placeholder="Email">
+                                        <input type="email" class="form-control" id="emailLogin" name="emailLogin"
+                                            placeholder="Email">
                                     </div>
                                 </div>
 
@@ -51,7 +53,7 @@
                                     <div class="col">
                                         <div class="input-group px-0">
                                             <input type="password" class="form-control" id="passwordLogin"
-                                                placeholder="Kata Sandi" required>
+                                                name="passwordLogin" placeholder="Kata Sandi" required>
                                             <div class="input-group-append">
                                                 <span class="input-group-text pass" id="pass">
                                                     <i class="bi bi-eye-fill" id="showPass"></i>
@@ -61,7 +63,6 @@
                                         </div>
                                     </div>
                                 </div>
-
 
                                 <div class="row text-end mb-3">
                                     <div class="col">
@@ -84,14 +85,13 @@
                                 <div class="divider d-flex align-items-center mb-3">
                                     <p class="text-center fw-bold mx-3 mb-0">atau menggunakan</p>
                                 </div>
-
-                                <div class="row mb-3">
-                                    <div class="d-grid">
-                                        <button type="submit" class="btn btn-primary login"><i
-                                                class="bi bi-google float-start"></i>Google</button>
-                                    </div>
-                                </div>
                             </form>
+                            <div class="row mb-3">
+                                <div class="d-grid">
+                                    <button type="submit" class="btn btn-primary login"><i
+                                            class="bi bi-google float-start"></i>Google</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -105,7 +105,7 @@
 
     {{-- Javascript  --}}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="javascript/login.js"></script>
 
     <!-- Bootstrap JavaScript Libraries -->
@@ -116,6 +116,33 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
         integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
     </script>
+
+    {{-- Alert --}}
+    @if (session('success'))
+        <script>
+            $(document).ready(function() {
+                // Alert
+                var toastMixin = Swal.mixin({
+                    toast: true,
+                    icon: 'success',
+                    title: 'General Title',
+                    position: 'top-right',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                });
+
+                toastMixin.fire({
+                    animation: true,
+                    title: 'Akun Berhasil Ditambahkan'
+                });
+            });
+        </script>
+    @endif
 </body>
 
 </html>

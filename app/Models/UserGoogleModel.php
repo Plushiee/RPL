@@ -17,6 +17,4 @@ class UserGoogleModel extends Model
         'name',
         'profile_picture',
     ];
-
-    
 }
