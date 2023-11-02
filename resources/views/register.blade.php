@@ -92,7 +92,7 @@
 
                                 <div class="row text-center">
                                     <div class="col">
-                                        <p>Sudah Memiliki Akun? <a href="/">Masuk</a></p>
+                                        <p>Sudah Memiliki Akun? <a href="/">Daftar</a></p>
                                     </div>
                                 </div>
 
@@ -102,7 +102,7 @@
                             </form>
                             <div class="row mb-3">
                                 <div class="d-grid">
-                                    <button type="submit" class="btn btn-primary register"><i
+                                    <button type="submit" class="btn btn-primary register-google"><i
                                             class="bi bi-google float-start"></i>Google</button>
                                 </div>
                             </div>
