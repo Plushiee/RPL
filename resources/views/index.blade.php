@@ -91,7 +91,7 @@
 
                     <div class="col-12 col-lg-5 hero-img pos-abs-bottom-right d-none d-lg-block">
                         <span>
-                            <img src="/assets/navbar/logo-long-vertical.png" alt="hero-image" class="img-fluid" width="390px">
+                            <img src="/assets/navbar/logo-long-vertical.png" alt="hero-image" class="img-fluid">
                         </span>
                     </div>
                     <!-- col-12 end -->
