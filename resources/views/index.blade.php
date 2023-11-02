@@ -52,7 +52,7 @@
                 </div>
                 <!-- collapse end -->
                 <div class="navbar-btn mr-60 mr-lg-0">
-                    <a href="#"
+                    <a href="login"
                         class="btn btn-outline btn-outline--sm border-color-white btn-color--white btn-outline-hover--white btn-hover">Login</a>
                 </div>
             </div>

@@ -17,7 +17,7 @@ class RegisterController extends Controller
 
     public function auth()
     {
-        require('./vendor/autoload.php');
+        // require('./vendor/autoload.php');
 
         # Add your client ID and Secret
         $client_id = "233436046340-3g8k1tar7j9evj6btbbgb7l9ak4637hn.apps.googleusercontent.com";
