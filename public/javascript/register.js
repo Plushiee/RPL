@@ -48,17 +48,7 @@ $(document).ready(function () {
 
     $('.register-google').click(function (e) { 
         e.preventDefault();
-        
-        // Konfigurasi OAuth 2.0
-        const clientId = '233436046340-3g8k1tar7j9evj6btbbgb7l9ak4637hn.apps.googleusercontent.com'; // Ganti dengan ID klien OAuth Anda
-        const redirectUri = 'https://rpl.plushiee.my.id/register/auth'; // Ganti dengan URI pengalihan Anda
-
-        // Bangun URL otorisasi Google
-        const authUrl = `https://accounts.google.com/o/oauth2/auth?` +
-            `client_id=${clientId}&redirect_uri=${redirectUri}&` +
-            `scope=openid%20profile%20email&response_type=token&prompt=select_account`;
-
-        // Buka jendela otorisasi Google
+        const redirectUri = 'https://rpl.plushiee.my.id/register/auth';
         window.location.href = redirectUri;
     });
 });
