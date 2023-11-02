@@ -49,7 +49,7 @@
 
                                 <div class="row mb-3">
                                     <div class="col">
-                                        <input type="email" class="form-control" id="emailRegister" placeholder="Email" required>
+                                        <input type="email" class="form-control" id="emailRegister" placeholder="Email" autocomplete="email" required>
                                     </div>
                                 </div>
 
@@ -57,7 +57,7 @@
                                     <div class="col">
                                         <div class="input-group px-0">
                                             <input type="password" class="form-control" id="passwordRegister"
-                                                placeholder="Kata Sandi">
+                                                placeholder="Kata Sandi" autocomplete="new-password">
                                             <div class="input-group-append">
                                                 <span class="input-group-text pass" id="pass">
                                                     <i class="bi bi-eye-fill" id="showPass"></i>
@@ -72,7 +72,7 @@
                                     <div class="col">
                                         <div class="input-group px-0">
                                             <input type="password" class="form-control" id="passwordConformation"
-                                                placeholder="Ulangi Kata Sandi">
+                                                placeholder="Ulangi Kata Sandi" autocomplete="new-conf-password">
                                             <div class="input-group-append">
                                                 <span class="input-group-text conf" id="conf">
                                                     <i class="bi bi-eye-fill" id="showPassConf"></i>
@@ -99,14 +99,13 @@
                                 <div class="divider d-flex align-items-center mb-3">
                                     <p class="text-center fw-bold mx-3 mb-0">atau menggunakan</p>
                                 </div>
-
-                                <div class="row mb-3">
-                                    <div class="d-grid">
-                                        <button type="submit" class="btn btn-primary register"><i
-                                                class="bi bi-google float-start"></i>Google</button>
-                                    </div>
-                                </div>
                             </form>
+                            <div class="row mb-3">
+                                <div class="d-grid">
+                                    <button type="submit" class="btn btn-primary register"><i
+                                            class="bi bi-google float-start"></i>Google</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

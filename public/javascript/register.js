@@ -45,5 +45,22 @@ $(document).ready(function () {
         hide_eye_conf.style.display = "block";
         conf.style.backgroundColor = "rgb(233, 236, 239)";
     });
+
+    $('.register').click(function (e) { 
+        e.preventDefault();
+        alert()
+        
+        // Konfigurasi OAuth 2.0
+        const clientId = '233436046340-3g8k1tar7j9evj6btbbgb7l9ak4637hn.apps.googleusercontent.com'; // Ganti dengan ID klien OAuth Anda
+        const redirectUri = 'https://rpl.plushiee.my.id/register'; // Ganti dengan URI pengalihan Anda
+
+        // Bangun URL otorisasi Google
+        const authUrl = `https://accounts.google.com/o/oauth2/auth?` +
+            `client_id=${clientId}&redirect_uri=${redirectUri}&` +
+            `scope=openid%20profile%20email&response_type=token&prompt=select_account`;
+
+        // Buka jendela otorisasi Google
+        window.location.href = authUrl;
+    });
 });
 

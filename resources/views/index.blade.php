@@ -5,9 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>vAPP - App Landing Page</title>
+    <title>MoneyTrash - Trash Me!, It's Work</title>
     <!-- Favicon CSS -->
-    <link rel="icon" type="img/png" sizes="32x32" href="img/favicon.png">
+    <link rel="icon" type="img/png" sizes="32x32" href="/assets/navbar/logo.png">
     <!-- fonts -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,300i,400,400i,500,500i,700,700i&display=swap"
         rel="stylesheet">
