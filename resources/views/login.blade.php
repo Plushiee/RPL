@@ -55,7 +55,8 @@
                                     <div class="col">
                                         <div class="input-group px-0">
                                             <input type="password" class="form-control" id="passwordLogin"
-                                                name="passwordLogin" placeholder="Kata Sandi" autocomplete="passwordLogin" required>
+                                                name="passwordLogin" placeholder="Kata Sandi"
+                                                autocomplete="passwordLogin" required>
                                             <div class="input-group-append">
                                                 <span class="input-group-text pass" id="pass">
                                                     <i class="bi bi-eye-fill" id="showPass"></i>
@@ -80,9 +81,10 @@
                                 </div>
 
                                 <div class="row mb-3">
+                                    <div class="g-recaptcha" data-sitekey="6LcHsO4oAAAAAHQ0-JzJ2Pz5yUQQKbK9gGOBdzo5"
+                                        data-size="invisible" data-callback="formSubmit" data-badge='inline'> </div>
                                     <div class="d-grid">
-                                        <button type="submit" class="btn btn-success submit g-recaptcha" data-sitekey="6LcHsO4oAAAAAHQ0-JzJ2Pz5yUQQKbK9gGOBdzo5"
-                                        data-callback='onSubmit' data-action='submit' data-badge='inline'>Masuk</button>
+                                        <button type="submit" class="btn btn-success submit">Masuk</button>
                                     </div>
                                 </div>
 
@@ -119,7 +121,11 @@
     <script src="https://www.google.com/recaptcha/api.js"></script>
     <script>
         function onSubmit(token) {
-            document.getElementById("formLogin").submit();
+            document.getElementById("formRegister").submit(function(event) {
+                event.preventDefault();
+                grecaptcha.reset();
+                grecaptcha.execute();
+            });
         }
     </script>
     <script src="javascript/login.js"></script>

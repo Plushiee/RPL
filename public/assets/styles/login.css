@@ -56,12 +56,12 @@
 }
 
 
-.grecaptcha-badge {
+.g-recaptcha{
     margin-bottom: 10px;
 }
 
 @media only screen and (max-width: 945px) {
-    .grecaptcha-badge {
+    .g-recaptcha {
         transform:scale(0.85);
         transform-origin:0 0;
         margin-bottom: 5px;

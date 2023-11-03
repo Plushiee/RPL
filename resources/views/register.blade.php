@@ -91,10 +91,10 @@
                                     </div>
                                 </div>
                                 <div class="row mb-3">
+                                    <div class="g-recaptcha" data-sitekey="6LcHsO4oAAAAAHQ0-JzJ2Pz5yUQQKbK9gGOBdzo5"
+                                        data-size="invisible" data-callback="formSubmit" data-badge='inline'> </div>
                                     <div class="d-grid">
-                                        <button type="submit" class="btn btn-success submit g-recaptcha"
-                                            data-sitekey="6LcHsO4oAAAAAHQ0-JzJ2Pz5yUQQKbK9gGOBdzo5"
-                                            data-callback='onSubmit' data-action='submit' data-badge='inline'>Daftar</button>
+                                        <button type="submit" class="btn btn-success submit">Daftar</button>
                                         <p class="mb-0 text-center d-none" id="sama"
                                             style="color: red; font-weight: bold">Password Tidak Sama!</p>
                                     </div>
@@ -135,7 +135,11 @@
 
     <script>
         function onSubmit(token) {
-            document.getElementById("formRegister").submit();
+            document.getElementById("formRegister").submit(function(event) {
+                event.preventDefault();
+                grecaptcha.reset();
+                grecaptcha.execute();
+            });
         }
     </script>
     <!-- Bootstrap JavaScript Libraries -->
