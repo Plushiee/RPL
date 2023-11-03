@@ -64,7 +64,7 @@
                                         <div class="input-group px-0">
                                             <input type="password" class="form-control" id="passwordRegister"
                                                 name="passwordRegister" placeholder="Kata Sandi" minlength="8"
-                                                autocomplete="new-password">
+                                                autocomplete="new-password" required>
                                             <div class="input-group-append">
                                                 <span class="input-group-text pass" id="pass">
                                                     <i class="bi bi-eye-fill" id="showPass"></i>
@@ -79,8 +79,8 @@
                                     <div class="col">
                                         <div class="input-group px-0">
                                             <input type="password" class="form-control" id="passwordConformation"
-                                                name="passwordConformation" placeholder="Ulangi Kata Sandi"
-                                                autocomplete="new-conf-password">
+                                                name="passwordConformation" placeholder="Ulangi Kata Sandi"minlength="8"
+                                                autocomplete="new-conf-password" required>
                                             <div class="input-group-append">
                                                 <span class="input-group-text conf" id="conf">
                                                     <i class="bi bi-eye-fill" id="showPassConf"></i>
@@ -92,7 +92,9 @@
                                 </div>
                                 <div class="row mb-3">
                                     <div class="d-grid">
-                                        <button type="submit" class="btn btn-success submit g-recaptcha" data-sitekey="6LcHsO4oAAAAAHQ0-JzJ2Pz5yUQQKbK9gGOBdzo5" data-callback='onSubmit' data-action='submit' disabled>Daftar</button>
+                                        <button type="submit" class="btn btn-success submit g-recaptcha"
+                                            data-sitekey="6LcHsO4oAAAAAHQ0-JzJ2Pz5yUQQKbK9gGOBdzo5"
+                                            data-callback='onSubmit' data-action='submit' data-badge='inline'>Daftar</button>
                                         <p class="mb-0 text-center d-none" id="sama"
                                             style="color: red; font-weight: bold">Password Tidak Sama!</p>
                                     </div>
@@ -128,9 +130,14 @@
     {{-- Javascript  --}}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="https://www.google.com/recaptcha/api.js"></script>
     <script src="/javascript/register.js"></script>
+    <script src="https://www.google.com/recaptcha/api.js"></script>
 
+    <script>
+        function onSubmit(token) {
+            document.getElementById("formRegister").submit();
+        }
+    </script>
     <!-- Bootstrap JavaScript Libraries -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
         integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
@@ -141,30 +148,30 @@
     </script>
 
     {{-- Alert --}}
-    @if(session('error'))
-    <script>
-        $(document).ready(function() {
-            // Alert
-            var toastMixin = Swal.mixin({
-                toast: true,
-                icon: 'error',
-                title: 'General Title',
-                position: 'top-right',
-                showConfirmButton: false,
-                timer: 3000,
-                timerProgressBar: true,
-                didOpen: (toast) => {
-                    toast.addEventListener('mouseenter', Swal.stopTimer)
-                    toast.addEventListener('mouseleave', Swal.resumeTimer)
-                }
-            });
+    @if (session('error'))
+        <script>
+            $(document).ready(function() {
+                // Alert
+                var toastMixin = Swal.mixin({
+                    toast: true,
+                    icon: 'error',
+                    title: 'General Title',
+                    position: 'top-right',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                });
 
-            toastMixin.fire({
-                animation: true,
-                title: 'Email atau Nama Sudah Terdaftar'
+                toastMixin.fire({
+                    animation: true,
+                    title: 'Email atau Nama Sudah Terdaftar'
+                });
             });
-        });
-    </script>
+        </script>
     @endif
 </body>
 

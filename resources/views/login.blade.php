@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- App favicon -->
     <link rel="shortcut icon" href="/assets/navbar/logo.png">
-    
+
     <!-- Bootstrap CSS v5.2.1 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
@@ -42,20 +42,20 @@
                                     <h1 class="title">Masuk Akun</h1>
                                 </div>
                             </div>
-                            <form action="/login/loginCheck" method="POST">
+                            <form action="/login/loginCheck" method="POST" id="formLogin">
                                 @csrf
                                 <div class="row mb-3">
                                     <div class="col">
                                         <input type="email" class="form-control" id="emailLogin" name="emailLogin"
-                                            placeholder="Email">
+                                            placeholder="Email" autocomplete="email" required>
                                     </div>
                                 </div>
 
-                                <div class="row">
+                                <div class="row mb-1">
                                     <div class="col">
                                         <div class="input-group px-0">
                                             <input type="password" class="form-control" id="passwordLogin"
-                                                name="passwordLogin" placeholder="Kata Sandi" required>
+                                                name="passwordLogin" placeholder="Kata Sandi" autocomplete="passwordLogin" required>
                                             <div class="input-group-append">
                                                 <span class="input-group-text pass" id="pass">
                                                     <i class="bi bi-eye-fill" id="showPass"></i>
@@ -66,15 +66,23 @@
                                     </div>
                                 </div>
 
-                                <div class="row text-end mb-3">
-                                    <div class="col">
+                                <div class="row mb-3">
+                                    <div class="col-5 pe-0">
+                                        <input type="checkbox" name="remember" id="remember"
+                                            {{ old('remember') ? 'checked' : '' }}>
+                                        <label class="form-check-label" for="remember">
+                                            {{ __('Ingat Saya') }}
+                                        </label>
+                                    </div>
+                                    <div class="col-7 text-end ps-0">
                                         <a href="">Lupa Kata Sandi?</a>
                                     </div>
                                 </div>
 
                                 <div class="row mb-3">
                                     <div class="d-grid">
-                                        <button type="submit" class="btn btn-success submit">Masuk</button>
+                                        <button type="submit" class="btn btn-success submit g-recaptcha" data-sitekey="6LcHsO4oAAAAAHQ0-JzJ2Pz5yUQQKbK9gGOBdzo5"
+                                        data-callback='onSubmit' data-action='submit' data-badge='inline'>Masuk</button>
                                     </div>
                                 </div>
 
@@ -108,6 +116,12 @@
     {{-- Javascript  --}}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://www.google.com/recaptcha/api.js"></script>
+    <script>
+        function onSubmit(token) {
+            document.getElementById("formLogin").submit();
+        }
+    </script>
     <script src="javascript/login.js"></script>
 
     <!-- Bootstrap JavaScript Libraries -->

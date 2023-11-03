@@ -74,13 +74,13 @@
                         role="button" aria-haspopup="false" aria-expanded="false">
                         <img src="/assets/images/users/avatar-1.jpg" alt="user-image" class="rounded-circle">
                         <span class="pro-user-name ml-1">
-                            Maxine K <i class="mdi mdi-chevron-down"></i>
+                            {{ Auth::user()->name }} <i class="mdi mdi-chevron-down"></i>
                         </span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
                         <!-- item-->
                         <div class="dropdown-header noti-title">
-                            <h6 class="text-overflow m-0">Welcome ... !</h6>
+                            <h6 class="text-overflow m-0">Welcome {{ Auth::user()->name }} !</h6>
                         </div>
 
                         <!-- item-->
@@ -130,8 +130,14 @@
                     <img src="/assets/images/users/avatar-1.jpg" alt="" class="avatar-md rounded-circle">
                 </div>
                 <div class="user-info">
-                    <a href="#">Stanley Jones</a>
-                    <p class="text-muted m-0">Administrator</p>
+                    <a href="#">{{ Auth::user()->name }}</a>
+                    <p class="text-muted m-0">
+                        @if (Auth::check() && Auth::user()->status === 'pemilik')
+                            Pemilik Sampah
+                        @else
+                            Administrator
+                        @endif
+                    </p>
                 </div>
             </div>
 
@@ -146,11 +152,15 @@
                             <span> Home</span>
                         </a>
                         <ul class="nav-second-level" aria-expanded="false">
-                            <li><a href="/pemilik/dashboard" class="mt-0 @if (request()->is('pemilik/dashboard')) active-class active-txt @endif"><i class="bi bi-speedometer2"></i>&nbsp; Dashboard</a></li>
-                            <li><a href="/pemilik/dashboard/ambil" class="@if (request()->is('pemilik/dashboard/ambil*')) active-class active-txt @endif"><i
-                                class="bi bi-truck"></i>&nbsp; Ambil Di Rumah</a></li>
-                            <li><a href="/pemilik/dashboard/antar" class="@if (request()->is('pemilik/dashboard/antar*')) active-class active-txt @endif"><i
-                                class="bi bi-box-seam"></i>&nbsp; Antar Sendiri</a></li>
+                            <li><a href="/pemilik/dashboard"
+                                    class="mt-0 @if (request()->is('pemilik/dashboard')) active-class active-txt @endif"><i
+                                        class="bi bi-speedometer2"></i>&nbsp; Dashboard</a></li>
+                            <li><a href="/pemilik/dashboard/ambil"
+                                    class="@if (request()->is('pemilik/dashboard/ambil*')) active-class active-txt @endif"><i
+                                        class="bi bi-truck"></i>&nbsp; Ambil Di Rumah</a></li>
+                            <li><a href="/pemilik/dashboard/antar"
+                                    class="@if (request()->is('pemilik/dashboard/antar*')) active-class active-txt @endif"><i
+                                        class="bi bi-box-seam"></i>&nbsp; Antar Sendiri</a></li>
                         </ul>
                     </li>
 

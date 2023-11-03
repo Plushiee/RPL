@@ -54,3 +54,16 @@
     color: white;
     font-weight: bold;
 }
+
+
+.grecaptcha-badge {
+    margin-bottom: 10px;
+}
+
+@media only screen and (max-width: 945px) {
+    .grecaptcha-badge {
+        transform:scale(0.85);
+        transform-origin:0 0;
+        margin-bottom: 5px;
+    }
+}

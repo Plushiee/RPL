@@ -19,11 +19,12 @@ class LoginController extends Controller
     {
         $email = $request->emailLogin;
         $password = $request->passwordLogin;
+        $remember = $request->has('remember');
 
         $user = UserEmailModel::where('email', $email)->first();
 
         if ($user && password_verify($password, $user->password)) {
-            Auth::login($user);
+            Auth::login($user, $remember);
             return redirect('/pemilik/dashboard');
         }
 
@@ -34,6 +35,6 @@ class LoginController extends Controller
     public function logout()
     {
         Auth::logout();
-        return redirect('/');
+        return redirect('/login');
     }
 }

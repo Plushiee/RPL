@@ -30,9 +30,9 @@
                             <h4 class="header-title mb-3">Selamat
                                 <?php
                                 date_default_timezone_set('Asia/Jakarta');
-
+                                
                                 $jam = date('H');
-
+                                
                                 if ($jam >= 5 && $jam < 12) {
                                     $waktu = 'Pagi';
                                 } elseif ($jam >= 12 && $jam < 18) {
@@ -40,10 +40,10 @@
                                 } else {
                                     $waktu = 'Malam';
                                 }
-
+                                
                                 echo $waktu;
                                 ?>
-                                , ...</h4>
+                                , {{ Auth::user()->name }} </h4>
                         </div>
                     </div>
                 </div>
@@ -60,7 +60,13 @@
                             <div class="col-8">
                                 <div class="user-info align-items-center">
                                     <a href="#" style="font-weight: bold; color: black">Stanley Jones</a>
-                                    <p class="text-muted m-0">Administrator</p>
+                                    <p class="text-muted m-0">
+                                        @if (Auth::check() && Auth::user()->status === 'pemilik')
+                                            Pemilik Sampah
+                                        @else
+                                            Administrator
+                                        @endif
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -68,14 +74,15 @@
                 </div>
                 <div class="row mt-3">
                     <h5 class="mt-0 mb-0 font-14">Data Akun
-                        <button class="btn btn-primary float-end edit-btn py-1 px-2"><i class="mdi mdi-settings-outline"></i> &nbsp;Edit Data Akun</button>
+                        <button class="btn btn-primary float-end edit-btn py-1 px-2"><i
+                                class="mdi mdi-settings-outline"></i> &nbsp;Edit Data Akun</button>
                     </h5>
                     <div class="row ms-2 p-0 my-0">
                         <div class="col-3">
                             <p class="m-0 p-0">Nama Akun</p>
                         </div>
                         <div class="col-9">
-                            <p class="m-0 p-0">: Stanley Jones</p>
+                            <p class="m-0 p-0">: {{ Auth::user()->name }}/p>
                         </div>
                     </div>
                     <div class="row ms-2 p-0 my-0">
@@ -83,7 +90,7 @@
                             <p class="m-0 p-0">E-mail</p>
                         </div>
                         <div class="col-9">
-                            <p class="m-0 p-0">: StanleyJones@gmail.com</p>
+                            <p class="m-0 p-0">: {{ Auth::user()->email }}</p>
                         </div>
                     </div>
                     <div class="row ms-2 p-0 my-0">
@@ -115,7 +122,8 @@
 
                 <div class="row mt-3">
                     <h5 class="mt-0 mb-0 font-14">Data Pengguna
-                        <button class="btn btn-primary float-end edit-btn py-1 px-2"><i class="mdi mdi-settings-outline"></i> &nbsp;Edit Data Pengguna</button>
+                        <button class="btn btn-primary float-end edit-btn py-1 px-2"><i
+                                class="mdi mdi-settings-outline"></i> &nbsp;Edit Data Pengguna</button>
                     </h5>
                     <div class="row ms-2 p-0 my-0 ">
                         <div class="col-3">

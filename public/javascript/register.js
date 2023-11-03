@@ -77,10 +77,5 @@ $(document).ready(function () {
             }
         }
     }
-
-    // Captcha
-    function onSubmit(token) {
-        document.getElementById("formRegister").submit();
-    }
 });
 
