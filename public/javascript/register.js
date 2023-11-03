@@ -69,13 +69,18 @@ $(document).ready(function () {
             $daftarButton.prop('disabled', false);
             $samaText.addClass('d-none');
         } else {
-            if(passwordValue === confirmationValue || passwordValue.length === 0) {
+            if (passwordValue === confirmationValue || passwordValue.length === 0) {
                 $samaText.addClass('d-none');
                 $daftarButton.prop('disabled', true);
             } else {
                 $samaText.removeClass('d-none');
             }
         }
+    }
+
+    // Captcha
+    function onSubmit(token) {
+        document.getElementById("formRegister").submit();
     }
 });
 

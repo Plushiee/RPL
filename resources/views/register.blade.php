@@ -2,10 +2,12 @@
 <html lang="en">
 
 <head>
-    <title>Title</title>
+    <title>MoneyTrash! - Register</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="/assets/navbar/logo.png">
 
     <!-- Bootstrap CSS v5.2.1 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -41,7 +43,7 @@
                                 </div>
                             </div>
 
-                            <form action="/register/email" method="POST">
+                            <form action="/register/email" method="POST" id="formRegister">
                                 @csrf
                                 <div class="row mb-3">
                                     <div class="col">
@@ -90,7 +92,7 @@
                                 </div>
                                 <div class="row mb-3">
                                     <div class="d-grid">
-                                        <button type="submit" class="btn btn-success submit" disabled>Daftar</button>
+                                        <button type="submit" class="btn btn-success submit g-recaptcha" data-sitekey="6LcHsO4oAAAAAHQ0-JzJ2Pz5yUQQKbK9gGOBdzo5" data-callback='onSubmit' data-action='submit' disabled>Daftar</button>
                                         <p class="mb-0 text-center d-none" id="sama"
                                             style="color: red; font-weight: bold">Password Tidak Sama!</p>
                                     </div>
@@ -126,6 +128,7 @@
     {{-- Javascript  --}}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://www.google.com/recaptcha/api.js"></script>
     <script src="/javascript/register.js"></script>
 
     <!-- Bootstrap JavaScript Libraries -->
