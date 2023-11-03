@@ -43,7 +43,7 @@
 
                                 echo $waktu;
                                 ?>
-                                , ...</h4>
+                                , {{ Auth::user()->name }}</h4>
                         </div>
                     </div>
                 </div>
