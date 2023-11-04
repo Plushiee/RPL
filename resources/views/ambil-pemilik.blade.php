@@ -55,19 +55,17 @@
                             <h5 class="mt-0 font-14">Jenis Sampah dan Kuantitas</h5>
                             <div class="row">
                                 <div class="col-xl-2 col-sm-6 d-grid widget-inline-box text-center">
-                                    <a href="dashboard/ambil">
-                                        <button class="btn btn-outline-dark btn-block mt-3 mt-sm-0 p-3" type="button"
-                                            style="font-size: 18px; font-weight: bold"><img src="\assets\sampah\stink.png"
-                                                alt="organik.png" width="96"><br>Organik</button>
-                                    </a>
+                                    <button class="btn btn-outline-dark btn-block mt-3 mt-sm-0 p-3 organik" type="button"
+                                        style="font-size: 18px; font-weight: bold"><img src="\assets\sampah\stink.png"
+                                            alt="organik.png" width="96"><br>Organik</button>
                                 </div>
 
-                                <div class="col-xl-2 col-sm-6 d-grid widget-inline-box text-center">
+                                <div class="col-xl-2 col-sm-6 d-grid widget-inline-box text-center kertas">
                                     <button class="btn btn-outline-dark btn-block mt-3 mt-sm-0 p-3" type="button"
                                         style="font-size: 18px; font-weight: bold"><img src="\assets\sampah\paper.png"
                                             alt="kertas.png" width="96"><br>Kertas</button>
                                 </div>
-                                <div class="col-xl-2 col-sm-6 d-grid widget-inline-box text-center">
+                                <div class="col-xl-2 col-sm-6 d-grid widget-inline-box text-center plastik">
                                     <a href="dashboard/ambil">
                                         <button class="btn btn-outline-dark btn-block mt-3 mt-sm-0 p-3" type="button"
                                             style="font-size: 18px; font-weight: bold"><img
@@ -76,12 +74,12 @@
                                     </a>
                                 </div>
 
-                                <div class="col-xl-2 col-sm-6 d-grid widget-inline-box text-center">
+                                <div class="col-xl-2 col-sm-6 d-grid widget-inline-box text-center kaca">
                                     <button class="btn btn-outline-dark btn-block mt-3 mt-sm-0 p-3" type="button"
                                         style="font-size: 18px; font-weight: bold"><img src="\assets\sampah\glass.png"
                                             alt="kaca.png" width="96"><br>Kaca</button>
                                 </div>
-                                <div class="col-xl-2 col-sm-6 d-grid widget-inline-box text-center">
+                                <div class="col-xl-2 col-sm-6 d-grid widget-inline-box text-center logam">
                                     <a href="dashboard/ambil">
                                         <button class="btn btn-outline-dark btn-block mt-3 mt-sm-0 p-3" type="button"
                                             style="font-size: 18px; font-weight: bold"><img src="\assets\sampah\metal.png"
@@ -89,7 +87,7 @@
                                     </a>
                                 </div>
 
-                                <div class="col-xl-2 col-sm-6 d-grid widget-inline-box text-center"
+                                <div class="col-xl-2 col-sm-6 d-grid widget-inline-box text-center lainnya"
                                     style="border: none !important;">
                                     <button class="btn btn-outline-dark btn-block mt-3 mt-sm-0 p-3" type="button"
                                         style="font-size: 18px; font-weight: bold"><img src="\assets\sampah\trash-can.png"
@@ -198,6 +196,7 @@
 
 @section('scripts')
     <script src="/javascript/gps-map.js"></script>
+    <script src="/javascript/pemilik-ambil.js"></script>
     <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBPCyuCDP-NsuKm_SVIyga-LHZilnWyzmo&callback=initMap"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
