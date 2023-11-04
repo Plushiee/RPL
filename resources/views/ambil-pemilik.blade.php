@@ -49,7 +49,124 @@
                     </div>
                 </div>
                 <!-- end row -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card-box widget-inline pt-1" style="border: none !important">
+                            <h5 class="mt-0 font-14">Jenis Sampah dan Kuantitas</h5>
+                            <div class="row">
+                                <div class="col-xl-2 col-sm-6 d-grid widget-inline-box text-center">
+                                    <a href="dashboard/ambil">
+                                        <button class="btn btn-outline-dark btn-block mt-3 mt-sm-0 p-3" type="button"
+                                            style="font-size: 18px; font-weight: bold"><img src="\assets\sampah\stink.png"
+                                                alt="organik.png" width="96"><br>Organik</button>
+                                    </a>
+                                </div>
 
+                                <div class="col-xl-2 col-sm-6 d-grid widget-inline-box text-center">
+                                    <button class="btn btn-outline-dark btn-block mt-3 mt-sm-0 p-3" type="button"
+                                        style="font-size: 18px; font-weight: bold"><img src="\assets\sampah\paper.png"
+                                            alt="kertas.png" width="96"><br>Kertas</button>
+                                </div>
+                                <div class="col-xl-2 col-sm-6 d-grid widget-inline-box text-center">
+                                    <a href="dashboard/ambil">
+                                        <button class="btn btn-outline-dark btn-block mt-3 mt-sm-0 p-3" type="button"
+                                            style="font-size: 18px; font-weight: bold"><img
+                                                src="\assets\sampah\recycling-box.png" alt="plastik.png"
+                                                width="96"><br>Plastik</button>
+                                    </a>
+                                </div>
+
+                                <div class="col-xl-2 col-sm-6 d-grid widget-inline-box text-center">
+                                    <button class="btn btn-outline-dark btn-block mt-3 mt-sm-0 p-3" type="button"
+                                        style="font-size: 18px; font-weight: bold"><img src="\assets\sampah\glass.png"
+                                            alt="kaca.png" width="96"><br>Kaca</button>
+                                </div>
+                                <div class="col-xl-2 col-sm-6 d-grid widget-inline-box text-center">
+                                    <a href="dashboard/ambil">
+                                        <button class="btn btn-outline-dark btn-block mt-3 mt-sm-0 p-3" type="button"
+                                            style="font-size: 18px; font-weight: bold"><img src="\assets\sampah\metal.png"
+                                                alt="logam.png" width="96"><br>Logam</button>
+                                    </a>
+                                </div>
+
+                                <div class="col-xl-2 col-sm-6 d-grid widget-inline-box text-center"
+                                    style="border: none !important;">
+                                    <button class="btn btn-outline-dark btn-block mt-3 mt-sm-0 p-3" type="button"
+                                        style="font-size: 18px; font-weight: bold"><img src="\assets\sampah\trash-can.png"
+                                            alt="lainnya.png" width="96"><br>Lainnya</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-9">
+                        <div class="card-box">
+                            <h5 class="mt-0 font-14">Peta</h5>
+                            <div class="row m-0 p-0 border">
+                                <div id="map" style="width: 100%; height: 400px;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end col -->
+
+                    <div class="col-lg-3">
+                        <div class="card-box">
+                            <h5 class="mt-0 font-14">Pengumuman</h5>
+                            <div class="accordion accordion-flush" id="accordionFlushExample">
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                            data-bs-target="#flush-collapseOne" aria-expanded="false"
+                                            aria-controls="flush-collapseOne">
+                                            Accordion Item #1
+                                        </button>
+                                    </h2>
+                                    <div id="flush-collapseOne" class="accordion-collapse collapse"
+                                        data-bs-parent="#accordionFlushExample">
+                                        <div class="accordion-body">Placeholder content for this accordion, which is
+                                            intended to demonstrate the <code>.accordion-flush</code> class. This is the
+                                            first item's accordion body.</div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                            data-bs-target="#flush-collapseTwo" aria-expanded="false"
+                                            aria-controls="flush-collapseTwo">
+                                            Accordion Item #2
+                                        </button>
+                                    </h2>
+                                    <div id="flush-collapseTwo" class="accordion-collapse collapse"
+                                        data-bs-parent="#accordionFlushExample">
+                                        <div class="accordion-body">Placeholder content for this accordion, which is
+                                            intended to demonstrate the <code>.accordion-flush</code> class. This is the
+                                            second item's accordion body. Let's imagine this being filled with some actual
+                                            content.</div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#flush-collapseThree"
+                                            aria-expanded="false" aria-controls="flush-collapseThree">
+                                            Accordion Item #3
+                                        </button>
+                                    </h2>
+                                    <div id="flush-collapseThree" class="accordion-collapse collapse"
+                                        data-bs-parent="#accordionFlushExample">
+                                        <div class="accordion-body">Placeholder content for this accordion, which is
+                                            intended to demonstrate the <code>.accordion-flush</code> class. This is the
+                                            third item's accordion body. Nothing more exciting happening here in terms of
+                                            content, but just filling up the space to make it look, at least at first
+                                            glance, a bit more representative of how this would look in a real-world
+                                            application.</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
                 <!-- end col -->
             </div>
@@ -80,6 +197,8 @@
 @endsection
 
 @section('scripts')
+    <script src="/javascript/gps-map.js"></script>
     <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBPCyuCDP-NsuKm_SVIyga-LHZilnWyzmo&callback=initMap"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 @endsection
