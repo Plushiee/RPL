@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="/assets/styles/index/plugins.min.css">
     <!-- Style CSS -->
     <link rel="stylesheet" href="/assets/styles/index/app.css">
-    
+
     <!-- Your CSS -->
     <link rel="stylesheet" href="/assets/styles/index/custom.css">
 
@@ -73,8 +73,7 @@
                         <div class="hero-content mb-35">
                             <h1 class="color-white mb-15" style="font-weight: bold">MoneyTrash<br>Trash Me! It's Work
                             </h1>
-                            <p class="h6-font color-white">No one cares about products. People care about ideas. Is a
-                                product an idea? Noup. Is a brand? A good one is.
+                            <p class="h6-font color-white">Merupakan suatu terobosan aplikasi berbasis web yang dirancang khusus untuk memberikan dukungan yang sangat vital kepada Bank Sampah dalam pengelolaan dan pelaporan sampah yang ada dan dimilikinya.
                             </p>
                         </div>
                         <a href="register"
@@ -104,44 +103,38 @@
         <!-- =========== End of  Hero ============ -->
 
         <!-- =========== Start of features-one ============ -->
-        <section class="features features--v1 space--top--2">
+        <section class="features features--v1 mb-md-30 mb-0"> <!--space--top -->
             <div class="container">
                 <div class="row">
                     <div class="col-12 col-md-4">
                         <div class="feature text-center mb-50 mb-md-0">
-                            <span class="feature-icon mb-25 icon--4x">
-                                <i class="nc-icon nc-layers-3 bg-color--primary"></i>
+                            <span class="feature-icon mb-1 icon--4x">
+                                <iconify-icon icon="icon-park-outline:earth" height="96"></iconify-icon>
                             </span>
-                            <h5 class="feature-title">Easily Managable</h5>
-                            <p class="">No one cares about products. People care about ideas. Is a product an
-                                idea?
-                                Noup. Is a brand? A good one is.
+                            <h5 class="feature-title mb-0">Praktis</h5>
+                            <p class="m-0">Berjalan secara digital
                             </p>
                         </div>
                         <!-- feature end -->
                     </div>
                     <div class="col-12 col-md-4">
                         <div class="feature text-center mb-50 mb-md-0">
-                            <span class="feature-icon mb-25 icon--4x">
-                                <i class="nc-icon nc-watch-circle bg-color--primary"></i>
+                            <span class="feature-icon mb-1 icon--4x">
+                                <iconify-icon icon="icon-park-outline:circular-connection" height="96"></iconify-icon>
                             </span>
-                            <h5 class="feature-title">Track Your Move</h5>
-                            <p class="">No one cares about products. People care about ideas. Is a product an
-                                idea?
-                                Noup. Is a brand? A good one is.
+                            <h5 class="feature-title mb-0">Terintergrasi</h5>
+                            <p class="m-0">Terintegrasi dengan bank sampah
                             </p>
                         </div>
                         <!-- feature end -->
                     </div>
                     <div class="col-12 col-md-4">
-                        <div class="feature text-center">
-                            <span class="feature-icon mb-25 icon--4x">
-                                <i class="nc-icon nc-chart-bar-33 bg-color--primary"></i>
+                        <div class="feature text-center mb-50 mb-md-0">
+                            <span class="feature-icon mb-1 icon--4x">
+                                <iconify-icon icon="octicon:thumbsup-24" height="96"></iconify-icon>
                             </span>
-                            <h5 class="feature-title">Complete Data</h5>
-                            <p class="">No one cares about products. People care about ideas. Is a product an
-                                idea?
-                                Noup. Is a brand? A good one is.
+                            <h5 class="feature-title mb-0">Mudah</h5>
+                            <p class="m-0">Mudah dalam membuang sampah
                             </p>
                         </div>
                         <!-- feature end -->
@@ -152,7 +145,7 @@
         <!-- =========== End of features-one ============ -->
 
         <!-- =========== Start of footer  ============ -->
-        <footer class="footer footer--v1 section-light space border-top border-color-light--3">
+        <footer class="footer footer--v1 section-light border-top border-color-light--3 pt-25 pb-25">
             <div class="container">
                 <div class="row">
                     <div class="col-12 col-lg-7 mx-auto">
@@ -191,7 +184,7 @@
         <!-- =========== End of footer ============ -->
 
     </main>
-
+    <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js"></script>
     <script src="/assets/js/index/plugins.min.js"></script>
     <script src="/assets/js/index/app.js"></script>
 </body>
