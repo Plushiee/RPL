@@ -30,6 +30,7 @@ class DashboardController extends Controller
         $user->provinsi = $request->input('provinsi');
         $user->kodePos = $request->input('kodePos');
         $user->catatan = $request->input('catatan');
+        $user->status = true;
         $user->save();
     }
 }

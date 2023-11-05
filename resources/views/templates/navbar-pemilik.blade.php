@@ -240,7 +240,7 @@
                             <input class="form-control" type="text" name="nomor" id="nomor" required>
                         </div>
                         <div class="mb-3 text-start">
-                            <label for="alamat" class="form-label mb-0">Alamat Kengkap</label>
+                            <label for="alamat" class="form-label mb-0">Alamat Lengkap</label>
                             <textarea class="form-control" id="alamat" name="alamat" rows="3" required></textarea>
                         </div>
                         <div class="mb-3">
