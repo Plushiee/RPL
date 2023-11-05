@@ -59,7 +59,7 @@
                             </div>
                             <div class="col-8">
                                 <div class="user-info align-items-center">
-                                    <a href="#" style="font-weight: bold; color: black">Stanley Jones</a>
+                                    <a href="#" style="font-weight: bold; color: black">{{ Auth::user()->name }}</a>
                                     <p class="text-muted m-0">
                                         @if (Auth::check() && Auth::user()->status === 'pemilik')
                                             Pemilik Sampah
