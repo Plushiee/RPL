@@ -22,7 +22,7 @@ class DashboardController extends Controller
 
     public function simpanAkunAwal(Request $request) {
         $user = UserEmailModel::find(Auth::id());
-        $user->namaLengkap = $request->input('nama');
+        $user->namaLengkap = $request->input('namaLengkap');
         $user->nomor = $request->input('nomor');
         $user->alamat = $request->input('alamat');
         $user->kecamatan = $request->input('kecamatan');
