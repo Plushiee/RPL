@@ -147,7 +147,7 @@
                 <ul class="metismenu" id="side-menu">
                     <li class="menu-title">Navigasi</li>
                     <li>
-                        <a class="@if (request()->is('pemilik/dashboard*')) active-class active-txt @endif mb-0">
+                        <a href="/pemilik/dashboard" class="@if (request()->is('pemilik/dashboard*')) active-class active-txt @endif mb-0">
                             <i class="bi bi-house"></i>
                             <span> Home</span>
                         </a>

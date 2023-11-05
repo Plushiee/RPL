@@ -53,7 +53,7 @@
                     <div class="col-12">
                         <div class="card-box widget-inline pt-1" style="border: none !important">
                             <h5 class="mt-0 font-14">Jenis Sampah dan Kuantitas</h5>
-                            <div class="row">
+                            <div class="row g-md-4 g-sm-4 g-1">
                                 <div class="col-xl-2 col-sm-6 d-grid widget-inline-box text-center">
                                     <button class="btn btn-outline-dark btn-block mt-3 mt-sm-0 p-3 organik" type="button"
                                         style="font-size: 18px; font-weight: bold"><img src="\assets\sampah\stink.png"

@@ -11,3 +11,8 @@
 .btn-success:hover {
     box-shadow: 0 0 10px #4fc55b;
 }
+
+.btn-success {
+    font-weight: bold;
+}
+
