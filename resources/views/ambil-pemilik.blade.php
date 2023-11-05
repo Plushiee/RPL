@@ -190,7 +190,7 @@
     </div>
     <!-- end content -->
 
-    </div>
+    {{-- </div> --}}
     <!-- END content-page -->
 @endsection
 
@@ -199,5 +199,4 @@
     <script src="/javascript/pemilik-ambil.js"></script>
     <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBPCyuCDP-NsuKm_SVIyga-LHZilnWyzmo&callback=initMap"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 @endsection

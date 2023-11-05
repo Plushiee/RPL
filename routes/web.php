@@ -36,6 +36,7 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('logout')->middl
 Route::get('/pemilik/dashboard', [DashboardController::class, 'dashboard'])->middleware('auth'); //default pemilik
 Route::get('/pemilik/dashboard/ambil', [DashboardController::class, 'ambil'])->middleware('auth'); //default pemilik
 Route::get('/pemilik/akun', [DashboardController::class, 'akun'])->middleware('auth'); //default pemilik
+Route::post('/pemilik/simpanAkunAwal', [DashboardController::class, 'simpanAkunAwal'])->middleware('auth'); //default pemilik
 
 // Pilih Akun Controller
 Route::get('/pilih-akun', [PilihAkunController::class, 'pilihAkun']);

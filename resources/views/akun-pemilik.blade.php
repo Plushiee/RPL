@@ -98,7 +98,7 @@
                             <p class="m-0 p-0">Nomor Handphone</p>
                         </div>
                         <div class="col-9">
-                            <p class="m-0 p-0">: +62-812-8993-6969</p>
+                            <p class="m-0 p-0">: {{ Auth::user()->nomor }}</p>
                         </div>
                     </div>
                     <div class="row ms-2 p-0 my-0">
@@ -130,7 +130,7 @@
                             <p class="m-0 p-0">Nama Lengkap</p>
                         </div>
                         <div class="col-9">
-                            <p class="m-0 p-0">: Stanley Jones</p>
+                            <p class="m-0 p-0">: {{ Auth::user()->namaLengkap }}</p>
                         </div>
                     </div>
                     <div class="row ms-2 p-0 my-0">
@@ -138,7 +138,7 @@
                             <p class="m-0 p-0">Alamat Lengkap</p>
                         </div>
                         <div class="col-9">
-                            <p class="m-0 p-0">: Jl. Dr. Wahidin Sudirohusodo No.5-25, Kotabaru</p>
+                            <p class="m-0 p-0">: {{ Auth::user()->alamat }}</p>
                         </div>
                     </div>
                     <div class="row ms-2 p-0 my-0">
@@ -146,7 +146,7 @@
                             <p class="m-0 p-0">Kecamatan</p>
                         </div>
                         <div class="col-9">
-                            <p class="m-0 p-0">: Gondokusuman</p>
+                            <p class="m-0 p-0">: {{ Auth::user()->kecamatan }}</p>
                         </div>
                     </div>
                     <div class="row ms-2 p-0 my-0">
@@ -154,7 +154,7 @@
                             <p class="m-0 p-0">Kota</p>
                         </div>
                         <div class="col-9">
-                            <p class="m-0 p-0">: Kota Yogyakarta</p>
+                            <p class="m-0 p-0">: {{ Auth::user()->kota }}</p>
                         </div>
                     </div>
                     <div class="row ms-2 p-0 my-0">
@@ -162,7 +162,7 @@
                             <p class="m-0 p-0">Provinsi</p>
                         </div>
                         <div class="col-9">
-                            <p class="m-0 p-0">: Daerah Istimewa Yogyakarta</p>
+                            <p class="m-0 p-0">: {{ Auth::user()->provinsi }}</p>
                         </div>
                     </div>
                     <div class="row ms-2 p-0 my-0">
@@ -170,7 +170,7 @@
                             <p class="m-0 p-0">Kode Pos</p>
                         </div>
                         <div class="col-9">
-                            <p class="m-0 p-0">: 55224</p>
+                            <p class="m-0 p-0">: {{ Auth::user()->kodePos }}</p>
                         </div>
                     </div>
                     <div class="row ms-2 p-0 my-0">
@@ -178,7 +178,7 @@
                             <p class="m-0 p-0">Catatan Tambahan (Cth: Blok / Unit, No., Patokan)</p>
                         </div>
                         <div class="col-9">
-                            <p class="m-0 p-0">: Gedung Agape</p>
+                            <p class="m-0 p-0">: {{ Auth::user()->catatan }}</p>
                         </div>
                     </div>
                 </div>

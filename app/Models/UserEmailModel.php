@@ -14,11 +14,25 @@ class UserEmailModel extends Model implements Authenticatable
 
     protected $table = "useremail";
 
+    protected $guarded = [
+        'id',
+    ];
+
     protected $fillable = [
         'name',
         'email',
         'email_verified_at',
         'password',
-        'status'
+        'status',
+        'baru',
+        // Data Diri
+        'namaLengkap',
+        'nomor',
+        'alamat',
+        'kecamatan',
+        'kota',
+        'provinsi',
+        'kodePos',
+        'catatan',
     ];
 }
