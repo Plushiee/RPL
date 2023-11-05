@@ -308,7 +308,7 @@
                 });
             }
 
-            const isUserBaru = {{ Auth::user()->baru ? 'true' : 'false' }};
+            const isUserBaru = {{ Auth::user()->baru}};
 
             if (isUserBaru) {
                 tampilkanSweetAlert();
