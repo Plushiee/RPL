@@ -31,9 +31,9 @@
                             <h4 class="header-title mb-3">Selamat
                                 <?php
                                 date_default_timezone_set('Asia/Jakarta');
-                                
+
                                 $jam = date('H');
-                                
+
                                 if ($jam >= 5 && $jam < 12) {
                                     $waktu = 'Pagi';
                                 } elseif ($jam >= 12 && $jam < 18) {
@@ -41,7 +41,7 @@
                                 } else {
                                     $waktu = 'Malam';
                                 }
-                                
+
                                 echo $waktu;
                                 ?>
                                 , {{ Auth::user()->name }} </h4>
@@ -197,7 +197,7 @@
 @section('scripts')
     <script src="/javascript/gps-map.js"></script>
     <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBPCyuCDP-NsuKm_SVIyga-LHZilnWyzmo&callback=initMap"></script>
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBRPlQuuQmmWWhwkDiUijv6F6deBOflQhk&callback=initMap"></script>
     <script>
         $(document).ready(function() {
             $('.organik').click(function(e) {
