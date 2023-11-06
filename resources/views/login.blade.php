@@ -165,7 +165,7 @@
             });
         </script>
     @endif
-    @if (session('error'))
+    @if (session('errorWrong'))
         <script>
             $(document).ready(function() {
                 // Alert
@@ -186,6 +186,31 @@
                 toastMixin.fire({
                     animation: true,
                     title: 'Email atau kata sandi salah'
+                });
+            });
+        </script>
+    @endif
+    @if (session('error'))
+        <script>
+            $(document).ready(function() {
+                // Alert
+                var toastMixin = Swal.mixin({
+                    toast: true,
+                    icon: 'error',
+                    title: 'General Title',
+                    position: 'top-right',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                });
+
+                toastMixin.fire({
+                    animation: true,
+                    title: 'Email tidak terdaftar'
                 });
             });
         </script>

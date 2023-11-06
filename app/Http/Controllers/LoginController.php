@@ -23,13 +23,18 @@ class LoginController extends Controller
 
         $user = UserEmailModel::where('email', $email)->first();
 
-        if ($user && password_verify($password, $user->password)) {
-            Auth::login($user, $remember);
-            return redirect('/pemilik/dashboard');
-        }
+        if ($user) {
+            if (password_verify($password, $user->password)) {
+                Auth::login($user, $remember);
+                return redirect('/pemilik/dashboard');
+            } else {
+                return back()->with("errorWrong", "Email atau Password anda salah");
+            }
+        } else {
 
-        // Jika login gagal, tampilkan pesan kesalahan
-        return back()->withErrors(['error' => 'Email atau kata sandi salah']);
+            // Jika login gagal, tampilkan pesan kesalahan
+            return back()->with("error", "Email tidak terdaftar");
+        }
     }
 
     public function logout()
