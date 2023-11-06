@@ -31,9 +31,9 @@
                             <h4 class="header-title mb-3">Selamat
                                 <?php
                                 date_default_timezone_set('Asia/Jakarta');
-
+                                
                                 $jam = date('H');
-
+                                
                                 if ($jam >= 5 && $jam < 12) {
                                     $waktu = 'Pagi';
                                 } elseif ($jam >= 12 && $jam < 18) {
@@ -41,7 +41,7 @@
                                 } else {
                                     $waktu = 'Malam';
                                 }
-
+                                
                                 echo $waktu;
                                 ?>
                                 , {{ Auth::user()->name }} </h4>
@@ -196,7 +196,158 @@
 
 @section('scripts')
     <script src="/javascript/gps-map.js"></script>
-    <script src="/javascript/pemilik-ambil.js"></script>
     <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBPCyuCDP-NsuKm_SVIyga-LHZilnWyzmo&callback=initMap"></script>
+    <script>
+        $(document).ready(function() {
+            $('.organik').click(function(e) {
+                e.preventDefault();
+
+                // Inisialisasi variabel alamatValue, kecamatanValue, kotaValue, provinsiValue, kodePosValue
+                let alamatValue, kecamatanValue, kotaValue, provinsiValue, kodePosValue;
+
+                Swal.fire({
+                    title: "Buat Pesanan Pengambilan Sampah Organik",
+                    html: `
+                    <form action="php/proses-tambah_Nikolaus-Pastika-Bara-Satyaradi.php" method="POST">
+                        <div class="mb-3">
+                            <input class="form-control" type="text" name="nama" placeholder="Nama Pemilik Sampah" required>
+                        </div>
+                        <div class="mb-3">
+                            <input class="form-control" type="text" name="nomor" placeholder="Nomor Handphone (+62xxx)" required>
+                        </div>
+                        <div class="mb-3 text-start">
+                            <label for="alamat" class="form-label">Alamat Pengambilan</label>
+                            <textarea class="form-control" id="alamat" name="alamat" rows="3" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <input class="form-control" type="text" name="kecamatan" placeholder="Kecamatan" required>
+                        </div>
+                        <div class="mb-3">
+                            <input class="form-control" type="text" name="kota" placeholder="Kota atau Kabupaten" required>
+                        </div>
+                        <div class="mb-3">
+                            <input class="form-control" type="text" name="provinsi" placeholder="Provinsi" required>
+                        </div>
+                        <div class="mb-3">
+                            <input class="form-control" type="number" name="kodePos" placeholder="Kode Pos" required>
+                        </div>
+                        <div class="mb-3 text-start">
+                            <label for="catatan" class="form-label">Catatan Tambahan</label>
+                            <textarea class="form-control" id="catatan" name="catatan" rows="3"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <input class="form-control" type="number" name="berat" placeholder="Berat" min="0" required>
+                        </div>
+                        <div class="mb-3 text-start">
+                            <label for="bukti" class="form-label">Bukti Barang</label>
+                            <input class="form-control" type="file" name="bukti" accept="image/*" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="useAuthData" class="form-label">Isi data dengan informasi saya</label>
+                            <input class="form-check-input" type="checkbox" id="useAuthData" name="useAuthData">
+                        </div>
+                    </form>`,
+                    showCancelButton: true,
+                    confirmButtonText: "Selanjutnya",
+                    cancelButtonText: "Tutup",
+                    focusConfirm: false,
+                    showLoaderOnConfirm: true,
+                    didOpen: () => {
+                        const useAuthDataCheckbox = Swal.getPopup().querySelector(
+                            "#useAuthData");
+                        // $(useAuthDataCheckbox).on("change", function() {
+                            if (useAuthDataCheckbox.checked) {
+                                // Isi data dengan informasi pengguna yang terotentikasi (Auth)
+                                // const authenticatedUser = {{ Auth::user() }};
+                                // Swal.getPopup().querySelector("input[name='nama']")
+                                //     .value = authenticatedUser.nama;
+                                // Swal.getPopup().querySelector("input[name='nomor']")
+                                //     .value = authenticatedUser.nomor;
+                                // Swal.getPopup().querySelector("textarea[name='alamat']")
+                                //     .value = authenticatedUser.alamat;
+                                // Swal.getPopup().querySelector("input[name='kecamatan']")
+                                //     .value = authenticatedUser.kecamatan;
+                                // Swal.getPopup().querySelector("input[name='kota']")
+                                //     .value = authenticatedUser.kota;
+                                // Swal.getPopup().querySelector("input[name='provinsi']")
+                                //     .value = authenticatedUser.provinsi;
+                                // Swal.getPopup().querySelector("input[name='kodePos']")
+                                //     .value = authenticatedUser.kodePos;
+                            }
+                            // else {
+                            //     // Kosongkan input jika checkbox tidak dicentang
+                            //     Swal.getPopup().querySelector("input[name='nama']")
+                            //         .value = "";
+                            //     Swal.getPopup().querySelector("input[name='nomor']")
+                            //         .value = "";
+                            //     Swal.getPopup().querySelector("textarea[name='alamat']")
+                            //         .value = "";
+                            //     Swal.getPopup().querySelector("input[name='kecamatan']")
+                            //         .value = "";
+                            //     Swal.getPopup().querySelector("input[name='kota']")
+                            //         .value = "";
+                            //     Swal.getPopup().querySelector("input[name='provinsi']")
+                            //         .value = "";
+                            //     Swal.getPopup().querySelector("input[name='kodePos']")
+                            //         .value = "";
+                            // }
+                        // });
+                    },
+                    preConfirm: () => {
+                        alamatValue = Swal.getPopup().querySelector("textarea[name='alamat']")
+                            .value;
+                        kecamatanValue = Swal.getPopup().querySelector(
+                            "input[name='kecamatan']").value;;
+                        kotaValue = Swal.getPopup().querySelector("input[name='kota']").value;
+                        provinsiValue = Swal.getPopup().querySelector("input[name='provinsi']")
+                            .value;
+                        kodePosValue = Swal.getPopup().querySelector("input[name='kodePos']")
+                            .value;
+                    },
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        Swal.fire({
+                            title: "Peta Lokasi",
+                            html: `
+                    <div id="mapSwoll" style="height: 300px;"></div>`,
+                            showCancelButton: true,
+                            confirmButtonText: "Simpan",
+                            cancelButtonText: "Tutup",
+                            didOpen: () => {
+                                const map = new google.maps.Map(document.getElementById(
+                                    "mapSwoll"), {
+                                    center: {
+                                        lat: -7.7956,
+                                        lng: 110.3695
+                                    }, // Koordinat awal peta
+                                    zoom: 8,
+                                });
+
+                                const geocoder = new google.maps.Geocoder();
+                                const fullAddress =
+                                    `${alamatValue}, ${kecamatanValue}, ${kotaValue}, ${provinsiValue}, ${kodePosValue}`;
+
+                                geocoder.geocode({
+                                    address: fullAddress
+                                }, (results, status) => {
+                                    if (status === "OK" && results.length > 0) {
+                                        const location = results[0].geometry
+                                            .location;
+                                        map.setCenter(
+                                            location
+                                        ); // Mengatur pusat peta ke lokasi yang ditemukan
+                                        new google.maps.Marker({
+                                            map,
+                                            position: location
+                                        }); // Menambahkan marker pada lokasi tersebut
+                                    }
+                                });
+                            },
+                        });
+                    }
+                });
+            });
+        });
+    </script>
 @endsection
