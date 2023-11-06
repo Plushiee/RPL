@@ -321,7 +321,7 @@
                                         lat: -7.7956,
                                         lng: 110.3695
                                     }, // Koordinat awal peta
-                                    zoom: 8,
+                                    zoom: 20,
                                 });
 
                                 const geocoder = new google.maps.Geocoder();
