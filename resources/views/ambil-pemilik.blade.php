@@ -14,8 +14,8 @@
         <!-- Start Breadcrumb -->
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb" style="background-color: transparent !important">
-                <li class="breadcrumb-item"><a href="pemilik">Pemilik Sampah</a></li>
-                <li class="breadcrumb-item"><a href="dashboard">Dashboard</a></li>
+                <li class="breadcrumb-item"><a href="/pemilik/dashboard">Pemilik Sampah</a></li>
+                <li class="breadcrumb-item"><a href="/pemilik/dashboard">Dashboard</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Ambil di Rumah</li>
             </ol>
         </nav>
@@ -245,7 +245,7 @@
                             <input class="form-control" type="file" name="bukti" accept="image/*" required>
                         </div>
                         <div class="mb-3">
-                            <label for="useAuthData" class="form-label">Isi data dengan informasi saya</label>
+                            <p class="form-label">Isi data dengan informasi saya</p>
                             <input class="form-check-input" type="checkbox" id="useAuthData" name="useAuthData">
                         </div>
                     </form>`,
@@ -257,43 +257,41 @@
                     didOpen: () => {
                         const useAuthDataCheckbox = Swal.getPopup().querySelector(
                             "#useAuthData");
-                        // $(useAuthDataCheckbox).on("change", function() {
-                        if (useAuthDataCheckbox.checked) {
-                            // Isi data dengan informasi pengguna yang terotentikasi (Auth)
-                            // const authenticatedUser = {{ Auth::user() }};
-                            // Swal.getPopup().querySelector("input[name='nama']")
-                            //     .value = authenticatedUser.nama;
-                            // Swal.getPopup().querySelector("input[name='nomor']")
-                            //     .value = authenticatedUser.nomor;
-                            // Swal.getPopup().querySelector("textarea[name='alamat']")
-                            //     .value = authenticatedUser.alamat;
-                            // Swal.getPopup().querySelector("input[name='kecamatan']")
-                            //     .value = authenticatedUser.kecamatan;
-                            // Swal.getPopup().querySelector("input[name='kota']")
-                            //     .value = authenticatedUser.kota;
-                            // Swal.getPopup().querySelector("input[name='provinsi']")
-                            //     .value = authenticatedUser.provinsi;
-                            // Swal.getPopup().querySelector("input[name='kodePos']")
-                            //     .value = authenticatedUser.kodePos;
-                        }
-                        // else {
-                        //     // Kosongkan input jika checkbox tidak dicentang
-                        //     Swal.getPopup().querySelector("input[name='nama']")
-                        //         .value = "";
-                        //     Swal.getPopup().querySelector("input[name='nomor']")
-                        //         .value = "";
-                        //     Swal.getPopup().querySelector("textarea[name='alamat']")
-                        //         .value = "";
-                        //     Swal.getPopup().querySelector("input[name='kecamatan']")
-                        //         .value = "";
-                        //     Swal.getPopup().querySelector("input[name='kota']")
-                        //         .value = "";
-                        //     Swal.getPopup().querySelector("input[name='provinsi']")
-                        //         .value = "";
-                        //     Swal.getPopup().querySelector("input[name='kodePos']")
-                        //         .value = "";
-                        // }
-                        // });
+                        $(useAuthDataCheckbox).on("change", function() {
+                                if (useAuthDataCheckbox.checked) {
+                                    Swal.getPopup().querySelector("input[name='nama']")
+                                        .value = '{{ Auth::user()->name }}';
+                                    Swal.getPopup().querySelector("input[name='nomor']")
+                                        .value = '{{ Auth::user()->nomor }}';
+                                    Swal.getPopup().querySelector("textarea[name='alamat']")
+                                        .value = '{{ Auth::user()->alamat }}';
+                                    Swal.getPopup().querySelector("input[name='kecamatan']")
+                                        .value = '{{ Auth::user()->kecamatan }}';
+                                    Swal.getPopup().querySelector("input[name='kota']")
+                                        .value = '{{ Auth::user()->kota }}';
+                                    Swal.getPopup().querySelector("input[name='provinsi']")
+                                        .value = '{{ Auth::user()->provinsi }}';
+                                    Swal.getPopup().querySelector("input[name='kodePos']")
+                                        .value = '{{ Auth::user()->kodePos }}';
+                                }
+                                // else {
+                                //     // Kosongkan input jika checkbox tidak dicentang
+                                //     Swal.getPopup().querySelector("input[name='nama']")
+                                //         .value = "";
+                                //     Swal.getPopup().querySelector("input[name='nomor']")
+                                //         .value = "";
+                                //     Swal.getPopup().querySelector("textarea[name='alamat']")
+                                //         .value = "";
+                                //     Swal.getPopup().querySelector("input[name='kecamatan']")
+                                //         .value = "";
+                                //     Swal.getPopup().querySelector("input[name='kota']")
+                                //         .value = "";
+                                //     Swal.getPopup().querySelector("input[name='provinsi']")
+                                //         .value = "";
+                                //     Swal.getPopup().querySelector("input[name='kodePos']")
+                                //         .value = "";
+                            }
+                        );
                     },
                     preConfirm: () => {
                         alamatValue = Swal.getPopup().querySelector("textarea[name='alamat']")
@@ -340,24 +338,24 @@
                                         const marker = new google.maps.Marker({
                                             map,
                                             position: location,
-                                            draggable: true 
+                                            draggable: true
                                         });
 
                                         Swal.getConfirmButton()
                                             .addEventListener('click',
-                                            function() {
-                                                // Ambil longitude dan latitude dari marker
-                                                const longitude = marker
-                                                    .getPosition().lng();
-                                                const latitude = marker
-                                                    .getPosition().lat();
+                                                function() {
+                                                    // Ambil longitude dan latitude dari marker
+                                                    const longitude = marker
+                                                        .getPosition().lng();
+                                                    const latitude = marker
+                                                        .getPosition().lat();
 
-                                                // Lakukan sesuatu dengan nilai longitude dan latitude, misalnya simpan ke database atau tampilkan kepada pengguna
-                                                console.log("Longitude: " +
-                                                    longitude);
-                                                console.log("Latitude: " +
-                                                    latitude);
-                                            });
+                                                    // Lakukan sesuatu dengan nilai longitude dan latitude, misalnya simpan ke database atau tampilkan kepada pengguna
+                                                    console.log("Longitude: " +
+                                                        longitude);
+                                                    console.log("Latitude: " +
+                                                        latitude);
+                                                });
                                     }
                                 });
                             },
