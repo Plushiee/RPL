@@ -238,15 +238,19 @@
                             <textarea class="form-control" id="catatan" name="catatan" rows="3"></textarea>
                         </div>
                         <div class="mb-3">
-                            <input class="form-control" type="number" name="berat" placeholder="Berat" min="0" required>
+                            <select class="form-select" name="berat" required>
+                                <option value="" disabled selected>Pilih Berat</option>
+                                <option value="small">Small (Maks. 5 kg)</option>
+                                <option value="medium">Medium (Maks. 20 kg)</option>
+                                <option value="large">Large (Maks. 100 kg)</option>
+                            </select>
                         </div>
                         <div class="mb-3 text-start">
                             <label for="bukti" class="form-label">Bukti Barang</label>
                             <input class="form-control" type="file" name="bukti" accept="image/*" required>
                         </div>
                         <div class="mb-3">
-                            <p class="form-label">Isi data dengan informasi saya</p>
-                            <input class="form-check-input" type="checkbox" id="useAuthData" name="useAuthData">
+                            <p class="form-label" style="font-size:12;"> <input class="form-check-input" type="checkbox" id="useAuthData" name="useAuthData"> Isi data dengan informasi saya</p>
                         </div>
                     </form>`,
                     showCancelButton: true,
@@ -258,42 +262,85 @@
                         const useAuthDataCheckbox = Swal.getPopup().querySelector(
                             "#useAuthData");
                         $(useAuthDataCheckbox).on("change", function() {
-                                if (useAuthDataCheckbox.checked) {
-                                    Swal.getPopup().querySelector("input[name='nama']")
-                                        .value = '{{ Auth::user()->name }}';
-                                    Swal.getPopup().querySelector("input[name='nomor']")
-                                        .value = '{{ Auth::user()->nomor }}';
-                                    Swal.getPopup().querySelector("textarea[name='alamat']")
-                                        .value = '{{ Auth::user()->alamat }}';
-                                    Swal.getPopup().querySelector("input[name='kecamatan']")
-                                        .value = '{{ Auth::user()->kecamatan }}';
-                                    Swal.getPopup().querySelector("input[name='kota']")
-                                        .value = '{{ Auth::user()->kota }}';
-                                    Swal.getPopup().querySelector("input[name='provinsi']")
-                                        .value = '{{ Auth::user()->provinsi }}';
-                                    Swal.getPopup().querySelector("input[name='kodePos']")
-                                        .value = '{{ Auth::user()->kodePos }}';
-                                }
-                                // else {
-                                //     // Kosongkan input jika checkbox tidak dicentang
-                                //     Swal.getPopup().querySelector("input[name='nama']")
-                                //         .value = "";
-                                //     Swal.getPopup().querySelector("input[name='nomor']")
-                                //         .value = "";
-                                //     Swal.getPopup().querySelector("textarea[name='alamat']")
-                                //         .value = "";
-                                //     Swal.getPopup().querySelector("input[name='kecamatan']")
-                                //         .value = "";
-                                //     Swal.getPopup().querySelector("input[name='kota']")
-                                //         .value = "";
-                                //     Swal.getPopup().querySelector("input[name='provinsi']")
-                                //         .value = "";
-                                //     Swal.getPopup().querySelector("input[name='kodePos']")
-                                //         .value = "";
+                            if (useAuthDataCheckbox.checked) {
+                                Swal.getPopup().querySelector("input[name='nama']")
+                                    .value = '{{ Auth::user()->name }}';
+                                Swal.getPopup().querySelector("input[name='nama']")
+                                    .disabled = true;
+                                Swal.getPopup().querySelector("input[name='nomor']")
+                                    .value = '{{ Auth::user()->nomor }}';
+                                Swal.getPopup().querySelector("input[name='nomor']")
+                                    .disabled = true;
+                                Swal.getPopup().querySelector("textarea[name='alamat']")
+                                    .value = '{{ Auth::user()->alamat }}';
+                                Swal.getPopup().querySelector("textarea[name='alamat']")
+                                    .disabled = true;
+                                Swal.getPopup().querySelector("input[name='kecamatan']")
+                                    .value = '{{ Auth::user()->kecamatan }}';
+                                Swal.getPopup().querySelector("input[name='kecamatan']")
+                                    .disabled = true;
+                                Swal.getPopup().querySelector("input[name='kota']")
+                                    .value = '{{ Auth::user()->kota }}';
+                                Swal.getPopup().querySelector("input[name='kota']")
+                                    .disabled = true;
+                                Swal.getPopup().querySelector("input[name='provinsi']")
+                                    .value = '{{ Auth::user()->provinsi }}';
+                                Swal.getPopup().querySelector("input[name='provinsi']")
+                                    .disabled = true;
+                                Swal.getPopup().querySelector("input[name='kodePos']")
+                                    .value = '{{ Auth::user()->kodePos }}';
+                                Swal.getPopup().querySelector("input[name='kodePos']")
+                                    .disabled = true;
+                                Swal.getPopup().querySelector(
+                                        "textarea[name='catatan']")
+                                    .value = '{{ Auth::user()->alamat }}';
+                                Swal.getPopup().querySelector(
+                                        "textarea[name='catatan']")
+                                    .disabled = true;
+                            } else {
+                                // Kosongkan input jika checkbox tidak dicentang
+                                Swal.getPopup().querySelector("input[name='nama']")
+                                    .value = "";
+                                Swal.getPopup().querySelector("input[name='nama']")
+                                    .disabled = false;
+                                Swal.getPopup().querySelector("input[name='nomor']")
+                                    .value = "";
+                                Swal.getPopup().querySelector("input[name='nomor']")
+                                    .disabled = false;
+                                Swal.getPopup().querySelector("textarea[name='alamat']")
+                                    .value = "";
+                                Swal.getPopup().querySelector("textarea[name='alamat']")
+                                    .disabled = false;
+                                Swal.getPopup().querySelector("input[name='kecamatan']")
+                                    .value = "";
+                                Swal.getPopup().querySelector("input[name='kecamatan']")
+                                    .disabled = false;
+                                Swal.getPopup().querySelector("input[name='kota']")
+                                    .value = "";
+                                Swal.getPopup().querySelector("input[name='kota']")
+                                    .disabled = false;
+                                Swal.getPopup().querySelector("input[name='provinsi']")
+                                    .value = "";
+                                Swal.getPopup().querySelector("input[name='provinsi']")
+                                    .disabled = false;
+                                Swal.getPopup().querySelector("input[name='kodePos']")
+                                    .value = "";
+                                Swal.getPopup().querySelector("input[name='kodePos']")
+                                    .disabled = false;
+                                Swal.getPopup().querySelector(
+                                        "textarea[name='catatan']")
+                                    .value = "";
+                                Swal.getPopup().querySelector(
+                                        "textarea[name='catatan']")
+                                    .disabled = false;
                             }
-                        );
+                        });
                     },
                     preConfirm: () => {
+                        const nama = Swal.getPopup().querySelector("input[name='nama']")
+                            .value;
+                        const nomor = Swal.getPopup().querySelector("input[name='nomor']")
+                                    .value;
                         alamatValue = Swal.getPopup().querySelector("textarea[name='alamat']")
                             .value;
                         kecamatanValue = Swal.getPopup().querySelector(
@@ -303,13 +350,18 @@
                             .value;
                         kodePosValue = Swal.getPopup().querySelector("input[name='kodePos']")
                             .value;
+                        if (!namaLengkap || !nomor || !alamat || !kecamatan || !kota || !
+                            provinsi || !
+                            kodePos) {
+                            Swal.showValidationMessage("Semua Kolom Harus Terisi!");
+                        }
                     },
                 }).then((result) => {
                     if (result.isConfirmed) {
                         Swal.fire({
                             title: "Peta Lokasi",
                             html: `
-            <div id="mapSwoll" style="height: 400px;"></div>`,
+                                <div id="mapSwoll" style="height: 400px;"></div>`,
                             showCancelButton: true,
                             confirmButtonText: "Simpan",
                             cancelButtonText: "Tutup",
