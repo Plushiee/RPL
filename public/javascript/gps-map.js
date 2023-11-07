@@ -1,21 +1,20 @@
 $(document).ready(function () {
-    // Map
+    var count = 0;
+
     function initMap(latitude, longitude) {
-        // Coordinat awal (default jika geolokasi tidak diizinkan)
         const initialLocation = { lat: latitude, lng: longitude };
 
-        // Buat peta dengan koordinat awal
         const map = new google.maps.Map(document.getElementById('map'), {
             center: initialLocation,
             zoom: 15
         });
 
         const iconSize = {
-            width: 32,  // Set the width you want
-            height: 32  // Set the height you want
+            width: 32, 
+            height: 32
         };
 
-        // Tambahkan marker di lokasi awal dengan simbol dot biru
+        //dot biru
         const userMarker = new google.maps.Marker({
             position: initialLocation,
             map: map,
@@ -26,27 +25,54 @@ $(document).ready(function () {
             title: 'You are here!'
         });
 
-        // Panggil fungsi untuk menambahkan pin "Bank Sampah" di Yogyakarta
-        addBankSampahMarker(map);
-    }
+        const searchLocation = "Bank Sampah Yogyakarta";
+        const request = {
+            query: searchLocation,
+            fields: ['name', 'geometry', 'formatted_address']
+        };
+        const service = new google.maps.places.PlacesService(map);
 
-    // Fungsi untuk menambahkan marker "Bank Sampah" di Yogyakarta
-    function addBankSampahMarker(map) {
-        const geocoder = new google.maps.Geocoder();
-        const locationName = "Bank Sampah, Yogyakarta";
+        function performTextSearch(request, map) {
+            service.textSearch(request, (results, status, pagination) => {
+                if (status === google.maps.places.PlacesServiceStatus.OK) {
+                    results.forEach((result) => {
+                        const location = result.geometry.location;
+                        const name = result.name;
+                        const address = result.formatted_address;
+                        
+                        const marker = new google.maps.Marker({
+                            position: location,
+                            map: map,
+                            title: name
+                        });
 
-        geocoder.geocode({
-            address: locationName
-        }, (results, status) => {
-            if (status === "OK" && results.length > 0) {
-                const location = results[0].geometry.location;
-                new google.maps.Marker({
-                    position: location,
-                    map: map,
-                    title: "Bank Sampah"
-                });
-            }
-        });
+                        const infoWindow = new google.maps.InfoWindow({
+                            content: `<h3 style="font-size:12pt; font-weight:bold;">${name}</h3><p style="font-size:8pt;">${address}</p>`,
+                            maxWidth: 300 
+                        });
+
+                        // Tambahkan event listener untuk menampilkan info window ketika marker diklik
+                        marker.addListener('click', function () {
+                            infoWindow.open(map, marker);
+                        });
+                    });
+                    
+                    count = results.length;
+
+                    // Periksa apakah ada halaman berikutnya hasil pencarian
+                    if (pagination.hasNextPage) {
+                        // Ambil halaman berikutnya
+                        pagination.nextPage();
+                    }
+                }
+                new numberRush('jumlahMitra', {
+                    maxNumber: count,
+                    steps: 1,
+                    speed: 0.5,
+                })
+            });
+        }
+        performTextSearch(request, map);
     }
 
     // Fungsi untuk mendapatkan geolokasi pengguna

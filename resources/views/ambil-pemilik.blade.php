@@ -31,9 +31,9 @@
                             <h4 class="header-title mb-3">Selamat
                                 <?php
                                 date_default_timezone_set('Asia/Jakarta');
-
+                                
                                 $jam = date('H');
-
+                                
                                 if ($jam >= 5 && $jam < 12) {
                                     $waktu = 'Pagi';
                                 } elseif ($jam >= 12 && $jam < 18) {
@@ -41,7 +41,7 @@
                                 } else {
                                     $waktu = 'Malam';
                                 }
-
+                                
                                 echo $waktu;
                                 ?>
                                 , {{ Auth::user()->name }} </h4>
@@ -196,9 +196,10 @@
 
 @section('scripts')
     <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBRPlQuuQmmWWhwkDiUijv6F6deBOflQhk&callback=initMap"></script>
-    <script>
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBRPlQuuQmmWWhwkDiUijv6F6deBOflQhk&callback=initMap&libraries=places">
+    </script>
     <script src="/javascript/gps-map.js"></script>
+    <script>
         $(document).ready(function() {
             $('.organik').click(function(e) {
                 e.preventDefault();
@@ -257,41 +258,41 @@
                         const useAuthDataCheckbox = Swal.getPopup().querySelector(
                             "#useAuthData");
                         // $(useAuthDataCheckbox).on("change", function() {
-                            if (useAuthDataCheckbox.checked) {
-                                // Isi data dengan informasi pengguna yang terotentikasi (Auth)
-                                // const authenticatedUser = {{ Auth::user() }};
-                                // Swal.getPopup().querySelector("input[name='nama']")
-                                //     .value = authenticatedUser.nama;
-                                // Swal.getPopup().querySelector("input[name='nomor']")
-                                //     .value = authenticatedUser.nomor;
-                                // Swal.getPopup().querySelector("textarea[name='alamat']")
-                                //     .value = authenticatedUser.alamat;
-                                // Swal.getPopup().querySelector("input[name='kecamatan']")
-                                //     .value = authenticatedUser.kecamatan;
-                                // Swal.getPopup().querySelector("input[name='kota']")
-                                //     .value = authenticatedUser.kota;
-                                // Swal.getPopup().querySelector("input[name='provinsi']")
-                                //     .value = authenticatedUser.provinsi;
-                                // Swal.getPopup().querySelector("input[name='kodePos']")
-                                //     .value = authenticatedUser.kodePos;
-                            }
-                            // else {
-                            //     // Kosongkan input jika checkbox tidak dicentang
-                            //     Swal.getPopup().querySelector("input[name='nama']")
-                            //         .value = "";
-                            //     Swal.getPopup().querySelector("input[name='nomor']")
-                            //         .value = "";
-                            //     Swal.getPopup().querySelector("textarea[name='alamat']")
-                            //         .value = "";
-                            //     Swal.getPopup().querySelector("input[name='kecamatan']")
-                            //         .value = "";
-                            //     Swal.getPopup().querySelector("input[name='kota']")
-                            //         .value = "";
-                            //     Swal.getPopup().querySelector("input[name='provinsi']")
-                            //         .value = "";
-                            //     Swal.getPopup().querySelector("input[name='kodePos']")
-                            //         .value = "";
-                            // }
+                        if (useAuthDataCheckbox.checked) {
+                            // Isi data dengan informasi pengguna yang terotentikasi (Auth)
+                            // const authenticatedUser = {{ Auth::user() }};
+                            // Swal.getPopup().querySelector("input[name='nama']")
+                            //     .value = authenticatedUser.nama;
+                            // Swal.getPopup().querySelector("input[name='nomor']")
+                            //     .value = authenticatedUser.nomor;
+                            // Swal.getPopup().querySelector("textarea[name='alamat']")
+                            //     .value = authenticatedUser.alamat;
+                            // Swal.getPopup().querySelector("input[name='kecamatan']")
+                            //     .value = authenticatedUser.kecamatan;
+                            // Swal.getPopup().querySelector("input[name='kota']")
+                            //     .value = authenticatedUser.kota;
+                            // Swal.getPopup().querySelector("input[name='provinsi']")
+                            //     .value = authenticatedUser.provinsi;
+                            // Swal.getPopup().querySelector("input[name='kodePos']")
+                            //     .value = authenticatedUser.kodePos;
+                        }
+                        // else {
+                        //     // Kosongkan input jika checkbox tidak dicentang
+                        //     Swal.getPopup().querySelector("input[name='nama']")
+                        //         .value = "";
+                        //     Swal.getPopup().querySelector("input[name='nomor']")
+                        //         .value = "";
+                        //     Swal.getPopup().querySelector("textarea[name='alamat']")
+                        //         .value = "";
+                        //     Swal.getPopup().querySelector("input[name='kecamatan']")
+                        //         .value = "";
+                        //     Swal.getPopup().querySelector("input[name='kota']")
+                        //         .value = "";
+                        //     Swal.getPopup().querySelector("input[name='provinsi']")
+                        //         .value = "";
+                        //     Swal.getPopup().querySelector("input[name='kodePos']")
+                        //         .value = "";
+                        // }
                         // });
                     },
                     preConfirm: () => {
@@ -310,7 +311,7 @@
                         Swal.fire({
                             title: "Peta Lokasi",
                             html: `
-                    <div id="mapSwoll" style="height: 300px;"></div>`,
+            <div id="mapSwoll" style="height: 400px;"></div>`,
                             showCancelButton: true,
                             confirmButtonText: "Simpan",
                             cancelButtonText: "Tutup",
@@ -320,7 +321,7 @@
                                     center: {
                                         lat: -7.7956,
                                         lng: 110.3695
-                                    }, // Koordinat awal peta
+                                    },
                                     zoom: 20,
                                 });
 
@@ -334,13 +335,29 @@
                                     if (status === "OK" && results.length > 0) {
                                         const location = results[0].geometry
                                             .location;
-                                        map.setCenter(
-                                            location
-                                        ); // Mengatur pusat peta ke lokasi yang ditemukan
-                                        new google.maps.Marker({
+                                        map.setCenter(location);
+
+                                        const marker = new google.maps.Marker({
                                             map,
-                                            position: location
-                                        }); // Menambahkan marker pada lokasi tersebut
+                                            position: location,
+                                            draggable: true 
+                                        });
+
+                                        Swal.getConfirmButton()
+                                            .addEventListener('click',
+                                            function() {
+                                                // Ambil longitude dan latitude dari marker
+                                                const longitude = marker
+                                                    .getPosition().lng();
+                                                const latitude = marker
+                                                    .getPosition().lat();
+
+                                                // Lakukan sesuatu dengan nilai longitude dan latitude, misalnya simpan ke database atau tampilkan kepada pengguna
+                                                console.log("Longitude: " +
+                                                    longitude);
+                                                console.log("Latitude: " +
+                                                    latitude);
+                                            });
                                     }
                                 });
                             },

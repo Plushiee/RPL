@@ -106,8 +106,8 @@
         <!-- =========== End of  Hero ============ -->
 
         <!-- =========== Start of features-one ============ -->
-        <section class="features features--v1 mb-md-30 mb-0"> <!--space--top -->
-            <div class="container">
+        <section class="features features--v1 mb-30"> <!--space--top -->
+            <div class="container mt-10">
                 <div class="row">
                     <div class="col-12 col-md-4">
                         <div class="feature text-center mb-50 mb-md-0">
@@ -149,8 +149,9 @@
             <div class="container mt-30">
                 <div class="row">
                     <div class="col-12 text-center">
-                        <h5>Mitra Terintegrasi</h5>
-                        <div id="map" style="width: 100%; height: 400px;"></div>
+                        <h1 class="m-0 p-0" id="jumlahMitra" style="font-weight: bold">0</h1>
+                        <h5 class="mt-0 mb-4" >Mitra Terintegrasi</h5>
+                        <div class="mt-15 rounded" id="map" style="width: 100%; height: 400px;"></div>
                     </div>
                 </div>
             </div>
@@ -201,8 +202,9 @@
     <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js"></script>
     <script src="/assets/js/index/plugins.min.js"></script>
     <script src="/assets/js/index/app.js"></script>
+    <script src="/javascript/number-rush.js"></script>
     <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBRPlQuuQmmWWhwkDiUijv6F6deBOflQhk&callback=initMap"></script>
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBRPlQuuQmmWWhwkDiUijv6F6deBOflQhk&callback=initMap&libraries=places"></script>
     <script src="/javascript/gps-map.js"></script>
 </body>
 
