@@ -195,10 +195,10 @@
 @endsection
 
 @section('scripts')
-    <script src="/javascript/gps-map.js"></script>
     <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBRPlQuuQmmWWhwkDiUijv6F6deBOflQhk&callback=initMap"></script>
     <script>
+    <script src="/javascript/gps-map.js"></script>
         $(document).ready(function() {
             $('.organik').click(function(e) {
                 e.preventDefault();

@@ -33,7 +33,8 @@
                 </a>
                 <!-- navbar-brand end -->
 
-                <button class="navbar-toggler d-block d-sm-none" type="button" data-toggle="collapse" aria-label="Toggle navigation">
+                <button class="navbar-toggler d-block d-sm-none" type="button" data-toggle="collapse"
+                    aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon d-block d-sm-none"></span>
                 </button>
                 <!-- navbar-toggler end -->
@@ -73,7 +74,9 @@
                         <div class="hero-content mb-35">
                             <h1 class="color-white mb-15" style="font-weight: bold">MoneyTrash<br>Trash Me! It's Work
                             </h1>
-                            <p class="h6-font color-white">Merupakan suatu terobosan aplikasi berbasis web yang dirancang khusus untuk memberikan dukungan yang sangat vital kepada Bank Sampah dalam pengelolaan dan pelaporan sampah yang ada dan dimilikinya.
+                            <p class="h6-font color-white">Merupakan suatu terobosan aplikasi berbasis web yang
+                                dirancang khusus untuk memberikan dukungan yang sangat vital kepada Bank Sampah dalam
+                                pengelolaan dan pelaporan sampah yang ada dan dimilikinya.
                             </p>
                         </div>
                         <a href="register"
@@ -120,7 +123,8 @@
                     <div class="col-12 col-md-4">
                         <div class="feature text-center mb-50 mb-md-0">
                             <span class="feature-icon mb-1 icon--4x">
-                                <iconify-icon icon="icon-park-outline:circular-connection" height="96"></iconify-icon>
+                                <iconify-icon icon="icon-park-outline:circular-connection"
+                                    height="96"></iconify-icon>
                             </span>
                             <h5 class="feature-title mb-0">Terintergrasi</h5>
                             <p class="m-0">Terintegrasi dengan bank sampah
@@ -141,6 +145,15 @@
                     </div>
                 </div>
             </div>
+
+            <div class="container mt-30">
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <h5>Mitra Terintegrasi</h5>
+                        <div id="map" style="width: 100%; height: 400px;"></div>
+                    </div>
+                </div>
+            </div>
         </section>
         <!-- =========== End of features-one ============ -->
 
@@ -153,7 +166,8 @@
                             <a class="mb-25" href="index.html">
                                 <img src="/assets/navbar/logo.png" alt="" width="50px">
                             </a>
-                            <p class="font-size--16 text-color--400 mb-55">MoneyTrash! <br> Salah satu project RPL yang didirikan oleh Team RPL Moneytrash</p>
+                            <p class="font-size--16 text-color--400 mb-55">MoneyTrash! <br> Salah satu project RPL yang
+                                didirikan oleh Team RPL Moneytrash</p>
 
                             <div class="widget widget-nav">
                                 <ul>
@@ -187,6 +201,11 @@
     <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js"></script>
     <script src="/assets/js/index/plugins.min.js"></script>
     <script src="/assets/js/index/app.js"></script>
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBRPlQuuQmmWWhwkDiUijv6F6deBOflQhk&callback=initMap"></script>
+    <script>
+        < script src = "/javascript/gps-map.js" >
+    </script>
 </body>
 
 </html>
