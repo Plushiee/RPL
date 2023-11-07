@@ -203,9 +203,7 @@
     <script src="/assets/js/index/app.js"></script>
     <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBRPlQuuQmmWWhwkDiUijv6F6deBOflQhk&callback=initMap"></script>
-    <script>
-        < script src = "/javascript/gps-map.js" >
-    </script>
+    <script src="/javascript/gps-map.js"></script>
 </body>
 
 </html>

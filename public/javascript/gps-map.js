@@ -25,6 +25,28 @@ $(document).ready(function () {
             },
             title: 'You are here!'
         });
+
+        // Panggil fungsi untuk menambahkan pin "Bank Sampah" di Yogyakarta
+        addBankSampahMarker(map);
+    }
+
+    // Fungsi untuk menambahkan marker "Bank Sampah" di Yogyakarta
+    function addBankSampahMarker(map) {
+        const geocoder = new google.maps.Geocoder();
+        const locationName = "Bank Sampah, Yogyakarta";
+
+        geocoder.geocode({
+            address: locationName
+        }, (results, status) => {
+            if (status === "OK" && results.length > 0) {
+                const location = results[0].geometry.location;
+                new google.maps.Marker({
+                    position: location,
+                    map: map,
+                    title: "Bank Sampah"
+                });
+            }
+        });
     }
 
     // Fungsi untuk mendapatkan geolokasi pengguna

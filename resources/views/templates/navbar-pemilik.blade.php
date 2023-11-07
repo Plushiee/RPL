@@ -102,7 +102,7 @@
 
             <!-- LOGO -->
             <div class="logo-box">
-                <a href="pemilik" class="logo text-center logo-dark">
+                <a href="/" class="logo text-center logo-dark">
                     <span class="logo-lg">
                         <img src="/assets/navbar/logo-long.png" alt="" height="40">
                         <!-- <span class="logo-lg-text-dark">Simple</span> -->
