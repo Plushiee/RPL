@@ -26,7 +26,7 @@ class CreateUserTransaksi extends Migration
             $table->string('provinsi');
             $table->integer('kodePos');
             $table->text('catatan')->nullable();
-            $table->integer('berat');
+            $table->string('berat');
             $table->string('bukti')->nullable();
             $table->string('lang')->nullable();
             $table->string('long')->nullable();

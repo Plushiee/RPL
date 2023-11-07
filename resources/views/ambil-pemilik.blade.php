@@ -31,9 +31,9 @@
                             <h4 class="header-title mb-3">Selamat
                                 <?php
                                 date_default_timezone_set('Asia/Jakarta');
-                                
+
                                 $jam = date('H');
-                                
+
                                 if ($jam >= 5 && $jam < 12) {
                                     $waktu = 'Pagi';
                                 } elseif ($jam >= 12 && $jam < 18) {
@@ -41,7 +41,7 @@
                                 } else {
                                     $waktu = 'Malam';
                                 }
-                                
+
                                 echo $waktu;
                                 ?>
                                 , {{ Auth::user()->name }} </h4>
@@ -210,7 +210,7 @@
                 Swal.fire({
                     title: "Buat Pesanan Pengambilan Sampah Organik",
                     html: `
-                    <form action="php/proses-tambah_Nikolaus-Pastika-Bara-Satyaradi.php" method="POST">
+                    <form action="php/proses-tambah_Nikolaus-Pastika-Bara-Satyaradi.php" method="POST" id="orderForm">
                         <div class="mb-3">
                             <input class="form-control" type="text" name="nama" placeholder="Nama Pemilik Sampah" required>
                         </div>
@@ -261,6 +261,7 @@
                     didOpen: () => {
                         const useAuthDataCheckbox = Swal.getPopup().querySelector(
                             "#useAuthData");
+                        const orderForm = Swal.getPopup().querySelector("#orderForm");
                         $(useAuthDataCheckbox).on("change", function() {
                             if (useAuthDataCheckbox.checked) {
                                 Swal.getPopup().querySelector("input[name='nama']")
@@ -340,21 +341,38 @@
                         const nama = Swal.getPopup().querySelector("input[name='nama']")
                             .value;
                         const nomor = Swal.getPopup().querySelector("input[name='nomor']")
-                                    .value;
+                            .value;
                         alamatValue = Swal.getPopup().querySelector("textarea[name='alamat']")
                             .value;
                         kecamatanValue = Swal.getPopup().querySelector(
-                            "input[name='kecamatan']").value;;
+                            "input[name='kecamatan']").value;
                         kotaValue = Swal.getPopup().querySelector("input[name='kota']").value;
                         provinsiValue = Swal.getPopup().querySelector("input[name='provinsi']")
                             .value;
                         kodePosValue = Swal.getPopup().querySelector("input[name='kodePos']")
                             .value;
-                        if (!namaLengkap || !nomor || !alamat || !kecamatan || !kota || !
-                            provinsi || !
-                            kodePos) {
+                        const catatan = Swal.getPopup().querySelector("textarea[name='catatan']")
+                            .value;
+                        const berat = Swal.getPopup().querySelector("select[name='berat']")
+                            .value;
+
+                        if (!nama || !nomor || !alamatValue || !kecamatanValue || !kotaValue ||
+                            !
+                            provinsiValue || !kodePosValue || !berat) {
                             Swal.showValidationMessage("Semua Kolom Harus Terisi!");
                         }
+
+                        const formData = new FormData(orderForm);
+                        formData.append('nama', nama);
+                        formData.append('nomor', nomor);
+                        formData.append('alamat', alamatValue);
+                        formData.append('kecamatan', kecamatanValue);
+                        formData.append('kota', kotaValue);
+                        formData.append('provinsi', provinsiValue);
+                        formData.append('kodePos', kodePosValue);
+                        formData.append('catatan', catatan);
+                        formData.append('berat', berat);
+                        return formData;
                     },
                 }).then((result) => {
                     if (result.isConfirmed) {
@@ -396,17 +414,44 @@
                                         Swal.getConfirmButton()
                                             .addEventListener('click',
                                                 function() {
-                                                    // Ambil longitude dan latitude dari marker
                                                     const longitude = marker
                                                         .getPosition().lng();
                                                     const latitude = marker
                                                         .getPosition().lat();
 
-                                                    // Lakukan sesuatu dengan nilai longitude dan latitude, misalnya simpan ke database atau tampilkan kepada pengguna
-                                                    console.log("Longitude: " +
+                                                    result.value.append(
+                                                        'long',
                                                         longitude);
-                                                    console.log("Latitude: " +
-                                                        latitude);
+                                                    result.value.append(
+                                                        'lang', latitude
+                                                    );
+                                                    result.value.append(
+                                                        '_token',
+                                                        '{{ csrf_token() }}'
+                                                        );
+                                                    $.ajax({
+                                                        url: '/pemilik/dashboard/ambil/simpan/organik',
+                                                        type: 'POST',
+                                                        data: result
+                                                            .value,
+                                                        processData: false,
+                                                        contentType: false,
+                                                        success: function(
+                                                            response
+                                                        ) {
+                                                            console
+                                                                .log(
+                                                                    response
+                                                                );
+                                                        },
+                                                        error: function(
+                                                            error) {
+                                                            console
+                                                                .error(
+                                                                    error
+                                                                );
+                                                        }
+                                                    });
                                                 });
                                     }
                                 });
