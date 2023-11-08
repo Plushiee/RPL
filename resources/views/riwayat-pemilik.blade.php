@@ -82,11 +82,11 @@
                                                         <div
                                                             class="col-12 col-sm-2 d-flex align-items-center justify-content-end">
                                                             @if (!$transaksi->terbayar)
-                                                                <span
-                                                                    class="badge badge-warning"> &nbsp;Belum Terbayar&nbsp; </span>
+                                                                <span class="badge badge-warning"> &nbsp;Belum
+                                                                    Terbayar&nbsp; </span>
                                                             @else
-                                                                <span
-                                                                    class="badge badge-warning"> &nbsp;Sudah Terbayar&nbsp; </span>
+                                                                <span class="badge badge-warning"> &nbsp;Sudah
+                                                                    Terbayar&nbsp; </span>
                                                             @endif
                                                         </div>
                                                     </div>
@@ -120,14 +120,15 @@
                                                         <div
                                                             class="col-md-2 text-center d-flex justify-content-center align-items-center">
                                                             <p class="text-muted mb-0 small">{{ $transaksi->alamat }}
-                                                                ({{ $transaksi->catatan }}), {{ $transaksi->kecamatan }},
+                                                                ({{ $transaksi->catatan }})
+                                                                , {{ $transaksi->kecamatan }},
                                                                 {{ $transaksi->kota }}, {{ $transaksi->provinsi }},
                                                                 {{ $transaksi->kodePos }}</p>
                                                         </div>
                                                         <div
                                                             class="col-md-2 text-center d-flex justify-content-center align-items-center">
-                                                            <a href="/path/to/detail/gambar/{{ $transaksi->id }}"
-                                                                class="text-muted mb-0 small">Detail Gambar</a>
+                                                            <button type="button" class="btn btn-info small mt-2 mt-sm-2 mt-md-0" id="bukti" data-id="{{ $transaksi->idPemilik }}" data-bukti="{{ $transaksi->bukti }}" data-jenis="{{ $transaksi->jenisSampah }}">Tampilkan
+                                                                Bukti Barang</button>
                                                         </div>
                                                     </div>
                                                     <hr class="mb-4" style="background-color: #e0e0e0; opacity: 1;">
@@ -139,16 +140,13 @@
                                                             <div class="progress" style="height: 6px; border-radius: 16px;">
                                                                 <div class="progress-bar" role="progressbar"
                                                                     style="
-                                                                    @if ($transaksi->approved === true && $transaksi->terambil === false)
-                                                                    width: 50%;
+                                                                    @if ($transaksi->approved === true && $transaksi->terambil === false) width: 50%;
                                                                     @elseif ($transaksi->approved === true && $transaksi->terambil === true)
                                                                     width: 100%;
                                                                     @else
-                                                                    width: 0%;
-                                                                    @endif
+                                                                    width: 0%; @endif
                                                                      border-radius: 16px; background-color: #18be55;"
-                                                                    aria-valuemin="0"
-                                                                    aria-valuemax="100">
+                                                                    aria-valuemin="0" aria-valuemax="100">
                                                                 </div>
                                                             </div>
                                                             <div class="d-flex justify-content-around mb-1">
@@ -210,4 +208,9 @@
 
     {{-- </div> --}}
     <!-- END content-page -->
+@endsection
+
+@section('scripts')
+    <script src="/javascript/riwayat-pemilik.js"></script>
+
 @endsection

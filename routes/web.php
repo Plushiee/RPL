@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AmbilGambarController;
 use App\Http\Controllers\TransaksiController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
@@ -47,6 +48,9 @@ Route::post('/pemilik/dashboard/ambil/simpan/plastik', [TransaksiController::cla
 Route::post('/pemilik/dashboard/ambil/simpan/kaca', [TransaksiController::class,'kaca'])->middleware('auth'); // kertas
 Route::post('/pemilik/dashboard/ambil/simpan/logam', [TransaksiController::class,'logam'])->middleware('auth'); // kertas
 Route::post('/pemilik/dashboard/ambil/simpan/lainnya', [TransaksiController::class,'lainnya'])->middleware('auth'); // kertas
+
+// Ambil BuktiGambar
+Route::get('/pemilik/bukti/ambildirumah/{jenis}/{id}/{gambar}', [AmbilGambarController::class,'showBuktiSampah'])->middleware('auth'); //ambil bukti
 
 // Pilih Akun Controller
 Route::get('/pilih-akun', [PilihAkunController::class, 'pilihAkun']);
