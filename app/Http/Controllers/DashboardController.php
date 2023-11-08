@@ -20,6 +20,10 @@ class DashboardController extends Controller
         return view('akun-pemilik');
     }
 
+    public function riwayat() {
+        return view('riwayat-pemilik');
+    }
+
     public function simpanAkunAwal(Request $request) {
         $user = UserEmailModel::find(Auth::id());
         $user->namaLengkap = $request->input('namaLengkap');
