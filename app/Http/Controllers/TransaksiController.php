@@ -15,7 +15,7 @@ class TransaksiController extends Controller
         //File bukti
         if ($request->hasFile('bukti')) {
             $file = $request->file('bukti');
-            $userId = Auth::id(); 
+            $userId = Auth::id();
             $fileName = $userId . '_' . time() . '_' . $file->getClientOriginalName();
             $directory = 'organik/' . $userId;
 
@@ -40,6 +40,9 @@ class TransaksiController extends Controller
             $transaksi->catatan = $request->catatan;
             $transaksi->berat = $request->berat;
             $transaksi->bukti = $fileName;
+            $transaksi->terbayar = false;
+            $transaksi->approved = false;
+            $transaksi->terambil = false;
             $transaksi->lang = $request->lang;
             $transaksi->long = $request->long;
             $transaksi->save();
@@ -55,7 +58,7 @@ class TransaksiController extends Controller
         //File bukti
         if ($request->hasFile('bukti')) {
             $file = $request->file('bukti');
-            $userId = Auth::id(); 
+            $userId = Auth::id();
             $fileName = $userId . '_' . time() . '_' . $file->getClientOriginalName();
             $directory = 'organik/' . $userId;
 
@@ -80,6 +83,9 @@ class TransaksiController extends Controller
             $transaksi->catatan = $request->catatan;
             $transaksi->berat = $request->berat;
             $transaksi->bukti = $fileName;
+            $transaksi->terbayar = false;
+            $transaksi->approved = false;
+            $transaksi->terambil = false;
             $transaksi->lang = $request->lang;
             $transaksi->long = $request->long;
             $transaksi->save();
@@ -94,7 +100,7 @@ class TransaksiController extends Controller
         //File bukti
         if ($request->hasFile('bukti')) {
             $file = $request->file('bukti');
-            $userId = Auth::id(); 
+            $userId = Auth::id();
             $fileName = $userId . '_' . time() . '_' . $file->getClientOriginalName();
             $directory = 'plastik/' . $userId;
 
@@ -119,6 +125,9 @@ class TransaksiController extends Controller
             $transaksi->catatan = $request->catatan;
             $transaksi->berat = $request->berat;
             $transaksi->bukti = $fileName;
+            $transaksi->terbayar = false;
+            $transaksi->approved = false;
+            $transaksi->terambil = false;
             $transaksi->lang = $request->lang;
             $transaksi->long = $request->long;
             $transaksi->save();
@@ -133,7 +142,7 @@ class TransaksiController extends Controller
         //File bukti
         if ($request->hasFile('bukti')) {
             $file = $request->file('bukti');
-            $userId = Auth::id(); 
+            $userId = Auth::id();
             $fileName = $userId . '_' . time() . '_' . $file->getClientOriginalName();
             $directory = 'kaca/' . $userId;
 
@@ -158,6 +167,9 @@ class TransaksiController extends Controller
             $transaksi->catatan = $request->catatan;
             $transaksi->berat = $request->berat;
             $transaksi->bukti = $fileName;
+            $transaksi->terbayar = false;
+            $transaksi->approved = false;
+            $transaksi->terambil = false;
             $transaksi->lang = $request->lang;
             $transaksi->long = $request->long;
             $transaksi->save();
@@ -172,7 +184,7 @@ class TransaksiController extends Controller
         //File bukti
         if ($request->hasFile('bukti')) {
             $file = $request->file('bukti');
-            $userId = Auth::id(); 
+            $userId = Auth::id();
             $fileName = $userId . '_' . time() . '_' . $file->getClientOriginalName();
             $directory = 'logam/' . $userId;
 
@@ -197,6 +209,9 @@ class TransaksiController extends Controller
             $transaksi->catatan = $request->catatan;
             $transaksi->berat = $request->berat;
             $transaksi->bukti = $fileName;
+            $transaksi->terbayar = false;
+            $transaksi->approved = false;
+            $transaksi->terambil = false;
             $transaksi->lang = $request->lang;
             $transaksi->long = $request->long;
             $transaksi->save();
@@ -211,7 +226,7 @@ class TransaksiController extends Controller
         //File bukti
         if ($request->hasFile('bukti')) {
             $file = $request->file('bukti');
-            $userId = Auth::id(); 
+            $userId = Auth::id();
             $fileName = $userId . '_' . time() . '_' . $file->getClientOriginalName();
             $directory = 'lainnya/' . $userId;
 
@@ -236,6 +251,9 @@ class TransaksiController extends Controller
             $transaksi->catatan = $request->catatan;
             $transaksi->berat = $request->berat;
             $transaksi->bukti = $fileName;
+            $transaksi->terbayar = false;
+            $transaksi->approved = false;
+            $transaksi->terambil = false;
             $transaksi->lang = $request->lang;
             $transaksi->long = $request->long;
             $transaksi->save();

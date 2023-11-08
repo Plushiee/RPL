@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\UserEmailModel;
 use Illuminate\Support\Facades\Auth;
+use App\Models\UserTransaksiModel;
 
 class DashboardController extends Controller
 {
@@ -21,7 +22,8 @@ class DashboardController extends Controller
     }
 
     public function riwayat() {
-        return view('riwayat-pemilik');
+        $kumpulanTransaksi = UserTransaksiModel::where('idPemilik', Auth::id())->get();
+        return view('riwayat-pemilik', ['kumpulanTransaksi' => $kumpulanTransaksi]);
     }
 
     public function simpanAkunAwal(Request $request) {

@@ -31,9 +31,9 @@
                             <h4 class="header-title mb-3">Selamat
                                 <?php
                                 date_default_timezone_set('Asia/Jakarta');
-                                
+
                                 $jam = date('H');
-                                
+
                                 if ($jam >= 5 && $jam < 12) {
                                     $waktu = 'Pagi';
                                 } elseif ($jam >= 12 && $jam < 18) {
@@ -41,7 +41,7 @@
                                 } else {
                                     $waktu = 'Malam';
                                 }
-                                
+
                                 echo $waktu;
                                 ?>
                                 , {{ Auth::user()->name }} </h4>
@@ -56,33 +56,33 @@
                             <div class="row g-md-4 g-sm-4 g-1">
                                 <div class="col-xl-2 col-sm-6 d-grid widget-inline-box text-center">
                                     <button class="btn btn-outline-dark btn-block mt-3 mt-sm-0 p-3 organik" type="button"
-                                        style="font-size: 18px; font-weight: bold"><img src="\assets\sampah\stink.png"
+                                        style="font-size: 18px; font-weight: bold"><img src="\assets\sampah\Organik.png"
                                             alt="organik.png" width="96"><br>Organik</button>
                                 </div>
 
                                 <div class="col-xl-2 col-sm-6 d-grid widget-inline-box text-center kertas">
                                     <button class="btn btn-outline-dark btn-block mt-3 mt-sm-0 p-3" type="button"
-                                        style="font-size: 18px; font-weight: bold"><img src="\assets\sampah\paper.png"
+                                        style="font-size: 18px; font-weight: bold"><img src="\assets\sampah\Kertas.png"
                                             alt="kertas.png" width="96"><br>Kertas</button>
                                 </div>
                                 <div class="col-xl-2 col-sm-6 d-grid widget-inline-box text-center plastik">
                                     <a href="dashboard/ambil">
                                         <button class="btn btn-outline-dark btn-block mt-3 mt-sm-0 p-3" type="button"
                                             style="font-size: 18px; font-weight: bold"><img
-                                                src="\assets\sampah\recycling-box.png" alt="plastik.png"
+                                                src="\assets\sampah\Plastik.png" alt="plastik.png"
                                                 width="96"><br>Plastik</button>
                                     </a>
                                 </div>
 
                                 <div class="col-xl-2 col-sm-6 d-grid widget-inline-box text-center kaca">
                                     <button class="btn btn-outline-dark btn-block mt-3 mt-sm-0 p-3" type="button"
-                                        style="font-size: 18px; font-weight: bold"><img src="\assets\sampah\glass.png"
+                                        style="font-size: 18px; font-weight: bold"><img src="\assets\sampah\Kaca.png"
                                             alt="kaca.png" width="96"><br>Kaca</button>
                                 </div>
                                 <div class="col-xl-2 col-sm-6 d-grid widget-inline-box text-center logam">
                                     <a href="dashboard/ambil">
                                         <button class="btn btn-outline-dark btn-block mt-3 mt-sm-0 p-3" type="button"
-                                            style="font-size: 18px; font-weight: bold"><img src="\assets\sampah\metal.png"
+                                            style="font-size: 18px; font-weight: bold"><img src="\assets\sampah\Logam.png"
                                                 alt="logam.png" width="96"><br>Logam</button>
                                     </a>
                                 </div>
@@ -90,7 +90,7 @@
                                 <div class="col-xl-2 col-sm-6 d-grid widget-inline-box text-center lainnya"
                                     style="border: none !important;">
                                     <button class="btn btn-outline-dark btn-block mt-3 mt-sm-0 p-3" type="button"
-                                        style="font-size: 18px; font-weight: bold"><img src="\assets\sampah\trash-can.png"
+                                        style="font-size: 18px; font-weight: bold"><img src="\assets\sampah\Lainnya.png"
                                             alt="lainnya.png" width="96"><br>Lainnya</button>
                                 </div>
                             </div>

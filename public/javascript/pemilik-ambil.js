@@ -11,6 +11,48 @@ $(document).ready(function () {
     const catatan = authData.getAttribute('data-catatan');
     const csrf = authData.getAttribute('data-csrf');
 
+    function berhasil() {
+        var toastMixin = Swal.mixin({
+            toast: true,
+            icon: 'success',
+            title: 'General Title',
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+        });
+
+        toastMixin.fire({
+            animation: true,
+            title: 'Pesanan Berhasil Ditambahkan'
+        });
+    }
+
+    function gagal() {
+        var toastMixin = Swal.mixin({
+            toast: true,
+            icon: 'error',
+            title: 'General Title',
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+        });
+
+        toastMixin.fire({
+            animation: true,
+            title: 'Pesanan Gagal Ditambahkan, Cek Kembali Data!'
+        });
+    }
+
     // Start Organik
     $('.organik').click(function (e) {
         e.preventDefault();
@@ -255,13 +297,11 @@ $(document).ready(function () {
                                                 success: function (
                                                     response
                                                 ) {
-                                                    console
-                                                        .log(
-                                                            response
-                                                        );
+                                                    berhasil();
                                                 },
                                                 error: function (
                                                     error) {
+                                                    gagal();
                                                     console
                                                         .error(
                                                             error
@@ -522,13 +562,11 @@ $(document).ready(function () {
                                                 success: function (
                                                     response
                                                 ) {
-                                                    console
-                                                        .log(
-                                                            response
-                                                        );
+                                                    berhasil();
                                                 },
                                                 error: function (
                                                     error) {
+                                                    gagal();
                                                     console
                                                         .error(
                                                             error
@@ -789,13 +827,11 @@ $(document).ready(function () {
                                                 success: function (
                                                     response
                                                 ) {
-                                                    console
-                                                        .log(
-                                                            response
-                                                        );
+                                                    berhasil();
                                                 },
                                                 error: function (
                                                     error) {
+                                                    gagal();
                                                     console
                                                         .error(
                                                             error
@@ -1056,13 +1092,11 @@ $(document).ready(function () {
                                                 success: function (
                                                     response
                                                 ) {
-                                                    console
-                                                        .log(
-                                                            response
-                                                        );
+                                                    berhasil();
                                                 },
                                                 error: function (
                                                     error) {
+                                                    gagal();
                                                     console
                                                         .error(
                                                             error
@@ -1323,13 +1357,11 @@ $(document).ready(function () {
                                                 success: function (
                                                     response
                                                 ) {
-                                                    console
-                                                        .log(
-                                                            response
-                                                        );
+                                                    berhasil();
                                                 },
                                                 error: function (
                                                     error) {
+                                                    gagal();
                                                     console
                                                         .error(
                                                             error
@@ -1590,13 +1622,11 @@ $(document).ready(function () {
                                                 success: function (
                                                     response
                                                 ) {
-                                                    console
-                                                        .log(
-                                                            response
-                                                        );
+                                                    berhasil();
                                                 },
                                                 error: function (
                                                     error) {
+                                                    gagal();
                                                     console
                                                         .error(
                                                             error
