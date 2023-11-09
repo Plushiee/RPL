@@ -137,8 +137,8 @@ $(document).ready(function () {
                 formData.append('kodePos', kodePosValue);
                 formData.append('catatan', catatanValue);
 
-                if (!namaAkun || !nomor || !oldPassword || !password ||
-                    !ulangiPassword) {
+                if (!nama || !alamatValue || !alamatValue || !kecamatanValue ||
+                    !kotaValue || !provinsiValue || !kodePosValue || !catatanValue) {
                     Swal.showValidationMessage("Semua Kolom Harus Terisi!");
                 } else {
                     $.ajax({
