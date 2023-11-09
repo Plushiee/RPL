@@ -24,7 +24,6 @@ class TransaksiController extends Controller
             $fileName = null;
         }
 
-
         // Simpan data ke database
         if (Auth::check()) {
             $transaksi = new UserTransaksiModel;
@@ -67,7 +66,6 @@ class TransaksiController extends Controller
             $fileName = null;
         }
 
-
         // Simpan data ke database
         if (Auth::check()) {
             $transaksi = new UserTransaksiModel;
@@ -108,7 +106,6 @@ class TransaksiController extends Controller
         } else {
             $fileName = null;
         }
-
 
         // Simpan data ke database
         if (Auth::check()) {
@@ -151,7 +148,6 @@ class TransaksiController extends Controller
             $fileName = null;
         }
 
-
         // Simpan data ke database
         if (Auth::check()) {
             $transaksi = new UserTransaksiModel;
@@ -193,7 +189,6 @@ class TransaksiController extends Controller
             $fileName = null;
         }
 
-
         // Simpan data ke database
         if (Auth::check()) {
             $transaksi = new UserTransaksiModel;
@@ -234,7 +229,6 @@ class TransaksiController extends Controller
         } else {
             $fileName = null;
         }
-
 
         // Simpan data ke database
         if (Auth::check()) {

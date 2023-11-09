@@ -120,6 +120,8 @@
                     </div>
                 </div>
 
+                <div id="authData" data-csrf="{{ csrf_token() }}"></div>
+
                 <div class="row mt-3">
                     <h5 class="mt-0 mb-0 font-14">Data Pengguna
                         <button class="btn btn-primary float-end edit-btn py-1 px-2" id="editPengguna"><i
@@ -175,7 +177,7 @@
                     </div>
                     <div class="row ms-2 p-0 my-0">
                         <div class="col-3">
-                            <p class="m-0 p-0">Catatan Tambahan (Cth: Blok / Unit, No., Patokan)</p>
+                            <p class="m-0 p-0">Catatan Tambahan Alamat</p>
                         </div>
                         <div class="col-9">
                             <p class="m-0 p-0">: {{ Auth::user()->catatan }}</p>

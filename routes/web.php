@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AmbilGambarController;
+use App\Http\Controllers\GantiInformasiAkunController;
 use App\Http\Controllers\TransaksiController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
@@ -43,6 +44,12 @@ Route::get('/pemilik/dashboard/ambil', [DashboardController::class, 'ambil'])->m
 Route::get('/pemilik/akun', [DashboardController::class, 'akun'])->middleware('auth'); //default pemilik
 Route::get('/pemilik/riwayat', [DashboardController::class, 'riwayat'])->middleware('auth'); //default pemilik
 Route::post('/pemilik/simpanAkunAwal', [DashboardController::class, 'simpanAkunAwal'])->middleware('auth'); //default pemilik simpan data awal
+
+// Ganti Data Akun
+Route::post('/pemilik/akun/passwordCheck', [GantiInformasiAkunController::class, 'passwordCheck'])->middleware('auth'); //cek password
+Route::post('/pemilik/akun/gantiDataAkun', [GantiInformasiAkunController::class, 'gantiDataAkunPemilik'])->middleware('auth'); //Ganti data akun pemilik
+Route::post('/pemilik/akun/gantiDataPemilik', [GantiInformasiAkunController::class, 'gantiDataPemilik'])->middleware('auth'); //Ganti data akun pemilik
+
 
 // Simpan ambil dirumah
 Route::post('/pemilik/dashboard/ambil/simpan/organik', [TransaksiController::class,'organik'])->middleware('auth'); // organik

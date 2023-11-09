@@ -10,6 +10,9 @@ $(document).ready(function () {
     const kodePos = authData.getAttribute('data-kodepos');
     const catatan = authData.getAttribute('data-catatan');
     const csrf = authData.getAttribute('data-csrf');
+    let long = "";
+    let lang = "";
+
 
     function berhasil() {
         var toastMixin = Swal.mixin({
@@ -269,49 +272,52 @@ $(document).ready(function () {
                                     draggable: true
                                 });
 
-                                Swal.getConfirmButton()
-                                    .addEventListener('click',
-                                        function () {
-                                            const longitude = marker
-                                                .getPosition().lng();
-                                            const latitude = marker
-                                                .getPosition().lat();
+                                long = marker
+                                    .getPosition().lng();
+                                lang = marker
+                                    .getPosition().lat();
 
-                                            result.value.append(
-                                                'long',
-                                                longitude);
-                                            result.value.append(
-                                                'lang', latitude
-                                            );
-                                            result.value.append(
-                                                '_token',
-                                                csrf
-                                            );
-                                            $.ajax({
-                                                url: '/pemilik/dashboard/ambil/simpan/organik',
-                                                type: 'POST',
-                                                data: result
-                                                    .value,
-                                                processData: false,
-                                                contentType: false,
-                                                success: function (
-                                                    response
-                                                ) {
-                                                    berhasil();
-                                                },
-                                                error: function (
-                                                    error) {
-                                                    gagal();
-                                                    console
-                                                        .error(
-                                                            error
-                                                        );
-                                                }
-                                            });
-                                        });
+                                google.maps.event.addListener(marker, 'dragend', function () {
+                                    long = marker
+                                        .getPosition().lng();
+                                    lang = marker
+                                        .getPosition().lat();
+                                });
                             }
                         });
-                    },
+                    }, preConfirm() {
+                        result.value.append(
+                            '_token',
+                            csrf
+                        );
+                        result.value.append(
+                            'long',
+                            long);
+                        result.value.append(
+                            'lang', lang
+                        );
+                        $.ajax({
+                            url: '/pemilik/dashboard/ambil/simpan/organik',
+                            type: 'POST',
+                            data: result
+                                .value,
+                            processData: false,
+                            contentType: false,
+                            success: function (
+                                response
+                            ) {
+                                berhasil();
+                            },
+                            error: function (
+                                error) {
+                                gagal();
+                                console
+                                    .error(
+                                        error
+                                    );
+                            }
+                        });
+                    }
                 });
             }
         });
@@ -534,49 +540,52 @@ $(document).ready(function () {
                                     draggable: true
                                 });
 
-                                Swal.getConfirmButton()
-                                    .addEventListener('click',
-                                        function () {
-                                            const longitude = marker
-                                                .getPosition().lng();
-                                            const latitude = marker
-                                                .getPosition().lat();
+                                long = marker
+                                    .getPosition().lng();
+                                lang = marker
+                                    .getPosition().lat();
 
-                                            result.value.append(
-                                                'long',
-                                                longitude);
-                                            result.value.append(
-                                                'lang', latitude
-                                            );
-                                            result.value.append(
-                                                '_token',
-                                                csrf
-                                            );
-                                            $.ajax({
-                                                url: '/pemilik/dashboard/ambil/simpan/kertas',
-                                                type: 'POST',
-                                                data: result
-                                                    .value,
-                                                processData: false,
-                                                contentType: false,
-                                                success: function (
-                                                    response
-                                                ) {
-                                                    berhasil();
-                                                },
-                                                error: function (
-                                                    error) {
-                                                    gagal();
-                                                    console
-                                                        .error(
-                                                            error
-                                                        );
-                                                }
-                                            });
-                                        });
+                                google.maps.event.addListener(marker, 'dragend', function () {
+                                    long = marker
+                                        .getPosition().lng();
+                                    lang = marker
+                                        .getPosition().lat();
+                                });
                             }
                         });
-                    },
+                    }, preConfirm() {
+                        result.value.append(
+                            '_token',
+                            csrf
+                        );
+                        result.value.append(
+                            'long',
+                            long);
+                        result.value.append(
+                            'lang', lang
+                        );
+                        $.ajax({
+                            url: '/pemilik/dashboard/ambil/simpan/kertas',
+                            type: 'POST',
+                            data: result
+                                .value,
+                            processData: false,
+                            contentType: false,
+                            success: function (
+                                response
+                            ) {
+                                berhasil();
+                            },
+                            error: function (
+                                error) {
+                                gagal();
+                                console
+                                    .error(
+                                        error
+                                    );
+                            }
+                        });
+                    }
                 });
             }
         });
@@ -799,49 +808,52 @@ $(document).ready(function () {
                                     draggable: true
                                 });
 
-                                Swal.getConfirmButton()
-                                    .addEventListener('click',
-                                        function () {
-                                            const longitude = marker
-                                                .getPosition().lng();
-                                            const latitude = marker
-                                                .getPosition().lat();
+                                long = marker
+                                    .getPosition().lng();
+                                lang = marker
+                                    .getPosition().lat();
 
-                                            result.value.append(
-                                                'long',
-                                                longitude);
-                                            result.value.append(
-                                                'lang', latitude
-                                            );
-                                            result.value.append(
-                                                '_token',
-                                                csrf
-                                            );
-                                            $.ajax({
-                                                url: '/pemilik/dashboard/ambil/simpan/plastik',
-                                                type: 'POST',
-                                                data: result
-                                                    .value,
-                                                processData: false,
-                                                contentType: false,
-                                                success: function (
-                                                    response
-                                                ) {
-                                                    berhasil();
-                                                },
-                                                error: function (
-                                                    error) {
-                                                    gagal();
-                                                    console
-                                                        .error(
-                                                            error
-                                                        );
-                                                }
-                                            });
-                                        });
+                                google.maps.event.addListener(marker, 'dragend', function () {
+                                    long = marker
+                                        .getPosition().lng();
+                                    lang = marker
+                                        .getPosition().lat();
+                                });
                             }
                         });
-                    },
+                    }, preConfirm() {
+                        result.value.append(
+                            '_token',
+                            csrf
+                        );
+                        result.value.append(
+                            'long',
+                            long);
+                        result.value.append(
+                            'lang', lang
+                        );
+                        $.ajax({
+                            url: '/pemilik/dashboard/ambil/simpan/plastik',
+                            type: 'POST',
+                            data: result
+                                .value,
+                            processData: false,
+                            contentType: false,
+                            success: function (
+                                response
+                            ) {
+                                berhasil();
+                            },
+                            error: function (
+                                error) {
+                                gagal();
+                                console
+                                    .error(
+                                        error
+                                    );
+                            }
+                        });
+                    }
                 });
             }
         });
@@ -1064,49 +1076,52 @@ $(document).ready(function () {
                                     draggable: true
                                 });
 
-                                Swal.getConfirmButton()
-                                    .addEventListener('click',
-                                        function () {
-                                            const longitude = marker
-                                                .getPosition().lng();
-                                            const latitude = marker
-                                                .getPosition().lat();
+                                long = marker
+                                    .getPosition().lng();
+                                lang = marker
+                                    .getPosition().lat();
 
-                                            result.value.append(
-                                                'long',
-                                                longitude);
-                                            result.value.append(
-                                                'lang', latitude
-                                            );
-                                            result.value.append(
-                                                '_token',
-                                                csrf
-                                            );
-                                            $.ajax({
-                                                url: '/pemilik/dashboard/ambil/simpan/kaca',
-                                                type: 'POST',
-                                                data: result
-                                                    .value,
-                                                processData: false,
-                                                contentType: false,
-                                                success: function (
-                                                    response
-                                                ) {
-                                                    berhasil();
-                                                },
-                                                error: function (
-                                                    error) {
-                                                    gagal();
-                                                    console
-                                                        .error(
-                                                            error
-                                                        );
-                                                }
-                                            });
-                                        });
+                                google.maps.event.addListener(marker, 'dragend', function () {
+                                    long = marker
+                                        .getPosition().lng();
+                                    lang = marker
+                                        .getPosition().lat();
+                                });
                             }
                         });
-                    },
+                    }, preConfirm() {
+                        result.value.append(
+                            '_token',
+                            csrf
+                        );
+                        result.value.append(
+                            'long',
+                            long);
+                        result.value.append(
+                            'lang', lang
+                        );
+                        $.ajax({
+                            url: '/pemilik/dashboard/ambil/simpan/kaca',
+                            type: 'POST',
+                            data: result
+                                .value,
+                            processData: false,
+                            contentType: false,
+                            success: function (
+                                response
+                            ) {
+                                berhasil();
+                            },
+                            error: function (
+                                error) {
+                                gagal();
+                                console
+                                    .error(
+                                        error
+                                    );
+                            }
+                        });
+                    }
                 });
             }
         });
@@ -1329,49 +1344,52 @@ $(document).ready(function () {
                                     draggable: true
                                 });
 
-                                Swal.getConfirmButton()
-                                    .addEventListener('click',
-                                        function () {
-                                            const longitude = marker
-                                                .getPosition().lng();
-                                            const latitude = marker
-                                                .getPosition().lat();
+                                long = marker
+                                    .getPosition().lng();
+                                lang = marker
+                                    .getPosition().lat();
 
-                                            result.value.append(
-                                                'long',
-                                                longitude);
-                                            result.value.append(
-                                                'lang', latitude
-                                            );
-                                            result.value.append(
-                                                '_token',
-                                                csrf
-                                            );
-                                            $.ajax({
-                                                url: '/pemilik/dashboard/ambil/simpan/logam',
-                                                type: 'POST',
-                                                data: result
-                                                    .value,
-                                                processData: false,
-                                                contentType: false,
-                                                success: function (
-                                                    response
-                                                ) {
-                                                    berhasil();
-                                                },
-                                                error: function (
-                                                    error) {
-                                                    gagal();
-                                                    console
-                                                        .error(
-                                                            error
-                                                        );
-                                                }
-                                            });
-                                        });
+                                google.maps.event.addListener(marker, 'dragend', function () {
+                                    long = marker
+                                        .getPosition().lng();
+                                    lang = marker
+                                        .getPosition().lat();
+                                });
                             }
                         });
-                    },
+                    }, preConfirm() {
+                        result.value.append(
+                            '_token',
+                            csrf
+                        );
+                        result.value.append(
+                            'long',
+                            long);
+                        result.value.append(
+                            'lang', lang
+                        );
+                        $.ajax({
+                            url: '/pemilik/dashboard/ambil/simpan/logam',
+                            type: 'POST',
+                            data: result
+                                .value,
+                            processData: false,
+                            contentType: false,
+                            success: function (
+                                response
+                            ) {
+                                berhasil();
+                            },
+                            error: function (
+                                error) {
+                                gagal();
+                                console
+                                    .error(
+                                        error
+                                    );
+                            }
+                        });
+                    }
                 });
             }
         });
@@ -1594,49 +1612,52 @@ $(document).ready(function () {
                                     draggable: true
                                 });
 
-                                Swal.getConfirmButton()
-                                    .addEventListener('click',
-                                        function () {
-                                            const longitude = marker
-                                                .getPosition().lng();
-                                            const latitude = marker
-                                                .getPosition().lat();
+                                long = marker
+                                    .getPosition().lng();
+                                lang = marker
+                                    .getPosition().lat();
 
-                                            result.value.append(
-                                                'long',
-                                                longitude);
-                                            result.value.append(
-                                                'lang', latitude
-                                            );
-                                            result.value.append(
-                                                '_token',
-                                                csrf
-                                            );
-                                            $.ajax({
-                                                url: '/pemilik/dashboard/ambil/simpan/lainnya',
-                                                type: 'POST',
-                                                data: result
-                                                    .value,
-                                                processData: false,
-                                                contentType: false,
-                                                success: function (
-                                                    response
-                                                ) {
-                                                    berhasil();
-                                                },
-                                                error: function (
-                                                    error) {
-                                                    gagal();
-                                                    console
-                                                        .error(
-                                                            error
-                                                        );
-                                                }
-                                            });
-                                        });
+                                google.maps.event.addListener(marker, 'dragend', function () {
+                                    long = marker
+                                        .getPosition().lng();
+                                    lang = marker
+                                        .getPosition().lat();
+                                });
                             }
                         });
-                    },
+                    }, preConfirm() {
+                        result.value.append(
+                            '_token',
+                            csrf
+                        );
+                        result.value.append(
+                            'long',
+                            long);
+                        result.value.append(
+                            'lang', lang
+                        );
+                        $.ajax({
+                            url: '/pemilik/dashboard/ambil/simpan/lainnya',
+                            type: 'POST',
+                            data: result
+                                .value,
+                            processData: false,
+                            contentType: false,
+                            success: function (
+                                response
+                            ) {
+                                berhasil();
+                            },
+                            error: function (
+                                error) {
+                                gagal();
+                                console
+                                    .error(
+                                        error
+                                    );
+                            }
+                        });
+                    }
                 });
             }
         });
