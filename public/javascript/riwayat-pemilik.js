@@ -1,31 +1,25 @@
 $(document).ready(function () {
-    const button = document.getElementById('bukti');
-    const id = button.getAttribute('data-id');
-    const bukti = button.getAttribute('data-bukti');
-    const jenis = button.getAttribute('data-jenis').toLowerCase();
-
-    $('#bukti').click(function (e) {
+    $('.btn-info').click(function (e) {
         e.preventDefault();
+
+        // Mendapatkan data dari button yang diklik
+        const button = $(this);
+        const id = button.data('id');
+        const bukti = button.data('bukti');
+        const jenis = button.data('jenis').toLowerCase();
 
         Swal.fire({
             title: "Bukti Barang",
-            html: `
-                <div id="gambarBukti" style="height: 400px;"></div>
-            `,
+            html: `<img src="${getBuktiSampahRoute(jenis, id, bukti)}" alt="Bukti Sampah" style="max-width: 100%; height: auto;">`,
             showCancelButton: true,
-            confirmButtonText: "Selanjutnya",
+            showConfirmButton: false,
             cancelButtonText: "Tutup",
             focusConfirm: false,
-            showLoaderOnConfirm: true,
-            didOpen: () => {
-                $.ajax({
-                    type: "GET",
-                    url: `/pemilik/bukti/ambildirumah/${jenis}/${id}/${bukti}`,
-                    success: function (response) {
-                        console.log (response)
-                    }
-                });
-            }
-        })
+        });
     });
+
+    function getBuktiSampahRoute(jenis, id, gambar) {
+        return `/pemilik/bukti/ambildirumah/${jenis}/${id}/${gambar}`;
+    }
+
 });

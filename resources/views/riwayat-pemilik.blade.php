@@ -212,5 +212,4 @@
 
 @section('scripts')
     <script src="/javascript/riwayat-pemilik.js"></script>
-
 @endsection

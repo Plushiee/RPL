@@ -72,7 +72,7 @@
                 <li class="dropdown notification-list">
                     <a class="nav-link dropdown-toggle nav-user mr-0" data-toggle="dropdown" href="#"
                         role="button" aria-haspopup="false" aria-expanded="false">
-                        <img src="/assets/images/users/avatar-1.jpg" alt="user-image" class="rounded-circle">
+                        <img src="/assets/images/users/user-default.webp" alt="user-image" class="rounded-circle">
                         <span class="pro-user-name ml-1">
                             {{ Auth::user()->name }} <i class="mdi mdi-chevron-down"></i>
                         </span>
@@ -127,7 +127,7 @@
         <div class="left-side-menu">
             <div class="user-box">
                 <div class="float-left">
-                    <img src="/assets/images/users/avatar-1.jpg" alt="" class="avatar-md rounded-circle">
+                    <img src="/assets/images/users/user-default.webp" alt="" class="avatar-md rounded-circle">
                 </div>
                 <div class="user-info">
                     <a href="#">{{ Auth::user()->name }}</a>

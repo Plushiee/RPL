@@ -15,11 +15,9 @@ class AmbilGambarController extends Controller
             $path = "/$jenis/$id/$gambar";
 
             if (Storage::disk('secure_diRumah')->exists($path)) {
-                // return response()->file(Storage::disk('secure_diRumah')->path($path));
-                return response()->json(['message' => 'OK']);
+                return response()->file(Storage::disk('secure_diRumah')->path($path));
             }
         }
-        return response()->json(['message' => 'Definitely not OK ', 'path'=> $path]);
-        // return response()->file(public_path('images/default.png'));
+        return response()->file(public_path('img/default.png'));
     }
 }

@@ -52,9 +52,9 @@
                     <div class="col-12 info">
                         <div class="row header-title">
                             <div class="col-4">
-                                <img src="/assets/images/users/avatar-1.jpg" width="128px" alt=""
+                                <img src="/assets/images/users/user-default.webp" width="128px" alt=""
                                     class="rounded-circle d-none d-sm-block">
-                                <img src="/assets/images/users/avatar-1.jpg" width="74px" alt=""
+                                <img src="/assets/images/users/user-default.webp" width="74px" alt=""
                                     class="rounded-circle d-block d-sm-none">
                             </div>
                             <div class="col-8">
@@ -74,7 +74,7 @@
                 </div>
                 <div class="row mt-3">
                     <h5 class="mt-0 mb-0 font-14">Data Akun
-                        <button class="btn btn-primary float-end edit-btn py-1 px-2"><i
+                        <button class="btn btn-primary float-end edit-btn py-1 px-2" id="editAkun"><i
                                 class="mdi mdi-settings-outline"></i> &nbsp;Edit Data Akun</button>
                     </h5>
                     <div class="row ms-2 p-0 my-0">
@@ -122,7 +122,7 @@
 
                 <div class="row mt-3">
                     <h5 class="mt-0 mb-0 font-14">Data Pengguna
-                        <button class="btn btn-primary float-end edit-btn py-1 px-2"><i
+                        <button class="btn btn-primary float-end edit-btn py-1 px-2" id="editPengguna"><i
                                 class="mdi mdi-settings-outline"></i> &nbsp;Edit Data Pengguna</button>
                     </h5>
                     <div class="row ms-2 p-0 my-0 ">
@@ -235,4 +235,8 @@
 
     </div>
     <!-- END content-page -->
+@endsection
+
+@section('scripts')
+    <script src="/javascript/akun-pemilik.js"></script>
 @endsection

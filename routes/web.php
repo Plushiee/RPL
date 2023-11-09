@@ -23,6 +23,9 @@ use App\Http\Controllers\DefaultController;
 // Login Controller
 Route::get('/', [DefaultController::class, 'index']);
 
+// Redirect
+Route::redirect('/pemilik', '/pemilik/dashboard');
+
 // Register Controller
 Route::get('/register', [RegisterController::class, 'register']);
 Route::get('/register/auth', [RegisterController::class, 'auth']);
