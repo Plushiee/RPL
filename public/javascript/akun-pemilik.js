@@ -27,7 +27,7 @@ $(document).ready(function () {
                 </form>
             `,
             showCancelButton: true,
-            confirmButtonText: 'Save Changes',
+            confirmButtonText: 'Simpan',
             cancelButtonText: 'Cancel',
             focusConfirm: false,
             preConfirm: () => {
@@ -116,7 +116,7 @@ $(document).ready(function () {
                 </form>
             `,
             showCancelButton: true,
-            confirmButtonText: 'Save Changes',
+            confirmButtonText: 'Simpan',
             cancelButtonText: 'Cancel',
             focusConfirm: false,
             preConfirm: () => {
