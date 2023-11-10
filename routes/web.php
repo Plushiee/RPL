@@ -41,6 +41,7 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('logout')->middl
 // Pemilik Controller
 Route::get('/pemilik/dashboard', [DashboardController::class, 'dashboard'])->middleware('auth'); //default pemilik
 Route::get('/pemilik/dashboard/ambil', [DashboardController::class, 'ambil'])->middleware('auth'); //default pemilik
+Route::get('/pemilik/dashboard/antar', [DashboardController::class, 'antar'])->middleware('auth'); //default pemilik
 Route::get('/pemilik/akun', [DashboardController::class, 'akun'])->middleware('auth'); //default pemilik
 Route::get('/pemilik/riwayat', [DashboardController::class, 'riwayat'])->middleware('auth'); //default pemilik
 Route::post('/pemilik/simpanAkunAwal', [DashboardController::class, 'simpanAkunAwal'])->middleware('auth'); //default pemilik simpan data awal

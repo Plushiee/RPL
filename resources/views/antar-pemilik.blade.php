@@ -1,6 +1,6 @@
 @extends('templates.navbar-pemilik')
 
-@section('title', 'MoneyTrash! - Ambil Di Rumah')
+@section('title', 'MoneyTrash! - Dashboard')
 @section('css')
     <link rel="stylesheet" href="/assets/styles/dashboard-pengguna.css">
 @endsection
