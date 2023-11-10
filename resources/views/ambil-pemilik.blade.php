@@ -66,12 +66,9 @@
                                             alt="kertas.png" width="96"><br>Kertas</button>
                                 </div>
                                 <div class="col-xl-2 col-sm-6 d-grid widget-inline-box text-center plastik">
-                                    <a href="dashboard/ambil">
-                                        <button class="btn btn-outline-dark btn-block mt-3 mt-sm-0 p-3" type="button"
-                                            style="font-size: 18px; font-weight: bold"><img
-                                                src="\assets\sampah\Plastik.png" alt="plastik.png"
-                                                width="96"><br>Plastik</button>
-                                    </a>
+                                    <button class="btn btn-outline-dark btn-block mt-3 mt-sm-0 p-3" type="button"
+                                        style="font-size: 18px; font-weight: bold"><img src="\assets\sampah\Plastik.png"
+                                            alt="plastik.png" width="96"><br>Plastik</button>
                                 </div>
 
                                 <div class="col-xl-2 col-sm-6 d-grid widget-inline-box text-center kaca">
@@ -80,11 +77,9 @@
                                             alt="kaca.png" width="96"><br>Kaca</button>
                                 </div>
                                 <div class="col-xl-2 col-sm-6 d-grid widget-inline-box text-center logam">
-                                    <a href="dashboard/ambil">
-                                        <button class="btn btn-outline-dark btn-block mt-3 mt-sm-0 p-3" type="button"
-                                            style="font-size: 18px; font-weight: bold"><img src="\assets\sampah\Logam.png"
-                                                alt="logam.png" width="96"><br>Logam</button>
-                                    </a>
+                                    <button class="btn btn-outline-dark btn-block mt-3 mt-sm-0 p-3" type="button"
+                                        style="font-size: 18px; font-weight: bold"><img src="\assets\sampah\Logam.png"
+                                            alt="logam.png" width="96"><br>Logam</button>
                                 </div>
 
                                 <div class="col-xl-2 col-sm-6 d-grid widget-inline-box text-center lainnya"
@@ -190,7 +185,8 @@
         <div id="authData" data-name="{{ Auth::user()->name }}" data-nomor="{{ Auth::user()->nomor }}"
             data-alamat="{{ Auth::user()->alamat }}" data-kecamatan="{{ Auth::user()->kecamatan }}"
             data-kota="{{ Auth::user()->kota }}" data-provinsi="{{ Auth::user()->provinsi }}"
-            data-kodepos="{{ Auth::user()->kodePos }}" data-catatan="{{ Auth::user()->catatan }}" data-csrf="{{ csrf_token() }}"></div>
+            data-kodepos="{{ Auth::user()->kodePos }}" data-catatan="{{ Auth::user()->catatan }}"
+            data-csrf="{{ csrf_token() }}"></div>
         <!-- EndAuth Data Share -->
 
     </div>

@@ -15,4 +15,23 @@
 .btn-success {
     font-weight: bold;
 }
+/*
+.checkbox-button {
+    display: none;
+}
 
+.checkbox-label {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 10px;
+    cursor: pointer;
+}
+
+.checkbox-label img {
+    width: 96px;
+}
+
+.checkbox-label.selected {
+    background-color: #626773;
+    color: #fff;
+} */

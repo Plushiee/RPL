@@ -51,52 +51,63 @@
                 <!-- end row -->
                 <div class="row">
                     <div class="col-12">
-                        <div class="card-box widget-inline pt-1" style="border: none !important">
+                        <div class="card-box widget-inline pt-1 mb-0 pb-2" style="border: none !important">
                             <h5 class="mt-0 font-14">Jenis Sampah dan Kuantitas</h5>
                             <div class="row g-md-4 g-sm-4 g-1">
                                 <div class="col-xl-2 col-sm-6 d-grid widget-inline-box text-center">
-                                    <button class="btn btn-outline-dark btn-block mt-3 mt-sm-0 p-3 organik" type="button"
-                                        style="font-size: 18px; font-weight: bold"><img src="\assets\sampah\Organik.png"
-                                            alt="organik.png" width="96"><br>Organik</button>
+                                    <input type="checkbox" class="btn-check" id="organik" autocomplete="off">
+                                    <label class="btn btn-outline-dark btn-block mt-3 mt-sm-0 p-3 organik mb-0" type="button"
+                                        style="font-size: 18px; font-weight: bold" for="organik"><img src="\assets\sampah\Organik.png"
+                                            alt="organik.png" width="96"><br>Organik</label>
                                 </div>
 
                                 <div class="col-xl-2 col-sm-6 d-grid widget-inline-box text-center kertas">
-                                    <button class="btn btn-outline-dark btn-block mt-3 mt-sm-0 p-3" type="button"
-                                        style="font-size: 18px; font-weight: bold"><img src="\assets\sampah\Kertas.png"
-                                            alt="kertas.png" width="96"><br>Kertas</button>
+                                    <input type="checkbox" class="btn-check" id="kertas" autocomplete="off">
+                                    <label class="btn btn-outline-dark btn-block mt-3 mt-sm-0 p-3 mb-0" type="button"
+                                        style="font-size: 18px; font-weight: bold" for="kertas"><img src="\assets\sampah\Kertas.png"
+                                            alt="kertas.png" width="96"><br>Kertas</label>
                                 </div>
                                 <div class="col-xl-2 col-sm-6 d-grid widget-inline-box text-center plastik">
-                                    <a href="dashboard/ambil">
-                                        <button class="btn btn-outline-dark btn-block mt-3 mt-sm-0 p-3" type="button"
-                                            style="font-size: 18px; font-weight: bold"><img
-                                                src="\assets\sampah\Plastik.png" alt="plastik.png"
-                                                width="96"><br>Plastik</button>
-                                    </a>
+                                    <input type="checkbox" class="btn-check" id="plastik" autocomplete="off">
+                                    <label class="btn btn-outline-dark btn-block mt-3 mt-sm-0 p-3 mb-0" type="button"
+                                        style="font-size: 18px; font-weight: bold" for="plastik"><img src="\assets\sampah\Plastik.png"
+                                            alt="plastik.png" width="96"><br>Plastik</label>
                                 </div>
 
                                 <div class="col-xl-2 col-sm-6 d-grid widget-inline-box text-center kaca">
-                                    <button class="btn btn-outline-dark btn-block mt-3 mt-sm-0 p-3" type="button"
-                                        style="font-size: 18px; font-weight: bold"><img src="\assets\sampah\Kaca.png"
-                                            alt="kaca.png" width="96"><br>Kaca</button>
+                                    <input type="checkbox" class="btn-check" id="kaca" autocomplete="off">
+                                    <label class="btn btn-outline-dark btn-block mt-3 mt-sm-0 p-3 mb-0" type="button"
+                                        style="font-size: 18px; font-weight: bold" for="kaca"><img src="\assets\sampah\Kaca.png"
+                                            alt="kaca.png" width="96"><br>Kaca</label>
                                 </div>
                                 <div class="col-xl-2 col-sm-6 d-grid widget-inline-box text-center logam">
-                                    <a href="dashboard/ambil">
-                                        <button class="btn btn-outline-dark btn-block mt-3 mt-sm-0 p-3" type="button"
-                                            style="font-size: 18px; font-weight: bold"><img src="\assets\sampah\Logam.png"
-                                                alt="logam.png" width="96"><br>Logam</button>
-                                    </a>
+                                    <input type="checkbox" class="btn-check" id="logam" autocomplete="off">
+                                    <label class="btn btn-outline-dark btn-block mt-3 mt-sm-0 p-3 mb-0" type="button"
+                                        style="font-size: 18px; font-weight: bold" for="logam"><img src="\assets\sampah\Logam.png"
+                                            alt="logam.png" width="96"><br>Logam</label>
                                 </div>
 
                                 <div class="col-xl-2 col-sm-6 d-grid widget-inline-box text-center lainnya"
                                     style="border: none !important;">
-                                    <button class="btn btn-outline-dark btn-block mt-3 mt-sm-0 p-3" type="button"
-                                        style="font-size: 18px; font-weight: bold"><img src="\assets\sampah\Lainnya.png"
-                                            alt="lainnya.png" width="96"><br>Lainnya</button>
+                                    <input type="checkbox" class="btn-check" id="lainnya" autocomplete="off">
+                                    <label class="btn btn-outline-dark btn-block mt-3 mt-sm-0 p-3 mb-0" type="button"
+                                        style="font-size: 18px; font-weight: bold" for="lainnya"><img src="\assets\sampah\Lainnya.png"
+                                            alt="lainnya.png" width="96"><br>Lainnya</label>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
+
+                <div class="row mb-4">
+                    <div class="card-box my-0 py-0" style="border: none !important">
+                        <div class="col-12">
+                            <button type="button" class="btn btn-success float-end" id="antar">Antar Sekarang &nbsp;>></button>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="row">
                     <div class="col-lg-9">
                         <div class="card-box">
@@ -129,9 +140,9 @@
                                 </div>
                                 <div class="accordion-item">
                                     <h2 class="accordion-header">
-                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                            data-bs-target="#flush-collapseTwo" aria-expanded="false"
-                                            aria-controls="flush-collapseTwo">
+                                        <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo"
+                                            aria-expanded="false" aria-controls="flush-collapseTwo">
                                             Accordion Item #2
                                         </button>
                                     </h2>
@@ -190,7 +201,8 @@
         <div id="authData" data-name="{{ Auth::user()->name }}" data-nomor="{{ Auth::user()->nomor }}"
             data-alamat="{{ Auth::user()->alamat }}" data-kecamatan="{{ Auth::user()->kecamatan }}"
             data-kota="{{ Auth::user()->kota }}" data-provinsi="{{ Auth::user()->provinsi }}"
-            data-kodepos="{{ Auth::user()->kodePos }}" data-catatan="{{ Auth::user()->catatan }}" data-csrf="{{ csrf_token() }}"></div>
+            data-kodepos="{{ Auth::user()->kodePos }}" data-catatan="{{ Auth::user()->catatan }}"
+            data-csrf="{{ csrf_token() }}"></div>
         <!-- EndAuth Data Share -->
 
     </div>
@@ -205,6 +217,6 @@
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBRPlQuuQmmWWhwkDiUijv6F6deBOflQhk&callback=initMap&libraries=places">
     </script>
     <script src="/javascript/gps-map.js"></script>
-    <script src="/javascript/pemilik-ambil.js"></script>
+    <script src="/javascript/pemilik-antar.js"></script>
 
 @endsection
