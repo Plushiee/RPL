@@ -60,6 +60,11 @@ Route::post('/pemilik/dashboard/ambil/simpan/kaca', [TransaksiController::class,
 Route::post('/pemilik/dashboard/ambil/simpan/logam', [TransaksiController::class,'logam'])->middleware('auth'); // kertas
 Route::post('/pemilik/dashboard/ambil/simpan/lainnya', [TransaksiController::class,'lainnya'])->middleware('auth'); // kertas
 
+// Simpan Antar
+Route::post('/pemilik/dashboard/antar/simpan', [TransaksiController::class,'antarSendiri'])->middleware('auth'); // Antar Sendiri
+
+
+
 // Ambil BuktiGambar
 Route::get('/pemilik/bukti/ambildirumah/{jenis}/{id}/{gambar}', [AmbilGambarController::class,'showBuktiSampah'])->middleware('auth'); //ambil bukti
 

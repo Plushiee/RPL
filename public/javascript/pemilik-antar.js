@@ -1,4 +1,33 @@
 $(document).ready(function () {
+    const authData = document.getElementById('authData');
+    const nama = authData.getAttribute('data-name');
+    const nomor = authData.getAttribute('data-nomor');
+    const csrf = authData.getAttribute('data-csrf');
+    let namaMap = "";
+    let alamatMap = "";
+    let longitudeMap = "";
+    let latitudeMap = "";
+
+    function berhasil() {
+        var toastMixin = Swal.mixin({
+            toast: true,
+            icon: 'success',
+            title: 'General Title',
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+        });
+
+        toastMixin.fire({
+            animation: true,
+            title: 'Pesanan Berhasil Ditambahkan'
+        });
+    }
 
     function getSelectedValues() {
         var selectedCheckboxes = $('.btn-check:checked');
@@ -21,11 +50,11 @@ $(document).ready(function () {
         Swal.fire({
             title: "Buat Pesanan Antar Sendiri",
             html: `
+                <form id="orderForm">
                     <div class="mb-3 mt-0 pt-0">
                         Jenis Sampah : <br>
                         ${selectedValues}
                     </div>
-                    <form action="" method="POST" id="orderForm">
                         <div class="mb-3">
                             <input class="form-control" type="text" name="nama" placeholder="Nama Pemilik Sampah" required>
                         </div>
@@ -47,13 +76,65 @@ $(document).ready(function () {
                         <div class="mb-3">
                             <p class="form-label" style="font-size:12;"> <input class="form-check-input" type="checkbox" id="useAuthData" name="useAuthData"> Isi data dengan informasi saya</p>
                         </div>
-                    </form>`,
+                    </form>`
+            ,
             showCancelButton: true,
-            confirmButtonText: "Selanjutnya",
+            confirmButtonText: "Kirim",
             cancelButtonText: "Tutup",
             focusConfirm: false,
             showLoaderOnConfirm: true,
+            allowOutsideClick: false,
+            preConfirm: () => {
+                const orderForm = Swal.getPopup().querySelector("#orderForm");
+                const namaValue = Swal.getPopup().querySelector("input[name='nama']")
+                    .value;
+                const nomorValue = Swal.getPopup().querySelector("input[name='nomor']")
+                    .value;
+                const catatanValue = Swal.getPopup().querySelector("textarea[name='catatan']")
+                    .value;
+
+                if (!nama || !nomor) {
+                    Swal.showValidationMessage("Semua Kolom Harus Terisi!");
+                } else {
+                    if (!namaMap || !alamatMap || !latitudeMap || !longitudeMap) {
+                        Swal.showValidationMessage("Mohon Pilih Bank Sampah Yang Dituju!");
+                    }
+                }
+
+                const formData = new FormData(orderForm);
+                formData.append('_token', csrf);
+                formData.append('nama', namaValue);
+                formData.append('nomor', nomorValue);
+                formData.append('catatan', catatanValue);
+                formData.append('jenisSampah', getSelectedValues())
+                return formData;
+            },
             didOpen: () => {
+                const useAuthDataCheckbox = Swal.getPopup().querySelector(
+                    "#useAuthData");
+                $(useAuthDataCheckbox).on("change", function () {
+                    if (useAuthDataCheckbox.checked) {
+                        Swal.getPopup().querySelector("input[name='nama']")
+                            .value = nama;
+                        Swal.getPopup().querySelector("input[name='nama']")
+                            .disabled = true;
+                        Swal.getPopup().querySelector("input[name='nomor']")
+                            .value = nomor;
+                        Swal.getPopup().querySelector("input[name='nomor']")
+                            .disabled = true;
+                    } else {
+                        // Kosongkan input jika checkbox tidak dicentang
+                        Swal.getPopup().querySelector("input[name='nama']")
+                            .value = "";
+                        Swal.getPopup().querySelector("input[name='nama']")
+                            .disabled = false;
+                        Swal.getPopup().querySelector("input[name='nomor']")
+                            .value = "";
+                        Swal.getPopup().querySelector("input[name='nomor']")
+                            .disabled = false;
+                    }
+                });
+
                 function initMap(latitude, longitude) {
                     const initialLocation = { lat: latitude, lng: longitude };
 
@@ -92,6 +173,8 @@ $(document).ready(function () {
                                     const location = result.geometry.location;
                                     const name = result.name;
                                     const address = result.formatted_address;
+                                    const latitude = location.lat();
+                                    const longitude = location.lng();
                                     const isOpen = result.business_status === 'OPERATIONAL';
 
                                     const marker = new google.maps.Marker({
@@ -104,28 +187,31 @@ $(document).ready(function () {
                                         content: `
                                             <h3 style="font-size:12pt; font-weight:bold;">${name}</h3>
                                             <p style="font-size:8pt;">${address}</p>
-                                            <button class="btn btn-primary btn-sm data" ${isOpen ? '' : 'disabled'}>Select</button>
+                                            <button class="btn btn-primary btn-sm data" ${isOpen ? '' : 'disabled'} data-name="${name}" data-address="${address}" data-latitude="${latitude}" data-longitude="${longitude}">Select</button>
                                         `,
                                         maxWidth: 300
                                     });
 
-                                    $(".data").click(function (e) {
-                                        e.preventDefault();
-                                        const selectedResult = result;
-                                        ambilLokasi(selectedResult);
-                                    });
-
-                                    // Tambahkan event listener untuk menampilkan info window ketika marker diklik
                                     marker.addListener('click', function () {
                                         infoWindow.open(map, marker);
                                     });
-                                });
 
-                                // Periksa apakah ada halaman berikutnya hasil pencarian
-                                if (pagination.hasNextPage) {
-                                    // Ambil halaman berikutnya
-                                    pagination.nextPage();
-                                }
+
+                                    google.maps.event.addListener(infoWindow, 'domready', function () {
+                                        const selectButton = document.querySelector('.btn.data');
+                                        selectButton.addEventListener('click', function (event) {
+                                            event.preventDefault();
+
+                                            namaMap = selectButton.getAttribute('data-name');
+                                            alamatMap = selectButton.getAttribute('data-address');
+                                            longitudeMap = selectButton.getAttribute('data-longitude');
+                                            latitudeMap = selectButton.getAttribute('data-latitude');
+                                            console.log(longitudeMap)
+
+                                            selectButton.setAttribute('disabled', 'true');
+                                        });
+                                    });
+                                });
                             }
                         });
                     }
@@ -133,22 +219,6 @@ $(document).ready(function () {
                     performTextSearch(request, map);
                 }
 
-                // Function to handle the button click in the info window
-                function ambilLokasi (place) {
-                    const name = place.name;
-                    const address = place.formatted_address;
-                    console.log(place)
-
-                    // Do something with the retrieved information
-                    console.log('Name:', name);
-                    console.log('Address:', address);
-                    console.log('Latitude:', latitude);
-                    console.log('Longitude:', longitude);
-
-                    // You can use this information to update your form or perform other actions
-                };
-
-                // Fungsi untuk mendapatkan geolokasi pengguna
                 function getLocation() {
                     if (navigator.geolocation) {
                         navigator.geolocation.getCurrentPosition(
@@ -156,23 +226,47 @@ $(document).ready(function () {
                                 const latitude = position.coords.latitude;
                                 const longitude = position.coords.longitude;
 
-                                // Inisialisasi peta dengan koordinat geolokasi
                                 initMap(latitude, longitude);
                             },
                             (error) => {
                                 console.error('Error getting geolocation:', error);
-                                // Jika terjadi kesalahan, inisialisasi peta dengan koordinat default
                                 initMap(0, 0);
                             }
                         );
                     } else {
-                        // Geolokasi tidak didukung oleh browser
                         console.error('Geolocation is not supported by your browser.');
                     }
                 }
-
-                // Panggil fungsi untuk mendapatkan geolokasi dan inisialisasi peta
                 getLocation();
+            }
+        }).then((result) => {
+            if (result.isConfirmed) {
+                result.value.append('namaBank', namaMap);
+                result.value.append('alamatBank', alamatMap);
+                result.value.append('longitudeBank', longitudeMap);
+                result.value.append('latitudeBank', latitudeMap);
+
+                $.ajax({
+                    url: '/pemilik/dashboard/antar/simpan',
+                    type: 'POST',
+                    data: result
+                        .value,
+                    processData: false,
+                    contentType: false,
+                    success: function (
+                        response
+                    ) {
+                        berhasil();
+                    },
+                    error: function (
+                        error) {
+                        gagal();
+                        console
+                            .error(
+                                error
+                            );
+                    }
+                });
             }
         })
     });

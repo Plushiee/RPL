@@ -1,6 +1,6 @@
 @extends('templates.navbar-pemilik')
 
-@section('title', 'MoneyTrash! - Dashboard')
+@section('title', 'MoneyTrash! - Antar Sendiri')
 @section('css')
     <link rel="stylesheet" href="/assets/styles/dashboard-pengguna.css">
 @endsection
@@ -16,7 +16,7 @@
             <ol class="breadcrumb" style="background-color: transparent !important">
                 <li class="breadcrumb-item"><a href="/pemilik/dashboard">Pemilik Sampah</a></li>
                 <li class="breadcrumb-item"><a href="/pemilik/dashboard">Dashboard</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Ambil di Rumah</li>
+                <li class="breadcrumb-item active" aria-current="page">Antar Sendiri</li>
             </ol>
         </nav>
         <!-- End Breadcrumb -->
@@ -198,11 +198,7 @@
         {{-- </footer> --}}
         <!-- end Footer -->
         <!-- Auth Data Share -->
-        <div id="authData" data-name="{{ Auth::user()->name }}" data-nomor="{{ Auth::user()->nomor }}"
-            data-alamat="{{ Auth::user()->alamat }}" data-kecamatan="{{ Auth::user()->kecamatan }}"
-            data-kota="{{ Auth::user()->kota }}" data-provinsi="{{ Auth::user()->provinsi }}"
-            data-kodepos="{{ Auth::user()->kodePos }}" data-catatan="{{ Auth::user()->catatan }}"
-            data-csrf="{{ csrf_token() }}"></div>
+        <div id="authData" data-name="{{ Auth::user()->name }}" data-nomor="{{ Auth::user()->nomor }}" data-csrf="{{ csrf_token() }}"></div>
         <!-- EndAuth Data Share -->
 
     </div>

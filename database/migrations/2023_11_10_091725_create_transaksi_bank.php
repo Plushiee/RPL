@@ -20,7 +20,6 @@ class CreateTransaksiBank extends Migration
             $table->string('jenisSampah');
             $table->string('nama');
             $table->string('nomor');
-            $table->string('berat');
             $table->text('catatanTambahan')->nullable();
             $table->string('bukti')->nullable();
             $table->boolean('approved');

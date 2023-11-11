@@ -6,10 +6,47 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use App\Models\UserTransaksiModel;
+use App\Models\UserTransaksiBankModel;
 
 class TransaksiController extends Controller
 {
-    //Simpan data organik
+    //Simpan data antarSendiri
+    public function antarSendiri(Request $request)
+    {
+        //File bukti
+        if ($request->hasFile('bukti')) {
+            $file = $request->file('bukti');
+            $userId = Auth::id();
+            $fileName = $userId . '_' . time() . '_' . $file->getClientOriginalName();
+            $directory = $userId;
+
+            Storage::disk('secure_antar')->putFileAs($directory, $file, $fileName);
+        } else {
+            $fileName = null;
+        }
+
+        // Simpan data ke database
+        if (Auth::check()) {
+            $transaksi = new UserTransaksiBankModel;
+            $transaksi->idPemilik = Auth::id();
+            $transaksi->jenisSampah = $request->jenisSampah;
+            $transaksi->nama = $request->nama;
+            $transaksi->nomor = $request->nomor;
+            $transaksi->catatanTambahan = $request->catatan;
+            $transaksi->bukti = $fileName;
+            $transaksi->approved = false;
+            $transaksi->terkirim = false;
+            $transaksi->bankSampah = $request->namaBank;
+            $transaksi->alamat = $request->alamatBank;
+            $transaksi->lang = $request->latitudeBank;
+            $transaksi->long = $request->longitudeBank;
+            $transaksi->save();
+            return response()->json(['message' => 'Data berhasil disimpan.']);
+        } else {
+            return response()->json(['message' => 'Error']);
+        }
+    }
+
     public function organik(Request $request)
     {
         //File bukti
@@ -59,7 +96,7 @@ class TransaksiController extends Controller
             $file = $request->file('bukti');
             $userId = Auth::id();
             $fileName = $userId . '_' . time() . '_' . $file->getClientOriginalName();
-            $directory = 'organik/' . $userId;
+            $directory = 'kertas/' . $userId;
 
             Storage::disk('secure_diRumah')->putFileAs($directory, $file, $fileName);
         } else {

@@ -58,6 +58,11 @@ return [
             'root' => storage_path('app/uploads/ambil_di_rumah'),
         ],
 
+        'secure_antar' => [
+            'driver' => 'local',
+            'root' => storage_path('app/uploads/antar_sendiri'),
+        ],
+
     ],
 
     /*

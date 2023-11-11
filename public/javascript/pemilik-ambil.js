@@ -297,6 +297,7 @@ $(document).ready(function () {
                     }
                 }).then((result) => {
                     if (result.isConfirmed) {
+                        console.log(result.value)
                         Swal.fire({
                             title: "Rincian Pembayaran",
                             html: `
@@ -314,7 +315,7 @@ $(document).ready(function () {
                                                 <b>Harga</b>
                                             </div>
                                         </div>
-                                        
+
                                         <div class="row">
                                             <div class="col-4">
                                                 Organik
@@ -362,12 +363,12 @@ $(document).ready(function () {
                                         });
                                     }
                                 });
-                            },
-                            preConfirm() {
                                 result.value.append(
                                     '_token',
                                     csrf
                                 );
+                            },
+                            preConfirm() {
                                 result.value.append(
                                     'long',
                                     long);
@@ -661,7 +662,7 @@ $(document).ready(function () {
                                                 <b>Harga</b>
                                             </div>
                                         </div>
-                                        
+
                                         <div class="row">
                                             <div class="col-4">
                                                 Kertas
@@ -709,18 +710,20 @@ $(document).ready(function () {
                                         });
                                     }
                                 });
-                            },
-                            preConfirm() {
+
                                 result.value.append(
                                     '_token',
                                     csrf
                                 );
+                            },
+                            preConfirm() {
                                 result.value.append(
                                     'long',
                                     long);
                                 result.value.append(
                                     'lang', lang
                                 );
+
                                 $.ajax({
                                     url: '/pemilik/dashboard/ambil/simpan/kertas',
                                     type: 'POST',
@@ -1007,7 +1010,7 @@ $(document).ready(function () {
                                                     <b>Harga</b>
                                                 </div>
                                             </div>
-                                            
+
                                             <div class="row">
                                                 <div class="col-4">
                                                     Plastik
@@ -1354,7 +1357,7 @@ $(document).ready(function () {
                                                 <b>Harga</b>
                                             </div>
                                         </div>
-                                        
+
                                         <div class="row">
                                             <div class="col-4">
                                                 Kaca
@@ -1700,7 +1703,7 @@ $(document).ready(function () {
                                                 <b>Harga</b>
                                             </div>
                                         </div>
-                                        
+
                                         <div class="row">
                                             <div class="col-4">
                                                 Logam
@@ -2046,7 +2049,7 @@ $(document).ready(function () {
                                                 <b>Harga</b>
                                             </div>
                                         </div>
-                                        
+
                                         <div class="row">
                                             <div class="col-4">
                                                 Lainnya
