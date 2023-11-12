@@ -127,7 +127,11 @@
                                                         </div>
                                                         <div
                                                             class="col-md-2 text-center d-flex justify-content-center align-items-center">
-                                                            <button type="button" class="btn btn-info small mt-2 mt-sm-2 mt-md-0" id="bukti" data-id="{{ $transaksi->idPemilik }}" data-bukti="{{ $transaksi->bukti }}" data-jenis="{{ $transaksi->jenisSampah }}">Tampilkan
+                                                            <button type="button"
+                                                                class="btn btn-info small mt-2 mt-sm-2 mt-md-0 bukti"
+                                                                id="bukti" data-id="{{ $transaksi->idPemilik }}"
+                                                                data-bukti="{{ $transaksi->bukti }}"
+                                                                data-jenis="{{ $transaksi->jenisSampah }}">Tampilkan
                                                                 Bukti Barang</button>
                                                         </div>
                                                     </div>
@@ -170,13 +174,107 @@
                                 </h2>
                                 <div id="collapseTwo" class="accordion-collapse collapse"
                                     data-bs-parent="#accordionExample">
-                                    <div class="accordion-body">
-                                        <strong>This is the second item's accordion body.</strong> It is hidden by default,
-                                        until the collapse plugin adds the appropriate classes that we use to style each
-                                        element. These classes control the overall appearance, as well as the showing and
-                                        hiding via CSS transitions. You can modify any of this with custom CSS or overriding
-                                        our default variables. It's also worth noting that just about any HTML can go within
-                                        the <code>.accordion-body</code>, though the transition does limit overflow.
+                                    <div class="accordion-body pt-4 pb-0">
+                                        @foreach ($kumpulanBank as $transaksi)
+                                            <div class="card shadow-0 border mb-4">
+                                                <div class="card-body pt-2">
+                                                    <div class="row mb-3">
+                                                        <div class="col-12 col-sm-10 d-flex align-items-center">
+                                                            <div class="row">
+                                                                <div class="col-12">
+                                                                    <h4 class="m-0 p-0">Sampah
+                                                                        {{ $transaksi->jenisSampah }}
+                                                                    </h4>
+                                                                    <p class="m-0 p-0">
+                                                                        {{ \Carbon\Carbon::parse($transaksi->created_at)->format('d-m-Y') }}
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div
+                                                            class="col-12 col-sm-2 d-flex align-items-center justify-content-end">
+                                                            @if (!$transaksi->approved)
+                                                                <span class="badge badge-warning"> &nbsp;Belum
+                                                                    Di Approved&nbsp; </span>
+                                                            @else
+                                                                <span class="badge badge-warning"> &nbsp;Sudah
+                                                                    Approved&nbsp; </span>
+                                                            @endif
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div
+                                                            class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                                                            <h5 class="text-muted mb-0 mt-0 pt-0">
+                                                                {{ $transaksi->bankSampah }}</h5>
+                                                        </div>
+                                                        <div
+                                                            class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                                                            <h5 class="text-muted mb-0 mt-0 pt-0">{{ $transaksi->nama }}
+                                                            </h5>
+                                                        </div>
+                                                        <div
+                                                            class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                                                            <p class="text-muted mb-0 small">{{ $transaksi->nomor }}</p>
+                                                        </div>
+                                                        <div
+                                                            class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                                                            <p class="text-muted mb-0 small">
+                                                                <b>Catatan Tambahan : </b><br>
+                                                                @if ($transaksi->catanTambaan == null)
+                                                                    -
+                                                                @else
+                                                                    {{ $transaksi->catanTambaan }}
+                                                                @endif
+                                                            </p>
+                                                        </div>
+                                                        <div
+                                                            class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                                                            <p class="text-muted mb-0 small">
+                                                                <b>Alamat :</b><br>{{ $transaksi->alamat }}
+                                                            </p>
+                                                        </div>
+                                                        <div
+                                                            class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                                                            <button type="button"
+                                                                class="btn btn-info small mt-2 mt-sm-2 mt-md-0 informasi"
+                                                                id="informasi" data-id="{{ $transaksi->idPemilik }}"
+                                                                data-bukti="{{ $transaksi->bukti }}"
+                                                                data-bankSampah="{{ $transaksi->bankSampah }}"
+                                                                data-alamat="{{ $transaksi->alamat }}"
+                                                                data-lang="{{ $transaksi->lang }}"
+                                                                data-long="{{ $transaksi->long }}">Informasi
+                                                                Lainnya</button>
+                                                        </div>
+                                                    </div>
+                                                    <hr class="mb-4" style="background-color: #e0e0e0; opacity: 1;">
+                                                    <div class="row d-flex align-items-center">
+                                                        <div class="col-md-2">
+                                                            <h5 class="text-muted mb-0 mt-0">Track Order</h5>
+                                                        </div>
+                                                        <div class="col-md-10">
+                                                            <div class="progress"
+                                                                style="height: 6px; border-radius: 16px;">
+                                                                <div class="progress-bar" role="progressbar"
+                                                                    style="
+                                                                    @if ($transaksi->approved === true && $transaksi->terkirim === false) width: 50%;
+                                                                    @elseif ($transaksi->approved === true && $transaksi->terkirim === true)
+                                                                    width: 100%;
+                                                                    @else
+                                                                    width: 0%; @endif
+                                                                     border-radius: 16px; background-color: #18be55;"
+                                                                    aria-valuemin="0" aria-valuemax="100">
+                                                                </div>
+                                                            </div>
+                                                            <div class="d-flex justify-content-around mb-1">
+                                                                <p class="text-muted mt-1 mb-0 small ms-xl-5">Approved</p>
+                                                                <p class="text-muted mt-1 mb-0 small ms-xl-5">Terkirim</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endforeach
                                     </div>
                                 </div>
                             </div>
@@ -211,5 +309,9 @@
 @endsection
 
 @section('scripts')
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBRPlQuuQmmWWhwkDiUijv6F6deBOflQhk&callback=initMap&libraries=places">
+    </script>
+    <script src="/javascript/gps-map.js"></script>
     <script src="/javascript/riwayat-pemilik.js"></script>
 @endsection

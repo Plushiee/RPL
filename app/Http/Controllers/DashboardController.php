@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\UserTransaksiBankModel;
 use Illuminate\Http\Request;
 use App\Models\UserEmailModel;
 use Illuminate\Support\Facades\Auth;
@@ -15,7 +16,7 @@ class DashboardController extends Controller
 
     public function ambil() {
         return view('ambil-pemilik');
-    
+
     }
     public function antar() {
         return view('antar-pemilik');
@@ -26,8 +27,12 @@ class DashboardController extends Controller
     }
 
     public function riwayat() {
-        $kumpulanTransaksi = UserTransaksiModel::where('idPemilik', Auth::id())->get();
-        return view('riwayat-pemilik', ['kumpulanTransaksi' => $kumpulanTransaksi]);
+        $kumpulanTransaksi = UserTransaksiModel::where('idPemilik', Auth::id())->orderBy('id', 'desc')->get();
+        $kumpulanBank = UserTransaksiBankModel::where('idPemilik', Auth::id())->orderBy('id', 'desc')->get();
+        return view('riwayat-pemilik', [
+            'kumpulanTransaksi' => $kumpulanTransaksi,
+            'kumpulanBank' => $kumpulanBank,
+        ]);
     }
 
     public function simpanAkunAwal(Request $request) {

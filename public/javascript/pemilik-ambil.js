@@ -239,6 +239,7 @@ $(document).ready(function () {
                 return formData;
             },
         }).then((result) => {
+            console.log('hasil', result)
             if (result.isConfirmed) {
                 Swal.fire({
                     title: "Peta Lokasi",
@@ -294,10 +295,11 @@ $(document).ready(function () {
                                 });
                             }
                         });
+                    }, preConfirm: () => {
+                        return result.value
                     }
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        console.log(result.value)
                         Swal.fire({
                             title: "Rincian Pembayaran",
                             html: `
@@ -363,12 +365,12 @@ $(document).ready(function () {
                                         });
                                     }
                                 });
+                            },
+                            preConfirm() {
                                 result.value.append(
                                     '_token',
                                     csrf
                                 );
-                            },
-                            preConfirm() {
                                 result.value.append(
                                     'long',
                                     long);
@@ -642,6 +644,8 @@ $(document).ready(function () {
                                 });
                             }
                         });
+                    }, preConfirm: () => {
+                        return result.value
                     }
                 }).then((result) => {
                     if (result.isConfirmed) {
@@ -990,6 +994,8 @@ $(document).ready(function () {
                                     });
                                 }
                             });
+                        }, preConfirm: () => {
+                            return result.value
                         }
                     }).then((result) => {
                         if (result.isConfirmed) {
@@ -1337,6 +1343,8 @@ $(document).ready(function () {
                                 });
                             }
                         });
+                    }, preConfirm: () => {
+                        return result.value
                     }
                 }).then((result) => {
                     if (result.isConfirmed) {
@@ -1683,6 +1691,8 @@ $(document).ready(function () {
                                 });
                             }
                         });
+                    }, preConfirm: () => {
+                        return result.value
                     }
                 }).then((result) => {
                     if (result.isConfirmed) {
@@ -2029,6 +2039,8 @@ $(document).ready(function () {
                                 });
                             }
                         });
+                    }, preConfirm: () => {
+                        return result.value
                     }
                 }).then((result) => {
                     if (result.isConfirmed) {
