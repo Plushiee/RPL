@@ -40,11 +40,12 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('logout')->middl
 
 // Pemilik Controller
 Route::get('/pemilik/dashboard', [DashboardController::class, 'dashboard'])->middleware('auth'); //default pemilik
-Route::get('/pemilik/dashboard/ambil', [DashboardController::class, 'ambil'])->middleware('auth'); //default pemilik
-Route::get('/pemilik/dashboard/antar', [DashboardController::class, 'antar'])->middleware('auth'); //default pemilik
-Route::get('/pemilik/akun', [DashboardController::class, 'akun'])->middleware('auth'); //default pemilik
-Route::get('/pemilik/riwayat', [DashboardController::class, 'riwayat'])->middleware('auth'); //default pemilik
-Route::post('/pemilik/simpanAkunAwal', [DashboardController::class, 'simpanAkunAwal'])->middleware('auth'); //default pemilik simpan data awal
+Route::get('/pemilik/dashboard/ambil', [DashboardController::class, 'ambil'])->middleware('auth'); //antar pemilik
+Route::get('/pemilik/dashboard/antar', [DashboardController::class, 'antar'])->middleware('auth'); //ambil pemilik
+Route::get('/pemilik/akun', [DashboardController::class, 'akun'])->middleware('auth'); //akun pemilik
+Route::get('/pemilik/riwayat', [DashboardController::class, 'riwayat'])->middleware('auth'); //riwayat pemilik
+Route::get('/pemilik/pembayaran', [DashboardController::class, 'pembayaran'])->middleware('auth'); //riwayat pemilik
+Route::post('/pemilik/simpanAkunAwal', [DashboardController::class, 'simpanAkunAwal'])->middleware('auth'); //simpan data awal pemilik
 
 // Ganti Data Akun
 Route::post('/pemilik/akun/passwordCheck', [GantiInformasiAkunController::class, 'passwordCheck'])->middleware('auth'); //cek password
@@ -67,6 +68,8 @@ Route::post('/pemilik/dashboard/antar/simpan', [TransaksiController::class,'anta
 
 // Ambil BuktiGambar
 Route::get('/pemilik/bukti/ambildirumah/{jenis}/{id}/{gambar}', [AmbilGambarController::class,'showBuktiSampah'])->middleware('auth'); //ambil bukti
+Route::get('/pemilik/bukti/antarsendiri/{id}/{gambar}', [AmbilGambarController::class,'showBuktiKirim'])->middleware('auth'); //ambil bukti
+
 
 // Pilih Akun Controller
 Route::get('/pilih-akun', [PilihAkunController::class, 'pilihAkun']);

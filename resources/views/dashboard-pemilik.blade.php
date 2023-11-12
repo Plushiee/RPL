@@ -62,8 +62,10 @@
                                 </div>
 
                                 <div class="col-xl-6 col-sm-6 d-grid widget-inline-box text-center">
-                                    <button class="btn btn-success btn-block mt-3 mt-sm-0 p-3" type="button"><i
-                                            class="bi bi-box-seam"></i>&nbsp; Antar Sendiri</button>
+                                    <a href="dashboard/antar">
+                                        <button class="btn btn-success btn-block mt-3 mt-sm-0 p-3" type="button"><i
+                                                class="bi bi-box-seam"></i>&nbsp; Antar Sendiri</button>
+                                    </a>
                                 </div>
                             </div>
                         </div>

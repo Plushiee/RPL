@@ -82,7 +82,7 @@
                         <a href="register"
                             class="btn btn-bg--cta--1 btn-size--xl color-dark-500 box-shadow--1 btn-hover">Register
                             For Free</a>
-                        <div class="col-12 col-lg-5 hero-img pos-abs-bottom-right p-5 m-5 d-lg-none">
+                        <div class="col-12 col-lg-5 hero-img pos-abs-bottom-right d-lg-none">
                             <span>
                                 <img src="/assets/navbar/logo.png" alt="hero-image" class="img-fluid p-5 m-5"
                                     width="320px">

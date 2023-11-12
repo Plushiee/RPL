@@ -1,6 +1,6 @@
 @extends('templates.navbar-pemilik')
 
-@section('title', 'MoneyTrash! - Dashboard')
+@section('title', 'MoneyTrash! - Riwayat')
 @section('css')
     <link rel="stylesheet" href="/assets/styles/dashboard-pengguna.css">
 @endsection
@@ -240,7 +240,7 @@
                                                                 class="btn btn-info small mt-2 mt-sm-2 mt-md-0 informasi"
                                                                 id="informasi" data-id="{{ $transaksi->idPemilik }}"
                                                                 data-bukti="{{ $transaksi->bukti }}"
-                                                                data-bankSampah="{{ $transaksi->bankSampah }}"
+                                                                data-banksampah="{{ $transaksi->bankSampah }}"
                                                                 data-alamat="{{ $transaksi->alamat }}"
                                                                 data-lang="{{ $transaksi->lang }}"
                                                                 data-long="{{ $transaksi->long }}">Informasi

@@ -35,6 +35,11 @@ class DashboardController extends Controller
         ]);
     }
 
+    public function pembayaran() {
+        $kumpulanTransaksi = UserTransaksiModel::where('idPemilik', Auth::id())->orderBy('id', 'desc')->get();
+        return view('pembayaran-pemilik', ['kumpulanTransaksi' => $kumpulanTransaksi]);
+    }
+
     public function simpanAkunAwal(Request $request) {
         $user = UserEmailModel::find(Auth::id());
         $user->namaLengkap = $request->input('namaLengkap');
