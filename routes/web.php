@@ -44,7 +44,7 @@ Route::get('/pemilik/dashboard/ambil', [DashboardController::class, 'ambil'])->m
 Route::get('/pemilik/dashboard/antar', [DashboardController::class, 'antar'])->middleware('auth'); //ambil pemilik
 Route::get('/pemilik/akun', [DashboardController::class, 'akun'])->middleware('auth'); //akun pemilik
 Route::get('/pemilik/riwayat', [DashboardController::class, 'riwayat'])->middleware('auth'); //riwayat pemilik
-Route::get('/pemilik/pembayaran', [DashboardController::class, 'pembayaran'])->middleware('auth'); //riwayat pemilik
+Route::get('/pemilik/pembayaran', [DashboardController::class, 'pembayaran'])->name('pembayaran')->middleware('auth'); //riwayat pemilik
 Route::post('/pemilik/simpanAkunAwal', [DashboardController::class, 'simpanAkunAwal'])->middleware('auth'); //simpan data awal pemilik
 
 // Ganti Data Akun
@@ -52,6 +52,8 @@ Route::post('/pemilik/akun/passwordCheck', [GantiInformasiAkunController::class,
 Route::post('/pemilik/akun/gantiDataAkun', [GantiInformasiAkunController::class, 'gantiDataAkunPemilik'])->middleware('auth'); //Ganti data akun pemilik
 Route::post('/pemilik/akun/gantiDataPemilik', [GantiInformasiAkunController::class, 'gantiDataPemilik'])->middleware('auth'); //Ganti data akun pemilik
 
+// Pembayaran
+Route::post('/pemilik/pembaran/simpanbukti', [TransaksiController::class,'simpanbukti'])->middleware('auth')->name('uploadBukti'); //Lihat bukti
 
 // Simpan ambil dirumah
 Route::post('/pemilik/dashboard/ambil/simpan/organik', [TransaksiController::class,'organik'])->middleware('auth'); // organik
@@ -64,11 +66,10 @@ Route::post('/pemilik/dashboard/ambil/simpan/lainnya', [TransaksiController::cla
 // Simpan Antar
 Route::post('/pemilik/dashboard/antar/simpan', [TransaksiController::class,'antarSendiri'])->middleware('auth'); // Antar Sendiri
 
-
-
 // Ambil BuktiGambar
 Route::get('/pemilik/bukti/ambildirumah/{jenis}/{id}/{gambar}', [AmbilGambarController::class,'showBuktiSampah'])->middleware('auth'); //ambil bukti
 Route::get('/pemilik/bukti/antarsendiri/{id}/{gambar}', [AmbilGambarController::class,'showBuktiKirim'])->middleware('auth'); //ambil bukti
+Route::get('/pemilik/bukti/pembayaran/{id}/{gambar}', [AmbilGambarController::class,'showBPembayaran'])->middleware('auth'); //ambil bukti
 
 
 // Pilih Akun Controller

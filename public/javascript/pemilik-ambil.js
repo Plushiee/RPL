@@ -325,7 +325,7 @@ $(document).ready(function () {
                                             <div class="col-4">
                                             ${berat === 'small' ? 'Small' :
                                     berat === 'medium' ? 'Medium' :
-                                        berat === 'big' ? 'Big' : "null"
+                                        berat === 'large' ? 'Large' : "null"
                                 }
                                             </div>
                                             <div class="col-4">
@@ -560,7 +560,7 @@ $(document).ready(function () {
                     .value;
                 catatanValue = Swal.getPopup().querySelector("textarea[name='catatan']")
                     .value;
-                const berat = Swal.getPopup().querySelector("select[name='berat']")
+                berat = Swal.getPopup().querySelector("select[name='berat']")
                     .value;
 
                 if (!nama || !nomor || !alamatValue || !kecamatanValue || !kotaValue ||
@@ -674,7 +674,7 @@ $(document).ready(function () {
                                             <div class="col-4">
                                             ${berat === 'small' ? 'Small' :
                                     berat === 'medium' ? 'Medium' :
-                                        berat === 'big' ? 'Big' : "null"
+                                        berat === 'large' ? 'Large' : "null"
                                 }
                                             </div>
                                             <div class="col-4">
@@ -755,7 +755,8 @@ $(document).ready(function () {
                 });
             };
         })
-        // End Kertas
+    })
+    // End Kertas
 
         // Start Plastik
         $('.plastik').click(function (e) {
@@ -1024,7 +1025,7 @@ $(document).ready(function () {
                                                 <div class="col-4">
                                                 ${berat === 'small' ? 'Small' :
                                         berat === 'medium' ? 'Medium' :
-                                            berat === 'big' ? 'Big' : "null"
+                                            berat === 'large' ? 'Large' : "null"
                                     }
                                                 </div>
                                                 <div class="col-4">
@@ -1103,7 +1104,7 @@ $(document).ready(function () {
                 }
             });
         });
-    })
+
     // End Plastik
 
     // Start Kaca
@@ -1259,7 +1260,7 @@ $(document).ready(function () {
                     .value;
                 catatanValue = Swal.getPopup().querySelector("textarea[name='catatan']")
                     .value;
-                const berat = Swal.getPopup().querySelector("select[name='berat']")
+                berat = Swal.getPopup().querySelector("select[name='berat']")
                     .value;
 
                 if (!nama || !nomor || !alamatValue || !kecamatanValue || !kotaValue ||
@@ -1373,7 +1374,7 @@ $(document).ready(function () {
                                             <div class="col-4">
                                             ${berat === 'small' ? 'Small' :
                                     berat === 'medium' ? 'Medium' :
-                                        berat === 'big' ? 'Big' : "null"
+                                        berat === 'large' ? 'Large' : "null"
                                 }
                                             </div>
                                             <div class="col-4">
@@ -1607,7 +1608,7 @@ $(document).ready(function () {
                     .value;
                 catatanValue = Swal.getPopup().querySelector("textarea[name='catatan']")
                     .value;
-                const berat = Swal.getPopup().querySelector("select[name='berat']")
+                berat = Swal.getPopup().querySelector("select[name='berat']")
                     .value;
 
                 if (!nama || !nomor || !alamatValue || !kecamatanValue || !kotaValue ||
@@ -1721,7 +1722,7 @@ $(document).ready(function () {
                                             <div class="col-4">
                                             ${berat === 'small' ? 'Small' :
                                     berat === 'medium' ? 'Medium' :
-                                        berat === 'big' ? 'Big' : "null"
+                                        berat === 'large' ? 'Large' : "null"
                                 }
                                             </div>
                                             <div class="col-4">
@@ -1955,7 +1956,7 @@ $(document).ready(function () {
                     .value;
                 catatanValue = Swal.getPopup().querySelector("textarea[name='catatan']")
                     .value;
-                const berat = Swal.getPopup().querySelector("select[name='berat']")
+                berat = Swal.getPopup().querySelector("select[name='berat']")
                     .value;
 
                 if (!nama || !nomor || !alamatValue || !kecamatanValue || !kotaValue ||
@@ -2069,7 +2070,7 @@ $(document).ready(function () {
                                             <div class="col-4">
                                             ${berat === 'small' ? 'Small' :
                                     berat === 'medium' ? 'Medium' :
-                                        berat === 'big' ? 'Big' : "null"
+                                        berat === 'large' ? 'Large' : "null"
                                 }
                                             </div>
                                             <div class="col-4">

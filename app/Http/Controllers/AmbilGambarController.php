@@ -32,4 +32,16 @@ class AmbilGambarController extends Controller
         }
         return response()->file(public_path('img/default.png'));
     }
+
+    public function showBPembayaran($id, $gambar)
+    {
+        if (Auth::check()) {
+            $path = "/$id/$gambar";
+
+            if (Storage::disk('secure_bukti')->exists($path)) {
+                return response()->file(Storage::disk('secure_bukti')->path($path));
+            }
+        }
+        return response()->file(public_path('img/default.png'));
+    }
 }

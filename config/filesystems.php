@@ -63,6 +63,11 @@ return [
             'root' => storage_path('app/uploads/antar_sendiri'),
         ],
 
+        'secure_bukti' => [
+            'driver' => 'local',
+            'root' => storage_path('app/uploads/bukti'),
+        ],
+
     ],
 
     /*

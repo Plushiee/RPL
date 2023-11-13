@@ -30,9 +30,9 @@
                             <h4 class="header-title mb-3">Selamat
                                 <?php
                                 date_default_timezone_set('Asia/Jakarta');
-
+                                
                                 $jam = date('H');
-
+                                
                                 if ($jam >= 5 && $jam < 12) {
                                     $waktu = 'Pagi';
                                 } elseif ($jam >= 12 && $jam < 18) {
@@ -40,7 +40,7 @@
                                 } else {
                                     $waktu = 'Malam';
                                 }
-
+                                
                                 echo $waktu;
                                 ?>
                                 , {{ Auth::user()->name }} </h4>
@@ -69,12 +69,13 @@
                                             </div>
                                         </div>
                                         <div class="col-12 col-sm-2 d-flex align-items-center justify-content-end">
-                                            @if (!$transaksi->terbayar)
-                                                <span class="badge badge-warning"> &nbsp;Belum
+                                            @if (!$transaksi->terbayar && !$transaksi->approved)
+                                                <span class="badge badge-danger"> &nbsp;Belum
                                                     Terbayar&nbsp; </span>
+                                            @elseif($transaksi->terbayar && !$transaksi->approved)
+                                                <span class="badge badge-warning"> &nbsp;Menunggu Konfirmasi&nbsp; </span>
                                             @else
-                                                <span class="badge badge-warning"> &nbsp;Sudah
-                                                    Terbayar&nbsp; </span>
+                                                <span class="badge badge-success"> &nbsp;Terbayar&nbsp; </span>
                                             @endif
                                         </div>
                                     </div>
@@ -108,19 +109,25 @@
                                                 {{ $transaksi->kota }}, {{ $transaksi->provinsi }},
                                                 {{ $transaksi->kodePos }}</p>
                                         </div>
-                                        <div class="col-md-2 mt-3 mt-sm-2 mt-md-0 text-center d-flex justify-content-center align-items-center">
+                                        <div
+                                            class="col-md-2 mt-3 mt-sm-2 mt-md-0 text-center d-flex justify-content-center align-items-center">
                                             <div class="row">
-                                                <div class="col-md-12 mb-2">
-                                                    <button type="button" class="btn btn-info btn-block bukti"
-                                                        data-id="{{ $transaksi->idPemilik }}"
-                                                        data-bukti="{{ $transaksi->bukti }}"
-                                                        data-jenis="{{ $transaksi->jenisSampah }}">Upload Bukti</button>
-                                                </div>
+                                                <form action="{{ route('uploadBukti') }}" method="post"
+                                                    enctype="multipart/form-data" class="mx-0 px-0" id="uploadForm">
+                                                    @csrf
+                                                    <input type="hidden" name="id_transaksi" value="{{ $transaksi->id }}">
+                                                    <div class="col-md-12">
+                                                        <label for="bukti" class="btn btn-info btn-block">
+                                                            Upload Bukti
+                                                            <input type="file" id="bukti" name="bukti"
+                                                                class="d-none bukti" accept="image/*">
+                                                        </label>
+                                                    </div>
+                                                </form>
                                                 <div class="col-md-12">
-                                                    <button type="button" class="btn btn-info btn-block lihat"
-                                                        data-id="{{ $transaksi->idPemilik }}"
-                                                        data-bukti="{{ $transaksi->bukti }}"
-                                                        data-jenis="{{ $transaksi->jenisSampah }}">Lihat Bukti</button>
+                                                    <button class="btn btn-info btn-block lihat" data-id="{{ $transaksi->idPemilik }}"
+                                                        data-bukti="{{ $transaksi->buktibayar }}">Tampilkan
+                                                        Bukti</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -188,4 +195,54 @@
 
 @section('scripts')
     <script src="/javascript/pembayaran-pemilik.js"></script>
+    @if (session('berhasil'))
+        <script>
+            $(document).ready(function() {
+                // Alert
+                var toastMixin = Swal.mixin({
+                    toast: true,
+                    icon: 'success',
+                    title: 'General Title',
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                });
+
+                toastMixin.fire({
+                    animation: true,
+                    title: 'Data Pembayaran Berhasil Ditambahkan'
+                });
+            });
+        </script>
+    @endif
+    @if (session('gagal'))
+        <script>
+            $(document).ready(function() {
+                // Alert
+                var toastMixin = Swal.mixin({
+                    toast: true,
+                    icon: 'error',
+                    title: 'General Title',
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                });
+
+                toastMixin.fire({
+                    animation: true,
+                    title: 'Data Pembayaran Tidak Berhasil Ditambahkan, Cek Kembali File!'
+                });
+            });
+        </script>
+    @endif
 @endsection

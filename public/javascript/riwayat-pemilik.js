@@ -10,7 +10,7 @@ $(document).ready(function () {
 
         Swal.fire({
             title: "Bukti Barang",
-            html: `<img src="${getBuktiSampahRoute(jenis, id, bukti)}" alt="Bukti Sampah" style="max-width: 100%; height: auto;">`,
+            html: `<img src="${getBuktiSampahAmbilRoute(jenis, id, bukti)}" alt="Bukti Sampah" style="max-width: 100%; height: auto;">`,
             showCancelButton: true,
             showConfirmButton: false,
             cancelButtonText: "Tutup",
@@ -18,7 +18,7 @@ $(document).ready(function () {
         });
     });
 
-    function getBuktiSampahRoute(jenis, id, gambar) {
+    function getBuktiSampahAmbilRoute(jenis, id, gambar) {
         return `/pemilik/bukti/ambildirumah/${jenis}/${id}/${gambar}`;
     }
 
@@ -38,7 +38,7 @@ $(document).ready(function () {
             title: "Informasi Lainnya",
             html: `
             <h4>Bukti Barang</h4>
-            <img src="${getBuktiSampahRoute(id, bukti)}" alt="Bukti Sampah" style="max-width: 100%; height: auto;">
+            <img src="${getBuktiSampahAntarRoute(id, bukti)}" alt="Bukti Sampah" style="max-width: 100%; height: auto;">
             <br><h4>Alamat Bank Sampah</h4>
             <div id="mapSwoll" style="height: 400px;"></div>
             `,
@@ -87,7 +87,7 @@ $(document).ready(function () {
         });
     });
 
-    function getBuktiSampahRoute(id, gambar) {
+    function getBuktiSampahAntarRoute(id, gambar) {
         return `/pemilik/bukti/antarsendiri/${id}/${gambar}`;
     }
 });

@@ -10,6 +10,34 @@ use App\Models\UserTransaksiBankModel;
 
 class TransaksiController extends Controller
 {
+    // File Pembayaran
+    public function simpanbukti(Request $request)
+    {
+        //File bukti
+        if ($request->hasFile('bukti')) {
+            $file = $request->file('bukti');
+            $userId = Auth::id();
+            $transaksiId = $request->id_transaksi;
+            $fileName = $userId . '_' . $transaksiId . '_bukti.' . $file->getClientOriginalExtension();
+            $directory = $userId;
+
+            Storage::disk('secure_bukti')->putFileAs($directory, $file, $fileName);
+        } else {
+            $fileName = null;
+        }
+
+        // Simpan data ke database
+        if (Auth::check()) {
+            $transaksi = UserTransaksiModel::where('id', $request->id_transaksi)->first();
+            $transaksi->buktibayar = $fileName;
+            $transaksi->terbayar = true;
+            $transaksi->save();
+            return redirect()->route('pembayaran')->with('berhasil', 'Data berhasil disimpan.');
+        } else {
+            return redirect()->route('pembayaran')->with('gagal', 'Data Tidak Berhasil disimpan.');
+        }
+    }
+
     //Simpan data antarSendiri
     public function antarSendiri(Request $request)
     {

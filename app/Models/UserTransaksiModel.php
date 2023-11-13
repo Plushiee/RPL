@@ -28,6 +28,7 @@ class UserTransaksiModel extends Model
         'catatan',
         'berat',
         'bukti',
+        'buktibayar',
         'terbayar',
         'approved',
         'terambil'.
