@@ -168,8 +168,8 @@
                         <a href="/pemilik/pembayaran">
                             <i class="bi bi-cash-stack @if (request()->is('pemilik/pembayaran*')) active-txt @endif"></i>
                             <span class="@if (request()->is('pemilik/pembayaran*')) active-txt @endif"> Pembayaran </span>
-                            @if ($countBelumTerbayar > 0)
-                                <span class="badge badge-danger float-right">{{ $countBelumTerbayar }}</span>
+                            @if ($hitungBelumTerbayar > 0)
+                                <span class="badge badge-danger float-right">{{ $hitungBelumTerbayar }}</span>
                             @endif
                         </a>
                     </li>
