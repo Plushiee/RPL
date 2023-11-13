@@ -10,34 +10,46 @@ use App\Models\UserTransaksiModel;
 
 class DashboardController extends Controller
 {
+    private $hitungBelumTerbayar;
+    
+    public function __construct() {
+        $this->hitungBelumTerbayar = UserTransaksiModel::where('idPemilik', Auth::id())
+        ->where('terbayar', false)
+        ->count();
+    }
+
     public function dashboard() {
-        return view('dashboard-pemilik');
+        return view('dashboard-pemilik', ['hitungBelumTerbayar' => $this->hitungBelumTerbayar]);
     }
 
     public function ambil() {
-        return view('ambil-pemilik');
+        return view('ambil-pemilik', ['hitungBelumTerbayar' => $this->hitungBelumTerbayar]);
 
     }
     public function antar() {
-        return view('antar-pemilik');
+        return view('antar-pemilik', ['hitungBelumTerbayar' => $this->hitungBelumTerbayar]);
     }
 
     public function akun() {
-        return view('akun-pemilik');
+        return view('akun-pemilik', ['hitungBelumTerbayar' => $this->hitungBelumTerbayar]);
     }
 
     public function riwayat() {
-        $kumpulanTransaksi = UserTransaksiModel::where('idPemilik', Auth::id())->orderBy('id', 'desc')->get();
         $kumpulanBank = UserTransaksiBankModel::where('idPemilik', Auth::id())->orderBy('id', 'desc')->get();
+        $kumpulanTransaksi = UserTransaksiModel::where('idPemilik', Auth::id())->orderBy('id', 'desc')->get();
         return view('riwayat-pemilik', [
             'kumpulanTransaksi' => $kumpulanTransaksi,
             'kumpulanBank' => $kumpulanBank,
+            'hitungBelumTerbayar' => $this->hitungBelumTerbayar
         ]);
     }
 
     public function pembayaran() {
         $kumpulanTransaksi = UserTransaksiModel::where('idPemilik', Auth::id())->orderBy('id', 'desc')->get();
-        return view('pembayaran-pemilik', ['kumpulanTransaksi' => $kumpulanTransaksi]);
+        return view('pembayaran-pemilik', [
+            'kumpulanTransaksi' => $kumpulanTransaksi,
+            'hitungBelumTerbayar' => $this->hitungBelumTerbayar
+        ]);
     }
 
     public function simpanAkunAwal(Request $request) {

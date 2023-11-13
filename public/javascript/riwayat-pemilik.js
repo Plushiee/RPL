@@ -22,7 +22,7 @@ $(document).ready(function () {
         return `/pemilik/bukti/ambildirumah/${jenis}/${id}/${gambar}`;
     }
 
-    $('.lihat').click(function (e) {
+    $('.informasi').click(function (e) {
         e.preventDefault();
 
         // Mendapatkan data dari button yang diklik

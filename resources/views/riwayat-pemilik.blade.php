@@ -30,9 +30,9 @@
                             <h4 class="header-title mb-3">Selamat
                                 <?php
                                 date_default_timezone_set('Asia/Jakarta');
-
+                                
                                 $jam = date('H');
-
+                                
                                 if ($jam >= 5 && $jam < 12) {
                                     $waktu = 'Pagi';
                                 } elseif ($jam >= 12 && $jam < 18) {
@@ -40,7 +40,7 @@
                                 } else {
                                     $waktu = 'Malam';
                                 }
-
+                                
                                 echo $waktu;
                                 ?>
                                 , {{ Auth::user()->name }} </h4>
@@ -81,12 +81,15 @@
                                                         </div>
                                                         <div
                                                             class="col-12 col-sm-2 d-flex align-items-center justify-content-end">
-                                                            @if (!$transaksi->terbayar)
-                                                                <span class="badge badge-warning"> &nbsp;Belum
+                                                            @if (!$transaksi->terbayar && !$transaksi->approved)
+                                                                <span class="badge badge-danger"> &nbsp;Belum
                                                                     Terbayar&nbsp; </span>
+                                                            @elseif($transaksi->terbayar && !$transaksi->approved)
+                                                                <span class="badge badge-warning"> &nbsp;Menunggu
+                                                                    Konfirmasi&nbsp; </span>
                                                             @else
-                                                                <span class="badge badge-warning"> &nbsp;Sudah
-                                                                    Terbayar&nbsp; </span>
+                                                                <span class="badge badge-success"> &nbsp;Terbayar&nbsp;
+                                                                </span>
                                                             @endif
                                                         </div>
                                                     </div>
