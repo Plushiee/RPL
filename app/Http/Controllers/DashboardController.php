@@ -12,29 +12,34 @@ class DashboardController extends Controller
 {
     private $hitungBelumTerbayar;
     
-    public function __construct() {
+    private function getCount() {
         $this->hitungBelumTerbayar = UserTransaksiModel::where('idPemilik', Auth::id())
         ->where('terbayar', false)
         ->count();
     }
 
     public function dashboard() {
+        $this->getCount();
         return view('dashboard-pemilik', ['hitungBelumTerbayar' => $this->hitungBelumTerbayar]);
     }
 
     public function ambil() {
+        $this->getCount();
         return view('ambil-pemilik', ['hitungBelumTerbayar' => $this->hitungBelumTerbayar]);
 
     }
     public function antar() {
+        $this->getCount();
         return view('antar-pemilik', ['hitungBelumTerbayar' => $this->hitungBelumTerbayar]);
     }
 
     public function akun() {
+        $this->getCount();
         return view('akun-pemilik', ['hitungBelumTerbayar' => $this->hitungBelumTerbayar]);
     }
 
     public function riwayat() {
+        $this->getCount();
         $kumpulanBank = UserTransaksiBankModel::where('idPemilik', Auth::id())->orderBy('id', 'desc')->get();
         $kumpulanTransaksi = UserTransaksiModel::where('idPemilik', Auth::id())->orderBy('id', 'desc')->get();
         return view('riwayat-pemilik', [
@@ -45,6 +50,7 @@ class DashboardController extends Controller
     }
 
     public function pembayaran() {
+        $this->getCount();
         $kumpulanTransaksi = UserTransaksiModel::where('idPemilik', Auth::id())->orderBy('id', 'desc')->get();
         return view('pembayaran-pemilik', [
             'kumpulanTransaksi' => $kumpulanTransaksi,
