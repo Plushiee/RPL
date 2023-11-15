@@ -33,7 +33,7 @@ class AmbilGambarController extends Controller
         return response()->file(public_path('img/default.png'));
     }
 
-    public function showBPembayaran($id, $gambar)
+    public function showBuktiPembayaran ($id, $gambar)
     {
         if (Auth::check()) {
             $path = "/$id/$gambar";

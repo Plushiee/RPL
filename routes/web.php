@@ -38,39 +38,40 @@ Route::get('/login', [LoginController::class, 'login'])->name('login');
 Route::post('/login/loginCheck', [LoginController::class, 'loginCheck'])->name('loginCheck');
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout')->middleware('auth');
 
-// Pemilik Controller
-Route::get('/pemilik/dashboard', [DashboardController::class, 'dashboard'])->middleware('auth'); //default pemilik
-Route::get('/pemilik/dashboard/ambil', [DashboardController::class, 'ambil'])->middleware('auth'); //antar pemilik
-Route::get('/pemilik/dashboard/antar', [DashboardController::class, 'antar'])->middleware('auth'); //ambil pemilik
-Route::get('/pemilik/akun', [DashboardController::class, 'akun'])->middleware('auth'); //akun pemilik
-Route::get('/pemilik/riwayat', [DashboardController::class, 'riwayat'])->middleware('auth'); //riwayat pemilik
-Route::get('/pemilik/pembayaran', [DashboardController::class, 'pembayaran'])->name('pembayaran')->middleware('auth'); //riwayat pemilik
-Route::post('/pemilik/simpanAkunAwal', [DashboardController::class, 'simpanAkunAwal'])->middleware('auth'); //simpan data awal pemilik
+Route::middleware(['auth', 'checkRole'])->group(function () {
+    // Pemilik Controller
+    Route::get('/pemilik/dashboard', [DashboardController::class, 'dashboard']); //default pemilik
+    Route::get('/pemilik/dashboard/ambil', [DashboardController::class, 'ambil']); //antar pemilik
+    Route::get('/pemilik/dashboard/antar', [DashboardController::class, 'antar']); //ambil pemilik
+    Route::get('/pemilik/akun', [DashboardController::class, 'akun']); //akun pemilik
+    Route::get('/pemilik/riwayat', [DashboardController::class, 'riwayat']); //riwayat pemilik
+    Route::get('/pemilik/pembayaran', [DashboardController::class, 'pembayaran'])->name('pembayaran'); //riwayat pemilik
+    Route::post('/pemilik/simpanAkunAwal', [DashboardController::class, 'simpanAkunAwal']); //simpan data awal pemilik
 
-// Ganti Data Akun
-Route::post('/pemilik/akun/passwordCheck', [GantiInformasiAkunController::class, 'passwordCheck'])->middleware('auth'); //cek password
-Route::post('/pemilik/akun/gantiDataAkun', [GantiInformasiAkunController::class, 'gantiDataAkunPemilik'])->middleware('auth'); //Ganti data akun pemilik
-Route::post('/pemilik/akun/gantiDataPemilik', [GantiInformasiAkunController::class, 'gantiDataPemilik'])->middleware('auth'); //Ganti data akun pemilik
+    // Ganti Data Akun
+    Route::post('/pemilik/akun/passwordCheck', [GantiInformasiAkunController::class, 'passwordCheck']); //cek password
+    Route::post('/pemilik/akun/gantiDataAkun', [GantiInformasiAkunController::class, 'gantiDataAkunPemilik']); //Ganti data akun pemilik
+    Route::post('/pemilik/akun/gantiDataPemilik', [GantiInformasiAkunController::class, 'gantiDataPemilik']); //Ganti data akun pemilik
 
-// Pembayaran
-Route::post('/pemilik/pembaran/simpanbukti', [TransaksiController::class,'simpanbukti'])->middleware('auth')->name('uploadBukti'); //Lihat bukti
+    // Pembayaran
+    Route::post('/pemilik/pembaran/simpanbukti', [TransaksiController::class, 'simpanbukti'])->name('uploadBukti'); //Lihat bukti
 
-// Simpan ambil dirumah
-Route::post('/pemilik/dashboard/ambil/simpan/organik', [TransaksiController::class,'organik'])->middleware('auth'); // organik
-Route::post('/pemilik/dashboard/ambil/simpan/kertas', [TransaksiController::class,'kertas'])->middleware('auth'); // kertas
-Route::post('/pemilik/dashboard/ambil/simpan/plastik', [TransaksiController::class,'plastik'])->middleware('auth'); // kertas
-Route::post('/pemilik/dashboard/ambil/simpan/kaca', [TransaksiController::class,'kaca'])->middleware('auth'); // kertas
-Route::post('/pemilik/dashboard/ambil/simpan/logam', [TransaksiController::class,'logam'])->middleware('auth'); // kertas
-Route::post('/pemilik/dashboard/ambil/simpan/lainnya', [TransaksiController::class,'lainnya'])->middleware('auth'); // kertas
+    // Simpan ambil dirumah
+    Route::post('/pemilik/dashboard/ambil/simpan/organik', [TransaksiController::class, 'organik']); // organik
+    Route::post('/pemilik/dashboard/ambil/simpan/kertas', [TransaksiController::class, 'kertas']); // kertas
+    Route::post('/pemilik/dashboard/ambil/simpan/plastik', [TransaksiController::class, 'plastik']); // kertas
+    Route::post('/pemilik/dashboard/ambil/simpan/kaca', [TransaksiController::class, 'kaca']); // kertas
+    Route::post('/pemilik/dashboard/ambil/simpan/logam', [TransaksiController::class, 'logam']); // kertas
+    Route::post('/pemilik/dashboard/ambil/simpan/lainnya', [TransaksiController::class, 'lainnya']); // kertas
 
-// Simpan Antar
-Route::post('/pemilik/dashboard/antar/simpan', [TransaksiController::class,'antarSendiri'])->middleware('auth'); // Antar Sendiri
+    // Simpan Antar
+    Route::post('/pemilik/dashboard/antar/simpan', [TransaksiController::class, 'antarSendiri']); // Antar Sendiri
 
-// Ambil BuktiGambar
-Route::get('/pemilik/bukti/ambildirumah/{jenis}/{id}/{gambar}', [AmbilGambarController::class,'showBuktiSampah'])->middleware('auth'); //ambil bukti
-Route::get('/pemilik/bukti/antarsendiri/{id}/{gambar}', [AmbilGambarController::class,'showBuktiKirim'])->middleware('auth'); //ambil bukti
-Route::get('/pemilik/bukti/pembayaran/{id}/{gambar}', [AmbilGambarController::class,'showBPembayaran'])->middleware('auth'); //ambil bukti
+    // Ambil BuktiGambar
+    Route::get('/pemilik/bukti/ambildirumah/{jenis}/{id}/{gambar}', [AmbilGambarController::class, 'showBuktiSampah']); //ambil bukti
+    Route::get('/pemilik/bukti/antarsendiri/{id}/{gambar}', [AmbilGambarController::class, 'showBuktiKirim']); //ambil bukti
+    Route::get('/pemilik/bukti/pembayaran/{id}/{gambar}', [AmbilGambarController::class, 'showBPembayaran']); //ambil bukti
 
-
-// Pilih Akun Controller
-Route::get('/pilih-akun', [PilihAkunController::class, 'pilihAkun']);
+    // Pilih Akun Controller
+    Route::get('/pilih-akun', [PilihAkunController::class, 'pilihAkun']);
+});

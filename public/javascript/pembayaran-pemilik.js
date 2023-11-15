@@ -21,6 +21,7 @@ $(document).ready(function () {
             focusConfirm: false,
         });
     });
+
     function getBuktiPembayaranRoute(id, gambar) {
         return `/pemilik/bukti/pembayaran/${id}/${gambar}`;
     }

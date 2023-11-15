@@ -43,7 +43,7 @@
                             <form>
                                 <div class="row mb-4">
                                     <div class="d-grid">
-                                        <button type="submit" class="btn btn-success submit" id="pemilik">Pemilik Sampah</button>
+                                        <a href="{{ route('loginPemilik') }}" class="btn btn-success submit" id="pemilik">Pemilik Sampah</a>
                                     </div>
                                 </div>
 

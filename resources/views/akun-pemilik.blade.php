@@ -120,7 +120,16 @@
                     </div>
                 </div>
 
-                <div id="authData" data-csrf="{{ csrf_token() }}"></div>
+                {{-- <div id="authData" data-csrf="{{ csrf_token() }}"></div> --}}
+                <input type="hidden" id="nameData" name="name" value="{{ Auth::user()->name }}">
+                <input type="hidden" id="nomorData" name="nomor" value="{{ Auth::user()->nomor }}">
+                <input type="hidden" id="alamatData" name="alamat" value="{{ Auth::user()->alamat }}">
+                <input type="hidden" id="kecamatanData" name="kecamatan" value="{{ Auth::user()->kecamatan }}">
+                <input type="hidden" id="kotaData" name="kota" value="{{ Auth::user()->kota }}">
+                <input type="hidden" id="provinsiData" name="provinsi" value="{{ Auth::user()->provinsi }}">
+                <input type="hidden" id="kodeposData" name="kodepos" value="{{ Auth::user()->kodePos }}">
+                <input type="hidden" id="catatanData" name="catatan" value="{{ Auth::user()->catatan }}">
+                <input type="hidden" id="authData" name="_token" value="{{ csrf_token() }}">
 
                 <div class="row mt-3">
                     <h5 class="mt-0 mb-0 font-14">Data Pengguna
@@ -193,13 +202,12 @@
                         <div class="card-box widget-inline mt-0 pt-3" style="border: none">
                             <div class="row g-0 g-sm-3 g-md-3">
                                 <div class="col-xl-6 col-sm-12 d-grid widget-inline-box text-center">
-                                    <a href="dashboard/ambil">
-                                        <button class="btn btn-warning btn-block mt-3 mt-sm-0 p-3" type="button"><i
-                                                class="bi bi-truck"></i>&nbsp; Pengambil Sampah</button>
-                                    </a>
+                                    <button class="btn btn-warning btn-block mt-3 mt-sm-0 p-3" type="button"
+                                        id="pengambil"><i class="bi bi-truck"></i>&nbsp; Pengambil Sampah</button>
                                 </div>
 
-                                <div class="col-xl-6 col-sm-12 d-grid widget-inline-box text-center" style="border: none !important">
+                                <div class="col-xl-6 col-sm-12 d-grid widget-inline-box text-center"
+                                    style="border: none !important">
                                     <button class="btn btn-success btn-block mt-3 mt-sm-0 p-3" type="button"><i
                                             class="bi bi-box-seam"></i>&nbsp; Bank Sampah</button>
                                 </div>

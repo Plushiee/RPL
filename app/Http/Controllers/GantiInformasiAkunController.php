@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\UserEmailModel;
+use App\Models\UserPengambilModel;
 
 class GantiInformasiAkunController extends Controller
 {
@@ -48,7 +49,7 @@ class GantiInformasiAkunController extends Controller
         $provinsi = $request->provinsi;
         $kodePos = $request->kodePos;
         $catatan = $request->catatan;
-        
+
         $user = UserEmailModel::find(Auth::id());
 
         $user->namaLengkap = $nama;
@@ -61,5 +62,35 @@ class GantiInformasiAkunController extends Controller
         $user->save();
 
         return response()->json(['successGanti' => 'Ganti Data Berhasil']);
+    }
+    public function daftarPengambil(Request $request)
+    {
+        $nama = $request->nama;
+        $nomor = $request->nomor;
+        $alamat = $request->alamat;
+        $kecamatan = $request->kecamatan;
+        $kota = $request->kota;
+        $provinsi = $request->provinsi;
+        $kodePos = $request->kodePos;
+        $catatan = $request->catatan;
+        $berat = $request->kapasitas;
+
+        $user = UserEmailModel::find(Auth::id());
+        $pengambil = new UserPengambilModel;
+
+        $pengambil->name = $user->name;
+        $pengambil->email = $user->email;
+        $pengambil->berat = $berat;
+        $pengambil->namaLengkap = $nama;
+        $pengambil->nomor = $nomor;
+        $pengambil->alamat = $alamat;
+        $pengambil->kecamatan = $kecamatan;
+        $pengambil->kota = $kota;
+        $pengambil->provinsi = $provinsi;
+        $pengambil->kodePos = $kodePos;
+        $pengambil->catatan = $catatan;
+        $pengambil->save();
+
+        return response()->json(['successGanti' => 'Mendaftar Menjadi Agen Berhasil']);
     }
 }
