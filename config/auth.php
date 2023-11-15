@@ -40,6 +40,16 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+
+        'pemilik' => [
+            'driver' => 'session',
+            'provider' => 'pemilik', // Ensure this matches the provider below
+        ],
+
+        'pengambil' => [
+            'driver' => 'session',
+            'provider' => 'pengambil', // Ensure this matches the provider below
+        ],
     ],
 
     /*
@@ -62,7 +72,17 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
+            'model' => App\Models\User::class,
+        ],
+
+        'pemilik' => [
+            'driver' => 'eloquent',
             'model' => App\Models\UserEmailModel::class,
+        ],
+
+        'pengambil' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\UserPengambilModel::class,
         ],
 
         // 'users' => [

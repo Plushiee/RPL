@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\UserEmailModel;
+use \App\Models\UserPengambilModel;
 use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
@@ -25,21 +26,46 @@ class LoginController extends Controller
 
         if ($user) {
             if (password_verify($password, $user->password)) {
-                Auth::login($user, $remember);
+                $userPemilik = UserEmailModel::where('email', $email)->first();
+                $isPemilik = UserEmailModel::where('email', $email)->exists();
+                $isPengambil = UserPengambilModel::where('email', $email)->exists();
+
+                if ($isPemilik && $isPengambil) {
+                    // Redirect to choose account type page
+                    Auth::guard('pemilik')->login($userPemilik, $remember);
+                    return redirect('/pilih-akun');
+                }
+
+                Auth::guard('pemilik')->login($userPemilik, $remember);
                 return redirect('/pemilik/dashboard');
+
             } else {
                 return back()->with("errorWrong", "Email atau Password anda salah");
             }
         } else {
-
-            // Jika login gagal, tampilkan pesan kesalahan
             return back()->with("error", "Email tidak terdaftar");
         }
     }
 
+    function loginPemilik(Request $request)
+    {
+        return redirect('/pemilik/dashboard');
+    }
+
+    function loginPengambil(Request $request)
+    {
+        $email = $request->email;
+        $remember = $request->remember;
+        $userPengambil = UserPengambilModel::where('email', $email)->first();
+        // dd($userPengambil);
+        Auth::guard('pemilik')->logout();
+        Auth::guard('pengambil')->login($userPengambil, $remember);
+        return redirect('/pengambil/dashboard');
+    }
+
     public function logout()
     {
-        Auth::logout();
+        Auth::guard('pemilik')->logout();
         return redirect('/login');
     }
 }

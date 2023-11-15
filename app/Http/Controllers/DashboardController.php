@@ -11,13 +11,14 @@ use App\Models\UserTransaksiModel;
 class DashboardController extends Controller
 {
     private $hitungBelumTerbayar;
-    
+
     private function getCount() {
         $this->hitungBelumTerbayar = UserTransaksiModel::where('idPemilik', Auth::id())
         ->where('terbayar', false)
         ->count();
     }
 
+    // Pemilik
     public function dashboard() {
         $this->getCount();
         return view('dashboard-pemilik', ['hitungBelumTerbayar' => $this->hitungBelumTerbayar]);
@@ -70,5 +71,11 @@ class DashboardController extends Controller
         $user->catatan = $request->input('catatan');
         $user->baru = false;
         $user->save();
+    }
+
+    // Pengambil
+    public function dashboardPengambil() {
+        $this->getCount();
+        return view('dashboard-pengambil');
     }
 }

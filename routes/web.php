@@ -36,9 +36,8 @@ Route::post('/register/email', [RegisterController::class, 'email']);
 // Login and Logout Controller
 Route::get('/login', [LoginController::class, 'login'])->name('login');
 Route::post('/login/loginCheck', [LoginController::class, 'loginCheck'])->name('loginCheck');
-Route::get('/logout', [LoginController::class, 'logout'])->name('logout')->middleware('auth');
 
-Route::middleware(['auth', 'checkRole'])->group(function () {
+Route::middleware(['auth:pemilik'])->group(function () {
     // Pemilik Controller
     Route::get('/pemilik/dashboard', [DashboardController::class, 'dashboard']); //default pemilik
     Route::get('/pemilik/dashboard/ambil', [DashboardController::class, 'ambil']); //antar pemilik
@@ -71,7 +70,18 @@ Route::middleware(['auth', 'checkRole'])->group(function () {
     Route::get('/pemilik/bukti/ambildirumah/{jenis}/{id}/{gambar}', [AmbilGambarController::class, 'showBuktiSampah']); //ambil bukti
     Route::get('/pemilik/bukti/antarsendiri/{id}/{gambar}', [AmbilGambarController::class, 'showBuktiKirim']); //ambil bukti
     Route::get('/pemilik/bukti/pembayaran/{id}/{gambar}', [AmbilGambarController::class, 'showBPembayaran']); //ambil bukti
+});
 
+Route::middleware(['auth:pemilik','checkRole'])->group(function () {
     // Pilih Akun Controller
     Route::get('/pilih-akun', [PilihAkunController::class, 'pilihAkun']);
+    Route::get('/login/loginPemilik', [LoginController::class, 'loginPemilik'])->name('loginPemilik');
+    Route::post('/login/loginPengambil', [LoginController::class, 'loginPengambil'])->name('loginPengambil');
+    Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+});
+
+
+Route::middleware(['auth:pengambil'])->group(function () {
+    // Pilih Akun Controller
+    Route::get('/pengambil/dashboard', [DashboardController::class, 'dashboardPengambil']); //default pemilik
 });

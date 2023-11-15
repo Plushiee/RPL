@@ -40,22 +40,32 @@
                                     <h1 class="title">Masuk Sebagai</h1>
                                 </div>
                             </div>
-                            <form>
+                            <form method="POST" action="{{ route('loginPemilik') }}">
+                                @csrf
                                 <div class="row mb-4">
                                     <div class="d-grid">
-                                        <a href="{{ route('loginPemilik') }}" class="btn btn-success submit" id="pemilik">Pemilik Sampah</a>
+                                        <button type="submit" class="btn btn-success submit" id="pemilik">Pemilik
+                                            Sampah</a>
                                     </div>
                                 </div>
-
+                            </form>
+                            <form method="POST" action="{{ route('loginPengambil') }}">
+                                @csrf
+                                <input type="hidden" id="email" name="email" value="{{ Auth::user()->email }}">
+                                <input type="hidden" id="remember" name="remember" value="{{ Auth::user()->remember_token }}">
                                 <div class="row mb-4">
                                     <div class="d-grid">
-                                        <button type="submit" class="btn btn-success submit" id="pengambil">Pengambil Sampah</button>
+                                        <button type="submit" class="btn btn-success submit" id="pengambil">Pengambil
+                                            Sampah</button>
                                     </div>
                                 </div>
-
+                            </form>
+                            <form method="POST" action="{{ route('loginPengambil') }}">
+                                @csrf
                                 <div class="row mb-4">
                                     <div class="d-grid">
-                                        <button type="submit" class="btn btn-success submit" id="bank">Bank Sampah</button>
+                                        <button type="submit" class="btn btn-success submit" id="bank">Bank
+                                            Sampah</button>
                                     </div>
                                 </div>
                             </form>
