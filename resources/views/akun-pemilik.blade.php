@@ -121,7 +121,9 @@
                 </div>
 
                 {{-- <div id="authData" data-csrf="{{ csrf_token() }}"></div> --}}
-                <input type="hidden" id="nameData" name="name" value="{{ Auth::user()->name }}">
+                <input type="hidden" id="nameUser" name="name" value="{{ Auth::user()->name }}">
+                <input type="hidden" id="nomor" name="name" value="{{ Auth::user()->nomor }}">
+                <input type="hidden" id="nameData" name="name" value="{{ Auth::user()->namaLengkap }}">
                 <input type="hidden" id="nomorData" name="nomor" value="{{ Auth::user()->nomor }}">
                 <input type="hidden" id="alamatData" name="alamat" value="{{ Auth::user()->alamat }}">
                 <input type="hidden" id="kecamatanData" name="kecamatan" value="{{ Auth::user()->kecamatan }}">

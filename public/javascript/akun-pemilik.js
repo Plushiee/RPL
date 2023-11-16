@@ -3,6 +3,8 @@ $(document).ready(function () {
     // const csrf = authData.getAttribute('data-csrf');
 
     var csrf = $('#authData').val();
+    var nameUser = document.getElementById('nameUser').value;
+    var nomor = document.getElementById('nomor').value;
     var namaPengambil = document.getElementById('nameData').value;
     var nomorPengambil = document.getElementById('nomorData').value;
     var alamatPengambil = document.getElementById('alamatData').value;
@@ -40,6 +42,12 @@ $(document).ready(function () {
             confirmButtonText: 'Simpan',
             cancelButtonText: 'Cancel',
             focusConfirm: false,
+            didOpen: () => {
+                Swal.getPopup().querySelector("input[name='nama']")
+                            .value = nameUser;
+                Swal.getPopup().querySelector("input[name='nomor']")
+                            .value = nomor;
+            },
             preConfirm: () => {
                 const namaAkun = Swal.getPopup().querySelector("input[name='nama']").value;
                 const nomor = Swal.getPopup().querySelector("input[name='nomor']").value;
@@ -129,6 +137,22 @@ $(document).ready(function () {
             confirmButtonText: 'Simpan',
             cancelButtonText: 'Cancel',
             focusConfirm: false,
+            didOpen: () => {
+                Swal.getPopup().querySelector("input[name='nama']")
+                            .value = namaPengambil;
+                Swal.getPopup().querySelector("textarea[name='alamat']")
+                            .value = alamatPengambil;
+                Swal.getPopup().querySelector("input[name='kecamatan']")
+                            .value = kecamatanPengambil;
+                Swal.getPopup().querySelector("input[name='kota']")
+                            .value = kotaPengambil;
+                Swal.getPopup().querySelector("input[name='provinsi']")
+                            .value = provinsiPengambil;
+                Swal.getPopup().querySelector("input[name='kodePos']")
+                            .value = kodeposPengambil;
+                Swal.getPopup().querySelector("textarea[name='catatan']")
+                            .value = catatanPengambil;
+            },
             preConfirm: () => {
                 const nama = Swal.getPopup().querySelector("input[name='nama']").value;
                 const alamatValue = Swal.getPopup().querySelector("textarea[name='alamat']").value;
