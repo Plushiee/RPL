@@ -14,7 +14,7 @@
         <!-- Start Breadcrumb -->
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb" style="background-color: transparent !important">
-                <li class="breadcrumb-item"><a href="pemilik">Pemilik Sampah</a></li>
+                <li class="breadcrumb-item"><a href="pemilik">Pengambil Sampah</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
             </ol>
         </nav>
@@ -30,9 +30,9 @@
                             <h4 class="header-title mb-3">Selamat
                                 <?php
                                 date_default_timezone_set('Asia/Jakarta');
-
+                                
                                 $jam = date('H');
-
+                                
                                 if ($jam >= 5 && $jam < 12) {
                                     $waktu = 'Pagi';
                                 } elseif ($jam >= 12 && $jam < 18) {
@@ -40,7 +40,7 @@
                                 } else {
                                     $waktu = 'Malam';
                                 }
-
+                                
                                 echo $waktu;
                                 ?>
                                 , {{ Auth::user()->name }}</h4>
@@ -49,23 +49,20 @@
                 </div>
                 <!-- end row -->
 
-                {{-- <div class="row">
+                <div class="row">
                     <div class="col-12">
                         <div class="card-box widget-inline">
-                            <h5 class="mt-0 font-14">Jenis Layanan</h5>
                             <div class="row">
                                 <div class="col-xl-6 col-sm-6 d-grid widget-inline-box text-center">
                                     <a href="dashboard/ambil">
                                         <button class="btn btn-warning btn-block mt-3 mt-sm-0 p-3" type="button"><i
-                                                class="bi bi-truck"></i>&nbsp; Ambil Di Rumah</button>
+                                                class="bi bi-truck"></i>&nbsp; Ambil Pesanan</button>
                                     </a>
                                 </div>
 
                                 <div class="col-xl-6 col-sm-6 d-grid widget-inline-box text-center">
-                                    <a href="dashboard/antar">
-                                        <button class="btn btn-success btn-block mt-3 mt-sm-0 p-3" type="button"><i
-                                                class="bi bi-box-seam"></i>&nbsp; Antar Sendiri</button>
-                                    </a>
+                                    <button class="btn btn-success btn-block mt-3 mt-sm-0 p-3" id="buatPengumuman"
+                                        type="button"><i class="bi bi-bell"></i>&nbsp; Buat Pengumuman</button>
                                 </div>
                             </div>
                         </div>
@@ -142,7 +139,7 @@
                     </div>
                 </div>
                 <!-- end col -->
-            </div> --}}
+            </div>
             <!-- end row -->
 
         </div>
@@ -173,5 +170,5 @@
     <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBRPlQuuQmmWWhwkDiUijv6F6deBOflQhk&callback=initMap&libraries=places">
     </script>
-    <script src="/javascript/gps-map.js"></script>
+    <script src="/javascript/gps-pengambil.js"></script>
 @endsection
