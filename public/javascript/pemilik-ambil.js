@@ -69,6 +69,9 @@ $(document).ready(function () {
             html: `
                     <form action="" method="POST" id="orderForm">
                         <div class="mb-3">
+                            <p class="form-label" style="font-size:12;"> <input class="form-check-input" type="checkbox" id="useAuthData" name="useAuthData"> Isi data dengan informasi saya</p>
+                        </div>
+                        <div class="mb-3">
                             <input class="form-control" type="text" name="nama" placeholder="Nama Pemilik Sampah" required>
                         </div>
                         <div class="mb-3">
@@ -105,9 +108,6 @@ $(document).ready(function () {
                         <div class="mb-3 text-start">
                             <label for="bukti" class="form-label">Bukti Barang</label>
                             <input class="form-control" type="file" name="bukti" accept="image/*" required>
-                        </div>
-                        <div class="mb-3">
-                            <p class="form-label" style="font-size:12;"> <input class="form-check-input" type="checkbox" id="useAuthData" name="useAuthData"> Isi data dengan informasi saya</p>
                         </div>
                     </form>`,
             showCancelButton: true,
@@ -419,6 +419,9 @@ $(document).ready(function () {
             html: `
                     <form action="" method="POST" id="orderForm">
                         <div class="mb-3">
+                            <p class="form-label" style="font-size:12;"> <input class="form-check-input" type="checkbox" id="useAuthData" name="useAuthData"> Isi data dengan informasi saya</p>
+                        </div>
+                        <div class="mb-3">
                             <input class="form-control" type="text" name="nama" placeholder="Nama Pemilik Sampah" required>
                         </div>
                         <div class="mb-3">
@@ -455,9 +458,6 @@ $(document).ready(function () {
                         <div class="mb-3 text-start">
                             <label for="bukti" class="form-label">Bukti Barang</label>
                             <input class="form-control" type="file" name="bukti" accept="image/*" required>
-                        </div>
-                        <div class="mb-3">
-                            <p class="form-label" style="font-size:12;"> <input class="form-check-input" type="checkbox" id="useAuthData" name="useAuthData"> Isi data dengan informasi saya</p>
                         </div>
                     </form>`,
             showCancelButton: true,
@@ -770,6 +770,9 @@ $(document).ready(function () {
                 html: `
                     <form action="" method="POST" id="orderForm">
                         <div class="mb-3">
+                            <p class="form-label" style="font-size:12;"> <input class="form-check-input" type="checkbox" id="useAuthData" name="useAuthData"> Isi data dengan informasi saya</p>
+                        </div>
+                        <div class="mb-3">
                             <input class="form-control" type="text" name="nama" placeholder="Nama Pemilik Sampah" required>
                         </div>
                         <div class="mb-3">
@@ -806,9 +809,6 @@ $(document).ready(function () {
                         <div class="mb-3 text-start">
                             <label for="bukti" class="form-label">Bukti Barang</label>
                             <input class="form-control" type="file" name="bukti" accept="image/*" required>
-                        </div>
-                        <div class="mb-3">
-                            <p class="form-label" style="font-size:12;"> <input class="form-check-input" type="checkbox" id="useAuthData" name="useAuthData"> Isi data dengan informasi saya</p>
                         </div>
                     </form>`,
                 showCancelButton: true,
@@ -1119,6 +1119,9 @@ $(document).ready(function () {
             html: `
                     <form action="" method="POST" id="orderForm">
                         <div class="mb-3">
+                            <p class="form-label" style="font-size:12;"> <input class="form-check-input" type="checkbox" id="useAuthData" name="useAuthData"> Isi data dengan informasi saya</p>
+                        </div>
+                        <div class="mb-3">
                             <input class="form-control" type="text" name="nama" placeholder="Nama Pemilik Sampah" required>
                         </div>
                         <div class="mb-3">
@@ -1155,9 +1158,6 @@ $(document).ready(function () {
                         <div class="mb-3 text-start">
                             <label for="bukti" class="form-label">Bukti Barang</label>
                             <input class="form-control" type="file" name="bukti" accept="image/*" required>
-                        </div>
-                        <div class="mb-3">
-                            <p class="form-label" style="font-size:12;"> <input class="form-check-input" type="checkbox" id="useAuthData" name="useAuthData"> Isi data dengan informasi saya</p>
                         </div>
                     </form>`,
             showCancelButton: true,
@@ -1467,6 +1467,9 @@ $(document).ready(function () {
             html: `
                     <form action="" method="POST" id="orderForm">
                         <div class="mb-3">
+                            <p class="form-label" style="font-size:12;"> <input class="form-check-input" type="checkbox" id="useAuthData" name="useAuthData"> Isi data dengan informasi saya</p>
+                        </div>
+                        <div class="mb-3">
                             <input class="form-control" type="text" name="nama" placeholder="Nama Pemilik Sampah" required>
                         </div>
                         <div class="mb-3">
@@ -1503,9 +1506,6 @@ $(document).ready(function () {
                         <div class="mb-3 text-start">
                             <label for="bukti" class="form-label">Bukti Barang</label>
                             <input class="form-control" type="file" name="bukti" accept="image/*" required>
-                        </div>
-                        <div class="mb-3">
-                            <p class="form-label" style="font-size:12;"> <input class="form-check-input" type="checkbox" id="useAuthData" name="useAuthData"> Isi data dengan informasi saya</p>
                         </div>
                     </form>`,
             showCancelButton: true,
@@ -1815,6 +1815,9 @@ $(document).ready(function () {
             html: `
                     <form action="" method="POST" id="orderForm">
                         <div class="mb-3">
+                            <p class="form-label" style="font-size:12;"> <input class="form-check-input" type="checkbox" id="useAuthData" name="useAuthData"> Isi data dengan informasi saya</p>
+                        </div>
+                        <div class="mb-3">
                             <input class="form-control" type="text" name="nama" placeholder="Nama Pemilik Sampah" required>
                         </div>
                         <div class="mb-3">
@@ -1851,9 +1854,6 @@ $(document).ready(function () {
                         <div class="mb-3 text-start">
                             <label for="bukti" class="form-label">Bukti Barang</label>
                             <input class="form-control" type="file" name="bukti" accept="image/*" required>
-                        </div>
-                        <div class="mb-3">
-                            <p class="form-label" style="font-size:12;"> <input class="form-check-input" type="checkbox" id="useAuthData" name="useAuthData"> Isi data dengan informasi saya</p>
                         </div>
                     </form>`,
             showCancelButton: true,

@@ -128,7 +128,7 @@ $(document).ready(function () {
                         <input class="form-control" type="number" name="kodePos" placeholder="Kode Pos" required>
                     </div>
                     <div class="mb-3 text-start">
-                        <label for="catatan" class="form-label">Catatan Alamat Tambahan (Cth: Blok / Unit, No., Patokan)</label>
+                        <label for="catatan" class="form-label">Catatan Alamat Tambahan</label>
                         <textarea class="form-control" id="catatan" name="catatan" rows="3"></textarea>
                     </div>
                 </form>
@@ -204,6 +204,9 @@ $(document).ready(function () {
             html: `
                     <form action="" method="POST" id="orderForm">
                         <div class="mb-3">
+                            <p class="form-label" style="font-size:12;"> <input class="form-check-input" type="checkbox" id="useAuthData" name="useAuthData"> Isi data dengan informasi akun saya</p>
+                        </div>
+                        <div class="mb-3">
                             <input class="form-control" type="text" name="nama" placeholder="Nama Pemilik Sampah" required>
                         </div>
                         <div class="mb-3">
@@ -228,9 +231,6 @@ $(document).ready(function () {
                         <div class="mb-3 text-start">
                             <label for="catatan" class="form-label">Catatan Alamat Tambahan</label>
                             <textarea class="form-control" id="catatan" name="catatan" rows="3"></textarea>
-                        </div>
-                        <div class="mb-3">
-                            <p class="form-label" style="font-size:12;"> <input class="form-check-input" type="checkbox" id="useAuthData" name="useAuthData"> Isi data dengan informasi akun saya</p>
                         </div>
                         <div class="mb-3">
                             <select class="form-select" name="berat" required>

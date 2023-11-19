@@ -50,11 +50,14 @@ $(document).ready(function () {
         Swal.fire({
             title: "Buat Pesanan Antar Sendiri",
             html: `
-                <form id="orderForm">
-                    <div class="mb-3 mt-0 pt-0">
-                        Jenis Sampah : <br>
-                        ${selectedValues}
-                    </div>
+                    <form id="orderForm">
+                        <div class="mb-3 mt-0 pt-0">
+                            Jenis Sampah : <br>
+                            ${selectedValues}
+                        </div>
+                        <div class="mb-3">
+                            <p class="form-label" style="font-size:12;"> <input class="form-check-input" type="checkbox" id="useAuthData" name="useAuthData"> Isi data dengan informasi saya</p>
+                        </div>
                         <div class="mb-3">
                             <input class="form-control" type="text" name="nama" placeholder="Nama Pemilik Sampah" required>
                         </div>
@@ -72,9 +75,6 @@ $(document).ready(function () {
                         <div class="mb-3 text-start">
                             <label for="mapSwoll" class="form-label">Peta Bank Sampah (Pilih Salah Satu)</label>
                             <div id="mapSwoll" style="height: 400px;"></div>
-                        </div>
-                        <div class="mb-3">
-                            <p class="form-label" style="font-size:12;"> <input class="form-check-input" type="checkbox" id="useAuthData" name="useAuthData"> Isi data dengan informasi saya</p>
                         </div>
                     </form>`
             ,
