@@ -2,7 +2,7 @@
 
 @section('title', 'MoneyTrash! - Dashboard')
 @section('css')
-    <link rel="stylesheet" href="/assets/styles/dashboard-pengguna.css">
+    <link rel="stylesheet" href="/assets/styles/dashboard-pengambil.css">
 @endsection
 
 @section('contents')

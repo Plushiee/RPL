@@ -1,7 +1,4 @@
 $(document).ready(function () {
-    // const authData = document.getElementById('authData');
-    // const csrf = authData.getAttribute('data-csrf');
-
     var csrf = $('#authData').val();
     var nameUser = document.getElementById('nameUser').value;
     var nomor = document.getElementById('nomor').value;
@@ -233,23 +230,59 @@ $(document).ready(function () {
                             <textarea class="form-control" id="catatan" name="catatan" rows="3"></textarea>
                         </div>
                         <div class="mb-3">
-                            <select class="form-select" name="berat" required>
-                                <option value="" disabled selected>Pilih Berat Maksimum Pengangkutan</option>
-                                <option value="small">Small (Maks. 5 kg)</option>
-                                <option value="medium">Medium (Maks. 20 kg)</option>
-                                <option value="large">Large (Maks. 100 kg)</option>
+                            <select class="form-select" name="bank" id="bank">
+                                <option value="" disabled selected>Pilih Bank</option>
+                                <option value="Mandiri">Mandiri</option>
+                                <option value="BCA">BCA</option>
+                                <option value="BNI">BNI</option>
+                                <option value="BRI">BRI</option>
                             </select>
+                        </div>
+                        <div class="mb-3">
+                            <input class="form-control" type="number" name="norek" id="norek" placeholder="Nomor Rekening" required>
+                        </div>
+                        <div class="mb-3">
+                        <select class="form-select" name="ewallet" id="ewallet">
+                            <option value="" disabled selected>Pilih E-Wallet (Opsional)</option>
+                            <option value="Go-Pay">Go-Pay</option>
+                            <option value="Ovo">Ovo</option>
+                            <option value="Dana">Dana</option>
+                            <option value="ShoppePay">ShoppePay</option>
+                            <option value="LinkAja">LinkAja</option>
+                        </select>
+                        </div>
+                        <div class="mb-3">
+                            <input class="form-control" type="number" name="noewallet" id="noewallet" placeholder="Nomor E-Wallet" disabled>
+                        </div>
+                        <div class="mb-3">
+                        <select class="form-select" name="berat" required>
+                            <option value="" disabled selected>Pilih Berat Maksimum Pengangkutan</option>
+                            <option value="small">Small (Maks. 5 kg)</option>
+                            <option value="medium">Medium (Maks. 20 kg)</option>
+                            <option value="large">Large (Maks. 100 kg)</option>
+                        </select>
                         </div>
                         <div class="mb-3">
                             <p class="form-label" style="font-size:12;"> <input class="form-check-input" type="checkbox" id="setuju" name="setuju"> Dengan ini, saya setuju atas seluruh <a href="">Terms & Condition</a> MoneyTrash!</p>
                         </div>
                     </form>`,
-            showCancelButton: true,
-            confirmButtonText: "Selanjutnya",
-            cancelButtonText: "Tutup",
+            showCancelButton: false,
+            confirmButtonText: "Daftar!",
             focusConfirm: false,
             showLoaderOnConfirm: true,
             didOpen: () => {
+                const ewalletSelect = Swal.getPopup().querySelector("#ewallet");
+                const noewalletInput = Swal.getPopup().querySelector("input[name='noewallet']");
+    
+                $(ewalletSelect).on("change", function () {
+                    var selectedEwallet = $(this).val();
+                    if (selectedEwallet === '') {
+                        $(noewalletInput).prop('disabled', true);
+                    } else {
+                        $(noewalletInput).prop('disabled', false);
+                    }
+                });
+
                 const useAuthDataCheckbox = Swal.getPopup().querySelector(
                     "#useAuthData");
                 const orderForm = Swal.getPopup().querySelector("#orderForm");
@@ -346,10 +379,18 @@ $(document).ready(function () {
                     .value;
                 kapasitas = Swal.getPopup().querySelector("select[name='berat']")
                     .value;
+                const bank = Swal.getPopup().querySelector("select[name='bank']")
+                    .value;
+                const norek = Swal.getPopup().querySelector("input[name='norek']")
+                    .value;
+                const ewallet = Swal.getPopup().querySelector("select[name='ewallet']")
+                    .value;
+                const noewallet = Swal.getPopup().querySelector("input[name='noewallet']")
+                    .value;
                 setujuCheckbox = Swal.getPopup().querySelector("input[name='setuju']");
 
                 if (!nama || !nomor || !alamatValue || !kecamatanValue || !kotaValue ||
-                    !provinsiValue || !kodePosValue || !kapasitas) {
+                    !provinsiValue || !kodePosValue || !kapasitas || !bank || !norek && (!ewallet && !noewallet )) {
                     Swal.showValidationMessage("Semua Kolom Harus Terisi!");
                 } else {
                     if (!setujuCheckbox.checked) {
@@ -368,6 +409,10 @@ $(document).ready(function () {
                 formData.append('kodePos', kodePosValue);
                 formData.append('catatan', catatanValue);
                 formData.append('kapasitas', kapasitas);
+                formData.append('bank', bank);
+                formData.append('norek', norek);
+                formData.append('ewallet', ewallet);
+                formData.append('noewallet', noewallet);
 
                 $.ajax({
                     url: '/pemilik/akun/daftarPengambil',

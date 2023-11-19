@@ -154,10 +154,10 @@
                                         class="bi bi-speedometer2"></i>&nbsp; Dashboard</a></li>
                             <li><a href="/pengambil/dashboard/ambil"
                                     class="@if (request()->is('pengambil/dashboard/ambil*')) active-class active-txt @endif"><i
-                                        class="bi bi-truck"></i>&nbsp; Ambil Di Rumah</a></li>
-                            <li><a href="/pengambil/dashboard/antar"
-                                    class="@if (request()->is('pengambil/dashboard/antar*')) active-class active-txt @endif"><i
-                                        class="bi bi-box-seam"></i>&nbsp; Antar Sendiri</a></li>
+                                        class="bi bi-truck"></i>&nbsp; Ambil Pesanan</a></li>
+                            <li><a href="/pengambil/dashboard/pengumuman"
+                                    class="@if (request()->is('pengambil/dashboard/pengumuman*')) active-class active-txt @endif"><i
+                                        class="bi bi-bell"></i>&nbsp; Buat Pengumuman</a></li>
                         </ul>
                     </li>
 
@@ -222,98 +222,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="/assets/js/app.min.js"></script>
-
-    <script>
-        $(document).ready(function() {
-            function tampilkanSweetAlert() {
-                Swal.fire({
-                    title: "Selamat datang di Dashboard MoneyTrash!",
-                    html: `Anda harus mengisi data sebelum melanjutkan.
-                    <form action="/pemilik/simpanAkunAwal" method="POST" class="mt-3">
-                        @csrf
-                        <div class="mb-3">
-                            <input class="form-control" type="text" name="nama" placeholder="Nama Pemilik Akun" required>
-                        </div>
-                        <div class="mb-3 text-start">
-                            <label for="nomor" class="form-label mb-0">Nomor Telepon</label>
-                            <input class="form-control" type="text" name="nomor" id="nomor" required>
-                        </div>
-                        <div class="mb-3 text-start">
-                            <label for="alamat" class="form-label mb-0">Alamat Lengkap</label>
-                            <textarea class="form-control" id="alamat" name="alamat" rows="3" required></textarea>
-                        </div>
-                        <div class="mb-3">
-                            <input class="form-control" type="text" name="kecamatan" placeholder="Kecamatan" required>
-                        </div>
-                        <div class="mb-3">
-                            <input class="form-control" type="text" name="kota" placeholder="Kota atau Kabupaten" required>
-                        </div>
-                        <div class="mb-3">
-                            <input class="form-control" type="text" name="provinsi" placeholder="Provinsi" required>
-                        </div>
-                        <div class="mb-3">
-                            <input class="form-control" type="number" name="kodePos" placeholder="Kode Pos" required>
-                        </div>
-                        <div class=" text-start">
-                            <label for="catatan" class="form-label mb-0">Catatan Tambahan</label>
-                            <textarea class="form-control" id="catatan" name="catatan" rows="3"></textarea>
-                        </div>
-                    </form>`,
-                    allowOutsideClick: false,
-                    allowEscapeKey: false,
-                    showCancelButton: false,
-                    confirmButtonText: "Simpan",
-                    preConfirm: () => {
-                        const namaLengkap = Swal.getPopup().querySelector("input[name='nama']").value;
-                        const nomor = Swal.getPopup().querySelector("input[name='nomor']").value;
-                        const alamat = Swal.getPopup().querySelector("textarea[name='alamat']").value;
-                        const kecamatan = Swal.getPopup().querySelector("input[name='kecamatan']")
-                            .value;
-                        const kota = Swal.getPopup().querySelector("input[name='kota']").value;
-                        const provinsi = Swal.getPopup().querySelector("input[name='provinsi']").value;
-                        const kodePos = Swal.getPopup().querySelector("input[name='kodePos']").value;
-                        const catatan = Swal.getPopup().querySelector("textarea[name='catatan']").value;
-
-                        if (!namaLengkap || !nomor || !alamat || !kecamatan || !kota || !provinsi || !
-                            kodePos) {
-                            Swal.showValidationMessage("Semua Kolom Harus Terisi!");
-                        } else {
-                            return $.ajax({
-                                type: "POST",
-                                url: "/pemilik/simpanAkunAwal", // Sesuaikan dengan route Anda
-                                data: {
-                                    _token: '{{ csrf_token() }}',
-                                    namaLengkap: namaLengkap,
-                                    nomor: nomor,
-                                    alamat: alamat,
-                                    kecamatan: kecamatan,
-                                    kota: kota,
-                                    provinsi: provinsi,
-                                    kodePos: kodePos,
-                                    catatan: catatan,
-                                },
-                                success: function(response) {
-                                    Swal.fire("Data Tersimpan", response.message,
-                                        "success");
-                                },
-                                error: function(error) {
-                                    Swal.fire("Error",
-                                        "Terjadi kesalahan saat menyimpan data.",
-                                        "error");
-                                }
-                            });
-                        }
-                    }
-                });
-            }
-
-            const isUserBaru = {{ Auth::user()->baru }};
-
-            if (isUserBaru) {
-                tampilkanSweetAlert();
-            }
-        });
-    </script>
 
     <!-- Script per page -->
     @yield('scripts')

@@ -74,6 +74,10 @@ class GantiInformasiAkunController extends Controller
         $kodePos = $request->kodePos;
         $catatan = $request->catatan;
         $berat = $request->kapasitas;
+        $bank = $request->bank;
+        $norek = $request->norek;
+        $ewallet = $request->ewallet;
+        $noewallet = $request->noewallet;
 
         $user = UserEmailModel::find(Auth::id());
         $pengambil = new UserPengambilModel;
@@ -89,6 +93,10 @@ class GantiInformasiAkunController extends Controller
         $pengambil->provinsi = $provinsi;
         $pengambil->kodePos = $kodePos;
         $pengambil->catatan = $catatan;
+        $pengambil->bank = $bank;
+        $pengambil->norek = $norek;
+        $pengambil->ewallet = $ewallet;
+        $pengambil->noewallet = $noewallet;
         $pengambil->save();
 
         return response()->json(['successGanti' => 'Mendaftar Menjadi Agen Berhasil']);

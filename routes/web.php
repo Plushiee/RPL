@@ -85,6 +85,7 @@ Route::middleware(['auth:pemilik','checkRole'])->group(function () {
 
 
 Route::middleware(['auth:pengambil'])->group(function () {
-    // Pilih Akun Controller
-    Route::get('/pengambil/dashboard', [DashboardController::class, 'dashboardPengambil']); //default pemilik
+    // Pengambil Contrroller
+    Route::get('/pengambil/dashboard', [DashboardController::class, 'dashboardPengambil']); // default pemilik
+    Route::get('/pengambil/dashboard/ambil', [DashboardController::class, 'ambilPengambil']); // ambil pesanan
 });

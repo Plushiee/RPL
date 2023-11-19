@@ -911,7 +911,7 @@ $(document).ready(function () {
                         .value;
                     catatanValue = Swal.getPopup().querySelector("textarea[name='catatan']")
                         .value;
-                    const berat = Swal.getPopup().querySelector("select[name='berat']")
+                    berat = Swal.getPopup().querySelector("select[name='berat']")
                         .value;
 
                     if (!nama || !nomor || !alamatValue || !kecamatanValue || !kotaValue ||

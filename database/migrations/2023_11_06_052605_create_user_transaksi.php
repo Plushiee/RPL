@@ -29,6 +29,7 @@ class CreateUserTransaksi extends Migration
             $table->string('berat');
             $table->string('bukti')->nullable();
             $table->string('buktibayar')->nullable();
+            $table->boolean('diterima')->default(false);;
             $table->boolean('terbayar');
             $table->boolean('approved');
             $table->boolean('terambil');

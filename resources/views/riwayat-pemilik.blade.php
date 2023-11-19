@@ -270,8 +270,9 @@
                                                                 </div>
                                                             </div>
                                                             <div class="d-flex justify-content-around mb-1">
+                                                                <p class="text-muted mt-1 mb-0 small ms-xl-5">Diterima</p>
                                                                 <p class="text-muted mt-1 mb-0 small ms-xl-5">Approved</p>
-                                                                <p class="text-muted mt-1 mb-0 small ms-xl-5">Terkirim</p>
+                                                                <p class="text-muted mt-1 mb-0 small ms-xl-5">Terambil</p>
                                                             </div>
                                                         </div>
                                                     </div>

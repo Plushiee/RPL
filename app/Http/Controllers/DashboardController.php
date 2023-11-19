@@ -12,34 +12,40 @@ class DashboardController extends Controller
 {
     private $hitungBelumTerbayar;
 
-    private function getCount() {
+    private function getCount()
+    {
         $this->hitungBelumTerbayar = UserTransaksiModel::where('idPemilik', Auth::id())
-        ->where('terbayar', false)
-        ->count();
+            ->where('terbayar', false)
+            ->count();
     }
 
     // Pemilik
-    public function dashboard() {
+    public function dashboard()
+    {
         $this->getCount();
         return view('dashboard-pemilik', ['hitungBelumTerbayar' => $this->hitungBelumTerbayar]);
     }
 
-    public function ambil() {
+    public function ambil()
+    {
         $this->getCount();
         return view('ambil-pemilik', ['hitungBelumTerbayar' => $this->hitungBelumTerbayar]);
 
     }
-    public function antar() {
+    public function antar()
+    {
         $this->getCount();
         return view('antar-pemilik', ['hitungBelumTerbayar' => $this->hitungBelumTerbayar]);
     }
 
-    public function akun() {
+    public function akun()
+    {
         $this->getCount();
         return view('akun-pemilik', ['hitungBelumTerbayar' => $this->hitungBelumTerbayar]);
     }
 
-    public function riwayat() {
+    public function riwayat()
+    {
         $this->getCount();
         $kumpulanBank = UserTransaksiBankModel::where('idPemilik', Auth::id())->orderBy('id', 'desc')->get();
         $kumpulanTransaksi = UserTransaksiModel::where('idPemilik', Auth::id())->orderBy('id', 'desc')->get();
@@ -50,7 +56,8 @@ class DashboardController extends Controller
         ]);
     }
 
-    public function pembayaran() {
+    public function pembayaran()
+    {
         $this->getCount();
         $kumpulanTransaksi = UserTransaksiModel::where('idPemilik', Auth::id())->orderBy('id', 'desc')->get();
         return view('pembayaran-pemilik', [
@@ -59,7 +66,8 @@ class DashboardController extends Controller
         ]);
     }
 
-    public function simpanAkunAwal(Request $request) {
+    public function simpanAkunAwal(Request $request)
+    {
         $user = UserEmailModel::find(Auth::id());
         $user->namaLengkap = $request->input('namaLengkap');
         $user->nomor = $request->input('nomor');
@@ -74,8 +82,19 @@ class DashboardController extends Controller
     }
 
     // Pengambil
-    public function dashboardPengambil() {
+    public function dashboardPengambil()
+    {
         $this->getCount();
         return view('dashboard-pengambil');
+    }
+
+    public function ambilPengambil()
+    {
+        $this->getCount();
+        $kumpulanTransaksi = UserTransaksiModel::orderBy('id', 'desc')->get();
+        return view('ambil-pengambil', [
+            'kumpulanTransaksi' => $kumpulanTransaksi,
+            'hitungBelumTerbayar' => $this->hitungBelumTerbayar
+        ]);
     }
 }
