@@ -198,7 +198,7 @@
 
 @section('scripts')
     <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBRPlQuuQmmWWhwkDiUijv6F6deBOflQhk&callback=initMap&libraries=places">
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBg-aZ-Iammau9oEl569JVpJu5olD_2rbQ&callback=initMap&libraries=places">
     </script>
     <script src="/javascript/gps-map.js"></script>
     <script src="/javascript/pemilik-ambil.js"></script>
