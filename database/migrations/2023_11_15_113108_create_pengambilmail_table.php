@@ -28,9 +28,11 @@ class CreatePengambilmailTable extends Migration
             $table->string('kota', 50)->nullable();
             $table->string('provinsi', 50)->nullable();
             $table->string('kodePos', 50)->nullable();
-            $table->string('bank', 50)->nullable();
-            $table->text('norek')->nullable();
+            $table->string('bank', 50);
+            $table->string('atasNamaBank');
+            $table->text('norek');
             $table->string('ewallet', 50)->nullable();
+            $table->string('namaewallet')->nullable();
             $table->text('noewallet')->nullable();
             $table->text('catatan')->nullable();
             $table->rememberToken();

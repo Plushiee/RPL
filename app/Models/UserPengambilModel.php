@@ -32,6 +32,13 @@ class UserPengambilModel extends Model implements Authenticatable
         'provinsi',
         'kodePos',
         'catatan',
+        // pembayaran
+        'bank',
+        'atasNamaBank',
+        'norek',
+        'ewallet',
+        'namaewallet',
+        'noewallet',
         'remember_token'
     ];
 }

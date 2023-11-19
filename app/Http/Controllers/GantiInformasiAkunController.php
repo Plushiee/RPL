@@ -74,9 +74,11 @@ class GantiInformasiAkunController extends Controller
         $kodePos = $request->kodePos;
         $catatan = $request->catatan;
         $berat = $request->kapasitas;
+        $atasNamaBank = $request->atasNamaBank;
         $bank = $request->bank;
         $norek = $request->norek;
         $ewallet = $request->ewallet;
+        $namaewallet = $request->namaewallet;
         $noewallet = $request->noewallet;
 
         $user = UserEmailModel::find(Auth::id());
@@ -93,9 +95,11 @@ class GantiInformasiAkunController extends Controller
         $pengambil->provinsi = $provinsi;
         $pengambil->kodePos = $kodePos;
         $pengambil->catatan = $catatan;
+        $pengambil->atasNamaBank = $atasNamaBank;
         $pengambil->bank = $bank;
         $pengambil->norek = $norek;
         $pengambil->ewallet = $ewallet;
+        $pengambil->namaewallet = $namaewallet;
         $pengambil->noewallet = $noewallet;
         $pengambil->save();
 

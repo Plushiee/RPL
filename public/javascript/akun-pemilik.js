@@ -239,6 +239,9 @@ $(document).ready(function () {
                             </select>
                         </div>
                         <div class="mb-3">
+                            <input class="form-control" type="text" name="atasNamaBank" id="atasNamaBank" placeholder="Atas Nama Rekening" required>
+                        </div>
+                        <div class="mb-3">
                             <input class="form-control" type="number" name="norek" id="norek" placeholder="Nomor Rekening" required>
                         </div>
                         <div class="mb-3">
@@ -250,6 +253,9 @@ $(document).ready(function () {
                             <option value="ShoppePay">ShoppePay</option>
                             <option value="LinkAja">LinkAja</option>
                         </select>
+                        </div>
+                        <div class="mb-3">
+                            <input class="form-control" type="text" name="namaewallet" id="namaewallet" placeholder="Atas Nama E-Wallet" disabled>
                         </div>
                         <div class="mb-3">
                             <input class="form-control" type="number" name="noewallet" id="noewallet" placeholder="Nomor E-Wallet" disabled>
@@ -273,13 +279,16 @@ $(document).ready(function () {
             didOpen: () => {
                 const ewalletSelect = Swal.getPopup().querySelector("#ewallet");
                 const noewalletInput = Swal.getPopup().querySelector("input[name='noewallet']");
-    
+                const namaewallet = Swal.getPopup().querySelector("input[name='namaewallet']");
+
                 $(ewalletSelect).on("change", function () {
                     var selectedEwallet = $(this).val();
                     if (selectedEwallet === '') {
                         $(noewalletInput).prop('disabled', true);
+                        $(namaewallet).prop('disabled', true);
                     } else {
                         $(noewalletInput).prop('disabled', false);
+                        $(namaewallet).prop('disabled', false);
                     }
                 });
 
@@ -381,16 +390,20 @@ $(document).ready(function () {
                     .value;
                 const bank = Swal.getPopup().querySelector("select[name='bank']")
                     .value;
+                const atasNamaBank = Swal.getPopup().querySelector("input[name='atasNamaBank']")
+                    .value;
                 const norek = Swal.getPopup().querySelector("input[name='norek']")
                     .value;
                 const ewallet = Swal.getPopup().querySelector("select[name='ewallet']")
+                    .value;
+                const namaewallet = Swal.getPopup().querySelector("input[name='namaewallet']")
                     .value;
                 const noewallet = Swal.getPopup().querySelector("input[name='noewallet']")
                     .value;
                 setujuCheckbox = Swal.getPopup().querySelector("input[name='setuju']");
 
                 if (!nama || !nomor || !alamatValue || !kecamatanValue || !kotaValue ||
-                    !provinsiValue || !kodePosValue || !kapasitas || !bank || !norek && (!ewallet && !noewallet )) {
+                    !provinsiValue || !kodePosValue || !kapasitas || !bank || !norek || !atasNamaBank && (!ewallet && !noewallet && !namaewallet )) {
                     Swal.showValidationMessage("Semua Kolom Harus Terisi!");
                 } else {
                     if (!setujuCheckbox.checked) {
@@ -410,8 +423,10 @@ $(document).ready(function () {
                 formData.append('catatan', catatanValue);
                 formData.append('kapasitas', kapasitas);
                 formData.append('bank', bank);
+                formData.append('atasNamaBank', atasNamaBank);
                 formData.append('norek', norek);
                 formData.append('ewallet', ewallet);
+                formData.append('namaewallet', namaewallet);
                 formData.append('noewallet', noewallet);
 
                 $.ajax({
@@ -427,7 +442,6 @@ $(document).ready(function () {
                     },
                     error: function (
                         error) {
-                        gagal();
                         console
                             .error(
                                 error
@@ -438,8 +452,16 @@ $(document).ready(function () {
             },
         }).then((result) => {
             if (result.isConfirmed) {
-                Swal.fire('Mendaftar Menjadi Agen Pengambil Berhasil!', '', 'success');
-                setTimeout(window.location.href = '/logout', 4000);
+                Swal.fire({
+                    title: 'Mendaftar Menjadi Agen Pengambil Berhasil!',
+                    icon: 'success',
+                    timer: 4000,
+                    timerProgressBar: true,
+                    showConfirmButton: false,
+                    allowOutsideClick: false
+                }).then(() => {
+                    window.location.href = '/logout';
+                });
             }
         });
     });
