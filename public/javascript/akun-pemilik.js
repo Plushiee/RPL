@@ -455,7 +455,7 @@ $(document).ready(function () {
                 Swal.fire({
                     title: 'Mendaftar Menjadi Agen Pengambil Berhasil!',
                     icon: 'success',
-                    timer: 4000,
+                    timer: 2000,
                     timerProgressBar: true,
                     showConfirmButton: false,
                     allowOutsideClick: false

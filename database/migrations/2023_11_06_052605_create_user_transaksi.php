@@ -16,7 +16,9 @@ class CreateUserTransaksi extends Migration
         Schema::create('user_transaksi', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('idPemilik');
+            $table->unsignedBigInteger('idPengambil')->nullable();
             $table->foreign('idPemilik')->references('id')->on('useremail');
+            $table->foreign('idPengambil')->references('id')->on('pengambilmail');
             $table->string('jenisSampah');
             $table->string('nama');
             $table->string('nomor');

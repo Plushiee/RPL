@@ -30,9 +30,9 @@
                             <h4 class="header-title mb-3">Selamat
                                 <?php
                                 date_default_timezone_set('Asia/Jakarta');
-                                
+
                                 $jam = date('H');
-                                
+
                                 if ($jam >= 5 && $jam < 12) {
                                     $waktu = 'Pagi';
                                 } elseif ($jam >= 12 && $jam < 18) {
@@ -40,7 +40,7 @@
                                 } else {
                                     $waktu = 'Malam';
                                 }
-                                
+
                                 echo $waktu;
                                 ?>
                                 , {{ Auth::user()->name }} </h4>
@@ -81,10 +81,13 @@
                                                         </div>
                                                         <div
                                                             class="col-12 col-sm-2 d-flex align-items-center justify-content-end">
-                                                            @if (!$transaksi->terbayar && !$transaksi->approved)
+                                                            @if (!$transaksi->terbayar && !$transaksi->approved && $transaksi->diterima)
                                                                 <span class="badge badge-danger"> &nbsp;Belum
                                                                     Terbayar&nbsp; </span>
-                                                            @elseif($transaksi->terbayar && !$transaksi->approved)
+                                                            @elseif (!$transaksi->terbayar && !$transaksi->approved && !$transaksi->diterima)
+                                                                <span class="badge badge-warning"> &nbsp;Menunggu
+                                                                    Diterima&nbsp; </span>
+                                                            @elseif($transaksi->terbayar && !$transaksi->approved && $transaksi->diterima)
                                                                 <span class="badge badge-warning"> &nbsp;Menunggu
                                                                     Konfirmasi&nbsp; </span>
                                                             @else
@@ -147,18 +150,21 @@
                                                             <div class="progress" style="height: 6px; border-radius: 16px;">
                                                                 <div class="progress-bar" role="progressbar"
                                                                     style="
-                                                                    @if ($transaksi->approved === true && $transaksi->terambil === false) width: 50%;
-                                                                    @elseif ($transaksi->approved === true && $transaksi->terambil === true)
-                                                                    width: 100%;
-                                                                    @else
-                                                                    width: 0%; @endif
-                                                                     border-radius: 16px; background-color: #18be55;"
+                                                                @if ($transaksi->diterima == true && $transaksi->approved == false && $transaksi->terambil == false) width: 33.33%;
+                                                                @elseif ($transaksi->diterima == true && $transaksi->approved == true && $transaksi->terambil == false)
+                                                                width: 66.66%;
+                                                                @elseif ($transaksi->diterima == true && $transaksi->approved == true && $transaksi->terambil == true)
+                                                                width: 100%;
+                                                                @else
+                                                                width: 0%; @endif
+                                                                 border-radius: 16px; background-color: #18be55;"
                                                                     aria-valuemin="0" aria-valuemax="100">
                                                                 </div>
                                                             </div>
                                                             <div class="d-flex justify-content-around mb-1">
+                                                                <p class="text-muted mt-1 mb-0 small ms-xl-5">Diterima</p>
                                                                 <p class="text-muted mt-1 mb-0 small ms-xl-5">Approved</p>
-                                                                <p class="text-muted mt-1 mb-0 small ms-xl-5">Diambil</p>
+                                                                <p class="text-muted mt-1 mb-0 small ms-xl-5">Terambil</p>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -272,7 +278,7 @@
                                                             <div class="d-flex justify-content-around mb-1">
                                                                 <p class="text-muted mt-1 mb-0 small ms-xl-5">Diterima</p>
                                                                 <p class="text-muted mt-1 mb-0 small ms-xl-5">Approved</p>
-                                                                <p class="text-muted mt-1 mb-0 small ms-xl-5">Terambil</p>
+                                                                <p class="text-muted mt-1 mb-0 small ms-xl-5">Terkirim</p>
                                                             </div>
                                                         </div>
                                                     </div>

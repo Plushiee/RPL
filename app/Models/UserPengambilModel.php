@@ -19,9 +19,9 @@ class UserPengambilModel extends Model implements Authenticatable
     ];
 
     protected $fillable = [
+        'idUserMail',
         'name',
         'email',
-        'email_verified_at',
         // Data Diri
         'berat',
         'namaLengkap',

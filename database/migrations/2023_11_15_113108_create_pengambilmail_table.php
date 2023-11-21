@@ -15,9 +15,10 @@ class CreatePengambilmailTable extends Migration
     {
         Schema::create('pengambilmail', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('idUserMail');
+            $table->foreign('idUserMail')->references('id')->on('useremail');
             $table->string('name');
             $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
 
             // Data Pengambil
             $table->string('berat');

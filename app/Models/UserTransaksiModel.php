@@ -17,6 +17,7 @@ class UserTransaksiModel extends Model
 
     protected $fillable = [
         'idPemilik',
+        'idPengambil',
         'jenisSampah',
         'nama',
         'nomor',

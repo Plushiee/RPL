@@ -27,16 +27,15 @@ class LoginController extends Controller
         if ($user) {
             if (password_verify($password, $user->password)) {
                 $userPemilik = UserEmailModel::where('email', $email)->first();
+                Auth::guard('pemilik')->login($userPemilik, $remember);
+
                 $isPemilik = UserEmailModel::where('email', $email)->exists();
                 $isPengambil = UserPengambilModel::where('email', $email)->exists();
 
                 if ($isPemilik && $isPengambil) {
-                    // Redirect to choose account type page
-                    Auth::guard('pemilik')->login($userPemilik, $remember);
                     return redirect('/pilih-akun');
                 }
 
-                Auth::guard('pemilik')->login($userPemilik, $remember);
                 return redirect('/pemilik/dashboard');
 
             } else {

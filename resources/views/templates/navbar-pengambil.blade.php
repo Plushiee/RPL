@@ -84,7 +84,7 @@
                         </div>
 
                         <!-- item-->
-                        <a href="/pemilik/akun" class="dropdown-item notify-item">
+                        <a href="/pengambil/akun" class="dropdown-item notify-item">
                             <i class="mdi mdi-settings-outline"></i>
                             <span>Akun</span>
                         </a>
@@ -143,7 +143,7 @@
                 <ul class="metismenu" id="side-menu">
                     <li class="menu-title">Navigasi</li>
                     <li>
-                        <a href="/pemilik/dashboard"
+                        <a href="/pengambil/dashboard"
                             class="@if (request()->is('pengambil/dashboard*')) active-class active-txt @endif mb-0">
                             <i class="bi bi-house"></i>
                             <span> Home</span>

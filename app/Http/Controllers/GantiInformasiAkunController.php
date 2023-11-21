@@ -84,6 +84,8 @@ class GantiInformasiAkunController extends Controller
         $user = UserEmailModel::find(Auth::id());
         $pengambil = new UserPengambilModel;
 
+        // isi data akun
+        $pengambil->idUserMail = Auth::id();
         $pengambil->name = $user->name;
         $pengambil->email = $user->email;
         $pengambil->berat = $berat;

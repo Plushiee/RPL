@@ -9,6 +9,7 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PilihAkunController;
 use App\Http\Controllers\DefaultController;
+use App\Http\Controllers\AmbilPengambilController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,6 +27,7 @@ Route::get('/', [DefaultController::class, 'index']);
 
 // Redirect
 Route::redirect('/pemilik', '/pemilik/dashboard');
+Route::redirect('/pengambil', '/pengambil/dashboard');
 
 // Register Controller
 Route::get('/register', [RegisterController::class, 'register']);
@@ -72,7 +74,7 @@ Route::middleware(['auth:pemilik'])->group(function () {
     // Ambil BuktiGambar
     Route::get('/pemilik/bukti/ambildirumah/{jenis}/{id}/{gambar}', [AmbilGambarController::class, 'showBuktiSampah']); //ambil bukti
     Route::get('/pemilik/bukti/antarsendiri/{id}/{gambar}', [AmbilGambarController::class, 'showBuktiKirim']); //ambil bukti
-    Route::get('/pemilik/bukti/pembayaran/{id}/{gambar}', [AmbilGambarController::class, 'showBPembayaran']); //ambil bukti
+    Route::get('/pemilik/bukti/pembayaran/{id}/{gambar}', [AmbilGambarController::class, 'showBuktiPembayaran']); //ambil bukti
 });
 
 Route::middleware(['auth:pemilik','checkRole'])->group(function () {
@@ -86,6 +88,18 @@ Route::middleware(['auth:pemilik','checkRole'])->group(function () {
 
 Route::middleware(['auth:pengambil'])->group(function () {
     // Pengambil Contrroller
-    Route::get('/pengambil/dashboard', [DashboardController::class, 'dashboardPengambil']); // default pemilik
-    Route::get('/pengambil/dashboard/ambil', [DashboardController::class, 'ambilPengambil']); // ambil pesanan
+    Route::get('/pengambil/dashboard', [DashboardController::class, 'dashboardPengambil']); // default pengambil
+    Route::get('/pengambil/pembayaran', [DashboardController::class, 'pembayaranPengambil']); // Pembayaran Pengambil
+    Route::get('/pengambil/riwayat', [DashboardController::class, 'riwayatPengambil']); // Riwayat Pengambil
+    Route::get('/pengambil/dashboard/ambil', [DashboardController::class, 'ambilPengambil']); // halaman ambil pesanan
+
+    // Ambil Pesanan
+    Route::post('/pengambil/dashboard/ambil', [AmbilPengambilController::class, 'ambilPengambilSave']); // ambil pesanan
+    Route::post('/pengambil/pembayaran/approved', [AmbilPengambilController::class, 'ambilPengambilSave']); // ambil pesanan
+    Route::post('/pengambil/riwayat/terambil', [AmbilPengambilController::class, 'ambilPengambilSave']); // pesanan terambil
+
+     // Ambil BuktiGambar
+     Route::get('/pengambil/bukti/transaksi/{jenis}/{id}/{gambar}', [AmbilGambarController::class, 'showBuktiSampah']); //ambil bukti
+     Route::get('/pengambil/bukti/pembayaran/{id}/{gambar}', [AmbilGambarController::class, 'showBuktiPembayaran']); //ambil bukti
+
 });

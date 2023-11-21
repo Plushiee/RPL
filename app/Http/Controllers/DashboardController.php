@@ -15,7 +15,7 @@ class DashboardController extends Controller
     private function getCount()
     {
         $this->hitungBelumTerbayar = UserTransaksiModel::where('idPemilik', Auth::id())
-            ->where('terbayar', false)
+            ->where('terbayar', false)->where('diterima', true)
             ->count();
     }
 
@@ -59,7 +59,7 @@ class DashboardController extends Controller
     public function pembayaran()
     {
         $this->getCount();
-        $kumpulanTransaksi = UserTransaksiModel::where('idPemilik', Auth::id())->orderBy('id', 'desc')->get();
+        $kumpulanTransaksi = UserTransaksiModel::where('idPemilik', Auth::id())->where('diterima', true)->orderBy('id', 'desc')->get();
         return view('pembayaran-pemilik', [
             'kumpulanTransaksi' => $kumpulanTransaksi,
             'hitungBelumTerbayar' => $this->hitungBelumTerbayar
@@ -91,8 +91,28 @@ class DashboardController extends Controller
     public function ambilPengambil()
     {
         $this->getCount();
-        $kumpulanTransaksi = UserTransaksiModel::orderBy('id', 'desc')->get();
+        $kumpulanTransaksi = UserTransaksiModel::orderBy('id', 'desc')->where('diterima', false)->get();
         return view('ambil-pengambil', [
+            'kumpulanTransaksi' => $kumpulanTransaksi,
+            'hitungBelumTerbayar' => $this->hitungBelumTerbayar
+        ]);
+    }
+
+    public function riwayatPengambil()
+    {
+        $this->getCount();
+        $kumpulanTransaksi = UserTransaksiModel::orderBy('id', 'desc')->where('diterima', true)->get();
+        return view('riwayat-pengambil', [
+            'kumpulanTransaksi' => $kumpulanTransaksi,
+            'hitungBelumTerbayar' => $this->hitungBelumTerbayar
+        ]);
+    }
+
+    public function pembayaranPengambil()
+    {
+        $this->getCount();
+        $kumpulanTransaksi = UserTransaksiModel::orderBy('id', 'desc')->where('idPengambil', Auth::id())->where('diterima', true)->get();;
+        return view('pembayaran-pengambil', [
             'kumpulanTransaksi' => $kumpulanTransaksi,
             'hitungBelumTerbayar' => $this->hitungBelumTerbayar
         ]);
