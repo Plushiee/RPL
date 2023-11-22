@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AmbilGambarController;
 use App\Http\Controllers\GantiInformasiAkunController;
+use App\Http\Controllers\PengumumanController;
 use App\Http\Controllers\TransaksiController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
@@ -92,6 +93,12 @@ Route::middleware(['auth:pengambil'])->group(function () {
     Route::get('/pengambil/pembayaran', [DashboardController::class, 'pembayaranPengambil']); // Pembayaran Pengambil
     Route::get('/pengambil/riwayat', [DashboardController::class, 'riwayatPengambil']); // Riwayat Pengambil
     Route::get('/pengambil/dashboard/ambil', [DashboardController::class, 'ambilPengambil']); // halaman ambil pesanan
+    Route::get('/pengambil/dashboard/pengumuman', [DashboardController::class, 'pengumumanPengambil']); // halaman pengumuman
+
+    // Pengumuman
+    Route::post('/pengambil/dashboard/pengumuman/buatPengumuman', [PengumumanController::class, 'buatPengumumanPengambil']); // Buat Pengumuman
+    Route::post('/pengambil/dashboard/pengumuman/selesai', [PengumumanController::class, 'selesaiPengumumanPengambil']); // Pengumuman Selesai
+    Route::post('/pengambil/dashboard/pengumuman/editPengumuman', [PengumumanController::class, 'editPengumumanPengambil']); // Edit Pengumuman
 
     // Ambil Pesanan
     Route::post('/pengambil/dashboard/ambil', [AmbilPengambilController::class, 'ambilPengambilSave']); // ambil pesanan

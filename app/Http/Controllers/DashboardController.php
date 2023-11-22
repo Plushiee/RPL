@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PengumumanModel;
 use App\Models\UserTransaksiBankModel;
 use Illuminate\Http\Request;
 use App\Models\UserEmailModel;
@@ -143,11 +144,23 @@ class DashboardController extends Controller
         ]);
     }
 
+    public function pengumumanPengambil()
+    {
+        $this->getCountPengambil();
+        $daftarPengumuman = PengumumanModel::orderBy('id', 'desc')->where('idPengambil', Auth::id())->get();
+        $hitungPengumumanAktif = PengumumanModel::where('idPengambil', Auth::id())->where('aktif', true)->count();
+        return view('pengumuman-pengambil', [
+            'daftarPengumuman' => $daftarPengumuman,
+            'hitungPengumumanAktif'=> $hitungPengumumanAktif,
+            'hitungPermintaanAprrove' => $this->hitungPermintaanAprrove,
+            'hitungTransaksiBerjalan' => $this->hitungTransaksiBerjalan
+        ]);
+    }
+
     public function pembayaranPengambil()
     {
         $this->getCountPengambil();
         $kumpulanTransaksi = UserTransaksiModel::orderBy('id', 'desc')->where('idPengambil', Auth::id())->where('diterima', true)->get();
-        ;
         return view('pembayaran-pengambil', [
             'kumpulanTransaksi' => $kumpulanTransaksi,
             'hitungPermintaanAprrove' => $this->hitungPermintaanAprrove,

@@ -15,6 +15,7 @@
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb" style="background-color: transparent !important">
                 <li class="breadcrumb-item"><a href="/pengambil/dashboard">Pengambil Sampah</a></li>
+                <li class="breadcrumb-item"><a href="/pengambil/dashboard">Dashboard</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Ambil Pesanan</li>
             </ol>
         </nav>
