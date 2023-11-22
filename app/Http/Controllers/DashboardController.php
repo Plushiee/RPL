@@ -11,11 +11,27 @@ use App\Models\UserTransaksiModel;
 class DashboardController extends Controller
 {
     private $hitungBelumTerbayar;
+    private $hitungPermintaanAprrove;
+    private $hitungTransaksiBerjalan;
+    private $hitungTransaksiBerjalanPemilik;
 
     private function getCount()
     {
         $this->hitungBelumTerbayar = UserTransaksiModel::where('idPemilik', Auth::id())
             ->where('terbayar', false)->where('diterima', true)
+            ->count();
+        $this->hitungTransaksiBerjalanPemilik = UserTransaksiModel::where('idPemilik', Auth::id())
+            ->where('terbayar', true)->where('diterima', true)
+            ->count();
+    }
+
+    private function getCountPengambil()
+    {
+        $this->hitungPermintaanAprrove = UserTransaksiModel::where('idPengambil', Auth::id())
+            ->where('terbayar', true)->where('approved', false)
+            ->count();
+        $this->hitungTransaksiBerjalan = UserTransaksiModel::where('idPengambil', Auth::id())
+            ->where('diterima', true)->where('terambil', false)
             ->count();
     }
 
@@ -23,25 +39,37 @@ class DashboardController extends Controller
     public function dashboard()
     {
         $this->getCount();
-        return view('dashboard-pemilik', ['hitungBelumTerbayar' => $this->hitungBelumTerbayar]);
+        return view('dashboard-pemilik', [
+            'hitungBelumTerbayar' => $this->hitungBelumTerbayar,
+            'hitungTransaksiBerjalanPemilik' => $this->hitungTransaksiBerjalanPemilik
+        ]);
     }
 
     public function ambil()
     {
         $this->getCount();
-        return view('ambil-pemilik', ['hitungBelumTerbayar' => $this->hitungBelumTerbayar]);
+        return view('ambil-pemilik', [
+            'hitungBelumTerbayar' => $this->hitungBelumTerbayar,
+            'hitungTransaksiBerjalanPemilik' => $this->hitungTransaksiBerjalanPemilik
+        ]);
 
     }
     public function antar()
     {
         $this->getCount();
-        return view('antar-pemilik', ['hitungBelumTerbayar' => $this->hitungBelumTerbayar]);
+        return view('antar-pemilik', [
+            'hitungBelumTerbayar' => $this->hitungBelumTerbayar,
+            'hitungTransaksiBerjalanPemilik' => $this->hitungTransaksiBerjalanPemilik
+        ]);
     }
 
     public function akun()
     {
         $this->getCount();
-        return view('akun-pemilik', ['hitungBelumTerbayar' => $this->hitungBelumTerbayar]);
+        return view('akun-pemilik', [
+            'hitungBelumTerbayar' => $this->hitungBelumTerbayar,
+            'hitungTransaksiBerjalanPemilik' => $this->hitungTransaksiBerjalanPemilik
+    ]);
     }
 
     public function riwayat()
@@ -52,7 +80,8 @@ class DashboardController extends Controller
         return view('riwayat-pemilik', [
             'kumpulanTransaksi' => $kumpulanTransaksi,
             'kumpulanBank' => $kumpulanBank,
-            'hitungBelumTerbayar' => $this->hitungBelumTerbayar
+            'hitungBelumTerbayar' => $this->hitungBelumTerbayar,
+            'hitungTransaksiBerjalanPemilik' => $this->hitungTransaksiBerjalanPemilik
         ]);
     }
 
@@ -62,7 +91,8 @@ class DashboardController extends Controller
         $kumpulanTransaksi = UserTransaksiModel::where('idPemilik', Auth::id())->where('diterima', true)->orderBy('id', 'desc')->get();
         return view('pembayaran-pemilik', [
             'kumpulanTransaksi' => $kumpulanTransaksi,
-            'hitungBelumTerbayar' => $this->hitungBelumTerbayar
+            'hitungBelumTerbayar' => $this->hitungBelumTerbayar,
+            'hitungTransaksiBerjalanPemilik' => $this->hitungTransaksiBerjalanPemilik
         ]);
     }
 
@@ -84,37 +114,44 @@ class DashboardController extends Controller
     // Pengambil
     public function dashboardPengambil()
     {
-        $this->getCount();
-        return view('dashboard-pengambil');
+        $this->getCountPengambil();
+        return view('dashboard-pengambil', [
+            'hitungPermintaanAprrove' => $this->hitungPermintaanAprrove,
+            'hitungTransaksiBerjalan' => $this->hitungTransaksiBerjalan
+        ]);
     }
 
     public function ambilPengambil()
     {
-        $this->getCount();
+        $this->getCountPengambil();
         $kumpulanTransaksi = UserTransaksiModel::orderBy('id', 'desc')->where('diterima', false)->get();
         return view('ambil-pengambil', [
             'kumpulanTransaksi' => $kumpulanTransaksi,
-            'hitungBelumTerbayar' => $this->hitungBelumTerbayar
+            'hitungPermintaanAprrove' => $this->hitungPermintaanAprrove,
+            'hitungTransaksiBerjalan' => $this->hitungTransaksiBerjalan
         ]);
     }
 
     public function riwayatPengambil()
     {
-        $this->getCount();
+        $this->getCountPengambil();
         $kumpulanTransaksi = UserTransaksiModel::orderBy('id', 'desc')->where('diterima', true)->get();
         return view('riwayat-pengambil', [
             'kumpulanTransaksi' => $kumpulanTransaksi,
-            'hitungBelumTerbayar' => $this->hitungBelumTerbayar
+            'hitungPermintaanAprrove' => $this->hitungPermintaanAprrove,
+            'hitungTransaksiBerjalan' => $this->hitungTransaksiBerjalan
         ]);
     }
 
     public function pembayaranPengambil()
     {
-        $this->getCount();
-        $kumpulanTransaksi = UserTransaksiModel::orderBy('id', 'desc')->where('idPengambil', Auth::id())->where('diterima', true)->get();;
+        $this->getCountPengambil();
+        $kumpulanTransaksi = UserTransaksiModel::orderBy('id', 'desc')->where('idPengambil', Auth::id())->where('diterima', true)->get();
+        ;
         return view('pembayaran-pengambil', [
             'kumpulanTransaksi' => $kumpulanTransaksi,
-            'hitungBelumTerbayar' => $this->hitungBelumTerbayar
+            'hitungPermintaanAprrove' => $this->hitungPermintaanAprrove,
+            'hitungTransaksiBerjalan' => $this->hitungTransaksiBerjalan
         ]);
     }
 }

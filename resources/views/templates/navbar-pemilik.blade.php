@@ -178,6 +178,9 @@
                         <a href="/pemilik/riwayat">
                             <i class="bi bi-clock-history @if (request()->is('pemilik/riwayat*')) active-txt @endif"></i>
                             <span class="@if (request()->is('pemilik/riwayat*')) active-txt @endif"> Riwayat </span>
+                            @if ($hitungTransaksiBerjalanPemilik > 0)
+                                <span class="badge badge-warning float-right">{{ $hitungTransaksiBerjalanPemilik }}</span>
+                            @endif
                         </a>
                     </li>
                     <li class="@if (request()->is('pemilik/akun*')) active-class @endif">

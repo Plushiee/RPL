@@ -165,9 +165,9 @@
                         <a href="/pengambil/pembayaran">
                             <i class="bi bi-cash-stack @if (request()->is('pengambil/pembayaran*')) active-txt @endif"></i>
                             <span class="@if (request()->is('pengambil/pembayaran*')) active-txt @endif"> Pembayaran </span>
-                            {{-- @if ($hitungBelumTerbayar > 0)
-                                <span class="badge badge-danger float-right">{{ $hitungBelumTerbayar }}</span>
-                            @endif --}}
+                            @if ($hitungPermintaanAprrove > 0)
+                                <span class="badge badge-danger float-right">{{ $hitungPermintaanAprrove }}</span>
+                            @endif
                         </a>
                     </li>
 
@@ -175,6 +175,9 @@
                         <a href="/pengambil/riwayat">
                             <i class="bi bi-clock-history @if (request()->is('pengambil/riwayat*')) active-txt @endif"></i>
                             <span class="@if (request()->is('pengambil/riwayat*')) active-txt @endif"> Riwayat </span>
+                            @if ($hitungTransaksiBerjalan > 0)
+                                <span class="badge badge-warning float-right">{{ $hitungTransaksiBerjalan }}</span>
+                            @endif
                         </a>
                     </li>
                     <li class="@if (request()->is('pengambil/akun*')) active-class @endif">

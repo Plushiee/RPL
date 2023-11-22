@@ -64,7 +64,7 @@
                                     data-bs-parent="#accordionExample">
                                     <div class="accordion-body pt-4 pb-0">
                                         @foreach ($kumpulanTransaksi as $transaksi)
-                                            @if ($transaksi->terambil == false && $transaksi->approved == true)
+                                            @if ($transaksi->terambil == false && $transaksi->diterima == true)
                                                 <div class="card shadow-0 border mb-4">
                                                     <div class="card-body pt-2">
                                                         <div class="row mb-3">
