@@ -40,7 +40,14 @@ class DashboardController extends Controller
     public function dashboard()
     {
         $this->getCount();
+        $daftarPengumuman = PengumumanModel::join('user_transaksi', 'pengumuman.idPengambil', '=', 'user_transaksi.idPengambil')
+            ->where('user_transaksi.idPemilik', Auth::user()->id)
+            ->where('user_transaksi.diterima', true)
+            ->where('pengumuman.aktif', true)
+            ->orderBy('pengumuman.id', 'desc')
+            ->get(['pengumuman.*']);
         return view('dashboard-pemilik', [
+            'daftarPengumuman' => $daftarPengumuman,
             'hitungBelumTerbayar' => $this->hitungBelumTerbayar,
             'hitungTransaksiBerjalanPemilik' => $this->hitungTransaksiBerjalanPemilik
         ]);
@@ -49,7 +56,14 @@ class DashboardController extends Controller
     public function ambil()
     {
         $this->getCount();
+        $daftarPengumuman = PengumumanModel::join('user_transaksi', 'pengumuman.idPengambil', '=', 'user_transaksi.idPengambil')
+            ->where('user_transaksi.idPemilik', Auth::user()->id)
+            ->where('user_transaksi.diterima', true)
+            ->where('pengumuman.aktif', true)
+            ->orderBy('pengumuman.id', 'desc')
+            ->get(['pengumuman.*']);
         return view('ambil-pemilik', [
+            'daftarPengumuman' => $daftarPengumuman,
             'hitungBelumTerbayar' => $this->hitungBelumTerbayar,
             'hitungTransaksiBerjalanPemilik' => $this->hitungTransaksiBerjalanPemilik
         ]);
@@ -70,7 +84,7 @@ class DashboardController extends Controller
         return view('akun-pemilik', [
             'hitungBelumTerbayar' => $this->hitungBelumTerbayar,
             'hitungTransaksiBerjalanPemilik' => $this->hitungTransaksiBerjalanPemilik
-    ]);
+        ]);
     }
 
     public function riwayat()
@@ -116,7 +130,11 @@ class DashboardController extends Controller
     public function dashboardPengambil()
     {
         $this->getCountPengambil();
+        $daftarPengumuman = PengumumanModel::where('idPengambil', Auth::user()->id)
+            ->where('aktif', true)->orderBy('id', 'desc')
+            ->get();
         return view('dashboard-pengambil', [
+            'daftarPengumuman' => $daftarPengumuman,
             'hitungPermintaanAprrove' => $this->hitungPermintaanAprrove,
             'hitungTransaksiBerjalan' => $this->hitungTransaksiBerjalan
         ]);
@@ -125,7 +143,24 @@ class DashboardController extends Controller
     public function ambilPengambil()
     {
         $this->getCountPengambil();
-        $kumpulanTransaksi = UserTransaksiModel::orderBy('id', 'desc')->where('diterima', false)->get();
+
+        $userBerat = Auth::user()->berat;
+
+        $allowedBerat = [];
+
+        if ($userBerat == 'medium') {
+            $allowedBerat = ['medium', 'small'];
+        } elseif ($userBerat == 'small') {
+            $allowedBerat = ['small'];
+        } elseif ($userBerat == 'large') {
+            $allowedBerat = ['medium', 'small', 'large'];
+        }
+
+        $kumpulanTransaksi = UserTransaksiModel::orderBy('id', 'desc')
+            ->whereIn('berat', $allowedBerat)
+            ->where('diterima', false)
+            ->get();
+
         return view('ambil-pengambil', [
             'kumpulanTransaksi' => $kumpulanTransaksi,
             'hitungPermintaanAprrove' => $this->hitungPermintaanAprrove,
@@ -151,7 +186,7 @@ class DashboardController extends Controller
         $hitungPengumumanAktif = PengumumanModel::where('idPengambil', Auth::id())->where('aktif', true)->count();
         return view('pengumuman-pengambil', [
             'daftarPengumuman' => $daftarPengumuman,
-            'hitungPengumumanAktif'=> $hitungPengumumanAktif,
+            'hitungPengumumanAktif' => $hitungPengumumanAktif,
             'hitungPermintaanAprrove' => $this->hitungPermintaanAprrove,
             'hitungTransaksiBerjalan' => $this->hitungTransaksiBerjalan
         ]);

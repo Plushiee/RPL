@@ -51,7 +51,6 @@ $(document).ready(function () {
                             maxWidth: 300 
                         });
 
-                        // Tambahkan event listener untuk menampilkan info window ketika marker diklik
                         marker.addListener('click', function () {
                             infoWindow.open(map, marker);
                         });
@@ -59,9 +58,7 @@ $(document).ready(function () {
                     
                     count = results.length;
 
-                    // Periksa apakah ada halaman berikutnya hasil pencarian
                     if (pagination.hasNextPage) {
-                        // Ambil halaman berikutnya
                         pagination.nextPage();
                     }
                 }
@@ -75,7 +72,6 @@ $(document).ready(function () {
         performTextSearch(request, map);
     }
 
-    // Fungsi untuk mendapatkan geolokasi pengguna
     function getLocation() {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
@@ -83,21 +79,17 @@ $(document).ready(function () {
                     const latitude = position.coords.latitude;
                     const longitude = position.coords.longitude;
 
-                    // Inisialisasi peta dengan koordinat geolokasi
                     initMap(latitude, longitude);
                 },
                 (error) => {
                     console.error('Error getting geolocation:', error);
-                    // Jika terjadi kesalahan, inisialisasi peta dengan koordinat default
                     initMap(0, 0);
                 }
             );
         } else {
-            // Geolokasi tidak didukung oleh browser
             console.error('Geolocation is not supported by your browser.');
         }
     }
 
-    // Panggil fungsi untuk mendapatkan geolokasi dan inisialisasi peta
     getLocation();
 });

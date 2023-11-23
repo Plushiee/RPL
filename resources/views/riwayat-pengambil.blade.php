@@ -479,5 +479,5 @@
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBg-aZ-Iammau9oEl569JVpJu5olD_2rbQ&callback=initMap&libraries=places">
     </script>
     <script src="/javascript/gps-map.js"></script>
-    <script src="/javascript/riwayat-pemilik.js"></script>
+    <script src="/javascript/riwayat-pengambil.js"></script>
 @endsection

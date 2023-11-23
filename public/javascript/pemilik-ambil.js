@@ -292,6 +292,8 @@ $(document).ready(function () {
                                         .getPosition().lng();
                                     lang = marker
                                         .getPosition().lat();
+                                        console.log(long)
+                                        console.log(lang)
                                 });
                             }
                         });

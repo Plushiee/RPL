@@ -58,7 +58,7 @@
                                     terima pesanannya. Maksimal pengumuman aktif sebanyak
                                     <b>{{ $hitungPengumumanAktif }}</b>/5 Pengumuman
                                 </p>
-                                <button class="btn btn-primary btn-block buatPengumuman  @if ($hitungPengumumanAktif > 5) disabled @endif"
+                                <button class="btn btn-primary btn-block buatPengumuman  @if ($hitungPengumumanAktif > 4) disabled @endif"
                                     id="buatPengumuman">Buat
                                     Pengumuman</button>
                             </div>
@@ -109,7 +109,7 @@
                                                         @csrf
                                                         <input type="hidden" name="id" value="{{ $pengumuman->id }}">
                                                         <button type="submit" class="btn btn-success float-end">
-                                                            Pengumumanm Selesai</button>
+                                                            Pengumuman Selesai</button>
                                                     </form>
                                                 @endif
                                             </div>

@@ -31,9 +31,9 @@
                             <h4 class="header-title mb-3">Selamat
                                 <?php
                                 date_default_timezone_set('Asia/Jakarta');
-
+                                
                                 $jam = date('H');
-
+                                
                                 if ($jam >= 5 && $jam < 12) {
                                     $waktu = 'Pagi';
                                 } elseif ($jam >= 12 && $jam < 18) {
@@ -41,7 +41,7 @@
                                 } else {
                                     $waktu = 'Malam';
                                 }
-
+                                
                                 echo $waktu;
                                 ?>
                                 , {{ Auth::user()->name }} </h4>
@@ -56,43 +56,47 @@
                             <div class="row g-md-4 g-sm-4 g-1">
                                 <div class="col-xl-2 col-sm-6 d-grid widget-inline-box text-center">
                                     <input type="checkbox" class="btn-check" id="organik" autocomplete="off">
-                                    <label class="btn btn-outline-dark btn-block mt-3 mt-sm-0 p-3 organik mb-0" type="button"
-                                        style="font-size: 18px; font-weight: bold" for="organik"><img src="\assets\sampah\Organik.png"
-                                            alt="organik.png" width="96"><br>Organik</label>
+                                    <label class="btn btn-outline-dark btn-block mt-3 mt-sm-0 p-3 organik mb-0"
+                                        type="button" style="font-size: 18px; font-weight: bold" for="organik"><img
+                                            src="\assets\sampah\Organik.png" alt="organik.png"
+                                            width="96"><br>Organik</label>
                                 </div>
 
                                 <div class="col-xl-2 col-sm-6 d-grid widget-inline-box text-center kertas">
                                     <input type="checkbox" class="btn-check" id="kertas" autocomplete="off">
                                     <label class="btn btn-outline-dark btn-block mt-3 mt-sm-0 p-3 mb-0" type="button"
-                                        style="font-size: 18px; font-weight: bold" for="kertas"><img src="\assets\sampah\Kertas.png"
-                                            alt="kertas.png" width="96"><br>Kertas</label>
+                                        style="font-size: 18px; font-weight: bold" for="kertas"><img
+                                            src="\assets\sampah\Kertas.png" alt="kertas.png"
+                                            width="96"><br>Kertas</label>
                                 </div>
                                 <div class="col-xl-2 col-sm-6 d-grid widget-inline-box text-center plastik">
                                     <input type="checkbox" class="btn-check" id="plastik" autocomplete="off">
                                     <label class="btn btn-outline-dark btn-block mt-3 mt-sm-0 p-3 mb-0" type="button"
-                                        style="font-size: 18px; font-weight: bold" for="plastik"><img src="\assets\sampah\Plastik.png"
-                                            alt="plastik.png" width="96"><br>Plastik</label>
+                                        style="font-size: 18px; font-weight: bold" for="plastik"><img
+                                            src="\assets\sampah\Plastik.png" alt="plastik.png"
+                                            width="96"><br>Plastik</label>
                                 </div>
 
                                 <div class="col-xl-2 col-sm-6 d-grid widget-inline-box text-center kaca">
                                     <input type="checkbox" class="btn-check" id="kaca" autocomplete="off">
                                     <label class="btn btn-outline-dark btn-block mt-3 mt-sm-0 p-3 mb-0" type="button"
-                                        style="font-size: 18px; font-weight: bold" for="kaca"><img src="\assets\sampah\Kaca.png"
-                                            alt="kaca.png" width="96"><br>Kaca</label>
+                                        style="font-size: 18px; font-weight: bold" for="kaca"><img
+                                            src="\assets\sampah\Kaca.png" alt="kaca.png" width="96"><br>Kaca</label>
                                 </div>
                                 <div class="col-xl-2 col-sm-6 d-grid widget-inline-box text-center logam">
                                     <input type="checkbox" class="btn-check" id="logam" autocomplete="off">
                                     <label class="btn btn-outline-dark btn-block mt-3 mt-sm-0 p-3 mb-0" type="button"
-                                        style="font-size: 18px; font-weight: bold" for="logam"><img src="\assets\sampah\Logam.png"
-                                            alt="logam.png" width="96"><br>Logam</label>
+                                        style="font-size: 18px; font-weight: bold" for="logam"><img
+                                            src="\assets\sampah\Logam.png" alt="logam.png" width="96"><br>Logam</label>
                                 </div>
 
                                 <div class="col-xl-2 col-sm-6 d-grid widget-inline-box text-center lainnya"
                                     style="border: none !important;">
                                     <input type="checkbox" class="btn-check" id="lainnya" autocomplete="off">
                                     <label class="btn btn-outline-dark btn-block mt-3 mt-sm-0 p-3 mb-0" type="button"
-                                        style="font-size: 18px; font-weight: bold" for="lainnya"><img src="\assets\sampah\Lainnya.png"
-                                            alt="lainnya.png" width="96"><br>Lainnya</label>
+                                        style="font-size: 18px; font-weight: bold" for="lainnya"><img
+                                            src="\assets\sampah\Lainnya.png" alt="lainnya.png"
+                                            width="96"><br>Lainnya</label>
                                 </div>
                             </div>
                         </div>
@@ -103,7 +107,8 @@
                 <div class="row mb-4">
                     <div class="card-box my-0 py-0" style="border: none !important">
                         <div class="col-12">
-                            <button type="button" class="btn btn-success float-end" id="antar">Antar Sekarang &nbsp;>></button>
+                            <button type="button" class="btn btn-success float-end" id="antar">Antar Sekarang
+                                &nbsp;>></button>
                         </div>
                     </div>
                 </div>
@@ -123,55 +128,6 @@
                         <div class="card-box">
                             <h5 class="mt-0 font-14">Pengumuman</h5>
                             <div class="accordion accordion-flush" id="accordionFlushExample">
-                                <div class="accordion-item">
-                                    <h2 class="accordion-header">
-                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                            data-bs-target="#flush-collapseOne" aria-expanded="false"
-                                            aria-controls="flush-collapseOne">
-                                            Accordion Item #1
-                                        </button>
-                                    </h2>
-                                    <div id="flush-collapseOne" class="accordion-collapse collapse"
-                                        data-bs-parent="#accordionFlushExample">
-                                        <div class="accordion-body">Placeholder content for this accordion, which is
-                                            intended to demonstrate the <code>.accordion-flush</code> class. This is the
-                                            first item's accordion body.</div>
-                                    </div>
-                                </div>
-                                <div class="accordion-item">
-                                    <h2 class="accordion-header">
-                                        <button class="accordion-button collapsed" type="button"
-                                            data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo"
-                                            aria-expanded="false" aria-controls="flush-collapseTwo">
-                                            Accordion Item #2
-                                        </button>
-                                    </h2>
-                                    <div id="flush-collapseTwo" class="accordion-collapse collapse"
-                                        data-bs-parent="#accordionFlushExample">
-                                        <div class="accordion-body">Placeholder content for this accordion, which is
-                                            intended to demonstrate the <code>.accordion-flush</code> class. This is the
-                                            second item's accordion body. Let's imagine this being filled with some actual
-                                            content.</div>
-                                    </div>
-                                </div>
-                                <div class="accordion-item">
-                                    <h2 class="accordion-header">
-                                        <button class="accordion-button collapsed" type="button"
-                                            data-bs-toggle="collapse" data-bs-target="#flush-collapseThree"
-                                            aria-expanded="false" aria-controls="flush-collapseThree">
-                                            Accordion Item #3
-                                        </button>
-                                    </h2>
-                                    <div id="flush-collapseThree" class="accordion-collapse collapse"
-                                        data-bs-parent="#accordionFlushExample">
-                                        <div class="accordion-body">Placeholder content for this accordion, which is
-                                            intended to demonstrate the <code>.accordion-flush</code> class. This is the
-                                            third item's accordion body. Nothing more exciting happening here in terms of
-                                            content, but just filling up the space to make it look, at least at first
-                                            glance, a bit more representative of how this would look in a real-world
-                                            application.</div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -198,7 +154,8 @@
         {{-- </footer> --}}
         <!-- end Footer -->
         <!-- Auth Data Share -->
-        <div id="authData" data-name="{{ Auth::user()->name }}" data-nomor="{{ Auth::user()->nomor }}" data-csrf="{{ csrf_token() }}"></div>
+        <div id="authData" data-name="{{ Auth::user()->name }}" data-nomor="{{ Auth::user()->nomor }}"
+            data-csrf="{{ csrf_token() }}"></div>
         <!-- EndAuth Data Share -->
 
     </div>
