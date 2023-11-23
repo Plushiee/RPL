@@ -3,13 +3,19 @@ $(document).ready(function () {
     var nameUser = document.getElementById('nameUser').value;
     var nomor = document.getElementById('nomor').value;
     var namaPengambil = document.getElementById('nameData').value;
-    var nomorPengambil = document.getElementById('nomorData').value;
     var alamatPengambil = document.getElementById('alamatData').value;
     var kecamatanPengambil = document.getElementById('kecamatanData').value;
     var kotaPengambil = document.getElementById('kotaData').value;
     var provinsiPengambil = document.getElementById('provinsiData').value;
     var kodeposPengambil = document.getElementById('kodeposData').value;
     var catatanPengambil = document.getElementById('catatanData').value;
+    var bank = document.getElementById('bank').value;
+    var atasNamaBank = document.getElementById('atasNamaBank').value;
+    var norek = document.getElementById('norek').value;
+    var ewallet = document.getElementById('ewallet').value;
+    var namaewalletData = document.getElementById('namaewallet').value;
+    var noewallet = document.getElementById('noewallet').value;
+    var kapasitas = document.getElementById('kapasitas').value;
 
     // edit akun
     $('#editAkun').click(function (e) {
@@ -67,14 +73,14 @@ $(document).ready(function () {
                     } else {
                         $.ajax({
                             type: "POST",
-                            url: "/pemilik/akun/passwordCheck",
+                            url: "/pengambil/akun/passwordCheck",
                             data: formData,
                             processData: false,
                             contentType: false,
                             success: function (response) {
                                 $.ajax({
                                     type: "POST",
-                                    url: "/pemilik/akun/gantiDataAkun",
+                                    url: "/pengambil/akun/gantiDataAkun",
                                     data: formData,
                                     processData: false,
                                     contentType: false,
@@ -93,7 +99,8 @@ $(document).ready(function () {
         }).then((result) => {
             if (result.isConfirmed) {
                 Swal.fire('Perubahan Data Akun Berhasil!', '', 'success');
-                setTimeout(window.location.href = '/logout', 4000);
+                console.log(result)
+                // setTimeout(window.location.href = '/logout', 4000);
             }
         });
     });
@@ -190,45 +197,18 @@ $(document).ready(function () {
         }).then((result) => {
             if (result.isConfirmed) {
                 Swal.fire('Perubahan Data Akun Berhasil!', '', 'success');
-                setTimeout(window.location.href = '/pemilik/akun', 3000);
+                setTimeout(window.location.href = '/pengambil/akun', 3000);
             }
         });
     });
 
-    $('#pengambil').click(function (e) {
+    $('#editPengambil').click(function (e) {
+        e.preventDefault();
+
         Swal.fire({
-            title: "Daftar Menjadi Member Pengambil Sampah",
+            title: "Edit Data Pengambil Sampah",
             html: `
                     <form action="" method="POST" id="orderForm">
-                        <div class="mb-3">
-                            <p class="form-label" style="font-size:12;"> <input class="form-check-input" type="checkbox" id="useAuthData" name="useAuthData"> Isi data dengan informasi akun saya</p>
-                        </div>
-                        <div class="mb-3">
-                            <input class="form-control" type="text" name="nama" placeholder="Nama Pemilik Sampah" required>
-                        </div>
-                        <div class="mb-3">
-                            <input class="form-control" type="text" name="nomor" placeholder="Nomor Handphone (+62xxx)" required>
-                        </div>
-                        <div class="mb-3 text-start">
-                            <label for="alamat" class="form-label">Alamat Pengambilan</label>
-                            <textarea class="form-control" id="alamat" name="alamat" rows="3" required></textarea>
-                        </div>
-                        <div class="mb-3">
-                            <input class="form-control" type="text" name="kecamatan" placeholder="Kecamatan" required>
-                        </div>
-                        <div class="mb-3">
-                            <input class="form-control" type="text" name="kota" placeholder="Kota atau Kabupaten" required>
-                        </div>
-                        <div class="mb-3">
-                            <input class="form-control" type="text" name="provinsi" placeholder="Provinsi" required>
-                        </div>
-                        <div class="mb-3">
-                            <input class="form-control" type="number" name="kodePos" placeholder="Kode Pos" required>
-                        </div>
-                        <div class="mb-3 text-start">
-                            <label for="catatan" class="form-label">Catatan Alamat Tambahan</label>
-                            <textarea class="form-control" id="catatan" name="catatan" rows="3"></textarea>
-                        </div>
                         <div class="mb-3">
                             <select class="form-select" name="bank" id="bank">
                                 <option value="" disabled selected>Pilih Bank</option>
@@ -261,19 +241,16 @@ $(document).ready(function () {
                             <input class="form-control" type="number" name="noewallet" id="noewallet" placeholder="Nomor E-Wallet" disabled>
                         </div>
                         <div class="mb-3">
-                        <select class="form-select" name="berat" required>
+                        <select class="form-select" name="berat" id="berat" required>
                             <option value="" disabled selected>Pilih Berat Maksimum Pengangkutan</option>
                             <option value="small">Small (Maks. 5 kg)</option>
                             <option value="medium">Medium (Maks. 20 kg)</option>
                             <option value="large">Large (Maks. 100 kg)</option>
                         </select>
                         </div>
-                        <div class="mb-3">
-                            <p class="form-label" style="font-size:12;"> <input class="form-check-input" type="checkbox" id="setuju" name="setuju"> Dengan ini, saya setuju atas seluruh <a href="">Terms & Condition</a> MoneyTrash!</p>
-                        </div>
                     </form>`,
-            showCancelButton: false,
-            confirmButtonText: "Daftar!",
+            showCancelButton: true,
+            confirmButtonText: "Ubah",
             focusConfirm: false,
             showLoaderOnConfirm: true,
             didOpen: () => {
@@ -292,101 +269,19 @@ $(document).ready(function () {
                     }
                 });
 
-                const useAuthDataCheckbox = Swal.getPopup().querySelector(
-                    "#useAuthData");
+                Swal.getPopup().querySelector('#bank').value = bank;
+                Swal.getPopup().querySelector('#atasNamaBank').value = atasNamaBank;
+                Swal.getPopup().querySelector('#norek').value = norek;
+                Swal.getPopup().querySelector('#ewallet').value = ewallet;
+                Swal.getPopup().querySelector('#namaewallet').value = namaewalletData;
+                Swal.getPopup().querySelector('#noewallet').value = noewallet;
+                Swal.getPopup().querySelector('#berat').value = kapasitas;
+
                 const orderForm = Swal.getPopup().querySelector("#orderForm");
-                $(useAuthDataCheckbox).on("change", function () {
-                    if (useAuthDataCheckbox.checked) {
-                        Swal.getPopup().querySelector("input[name='nama']")
-                            .value = namaPengambil;
-                        Swal.getPopup().querySelector("input[name='nama']")
-                            .disabled = true;
-                        Swal.getPopup().querySelector("input[name='nomor']")
-                            .value = nomorPengambil;
-                        Swal.getPopup().querySelector("input[name='nomor']")
-                            .disabled = true;
-                        Swal.getPopup().querySelector("textarea[name='alamat']")
-                            .value = alamatPengambil;
-                        Swal.getPopup().querySelector("textarea[name='alamat']")
-                            .disabled = true;
-                        Swal.getPopup().querySelector("input[name='kecamatan']")
-                            .value = kecamatanPengambil;
-                        Swal.getPopup().querySelector("input[name='kecamatan']")
-                            .disabled = true;
-                        Swal.getPopup().querySelector("input[name='kota']")
-                            .value = kotaPengambil;
-                        Swal.getPopup().querySelector("input[name='kota']")
-                            .disabled = true;
-                        Swal.getPopup().querySelector("input[name='provinsi']")
-                            .value = provinsiPengambil;
-                        Swal.getPopup().querySelector("input[name='provinsi']")
-                            .disabled = true;
-                        Swal.getPopup().querySelector("input[name='kodePos']")
-                            .value = kodeposPengambil;
-                        Swal.getPopup().querySelector("input[name='kodePos']")
-                            .disabled = true;
-                        Swal.getPopup().querySelector(
-                            "textarea[name='catatan']")
-                            .value = catatanPengambil;
-                        Swal.getPopup().querySelector(
-                            "textarea[name='catatan']")
-                            .disabled = true;
-                    } else {
-                        // Kosongkan input jika checkbox tidak dicentang
-                        Swal.getPopup().querySelector("input[name='nama']")
-                            .value = "";
-                        Swal.getPopup().querySelector("input[name='nama']")
-                            .disabled = false;
-                        Swal.getPopup().querySelector("input[name='nomor']")
-                            .value = "";
-                        Swal.getPopup().querySelector("input[name='nomor']")
-                            .disabled = false;
-                        Swal.getPopup().querySelector("textarea[name='alamat']")
-                            .value = "";
-                        Swal.getPopup().querySelector("textarea[name='alamat']")
-                            .disabled = false;
-                        Swal.getPopup().querySelector("input[name='kecamatan']")
-                            .value = "";
-                        Swal.getPopup().querySelector("input[name='kecamatan']")
-                            .disabled = false;
-                        Swal.getPopup().querySelector("input[name='kota']")
-                            .value = "";
-                        Swal.getPopup().querySelector("input[name='kota']")
-                            .disabled = false;
-                        Swal.getPopup().querySelector("input[name='provinsi']")
-                            .value = "";
-                        Swal.getPopup().querySelector("input[name='provinsi']")
-                            .disabled = false;
-                        Swal.getPopup().querySelector("input[name='kodePos']")
-                            .value = "";
-                        Swal.getPopup().querySelector("input[name='kodePos']")
-                            .disabled = false;
-                        Swal.getPopup().querySelector(
-                            "textarea[name='catatan']")
-                            .value = "";
-                        Swal.getPopup().querySelector(
-                            "textarea[name='catatan']")
-                            .disabled = false;
-                    }
-                });
+
             },
             preConfirm: () => {
-                const nama = Swal.getPopup().querySelector("input[name='nama']")
-                    .value;
-                const nomor = Swal.getPopup().querySelector("input[name='nomor']")
-                    .value;
-                alamatValue = Swal.getPopup().querySelector("textarea[name='alamat']")
-                    .value;
-                kecamatanValue = Swal.getPopup().querySelector(
-                    "input[name='kecamatan']").value;
-                kotaValue = Swal.getPopup().querySelector("input[name='kota']").value;
-                provinsiValue = Swal.getPopup().querySelector("input[name='provinsi']")
-                    .value;
-                kodePosValue = Swal.getPopup().querySelector("input[name='kodePos']")
-                    .value;
-                catatanValue = Swal.getPopup().querySelector("textarea[name='catatan']")
-                    .value;
-                kapasitas = Swal.getPopup().querySelector("select[name='berat']")
+                const kapasitas = Swal.getPopup().querySelector("select[name='berat']")
                     .value;
                 const bank = Swal.getPopup().querySelector("select[name='bank']")
                     .value;
@@ -400,26 +295,12 @@ $(document).ready(function () {
                     .value;
                 const noewallet = Swal.getPopup().querySelector("input[name='noewallet']")
                     .value;
-                setujuCheckbox = Swal.getPopup().querySelector("input[name='setuju']");
 
-                if (!nama || !nomor || !alamatValue || !kecamatanValue || !kotaValue ||
-                    !provinsiValue || !kodePosValue || !kapasitas || !bank || !norek || !atasNamaBank && (!ewallet && !noewallet && !namaewallet )) {
+                if ( !kapasitas || !bank || !norek || !atasNamaBank && (!ewallet && !noewallet && !namaewallet )) {
                     Swal.showValidationMessage("Semua Kolom Harus Terisi!");
-                } else {
-                    if (!setujuCheckbox.checked) {
-                        Swal.showValidationMessage("Anda Harus Menetujui Terms And Condition");
-                    }
                 }
 
                 const formData = new FormData(orderForm);
-                formData.append('_token', csrf);
-                formData.append('nama', nama);
-                formData.append('nomor', nomor);
-                formData.append('alamat', alamatValue);
-                formData.append('kecamatan', kecamatanValue);
-                formData.append('kota', kotaValue);
-                formData.append('provinsi', provinsiValue);
-                formData.append('kodePos', kodePosValue);
                 formData.append('catatan', catatanValue);
                 formData.append('kapasitas', kapasitas);
                 formData.append('bank', bank);
@@ -430,7 +311,7 @@ $(document).ready(function () {
                 formData.append('noewallet', noewallet);
 
                 $.ajax({
-                    url: '/pemilik/akun/daftarPengambil',
+                    url: '/pengambil/akun/simpanDataPengambil',
                     type: 'POST',
                     data: formData,
                     processData: false,
@@ -453,14 +334,14 @@ $(document).ready(function () {
         }).then((result) => {
             if (result.isConfirmed) {
                 Swal.fire({
-                    title: 'Mendaftar Menjadi Agen Pengambil Berhasil!',
+                    title: 'Edit Data Pengambil Berhasil!',
                     icon: 'success',
                     timer: 2000,
                     timerProgressBar: true,
                     showConfirmButton: false,
                     allowOutsideClick: false
                 }).then(() => {
-                    window.location.href = '/logout';
+                    window.location.href = '/pengambil/akun';
                 });
             }
         });

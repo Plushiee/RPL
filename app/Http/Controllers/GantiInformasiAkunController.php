@@ -63,6 +63,34 @@ class GantiInformasiAkunController extends Controller
 
         return response()->json(['successGanti' => 'Ganti Data Berhasil']);
     }
+    public function gantiDataAkunPengambil(Request $request)
+    {
+        $namaAkun = $request->nama;
+        $nomor = $request->nomor;
+        $oldPassword = $request->oldPassword;
+        $password = $request->password;
+        $user = UserEmailModel::where('email', Auth::email())->first();
+        $pengambil = UserPengambilModel::find(Auth::id());
+        dd($user);
+        if ($oldPassword === $password) {
+            $pengambil->name = $namaAkun;
+            $pengambil->nomor = $nomor;
+            $pengambil->save();
+            $user->name = $namaAkun;
+            $user->nomor = $nomor;
+            $user->save();
+        } else {
+            $user->name = $namaAkun;
+            $user->nomor = $nomor;
+            $user->password = bcrypt($password);
+            $user->save();
+            $pengambil->name = $namaAkun;
+            $pengambil->nomor = $nomor;
+            $pengambil->save();
+        }
+        return response()->json(['successGanti' => 'Ganti Data Berhasil']);
+    }
+
     public function daftarPengambil(Request $request)
     {
         $nama = $request->nama;

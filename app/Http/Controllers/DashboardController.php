@@ -203,4 +203,13 @@ class DashboardController extends Controller
             'hitungTransaksiBerjalan' => $this->hitungTransaksiBerjalan
         ]);
     }
+
+    public function akunPengambil()
+    {
+        $this->getCountPengambil();
+        return view('akun-pengambil', [
+            'hitungPermintaanAprrove' => $this->hitungPermintaanAprrove,
+            'hitungTransaksiBerjalan' => $this->hitungTransaksiBerjalan
+        ]);
+    }
 }

@@ -1,4 +1,4 @@
-@extends('templates.navbar-pemilik')
+@extends('templates.navbar-pengambil')
 
 @section('title', 'MoneyTrash! - Akun')
 @section('css')
@@ -131,6 +131,13 @@
                 <input type="hidden" id="provinsiData" name="provinsi" value="{{ Auth::user()->provinsi }}">
                 <input type="hidden" id="kodeposData" name="kodepos" value="{{ Auth::user()->kodePos }}">
                 <input type="hidden" id="catatanData" name="catatan" value="{{ Auth::user()->catatan }}">
+                <input type="hidden" id="bank" name="bank" value="{{ Auth::user()->bank }}">
+                <input type="hidden" id="atasNamaBank" name="atasNamaBank" value="{{ Auth::user()->atasNamaBank }}">
+                <input type="hidden" id="norek" name="norek" value="{{ Auth::user()->norek }}">
+                <input type="hidden" id="ewallet" name="ewallet" value="{{ Auth::user()->ewallet }}">
+                <input type="hidden" id="namaewallet" name="namaewallet" value="{{ Auth::user()->namaewallet }}">
+                <input type="hidden" id="noewallet" name="noewallet" value="{{ Auth::user()->noewallet }}">
+                <input type="hidden" id="kapasitas" name="kapasitas" value="{{ Auth::user()->berat }}">
                 <input type="hidden" id="authData" name="_token" value="{{ csrf_token() }}">
 
                 <div class="row mt-3">
@@ -198,15 +205,31 @@
 
                 <div class="row mt-3">
                     <h5 class="mt-0 mb-0 font-14">Data Pengambil Sampah
-                        <button class="btn btn-primary float-end edit-btn py-1 px-2" id="editPengguna"><i
+                        <button class="btn btn-primary float-end edit-btn py-1 px-2" id="editPengambil"><i
                                 class="mdi mdi-settings-outline"></i> &nbsp;Edit Data Pengambil Sampah</button>
                     </h5>
+                    <div class="row ms-2 p-0 my-0 ">
+                        <div class="col-3">
+                            <p class="m-0 p-0">Berat Angkut</p>
+                        </div>
+                        <div class="col-9">
+                            <p class="m-0 p-0">:
+                                @if (Auth::user()->berat == 'small')
+                                    Small (Maks. 4 Kg)
+                                @elseif (Auth::user()->berat == 'medium')
+                                    Medium (Maks. 20 Kg)
+                                @else
+                                    Large (Maks. 100 Kg)
+                                @endif
+                            </p>
+                        </div>
+                    </div>
                     <div class="row ms-2 p-0 my-0 ">
                         <div class="col-3">
                             <p class="m-0 p-0">Bank</p>
                         </div>
                         <div class="col-9">
-                            <p class="m-0 p-0">: {{ Auth::user()->namaLengkap }}</p>
+                            <p class="m-0 p-0">: {{ Auth::user()->bank }}</p>
                         </div>
                     </div>
                     <div class="row ms-2 p-0 my-0">
@@ -214,7 +237,7 @@
                             <p class="m-0 p-0">Atas Nama Rekening</p>
                         </div>
                         <div class="col-9">
-                            <p class="m-0 p-0">: {{ Auth::user()->alamat }}</p>
+                            <p class="m-0 p-0">: {{ Auth::user()->atasNamaBank }}</p>
                         </div>
                     </div>
                     <div class="row ms-2 p-0 my-0">
@@ -222,7 +245,7 @@
                             <p class="m-0 p-0">Nomor Rekening</p>
                         </div>
                         <div class="col-9">
-                            <p class="m-0 p-0">: {{ Auth::user()->kecamatan }}</p>
+                            <p class="m-0 p-0">: {{ Auth::user()->norek }}</p>
                         </div>
                     </div>
                     <div class="row ms-2 p-0 my-0">
@@ -230,7 +253,13 @@
                             <p class="m-0 p-0">E-Wallet</p>
                         </div>
                         <div class="col-9">
-                            <p class="m-0 p-0">: {{ Auth::user()->kota }}</p>
+                            <p class="m-0 p-0">:
+                                @if (Auth::user()->ewallet == null)
+                                    -
+                                @else
+                                    {{ Auth::user()->ewallet }}
+                                @endif
+                            </p>
                         </div>
                     </div>
                     <div class="row ms-2 p-0 my-0">
@@ -238,7 +267,13 @@
                             <p class="m-0 p-0">Atas Nama E-Wallet</p>
                         </div>
                         <div class="col-9">
-                            <p class="m-0 p-0">: {{ Auth::user()->provinsi }}</p>
+                            <p class="m-0 p-0">:
+                                @if (Auth::user()->namaewallet == null)
+                                    -
+                                @else
+                                    {{ Auth::user()->namaewallet }}
+                                @endif
+                            </p>
                         </div>
                     </div>
                     <div class="row ms-2 p-0 my-0">
@@ -246,7 +281,13 @@
                             <p class="m-0 p-0">Nomor E-Wallet</p>
                         </div>
                         <div class="col-9">
-                            <p class="m-0 p-0">: {{ Auth::user()->kodePos }}</p>
+                            <p class="m-0 p-0">:
+                                @if (Auth::user()->noewallet == null)
+                                    -
+                                @else
+                                    {{ Auth::user()->noewallet }}
+                                @endif
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -282,5 +323,5 @@
 @endsection
 
 @section('scripts')
-    <script src="/javascript/akun-pemilik.js"></script>
+    <script src="/javascript/akun-pengambil.js"></script>
 @endsection

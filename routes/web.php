@@ -92,6 +92,7 @@ Route::middleware(['auth:pengambil'])->group(function () {
     Route::get('/pengambil/dashboard', [DashboardController::class, 'dashboardPengambil']); // default pengambil
     Route::get('/pengambil/pembayaran', [DashboardController::class, 'pembayaranPengambil']); // Pembayaran Pengambil
     Route::get('/pengambil/riwayat', [DashboardController::class, 'riwayatPengambil']); // Riwayat Pengambil
+    Route::get('/pengambil/akun', [DashboardController::class, 'akunPengambil']); // Riwayat Pengambil
     Route::get('/pengambil/dashboard/ambil', [DashboardController::class, 'ambilPengambil']); // halaman ambil pesanan
     Route::get('/pengambil/dashboard/pengumuman', [DashboardController::class, 'pengumumanPengambil']); // halaman pengumuman
 
@@ -104,6 +105,12 @@ Route::middleware(['auth:pengambil'])->group(function () {
     Route::post('/pengambil/dashboard/ambil', [AmbilPengambilController::class, 'ambilPengambilSave']); // ambil pesanan
     Route::post('/pengambil/pembayaran/approved', [AmbilPengambilController::class, 'ambilPengambilSave']); // ambil pesanan
     Route::post('/pengambil/riwayat/terambil', [AmbilPengambilController::class, 'ambilPengambilSave']); // pesanan terambil
+
+    // Ganti Data Akun
+    Route::post('/pengambil/akun/passwordCheck', [GantiInformasiAkunController::class, 'passwordCheck']); // Check Password
+    Route::post('/pengambil/akun/gantiDataAkun', [GantiInformasiAkunController::class, 'gantiDataAkunPengambil']); // Simpan Data Akun
+    Route::post('/pengambil/akun/gantiDataPemilik', [GantiInformasiAkunController::class, 'gantiDataPemilikPengambil']); // Simpan Data Pemilik
+    Route::post('/pengambil/akun/simpanDataPengambil', [GantiInformasiAkunController::class, 'simpanDataPengambil']); // Simpan Data Pengambil
 
      // Ambil BuktiGambar
      Route::get('/pengambil/bukti/transaksi/{jenis}/{id}/{gambar}', [AmbilGambarController::class, 'showBuktiSampah']); //ambil bukti
