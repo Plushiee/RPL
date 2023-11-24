@@ -218,4 +218,13 @@ class DashboardController extends Controller
             'hitungTransaksiBerjalan' => $this->hitungTransaksiBerjalan
         ]);
     }
+
+    // Bank Sampah
+    public function dashboardBank()
+    {
+
+        return view('dashboard-bank', [
+
+        ]);
+    }
 }

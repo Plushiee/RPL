@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\UserBankSampahModel;
+
 use Illuminate\Http\Request;
 use App\Models\UserEmailModel;
-use \App\Models\UserPengambilModel;
+use App\Models\UserPengambilModel;
+use App\Models\UserBankSampahModel;
 use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
@@ -35,16 +36,16 @@ class LoginController extends Controller
                 $isBank = UserBankSampahModel::where('email', $email)->exists();
 
                 if ($isPemilik && ($isPengambil || $isBank)) {
-                    if($isPemilik) {
+                    if ($isPengambil) {
                         return redirect('/pilih-akun')->with("pengambil", "User Ini Ada Pengambil");
                     }
-                    if($isBank) {
+                    if ($isBank) {
                         return redirect('/pilih-akun')->with("bank", "User Ini Ada Bank");
                     }
+
+                } else {
+                    return redirect('/pemilik/dashboard')->with("success", "Berhasil Login");
                 }
-
-                return redirect('/pemilik/dashboard');
-
             } else {
                 return back()->with("errorWrong", "Email atau Password anda salah");
             }
@@ -53,20 +54,29 @@ class LoginController extends Controller
         }
     }
 
-    function loginPemilik(Request $request)
+    public function loginPemilik(Request $request)
     {
         return redirect('/pemilik/dashboard');
     }
 
-    function loginPengambil(Request $request)
+    public function loginPengambil(Request $request)
     {
         $email = $request->email;
         $remember = $request->remember;
         $userPengambil = UserPengambilModel::where('email', $email)->first();
-        // dd($userPengambil);
         Auth::guard('pemilik')->logout();
         Auth::guard('pengambil')->login($userPengambil, $remember);
         return redirect('/pengambil/dashboard');
+    }
+
+    public function loginBank(Request $request)
+    {
+        $email = $request->email;
+        $remember = $request->remember;
+        $userBank = UserBankSampahModel::where('email', $email)->first();
+        Auth::guard('pemilik')->logout();
+        Auth::guard('bank')->login($userBank, $remember);
+        return redirect('/bank/dashboard');
     }
 
     public function logout()
@@ -75,3 +85,4 @@ class LoginController extends Controller
         return redirect('/login');
     }
 }
+

@@ -21,8 +21,9 @@ class CheckRole
 
         $isPemilik = \App\Models\UserEmailModel::where('email', $email)->exists();
         $isPengambil = \App\Models\UserPengambilModel::where('email', $email)->exists();
+        $isBank = \App\Models\UserBankSampahModel::where('email', $email)->exists();
 
-        if ($isPemilik && $isPengambil) {
+        if ($isPemilik && ($isPengambil || $isBank)) {
             return redirect('/pilih-akun');
         }
 

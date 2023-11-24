@@ -69,6 +69,10 @@
                             @if (session('bank'))
                                 <form method="POST" action="{{ route('loginBank') }}">
                                     @csrf
+                                    <input type="hidden" id="email" name="email"
+                                        value="{{ Auth::user()->email }}">
+                                    <input type="hidden" id="remember" name="remember"
+                                        value="{{ Auth::user()->remember_token }}">
                                     <div class="row mb-4">
                                         <div class="d-grid">
                                             <button type="submit" class="btn btn-success submit" id="bank">Bank

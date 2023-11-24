@@ -43,12 +43,17 @@ return [
 
         'pemilik' => [
             'driver' => 'session',
-            'provider' => 'pemilik', // Ensure this matches the provider below
+            'provider' => 'pemilik',
         ],
 
         'pengambil' => [
             'driver' => 'session',
-            'provider' => 'pengambil', // Ensure this matches the provider below
+            'provider' => 'pengambil',
+        ],
+
+        'bank' => [
+            'driver' => 'session',
+            'provider' => 'bank',
         ],
     ],
 
@@ -83,6 +88,11 @@ return [
         'pengambil' => [
             'driver' => 'eloquent',
             'model' => App\Models\UserPengambilModel::class,
+        ],
+
+        'bank' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\UserBankSampahModel::class,
         ],
 
         // 'users' => [

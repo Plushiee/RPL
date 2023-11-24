@@ -84,6 +84,7 @@ Route::middleware(['auth:pemilik','checkRole'])->group(function () {
     Route::get('/pilih-akun', [PilihAkunController::class, 'pilihAkun']);
     Route::get('/login/loginPemilik', [LoginController::class, 'loginPemilik'])->name('loginPemilik');
     Route::post('/login/loginPengambil', [LoginController::class, 'loginPengambil'])->name('loginPengambil');
+    Route::post('/login/loginBank', [LoginController::class, 'loginBank'])->name('loginBank');
     Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 });
 
@@ -117,4 +118,10 @@ Route::middleware(['auth:pengambil'])->group(function () {
      Route::get('/pengambil/bukti/transaksi/{jenis}/{id}/{gambar}', [AmbilGambarController::class, 'showBuktiSampah']); //ambil bukti
      Route::get('/pengambil/bukti/pembayaran/{id}/{gambar}', [AmbilGambarController::class, 'showBuktiPembayaran']); //ambil bukti
 
+});
+
+
+Route::middleware(['auth:bank'])->group(function () {
+    // Pengambil Contrroller
+    Route::get('/bank/dashboard', [DashboardController::class, 'dashboardBank']); // default pengambil
 });
