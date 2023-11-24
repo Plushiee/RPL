@@ -100,7 +100,7 @@ $(document).ready(function () {
             if (result.isConfirmed) {
                 Swal.fire('Perubahan Data Akun Berhasil!', '', 'success');
                 console.log(result)
-                // setTimeout(window.location.href = '/logout', 4000);
+                setTimeout(window.location.href = '/logout', 4000);
             }
         });
     });
@@ -181,7 +181,7 @@ $(document).ready(function () {
                 } else {
                     $.ajax({
                         type: "POST",
-                        url: "/pemilik/akun/gantiDataPemilik",
+                        url: "/pengambil/akun/gantiDataPemilik",
                         data: formData,
                         processData: false,
                         contentType: false,
@@ -281,7 +281,7 @@ $(document).ready(function () {
 
             },
             preConfirm: () => {
-                const kapasitas = Swal.getPopup().querySelector("select[name='berat']")
+                const berat = Swal.getPopup().querySelector("select[name='berat']")
                     .value;
                 const bank = Swal.getPopup().querySelector("select[name='bank']")
                     .value;
@@ -296,13 +296,13 @@ $(document).ready(function () {
                 const noewallet = Swal.getPopup().querySelector("input[name='noewallet']")
                     .value;
 
-                if ( !kapasitas || !bank || !norek || !atasNamaBank && (!ewallet && !noewallet && !namaewallet )) {
+                if ( !berat || !bank || !norek || !atasNamaBank && (!ewallet && !noewallet && !namaewallet )) {
                     Swal.showValidationMessage("Semua Kolom Harus Terisi!");
                 }
 
                 const formData = new FormData(orderForm);
-                formData.append('catatan', catatanValue);
-                formData.append('kapasitas', kapasitas);
+                formData.append('_token', csrf);
+                formData.append('berat', berat);
                 formData.append('bank', bank);
                 formData.append('atasNamaBank', atasNamaBank);
                 formData.append('norek', norek);

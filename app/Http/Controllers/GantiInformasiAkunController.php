@@ -69,9 +69,8 @@ class GantiInformasiAkunController extends Controller
         $nomor = $request->nomor;
         $oldPassword = $request->oldPassword;
         $password = $request->password;
-        $user = UserEmailModel::where('email', Auth::email())->first();
+        $user = UserEmailModel::where('email', Auth::user()->email)->first();
         $pengambil = UserPengambilModel::find(Auth::id());
-        dd($user);
         if ($oldPassword === $password) {
             $pengambil->name = $namaAkun;
             $pengambil->nomor = $nomor;
@@ -89,6 +88,52 @@ class GantiInformasiAkunController extends Controller
             $pengambil->save();
         }
         return response()->json(['successGanti' => 'Ganti Data Berhasil']);
+    }
+
+    public function gantiDataPemilikPengambil(Request $request)
+    {
+        $nama = $request->nama;
+        $alamat = $request->alamat;
+        $kecamatan = $request->kecamatan;
+        $kota = $request->kota;
+        $provinsi = $request->provinsi;
+        $kodePos = $request->kodePos;
+        $catatan = $request->catatan;
+
+        $pengambil = UserPengambilModel::find(Auth::id());
+
+        $pengambil->namaLengkap = $nama;
+        $pengambil->alamat = $alamat;
+        $pengambil->kecamatan = $kecamatan;
+        $pengambil->kota = $kota;
+        $pengambil->provinsi = $provinsi;
+        $pengambil->kodePos = $kodePos;
+        $pengambil->catatan = $catatan;
+        $pengambil->save();
+
+        return response()->json(['successGanti' => 'Ganti Data Berhasil']);
+    }
+
+    public function simpanDataPengambil(Request $request) {
+        $berat = $request->berat;
+        $atasNamaBank = $request->atasNamaBank;
+        $bank = $request->bank;
+        $norek = $request->norek;
+        $ewallet = $request->ewallet;
+        $namaewallet = $request->namaewallet;
+        $noewallet = $request->noewallet;
+        
+        $pengambil = UserPengambilModel::find(Auth::id());
+
+        $pengambil->berat = $berat;
+        $pengambil->atasNamaBank = $atasNamaBank;
+        $pengambil->bank = $bank;
+        $pengambil->norek = $norek;
+        $pengambil->ewallet = $ewallet;
+        $pengambil->namaewallet = $namaewallet;
+        $pengambil->noewallet = $noewallet;
+        $pengambil->save();
+
     }
 
     public function daftarPengambil(Request $request)

@@ -64,7 +64,7 @@
                                         @if (Auth::check() && Auth::user()->status === 'pemilik')
                                             Pemilik Sampah
                                         @else
-                                            Administrator
+                                            Pengambil Sampah
                                         @endif
                                     </p>
                                 </div>
