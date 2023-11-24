@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\UserBankSampahModel;
 use Illuminate\Http\Request;
 use App\Models\UserEmailModel;
 use \App\Models\UserPengambilModel;
@@ -31,9 +32,15 @@ class LoginController extends Controller
 
                 $isPemilik = UserEmailModel::where('email', $email)->exists();
                 $isPengambil = UserPengambilModel::where('email', $email)->exists();
+                $isBank = UserBankSampahModel::where('email', $email)->exists();
 
-                if ($isPemilik && $isPengambil) {
-                    return redirect('/pilih-akun');
+                if ($isPemilik && ($isPengambil || $isBank)) {
+                    if($isPemilik) {
+                        return redirect('/pilih-akun')->with("pengambil", "User Ini Ada Pengambil");
+                    }
+                    if($isBank) {
+                        return redirect('/pilih-akun')->with("bank", "User Ini Ada Bank");
+                    }
                 }
 
                 return redirect('/pemilik/dashboard');

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\UserBankSampahModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\UserEmailModel;
@@ -177,6 +178,43 @@ class GantiInformasiAkunController extends Controller
         $pengambil->namaewallet = $namaewallet;
         $pengambil->noewallet = $noewallet;
         $pengambil->save();
+
+        return response()->json(['successGanti' => 'Mendaftar Menjadi Agen Berhasil']);
+    }
+
+    public function daftarBank(Request $request)
+    {
+        $name = $request->name;
+        $nomor = $request->nomor;
+        $alamat = $request->alamat;
+        $kecamatan = $request->kecamatan;
+        $kota = $request->kota;
+        $provinsi = $request->provinsi;
+        $kodePos = $request->kodePos;
+        $catatan = $request->catatan;
+        $kapasitas = $request->kapasitas;
+        $lang = $request->lang;
+        $long = $request->long;
+
+        $user = UserEmailModel::find(Auth::id());
+        $bankSampah = new UserBankSampahModel;
+
+        // isi data akun
+        $bankSampah->idUserMail = Auth::id();
+        $bankSampah->name = $name;
+        $bankSampah->email = $user->email;
+        $bankSampah->nomor = $nomor;
+        $bankSampah->alamat = $alamat;
+        $bankSampah->kecamatan = $kecamatan;
+        $bankSampah->kota = $kota;
+        $bankSampah->provinsi = $provinsi;
+        $bankSampah->kodePos = $kodePos;
+        $bankSampah->catatan = $catatan;
+        $bankSampah->kapasitas = $kapasitas;
+        $bankSampah->lang = $lang;
+        $bankSampah->long = $long;
+
+        $bankSampah->save();
 
         return response()->json(['successGanti' => 'Mendaftar Menjadi Agen Berhasil']);
     }

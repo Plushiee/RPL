@@ -57,6 +57,7 @@ Route::middleware(['auth:pemilik'])->group(function () {
 
     // Daftar
     Route::post('/pemilik/akun/daftarPengambil', [GantiInformasiAkunController::class, 'daftarPengambil']); // Daftar Pengambil
+    Route::post('/pemilik/akun/daftarBank', [GantiInformasiAkunController::class, 'daftarBank']); // Daftar Bank
 
     // Pembayaran
     Route::post('/pemilik/pembaran/simpanbukti', [TransaksiController::class, 'simpanbukti'])->name('uploadBukti'); //Lihat bukti

@@ -30,9 +30,9 @@
                             <h4 class="header-title mb-3">Selamat
                                 <?php
                                 date_default_timezone_set('Asia/Jakarta');
-
+                                
                                 $jam = date('H');
-
+                                
                                 if ($jam >= 5 && $jam < 12) {
                                     $waktu = 'Pagi';
                                 } elseif ($jam >= 12 && $jam < 18) {
@@ -40,7 +40,7 @@
                                 } else {
                                     $waktu = 'Malam';
                                 }
-
+                                
                                 echo $waktu;
                                 ?>
                                 , {{ Auth::user()->name }} </h4>
@@ -196,27 +196,29 @@
                     </div>
                 </div>
 
+
+                @if (!$bank && !$pengambil)
                 <div class="header-title"></div>
+                    <div class="row">
+                        <h5 class="mt-3 mb-0 font-14">Daftar Sebagai</h5>
+                        <div class="col-12 mx-0 px-0">
+                            <div class="card-box widget-inline mt-0 pt-3" style="border: none">
+                                <div class="row g-0 g-sm-3 g-md-3">
+                                    <div class="col-xl-6 col-sm-12 d-grid widget-inline-box text-center">
+                                        <button class="btn btn-warning btn-block mt-3 mt-sm-0 p-3" type="button"
+                                            id="pengambil"><i class="bi bi-truck"></i>&nbsp; Pengambil Sampah</button>
+                                    </div>
 
-                <div class="row">
-                    <h5 class="mt-3 mb-0 font-14">Daftar Sebagai</h5>
-                    <div class="col-12 mx-0 px-0">
-                        <div class="card-box widget-inline mt-0 pt-3" style="border: none">
-                            <div class="row g-0 g-sm-3 g-md-3">
-                                <div class="col-xl-6 col-sm-12 d-grid widget-inline-box text-center">
-                                    <button class="btn btn-warning btn-block mt-3 mt-sm-0 p-3" type="button"
-                                        id="pengambil"><i class="bi bi-truck"></i>&nbsp; Pengambil Sampah</button>
-                                </div>
-
-                                <div class="col-xl-6 col-sm-12 d-grid widget-inline-box text-center"
-                                    style="border: none !important">
-                                    <button class="btn btn-success btn-block mt-3 mt-sm-0 p-3" type="button"><i
-                                            class="bi bi-box-seam"></i>&nbsp; Bank Sampah</button>
+                                    <div class="col-xl-6 col-sm-12 d-grid widget-inline-box text-center"
+                                        style="border: none !important">
+                                        <button class="btn btn-success btn-block mt-3 mt-sm-0 p-3" type="button"
+                                            id="bankSampah"><i class="bi bi-box-seam"></i>&nbsp; Bank Sampah</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                @endif
 
                 <!-- end row -->
 
@@ -250,5 +252,8 @@
 @endsection
 
 @section('scripts')
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBg-aZ-Iammau9oEl569JVpJu5olD_2rbQ&callback=initMap&libraries=places">
+    </script>
     <script src="/javascript/akun-pemilik.js"></script>
 @endsection

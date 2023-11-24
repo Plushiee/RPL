@@ -49,26 +49,34 @@
                                     </div>
                                 </div>
                             </form>
-                            <form method="POST" action="{{ route('loginPengambil') }}">
-                                @csrf
-                                <input type="hidden" id="email" name="email" value="{{ Auth::user()->email }}">
-                                <input type="hidden" id="remember" name="remember" value="{{ Auth::user()->remember_token }}">
-                                <div class="row mb-4">
-                                    <div class="d-grid">
-                                        <button type="submit" class="btn btn-success submit" id="pengambil">Pengambil
-                                            Sampah</button>
+                            @if (session('pengambil'))
+                                <form method="POST" action="{{ route('loginPengambil') }}">
+                                    @csrf
+                                    <input type="hidden" id="email" name="email"
+                                        value="{{ Auth::user()->email }}">
+                                    <input type="hidden" id="remember" name="remember"
+                                        value="{{ Auth::user()->remember_token }}">
+                                    <div class="row mb-4">
+                                        <div class="d-grid">
+                                            <button type="submit" class="btn btn-success submit"
+                                                id="pengambil">Pengambil
+                                                Sampah</button>
+                                        </div>
                                     </div>
-                                </div>
-                            </form>
-                            <form method="POST" action="{{ route('loginPengambil') }}">
-                                @csrf
-                                <div class="row mb-4">
-                                    <div class="d-grid">
-                                        <button type="submit" class="btn btn-success submit" id="bank">Bank
-                                            Sampah</button>
+                                </form>
+                            @endif
+
+                            @if (session('bank'))
+                                <form method="POST" action="{{ route('loginBank') }}">
+                                    @csrf
+                                    <div class="row mb-4">
+                                        <div class="d-grid">
+                                            <button type="submit" class="btn btn-success submit" id="bank">Bank
+                                                Sampah</button>
+                                        </div>
                                     </div>
-                                </div>
-                            </form>
+                                </form>
+                            @endif
                         </div>
                     </div>
                 </div>

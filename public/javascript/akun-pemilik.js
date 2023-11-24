@@ -11,6 +11,9 @@ $(document).ready(function () {
     var kodeposPengambil = document.getElementById('kodeposData').value;
     var catatanPengambil = document.getElementById('catatanData').value;
 
+    let long = "";
+    let lang = "";
+
     // edit akun
     $('#editAkun').click(function (e) {
         e.preventDefault();
@@ -41,9 +44,9 @@ $(document).ready(function () {
             focusConfirm: false,
             didOpen: () => {
                 Swal.getPopup().querySelector("input[name='nama']")
-                            .value = nameUser;
+                    .value = nameUser;
                 Swal.getPopup().querySelector("input[name='nomor']")
-                            .value = nomor;
+                    .value = nomor;
             },
             preConfirm: () => {
                 const namaAkun = Swal.getPopup().querySelector("input[name='nama']").value;
@@ -136,19 +139,19 @@ $(document).ready(function () {
             focusConfirm: false,
             didOpen: () => {
                 Swal.getPopup().querySelector("input[name='nama']")
-                            .value = namaPengambil;
+                    .value = namaPengambil;
                 Swal.getPopup().querySelector("textarea[name='alamat']")
-                            .value = alamatPengambil;
+                    .value = alamatPengambil;
                 Swal.getPopup().querySelector("input[name='kecamatan']")
-                            .value = kecamatanPengambil;
+                    .value = kecamatanPengambil;
                 Swal.getPopup().querySelector("input[name='kota']")
-                            .value = kotaPengambil;
+                    .value = kotaPengambil;
                 Swal.getPopup().querySelector("input[name='provinsi']")
-                            .value = provinsiPengambil;
+                    .value = provinsiPengambil;
                 Swal.getPopup().querySelector("input[name='kodePos']")
-                            .value = kodeposPengambil;
+                    .value = kodeposPengambil;
                 Swal.getPopup().querySelector("textarea[name='catatan']")
-                            .value = catatanPengambil;
+                    .value = catatanPengambil;
             },
             preConfirm: () => {
                 const nama = Swal.getPopup().querySelector("input[name='nama']").value;
@@ -197,7 +200,7 @@ $(document).ready(function () {
 
     $('#pengambil').click(function (e) {
         Swal.fire({
-            title: "Daftar Menjadi Member Pengambil Sampah",
+            title: "Daftar Menjadi Mitra Pengambil Sampah",
             html: `
                     <form action="" method="POST" id="orderForm">
                         <div class="mb-3">
@@ -210,7 +213,7 @@ $(document).ready(function () {
                             <input class="form-control" type="text" name="nomor" placeholder="Nomor Handphone (+62xxx)" required>
                         </div>
                         <div class="mb-3 text-start">
-                            <label for="alamat" class="form-label">Alamat Pengambilan</label>
+                            <label for="alamat" class="form-label">Alamat Tempat Tinggal</label>
                             <textarea class="form-control" id="alamat" name="alamat" rows="3" required></textarea>
                         </div>
                         <div class="mb-3">
@@ -403,7 +406,7 @@ $(document).ready(function () {
                 setujuCheckbox = Swal.getPopup().querySelector("input[name='setuju']");
 
                 if (!nama || !nomor || !alamatValue || !kecamatanValue || !kotaValue ||
-                    !provinsiValue || !kodePosValue || !kapasitas || !bank || !norek || !atasNamaBank && (!ewallet && !noewallet && !namaewallet )) {
+                    !provinsiValue || !kodePosValue || !kapasitas || !bank || !norek || !atasNamaBank && (!ewallet && !noewallet && !namaewallet)) {
                     Swal.showValidationMessage("Semua Kolom Harus Terisi!");
                 } else {
                     if (!setujuCheckbox.checked) {
@@ -462,6 +465,273 @@ $(document).ready(function () {
                 }).then(() => {
                     window.location.href = '/logout';
                 });
+            }
+        });
+    });
+
+    $('#bankSampah').click(function (e) {
+        Swal.fire({
+            title: "Daftar Menjadi Mitra Bank Sampah",
+            html: `
+                    <form action="" method="POST" id="orderForm">
+                        <div class="mb-3">
+                            <p class="form-label" style="font-size:12;"> <input class="form-check-input" type="checkbox" id="useAuthData" name="useAuthData"> Isi data dengan informasi akun saya</p>
+                        </div>
+                        <div class="mb-3">
+                            <input class="form-control" type="text" name="name" placeholder="Nama Bank Sampah" required>
+                        </div>
+                        <div class="mb-3">
+                            <input class="form-control" type="text" name="nomor" placeholder="Nomor Bank Sampah (+62xxx)" required>
+                        </div>
+                        <div class="mb-3 text-start">
+                            <label for="alamat" class="form-label">Alamat Tempat Tinggal</label>
+                            <textarea class="form-control" id="alamat" name="alamat" rows="3" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <input class="form-control" type="text" name="kecamatan" placeholder="Kecamatan" required>
+                        </div>
+                        <div class="mb-3">
+                            <input class="form-control" type="text" name="kota" placeholder="Kota atau Kabupaten" required>
+                        </div>
+                        <div class="mb-3">
+                            <input class="form-control" type="text" name="provinsi" placeholder="Provinsi" required>
+                        </div>
+                        <div class="mb-3">
+                            <input class="form-control" type="number" name="kodePos" placeholder="Kode Pos" required>
+                        </div>
+                        <div class="mb-3 text-start">
+                            <label for="catatan" class="form-label">Catatan Alamat Tambahan</label>
+                            <textarea class="form-control" id="catatan" name="catatan" rows="3"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <input class="form-control" type="number" name="kapasitas" id="kapasitas" placeholder="Kapasitas Bank Sampah (Kg)">
+                        </div>
+                        <div class="mb-3">
+                            <p class="form-label" style="font-size:12;"> <input class="form-check-input" type="checkbox" id="setuju" name="setuju"> Dengan ini, saya setuju atas seluruh <a href="">Terms & Condition</a> MoneyTrash!</p>
+                        </div>
+                    </form>`,
+            showCancelButton: false,
+            confirmButtonText: "Daftar!",
+            focusConfirm: false,
+            showLoaderOnConfirm: true,
+            didOpen: () => {
+                const ewalletSelect = Swal.getPopup().querySelector("#ewallet");
+                const noewalletInput = Swal.getPopup().querySelector("input[name='noewallet']");
+                const namaewallet = Swal.getPopup().querySelector("input[name='namaewallet']");
+
+                $(ewalletSelect).on("change", function () {
+                    var selectedEwallet = $(this).val();
+                    if (selectedEwallet === '') {
+                        $(noewalletInput).prop('disabled', true);
+                        $(namaewallet).prop('disabled', true);
+                    } else {
+                        $(noewalletInput).prop('disabled', false);
+                        $(namaewallet).prop('disabled', false);
+                    }
+                });
+
+                const useAuthDataCheckbox = Swal.getPopup().querySelector(
+                    "#useAuthData");
+                const orderForm = Swal.getPopup().querySelector("#orderForm");
+                $(useAuthDataCheckbox).on("change", function () {
+                    if (useAuthDataCheckbox.checked) {
+                        Swal.getPopup().querySelector("textarea[name='alamat']")
+                            .value = alamatPengambil;
+                        Swal.getPopup().querySelector("textarea[name='alamat']")
+                            .disabled = true;
+                        Swal.getPopup().querySelector("input[name='kecamatan']")
+                            .value = kecamatanPengambil;
+                        Swal.getPopup().querySelector("input[name='kecamatan']")
+                            .disabled = true;
+                        Swal.getPopup().querySelector("input[name='kota']")
+                            .value = kotaPengambil;
+                        Swal.getPopup().querySelector("input[name='kota']")
+                            .disabled = true;
+                        Swal.getPopup().querySelector("input[name='provinsi']")
+                            .value = provinsiPengambil;
+                        Swal.getPopup().querySelector("input[name='provinsi']")
+                            .disabled = true;
+                        Swal.getPopup().querySelector("input[name='kodePos']")
+                            .value = kodeposPengambil;
+                        Swal.getPopup().querySelector("input[name='kodePos']")
+                            .disabled = true;
+                        Swal.getPopup().querySelector(
+                            "textarea[name='catatan']")
+                            .value = catatanPengambil;
+                        Swal.getPopup().querySelector(
+                            "textarea[name='catatan']")
+                            .disabled = true;
+                    } else {
+                        // Kosongkan input jika checkbox tidak dicentang
+                        Swal.getPopup().querySelector("textarea[name='alamat']")
+                            .value = "";
+                        Swal.getPopup().querySelector("textarea[name='alamat']")
+                            .disabled = false;
+                        Swal.getPopup().querySelector("input[name='kecamatan']")
+                            .value = "";
+                        Swal.getPopup().querySelector("input[name='kecamatan']")
+                            .disabled = false;
+                        Swal.getPopup().querySelector("input[name='kota']")
+                            .value = "";
+                        Swal.getPopup().querySelector("input[name='kota']")
+                            .disabled = false;
+                        Swal.getPopup().querySelector("input[name='provinsi']")
+                            .value = "";
+                        Swal.getPopup().querySelector("input[name='provinsi']")
+                            .disabled = false;
+                        Swal.getPopup().querySelector("input[name='kodePos']")
+                            .value = "";
+                        Swal.getPopup().querySelector("input[name='kodePos']")
+                            .disabled = false;
+                        Swal.getPopup().querySelector(
+                            "textarea[name='catatan']")
+                            .value = "";
+                        Swal.getPopup().querySelector(
+                            "textarea[name='catatan']")
+                            .disabled = false;
+                    }
+                });
+            },
+            preConfirm: () => {
+                const name = Swal.getPopup().querySelector(
+                    "input[name='name']").value;
+                const nomor = Swal.getPopup().querySelector(
+                    "input[name='nomor']").value;
+                alamatValue = Swal.getPopup().querySelector("textarea[name='alamat']")
+                    .value;
+                kecamatanValue = Swal.getPopup().querySelector(
+                    "input[name='kecamatan']").value;
+                kotaValue = Swal.getPopup().querySelector("input[name='kota']").value;
+                provinsiValue = Swal.getPopup().querySelector("input[name='provinsi']")
+                    .value;
+                kodePosValue = Swal.getPopup().querySelector("input[name='kodePos']")
+                    .value;
+                catatanValue = Swal.getPopup().querySelector("textarea[name='catatan']")
+                    .value;
+                kapasitas = Swal.getPopup().querySelector("input[name='kapasitas']")
+                    .value;
+                setujuCheckbox = Swal.getPopup().querySelector("input[name='setuju']");
+
+                if (!name || !nomor || !alamatValue || !kecamatanValue || !kotaValue ||
+                    !provinsiValue || !kodePosValue || !kapasitas) {
+                    Swal.showValidationMessage("Semua Kolom Harus Terisi!");
+                } else {
+                    if (!setujuCheckbox.checked) {
+                        Swal.showValidationMessage("Anda Harus Menetujui Terms And Condition");
+                    }
+                }
+
+                const formData = new FormData(orderForm);
+                formData.append('_token', csrf);
+                formData.append('nama', name);
+                formData.append('nomor', nomor);
+                formData.append('alamat', alamatValue);
+                formData.append('kecamatan', kecamatanValue);
+                formData.append('kota', kotaValue);
+                formData.append('provinsi', provinsiValue);
+                formData.append('kodePos', kodePosValue);
+                formData.append('catatan', catatanValue);
+                formData.append('kapasitas', kapasitas);
+                return formData;
+            },
+        }).then((result) => {
+            console.log('hasil', result)
+            if (result.isConfirmed) {
+                Swal.fire({
+                    title: "Lokasi Bank Sampah",
+                    html: `
+                                <div id="mapSwoll" style="height: 400px;"></div>`,
+                    showCancelButton: true,
+                    confirmButtonText: "Simpan",
+                    cancelButtonText: "Tutup",
+                    didOpen: () => {
+                        const map = new google.maps.Map(document.getElementById(
+                            "mapSwoll"), {
+                            center: {
+                                lat: -7.7956,
+                                lng: 110.3695
+                            },
+                            zoom: 20,
+                        });
+
+                        const geocoder = new google.maps.Geocoder();
+                        let fullAddress = "";
+                        if (catatanValue) {
+                            fullAddress =
+                                `${alamatValue} (${catatanValue}), ${kecamatanValue}, ${kotaValue}, ${provinsiValue}, ${kodePosValue}`;
+                        } else {
+                            fullAddress =
+                                `${alamatValue}, ${kecamatanValue}, ${kotaValue}, ${provinsiValue}, ${kodePosValue}`;
+                        }
+
+                        geocoder.geocode({
+                            address: fullAddress
+                        }, (results, status) => {
+                            if (status === "OK" && results.length > 0) {
+                                const location = results[0].geometry
+                                    .location;
+                                map.setCenter(location);
+
+                                const marker = new google.maps.Marker({
+                                    map,
+                                    position: location,
+                                    draggable: true
+                                });
+
+                                long = marker
+                                    .getPosition().lng();
+                                lang = marker
+                                    .getPosition().lat();
+
+                                google.maps.event.addListener(marker, 'dragend', function () {
+                                    long = marker
+                                        .getPosition().lng();
+                                    lang = marker
+                                        .getPosition().lat();
+                                });
+                            }
+                        });
+                    }, preConfirm: () => {
+                        result.value.append(
+                            'long',
+                            long);
+                        result.value.append(
+                            'lang', lang
+                        );
+                        $.ajax({
+                            url: '/pemilik/akun/daftarBank',
+                            type: 'POST',
+                            data: result.value,
+                            processData: false,
+                            contentType: false,
+                            success: function (
+                                response
+                            ) {
+                                console.log(response)
+                            },
+                            error: function (
+                                error) {
+                                console
+                                    .error(
+                                        error
+                                    );
+                            }
+                        });
+                    }
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        Swal.fire({
+                            title: 'Mendaftar Menjadi Agen Bank Sampah Berhasil!',
+                            icon: 'success',
+                            timer: 2000,
+                            timerProgressBar: true,
+                            showConfirmButton: false,
+                            allowOutsideClick: false
+                        }).then(() => {
+                            window.location.href = '/logout';
+                        });
+                    }
+                })
             }
         });
     });

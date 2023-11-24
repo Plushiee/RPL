@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use App\Models\UserEmailModel;
 use Illuminate\Support\Facades\Auth;
 use App\Models\UserTransaksiModel;
+use App\Models\UserBankSampahModel;
+use App\Models\UserPengambilModel;
 
 class DashboardController extends Controller
 {
@@ -81,9 +83,13 @@ class DashboardController extends Controller
     public function akun()
     {
         $this->getCount();
+        $isPengambil = UserPengambilModel::where('email', Auth::user()->email)->exists();
+        $isBank = UserBankSampahModel::where('email', Auth::user()->email)->exists();
         return view('akun-pemilik', [
             'hitungBelumTerbayar' => $this->hitungBelumTerbayar,
-            'hitungTransaksiBerjalanPemilik' => $this->hitungTransaksiBerjalanPemilik
+            'hitungTransaksiBerjalanPemilik' => $this->hitungTransaksiBerjalanPemilik,
+            'bank' => $isBank,
+            'pengambil' => $isPengambil,
         ]);
     }
 
