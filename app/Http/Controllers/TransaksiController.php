@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\UserBankSampahModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -38,7 +39,13 @@ class TransaksiController extends Controller
         }
     }
 
-    //Simpan data antarSendiri
+    //antarSendiri
+    public function lokasiBank() {
+        $locations = UserBankSampahModel::all();
+
+        return response()->json($locations);
+    }
+
     public function antarSendiri(Request $request)
     {
         //File bukti
@@ -57,17 +64,15 @@ class TransaksiController extends Controller
         if (Auth::check()) {
             $transaksi = new UserTransaksiBankModel;
             $transaksi->idPemilik = Auth::id();
+            $transaksi->idBank = $request->id;
             $transaksi->jenisSampah = $request->jenisSampah;
             $transaksi->nama = $request->nama;
             $transaksi->nomor = $request->nomor;
             $transaksi->catatanTambahan = $request->catatan;
+            $transaksi->berat = $request->berat;
             $transaksi->bukti = $fileName;
-            $transaksi->approved = false;
-            $transaksi->terkirim = false;
-            $transaksi->bankSampah = $request->namaBank;
-            $transaksi->alamat = $request->alamatBank;
-            $transaksi->lang = $request->latitudeBank;
-            $transaksi->long = $request->longitudeBank;
+            $transaksi->diterima = false;
+            $transaksi->terantar = false;
             $transaksi->save();
             return response()->json(['message' => 'Data berhasil disimpan.']);
         } else {

@@ -70,7 +70,8 @@ Route::middleware(['auth:pemilik'])->group(function () {
     Route::post('/pemilik/dashboard/ambil/simpan/logam', [TransaksiController::class, 'logam']); // kertas
     Route::post('/pemilik/dashboard/ambil/simpan/lainnya', [TransaksiController::class, 'lainnya']); // kertas
 
-    // Simpan Antar
+    // Antar
+    Route::get('/pemilik/dashboard/antar/lokasiBank', [TransaksiController::class, 'lokasiBank']); // Ambil Data Bank
     Route::post('/pemilik/dashboard/antar/simpan', [TransaksiController::class, 'antarSendiri']); // Antar Sendiri
 
     // Ambil BuktiGambar
@@ -124,4 +125,10 @@ Route::middleware(['auth:pengambil'])->group(function () {
 Route::middleware(['auth:bank'])->group(function () {
     // Pengambil Contrroller
     Route::get('/bank/dashboard', [DashboardController::class, 'dashboardBank']); // default pengambil
+    Route::get('/bank/pembayaran', [DashboardController::class, 'pembayaranPengambil']); // Pembayaran Pengambil
+    Route::get('/bank/riwayat', [DashboardController::class, 'riwayatPengambil']); // Riwayat Pengambil
+    Route::get('/bank/akun', [DashboardController::class, 'akunPengambil']); // Riwayat Pengambil
+    Route::get('/bank/dashboard/terima', [DashboardController::class, 'terimaBank']); // halaman terima pesanan
+    Route::get('/bank/dashboard/pengumuman', [DashboardController::class, 'pengumumanPengambil']); // halaman pengumuman
+
 });

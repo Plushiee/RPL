@@ -3,10 +3,7 @@ $(document).ready(function () {
     const nama = authData.getAttribute('data-name');
     const nomor = authData.getAttribute('data-nomor');
     const csrf = authData.getAttribute('data-csrf');
-    let namaMap = "";
-    let alamatMap = "";
-    let longitudeMap = "";
-    let latitudeMap = "";
+    let id;
 
     function berhasil() {
         var toastMixin = Swal.mixin({
@@ -26,6 +23,27 @@ $(document).ready(function () {
         toastMixin.fire({
             animation: true,
             title: 'Pesanan Berhasil Ditambahkan'
+        });
+    }
+
+    function gagal() {
+        var toastMixin = Swal.mixin({
+            toast: true,
+            icon: 'error',
+            title: 'General Title',
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+        });
+
+        toastMixin.fire({
+            animation: true,
+            title: 'Pesanan Gagal Ditambahkan, Cek Kembali Data!'
         });
     }
 
@@ -73,6 +91,9 @@ $(document).ready(function () {
                             <textarea class="form-control" id="catatan" name="catatan" rows="3"></textarea>
                         </div>
                         <div class="mb-3 text-start">
+                            <input class="form-control" type="number" id="berat" name="berat" placeholder="Berat Sampah (Kg)"></input>
+                        </div>
+                        <div class="mb-3 text-start">
                             <label for="mapSwoll" class="form-label">Peta Bank Sampah (Pilih Salah Satu)</label>
                             <div id="mapSwoll" style="height: 400px;"></div>
                         </div>
@@ -92,11 +113,13 @@ $(document).ready(function () {
                     .value;
                 const catatanValue = Swal.getPopup().querySelector("textarea[name='catatan']")
                     .value;
+                const beratValue = Swal.getPopup().querySelector("input[name='berat']")
+                    .value;
 
-                if (!nama || !nomor) {
+                if (!nama || !nomor || !beratValue) {
                     Swal.showValidationMessage("Semua Kolom Harus Terisi!");
                 } else {
-                    if (!namaMap || !alamatMap || !latitudeMap || !longitudeMap) {
+                    if (!id) {
                         Swal.showValidationMessage("Mohon Pilih Bank Sampah Yang Dituju!");
                     }
                 }
@@ -106,6 +129,7 @@ $(document).ready(function () {
                 formData.append('nama', namaValue);
                 formData.append('nomor', nomorValue);
                 formData.append('catatan', catatanValue);
+                formData.append('berat', beratValue);
                 formData.append('jenisSampah', getSelectedValues())
                 return formData;
             },
@@ -159,64 +183,70 @@ $(document).ready(function () {
                         title: 'You are here!'
                     });
 
-                    const searchLocation = "Bank Sampah Yogyakarta";
-                    const request = {
-                        query: searchLocation,
-                        fields: ['name', 'geometry', 'formatted_address', 'business_status']
-                    };
-                    const service = new google.maps.places.PlacesService(map);
 
-                    function performTextSearch(request, map) {
-                        service.textSearch(request, (results, status, pagination) => {
-                            if (status === google.maps.places.PlacesServiceStatus.OK) {
-                                results.forEach((result) => {
-                                    const location = result.geometry.location;
-                                    const name = result.name;
-                                    const address = result.formatted_address;
-                                    const latitude = location.lat();
-                                    const longitude = location.lng();
-                                    const isOpen = result.business_status === 'OPERATIONAL';
-
-                                    const marker = new google.maps.Marker({
-                                        position: location,
-                                        map: map,
-                                        title: name
-                                    });
-
-                                    const infoWindow = new google.maps.InfoWindow({
-                                        content: `
-                                            <h3 style="font-size:12pt; font-weight:bold;">${name}</h3>
-                                            <p style="font-size:8pt;">${address}</p>
-                                            <button class="btn btn-primary btn-sm data" ${isOpen ? '' : 'disabled'} data-name="${name}" data-address="${address}" data-latitude="${latitude}" data-longitude="${longitude}">Select</button>
-                                        `,
-                                        maxWidth: 300
-                                    });
-
-                                    marker.addListener('click', function () {
-                                        infoWindow.open(map, marker);
-                                    });
-
-
-                                    google.maps.event.addListener(infoWindow, 'domready', function () {
-                                        const selectButton = document.querySelector('.btn.data');
-                                        selectButton.addEventListener('click', function (event) {
-                                            event.preventDefault();
-
-                                            namaMap = selectButton.getAttribute('data-name');
-                                            alamatMap = selectButton.getAttribute('data-address');
-                                            longitudeMap = selectButton.getAttribute('data-longitude');
-                                            latitudeMap = selectButton.getAttribute('data-latitude');
-                                            console.log(longitudeMap)
-
-                                            selectButton.setAttribute('disabled', 'true');
-                                        });
-                                    });
-                                });
+                    function fetchLocationData() {
+                        $.ajax({
+                            url: '/pemilik/dashboard/antar/lokasiBank',
+                            type: 'GET',
+                            dataType: 'json',
+                            success: function (response) {
+                                console.log(response)
+                                performTextSearch(response);
+                            },
+                            error: function (error) {
+                                console.error('Error fetching location data:', error);
                             }
                         });
                     }
 
-                    performTextSearch(request, map);
+                    function performTextSearch(locations) {
+                        locations.forEach((locationData) => {
+                            const position = { lat: parseFloat(locationData.lang), lng: parseFloat(locationData.long) };
+                            const name = locationData.name;
+                            const address = `${locationData.alamat}, ${locationData.kecamatan}, ${locationData.kota}, ${locationData.provinsi}, ${locationData.kodePos}, ${locationData.catatan}`;
+
+                            const marker = new google.maps.Marker({
+                                position: position,
+                                map: map,
+                                title: name
+                            });
+
+                            const infoWindow = new google.maps.InfoWindow({
+                                content: `
+                                    <h3 style="font-size:12pt; font-weight:bold;">${name}</h3>
+                                    <p style="font-size:8pt;">${address}</p>
+                                    <button class="btn btn-primary btn-sm data" data-id="${locationData.id}">Select</button>
+                                    <button class="btn btn-info petunjuk float-end">Petunjuk Arah</button>
+                                `,
+                                maxWidth: 300
+                            });
+
+                            marker.addListener('click', function () {
+                                infoWindow.open(map, marker);
+                            });
+
+                            google.maps.event.addListener(infoWindow, 'domready', function () {
+                                const selectButton = document.querySelector('.btn.data');
+                                selectButton.addEventListener('click', function (event) {
+                                    event.preventDefault();
+
+                                    id = selectButton.getAttribute('data-id');
+                                    console.log(id)
+
+                                    selectButton.setAttribute('disabled', 'true');
+                                });
+
+                                const petunjukButton = document.querySelector('.petunjuk');
+                                petunjukButton.addEventListener('click', function (event) {
+                                    event.preventDefault();
+                                    const url = `https://www.google.com/maps/dir/?api=1&destination=${locationData.lang},${locationData.long}`;
+                                    window.open(url, '_blank');
+                                })
+                            });
+                        });
+                    }
+
+                    fetchLocationData();
                 }
 
                 function getLocation() {
@@ -241,10 +271,7 @@ $(document).ready(function () {
             }
         }).then((result) => {
             if (result.isConfirmed) {
-                result.value.append('namaBank', namaMap);
-                result.value.append('alamatBank', alamatMap);
-                result.value.append('longitudeBank', longitudeMap);
-                result.value.append('latitudeBank', latitudeMap);
+                result.value.append('id', id);
 
                 $.ajax({
                     url: '/pemilik/dashboard/antar/simpan',

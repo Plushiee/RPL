@@ -16,18 +16,18 @@ class CreateTransaksiBank extends Migration
         Schema::create('transaksi_bank', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('idPemilik');
+            $table->unsignedBigInteger('idBank')->nullable();
             $table->foreign('idPemilik')->references('id')->on('useremail');
+            $table->foreign('idBank')->references('id')->on('banksampahmail');
+
             $table->string('jenisSampah');
             $table->string('nama');
             $table->string('nomor');
             $table->text('catatanTambahan')->nullable();
+            $table->string('berat');
             $table->string('bukti')->nullable();
-            $table->boolean('approved');
-            $table->boolean('terkirim');
-            $table->string('bankSampah')->nullable();
-            $table->string('alamat')->nullable();
-            $table->string('lang')->nullable();
-            $table->string('long')->nullable();
+            $table->boolean('diterima')->default(false);
+            $table->boolean('terantar');
             $table->timestamps();
         });
     }

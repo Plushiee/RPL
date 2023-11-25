@@ -143,21 +143,21 @@
                 <ul class="metismenu" id="side-menu">
                     <li class="menu-title">Navigasi</li>
                     <li>
-                        <a href="/pemilik/dashboard"
-                            class="@if (request()->is('pemilik/dashboard*')) active-class active-txt @endif mb-0">
+                        <a href="/bank/dashboard"
+                            class="@if (request()->is('bank/dashboard*')) active-class active-txt @endif mb-0">
                             <i class="bi bi-house"></i>
                             <span> Home</span>
                         </a>
                         <ul class="nav-second-level" aria-expanded="false">
-                            <li><a href="/pemilik/dashboard"
-                                    class="mt-0 @if (request()->is('pemilik/dashboard')) active-class active-txt @endif"><i
+                            <li><a href="/bank/dashboard"
+                                    class="mt-0 @if (request()->is('bank/dashboard')) active-class active-txt @endif"><i
                                         class="bi bi-speedometer2"></i>&nbsp; Dashboard</a></li>
-                            <li><a href="/pemilik/dashboard/ambil"
-                                    class="@if (request()->is('pemilik/dashboard/ambil*')) active-class active-txt @endif"><i
-                                        class="bi bi-truck"></i>&nbsp; Ambil Di Rumah</a></li>
-                            <li><a href="/pemilik/dashboard/antar"
-                                    class="@if (request()->is('pemilik/dashboard/antar*')) active-class active-txt @endif"><i
-                                        class="bi bi-box-seam"></i>&nbsp; Antar Sendiri</a></li>
+                            <li><a href="/bank/dashboard/terima"
+                                    class="@if (request()->is('bank/dashboard/terima*')) active-class active-txt @endif"><i
+                                        class="bi bi-truck"></i>&nbsp; Terima Pesansan</a></li>
+                            <li><a href="/bank/dashboard/pengumuman"
+                                    class="@if (request()->is('bank/dashboard/pengumuman*')) active-class active-txt @endif"><i
+                                        class="bi bi-bell"></i>&nbsp; Buat Pengumuman</a></li>
                         </ul>
                     </li>
 

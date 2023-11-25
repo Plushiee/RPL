@@ -17,17 +17,14 @@ class UserTransaksiBankModel extends Model
 
     protected $fillable = [
         'idPemilik',
-        'idPemilik',
+        'idBank',
         'jenisSampah',
         'nama',
         'nomor',
         'catatanTambahan',
         'bukti',
-        'approved',
+        'diterima',
         'terkirim',
-        'bankSampah',
-        'alamat',
-        'lang',
-        'long',
+        'terantar',
     ];
 }

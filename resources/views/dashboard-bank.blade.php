@@ -54,9 +54,9 @@
                         <div class="card-box widget-inline">
                             <div class="row">
                                 <div class="col-xl-6 col-sm-6 d-grid widget-inline-box text-center">
-                                    <a href="dashboard/ambil">
+                                    <a href="dashboard/terima">
                                         <button class="btn btn-warning btn-block mt-3 mt-sm-0 p-3" type="button"><i
-                                                class="bi bi-truck"></i>&nbsp; Ambil Pesanan</button>
+                                                class="bi bi-truck"></i>&nbsp; Terima Pesanan</button>
                                     </a>
                                 </div>
 
@@ -75,9 +75,48 @@
                 <div class="row">
                     <div class="col-lg-9">
                         <div class="card-box">
-                            <h5 class="mt-0 font-14">Peta</h5>
-                            <div class="row m-0 p-0 border">
-                                <div id="map" style="width: 100%; height: 400px;"></div>
+                            <h5 class="mt-0 font-14">Rangkuman Data</h5>
+                            <div class="row m-0 p-0">
+                                <div class="col-12 col-md-6">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h5 class="card-title text-center">Banyak Sampah Hari Ini</h5>
+                                            <p class="card-text">With supporting text below as a natural lead-in to
+                                                additional content.</p>
+                                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h5 class="card-title text-center">Banyak Transaksi Hari Ini</h5>
+                                            <p class="card-text">With supporting text below as a natural lead-in to
+                                                additional content.</p>
+                                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h5 class="card-title text-center">Sampah Dengan Berat Terbanyak</h5>
+                                            <p class="card-text">With supporting text below as a natural lead-in to
+                                                additional content.</p>
+                                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h5 class="card-title text-center">Sampah Dengan Transaksi Terbanyak</h5>
+                                            <p class="card-text">With supporting text below as a natural lead-in to
+                                                additional content.</p>
+                                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

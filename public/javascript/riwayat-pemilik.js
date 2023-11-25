@@ -6,7 +6,7 @@ $(document).ready(function () {
         const button = $(this);
         const id = button.data('id');
         const bukti = button.data('bukti');
-        const jenis = button.data('jenis').toLowerCase();
+        const jenis = button.data('jenis');
 
         Swal.fire({
             title: "Bukti Barang",
@@ -31,8 +31,8 @@ $(document).ready(function () {
         const bankSampah = button.data('banksampah');
         const alamat = button.data('alamat');
         const bukti = button.data('bukti');
-        const lang = button.data('lang');
-        const long = button.data('long');
+        const lang = parseFloat(button.data('lang'));
+        const long = parseFloat(button.data('long'));
 
         Swal.fire({
             title: "Informasi Lainnya",
@@ -66,9 +66,19 @@ $(document).ready(function () {
                         `
                             <h3 style="font-size:12pt; font-weight:bold;">${bankSampah}</h3>
                             <p style="font-size:8pt;">${alamat}</p>
+                            <button class="btn btn-info petunjuk">Petunjuk Arah</button>
                         `,
                         maxWidth: 300
                     });
+
+                    google.maps.event.addListener(infoWindow, 'domready', function () {
+                        const selectButton = document.querySelector('.petunjuk');
+                        selectButton.addEventListener('click', function (event) {
+                            event.preventDefault();
+                            const url = `https://www.google.com/maps/dir/?api=1&destination=${lang},${long}`;
+                            window.open(url, '_blank');
+                        })
+                    })
 
                     marker.addListener('click', function () {
                         infoWindow.open(map, marker);

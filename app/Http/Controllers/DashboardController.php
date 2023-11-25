@@ -96,7 +96,11 @@ class DashboardController extends Controller
     public function riwayat()
     {
         $this->getCount();
-        $kumpulanBank = UserTransaksiBankModel::where('idPemilik', Auth::id())->orderBy('id', 'desc')->get();
+        $kumpulanBank = UserTransaksiBankModel::join('banksampahmail', 'transaksi_bank.idBank', '=', 'banksampahmail.id')
+            ->where('transaksi_bank.idPemilik', Auth::id())
+            ->orderBy('transaksi_bank.id', 'desc')
+            ->get(['transaksi_bank.*', 'banksampahmail.name', 'banksampahmail.email', 'banksampahmail.nomor', 'banksampahmail.alamat', 'banksampahmail.kecamatan', 'banksampahmail.kota', 'banksampahmail.provinsi', 'banksampahmail.kodePos', 'banksampahmail.catatan', 'banksampahmail.lang', 'banksampahmail.long']);
+
         $kumpulanTransaksi = UserTransaksiModel::where('idPemilik', Auth::id())->orderBy('id', 'desc')->get();
         return view('riwayat-pemilik', [
             'kumpulanTransaksi' => $kumpulanTransaksi,
@@ -225,6 +229,23 @@ class DashboardController extends Controller
 
         return view('dashboard-bank', [
 
+        ]);
+    }
+
+    public function terimaBank()
+    {
+
+        $kapasitas = Auth::user()->kapasitas;
+
+        $allowedBerat = '';
+
+        $kumpulanTransaksi = UserTransaksiBankModel::orderBy('id', 'desc')
+            ->where('diterima', false)
+            ->where('idPemilik', '!=', Auth::id())
+            ->get();
+
+        return view('terima-bank', [
+            'kumpulanTransaksi' => $kumpulanTransaksi,
         ]);
     }
 }

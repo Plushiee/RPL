@@ -215,7 +215,7 @@
                                                         <div
                                                             class="col-md-2 text-center d-flex justify-content-center align-items-center">
                                                             <h5 class="text-muted mb-0 mt-0 pt-0">
-                                                                {{ $transaksi->bankSampah }}</h5>
+                                                                {{ $transaksi->name }}</h5>
                                                         </div>
                                                         <div
                                                             class="col-md-2 text-center d-flex justify-content-center align-items-center">
@@ -230,17 +230,18 @@
                                                             class="col-md-2 text-center d-flex justify-content-center align-items-center">
                                                             <p class="text-muted mb-0 small">
                                                                 <b>Catatan Tambahan : </b><br>
-                                                                @if ($transaksi->catanTambaan == null)
+                                                                @if ($transaksi->catatanTambahan == null)
                                                                     -
                                                                 @else
-                                                                    {{ $transaksi->catanTambaan }}
+                                                                    {{ $transaksi->catatanTambahan }}
                                                                 @endif
                                                             </p>
                                                         </div>
                                                         <div
                                                             class="col-md-2 text-center d-flex justify-content-center align-items-center">
                                                             <p class="text-muted mb-0 small">
-                                                                <b>Alamat :</b><br>{{ $transaksi->alamat }}
+                                                                <b>Alamat :</b><br>{{ $transaksi->alamat }} ({{ $transaksi->catatan }}), {{ $transaksi->kecamatan }}, {{ $transaksi->kota }}, {{ $transaksi->provinsi }}, {{ $transaksi->kodePos }}
+
                                                             </p>
                                                         </div>
                                                         <div
@@ -249,8 +250,8 @@
                                                                 class="btn btn-info small mt-2 mt-sm-2 mt-md-0 informasi"
                                                                 id="informasi" data-id="{{ $transaksi->idPemilik }}"
                                                                 data-bukti="{{ $transaksi->bukti }}"
-                                                                data-banksampah="{{ $transaksi->bankSampah }}"
-                                                                data-alamat="{{ $transaksi->alamat }}"
+                                                                data-banksampah="{{ $transaksi->name }}"
+                                                                data-alamat="{{ $transaksi->alamat }} ({{ $transaksi->catatan }}), {{ $transaksi->kecamatan }}, {{ $transaksi->kota }}, {{ $transaksi->provinsi }}, {{ $transaksi->kodePos }}"
                                                                 data-lang="{{ $transaksi->lang }}"
                                                                 data-long="{{ $transaksi->long }}">Informasi
                                                                 Lainnya</button>
