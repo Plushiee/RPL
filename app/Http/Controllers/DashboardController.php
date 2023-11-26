@@ -239,13 +239,38 @@ class DashboardController extends Controller
 
         $allowedBerat = '';
 
-        $kumpulanTransaksi = UserTransaksiBankModel::orderBy('id', 'desc')
-            ->where('diterima', false)
-            ->where('idPemilik', '!=', Auth::id())
-            ->get();
+
+        $kumpulanTransaksi = UserTransaksiBankModel::join('banksampahmail', 'transaksi_bank.idBank', '=', 'banksampahmail.id')
+            ->where('transaksi_bank.diterima', false)
+            ->where('transaksi_bank.idPemilik', '!=', Auth::id())
+            ->orderBy('transaksi_bank.id', 'desc')
+            ->get(['transaksi_bank.*', 'banksampahmail.name', 'banksampahmail.email', 'banksampahmail.nomor', 'banksampahmail.alamat', 'banksampahmail.kecamatan', 'banksampahmail.kota', 'banksampahmail.provinsi', 'banksampahmail.kodePos', 'banksampahmail.catatan', 'banksampahmail.lang', 'banksampahmail.long']);
 
         return view('terima-bank', [
             'kumpulanTransaksi' => $kumpulanTransaksi,
+        ]);
+    }
+
+    public function riwayatBank() {
+        $kumpulanTransaksi = UserTransaksiBankModel::join('banksampahmail', 'transaksi_bank.idBank', '=', 'banksampahmail.id')
+            ->where('transaksi_bank.diterima', true)
+            ->where('transaksi_bank.idBank', Auth::id())
+            ->orderBy('transaksi_bank.id', 'desc')
+            ->get(['transaksi_bank.*', 'banksampahmail.name', 'banksampahmail.email', 'banksampahmail.nomor', 'banksampahmail.alamat', 'banksampahmail.kecamatan', 'banksampahmail.kota', 'banksampahmail.provinsi', 'banksampahmail.kodePos', 'banksampahmail.catatan', 'banksampahmail.lang', 'banksampahmail.long']);
+
+        return view('riwayat-bank', [
+            'kumpulanTransaksi' => $kumpulanTransaksi,
+        ]);
+    }
+
+    public function pengumumanBank()
+    {
+        // $this->getCountPengambil();
+        $daftarPengumuman = PengumumanModel::orderBy('id', 'desc')->where('idPengambil', Auth::id())->get();
+        $hitungPengumumanAktif = PengumumanModel::where('idPengambil', Auth::id())->where('aktif', true)->count();
+        return view('pengumuman-bank', [
+            'daftarPengumuman' => $daftarPengumuman,
+            'hitungPengumumanAktif' => $hitungPengumumanAktif,
         ]);
     }
 }

@@ -72,13 +72,8 @@
                                                 </div>
                                             </div>
                                             <div class="col-12 col-sm-2 d-flex align-items-center justify-content-end">
-                                                @if (!$transaksi->approved)
-                                                    <span class="badge badge-warning"> &nbsp;Belum
-                                                        Di Approved&nbsp; </span>
-                                                @else
-                                                    <span class="badge badge-warning"> &nbsp;Sudah
-                                                        Approved&nbsp; </span>
-                                                @endif
+                                                <span class="badge badge-warning"> &nbsp;Belum
+                                                    Diterima&nbsp; </span>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -117,15 +112,11 @@
                                                 class="col-md-2 mt-3 mt-sm-2 mt-md-0 text-center d-flex justify-content-center align-items-center">
                                                 <div class="row">
                                                     <div class="col-md-12">
-                                                        <form action="/pengambil/dashboard/ambil" method="POST">
+                                                        <form action="/bank/dashboard/terima" method="POST">
                                                             @csrf
                                                             <input type="hidden" name="id_transaksi"
                                                                 value="{{ $transaksi->id }}">
-                                                            @if (
-                                                                $transaksi->diterima == false &&
-                                                                    $transaksi->terbayar == false &&
-                                                                    $transaksi->approved == false &&
-                                                                    $transaksi->terambil == false)
+                                                            @if ($transaksi->diterima == false && $transaksi->terantar == false)
                                                                 <input type="hidden" name="aksi" value="diterima">
                                                                 <button type="submit" id="terima"
                                                                     class="btn btn-info btn-block mb-2 terima">
@@ -138,6 +129,7 @@
                                                         <button type="button"
                                                             class="btn btn-info small mt-2 mt-sm-2 mt-md-0 btn-block informasi"
                                                             id="informasi" data-id="{{ $transaksi->idPemilik }}"
+                                                            data-jenis="{{ $transaksi->jenisSampah }}"
                                                             data-bukti="{{ $transaksi->bukti }}"
                                                             data-banksampah="{{ $transaksi->name }}"
                                                             data-alamat="{{ $transaksi->alamat }} ({{ $transaksi->catatan }}), {{ $transaksi->kecamatan }}, {{ $transaksi->kota }}, {{ $transaksi->provinsi }}, {{ $transaksi->kodePos }}"
@@ -159,8 +151,8 @@
                                                 <div class="progress" style="height: 6px; border-radius: 16px;">
                                                     <div class="progress-bar" role="progressbar"
                                                         style="
-                                                    @if ($transaksi->approved === true && $transaksi->terkirim === false) width: 50%;
-                                                    @elseif ($transaksi->approved === true && $transaksi->terkirim === true)
+                                                    @if ($transaksi->diterima == true && $transaksi->terantar == false) width: 50%;
+                                                    @elseif ($transaksi->diterima == true && $transaksi->terterantarkirim == true)
                                                     width: 100%;
                                                     @else
                                                     width: 0%; @endif
@@ -170,7 +162,7 @@
                                                 </div>
                                                 <div class="d-flex justify-content-around mb-1">
                                                     <p class="text-muted mt-1 mb-0 small ms-xl-5">Diterima</p>
-                                                    <p class="text-muted mt-1 mb-0 small ms-xl-5">Terkirim</p>
+                                                    <p class="text-muted mt-1 mb-0 small ms-xl-5">Terantar</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -368,7 +360,7 @@
     <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBg-aZ-Iammau9oEl569JVpJu5olD_2rbQ&callback=initMap&libraries=places">
     </script>
-    <script src="/javascript/ambil-pengambil.js"></script>
+    <script src="/javascript/terima-bank.js"></script>
     @if (session('diterima'))
         <script>
             $(document).ready(function() {
@@ -390,31 +382,6 @@
                 toastMixin.fire({
                     animation: true,
                     title: 'Pesanan Berhasil Diterima'
-                });
-            });
-        </script>
-    @endif
-    @if (session('gagal'))
-        <script>
-            $(document).ready(function() {
-                // Alert
-                var toastMixin = Swal.mixin({
-                    toast: true,
-                    icon: 'error',
-                    title: 'General Title',
-                    position: 'top-end',
-                    showConfirmButton: false,
-                    timer: 3000,
-                    timerProgressBar: true,
-                    didOpen: (toast) => {
-                        toast.addEventListener('mouseenter', Swal.stopTimer)
-                        toast.addEventListener('mouseleave', Swal.resumeTimer)
-                    }
-                });
-
-                toastMixin.fire({
-                    animation: true,
-                    title: 'Data Pembayaran Tidak Berhasil Ditambahkan, Cek Kembali File!'
                 });
             });
         </script>

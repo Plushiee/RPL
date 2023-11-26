@@ -3,6 +3,7 @@
 use App\Http\Controllers\AmbilGambarController;
 use App\Http\Controllers\GantiInformasiAkunController;
 use App\Http\Controllers\PengumumanController;
+use App\Http\Controllers\TerimaPesananController;
 use App\Http\Controllers\TransaksiController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
@@ -29,6 +30,7 @@ Route::get('/', [DefaultController::class, 'index']);
 // Redirect
 Route::redirect('/pemilik', '/pemilik/dashboard');
 Route::redirect('/pengambil', '/pengambil/dashboard');
+Route::redirect('/bank', '/bank/dashboard');
 
 // Register Controller
 Route::get('/register', [RegisterController::class, 'register']);
@@ -124,11 +126,16 @@ Route::middleware(['auth:pengambil'])->group(function () {
 
 Route::middleware(['auth:bank'])->group(function () {
     // Pengambil Contrroller
-    Route::get('/bank/dashboard', [DashboardController::class, 'dashboardBank']); // default pengambil
-    Route::get('/bank/pembayaran', [DashboardController::class, 'pembayaranPengambil']); // Pembayaran Pengambil
-    Route::get('/bank/riwayat', [DashboardController::class, 'riwayatPengambil']); // Riwayat Pengambil
-    Route::get('/bank/akun', [DashboardController::class, 'akunPengambil']); // Riwayat Pengambil
+    Route::get('/bank/dashboard', [DashboardController::class, 'dashboardBank']); // default Bank
+    Route::get('/bank/riwayat', [DashboardController::class, 'riwayatBank']); // Riwayat Bank
+    Route::get('/bank/akun', [DashboardController::class, 'akunPengambil']); // Riwayat Bank
     Route::get('/bank/dashboard/terima', [DashboardController::class, 'terimaBank']); // halaman terima pesanan
-    Route::get('/bank/dashboard/pengumuman', [DashboardController::class, 'pengumumanPengambil']); // halaman pengumuman
+    Route::get('/bank/dashboard/pengumuman', [DashboardController::class, 'pengumumanBank']); // halaman pengumuman
 
+    // Terima Pesanan
+    Route::post('/bank/dashboard/terima', [TerimaPesananController::class, 'terimaBank']); // terima pesanan
+    Route::post('/bank/dashboard/terantar', [TerimaPesananController::class, 'terimaBank']); // pesanan terantar
+
+    // Ambil Bukti Gambar
+    Route::get('/bank/bukti/antarsendiri/{id}/{gambar}', [AmbilGambarController::class, 'showBuktiKirim']); //ambil bukti
 });

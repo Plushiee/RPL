@@ -202,12 +202,17 @@
                                                         </div>
                                                         <div
                                                             class="col-12 col-sm-2 d-flex align-items-center justify-content-end">
-                                                            @if (!$transaksi->approved)
-                                                                <span class="badge badge-warning"> &nbsp;Belum
-                                                                    Di Approved&nbsp; </span>
-                                                            @else
-                                                                <span class="badge badge-warning"> &nbsp;Sudah
-                                                                    Approved&nbsp; </span>
+                                                            @if ($transaksi->diterima == false && $transaksi->terantar == false)
+                                                                <span class="badge badge-warning"> &nbsp;Menunggu
+                                                                    Respon&nbsp; </span>
+                                                            @endif
+                                                            @if ($transaksi->diterima == true && $transaksi->terantar == false)
+                                                                <span class="badge badge-danger"> &nbsp;Belum
+                                                                    Diantar&nbsp; </span>
+                                                            @endif
+                                                            @if ($transaksi->diterima == true && $transaksi->terantar == true)
+                                                                <span class="badge badge-success"> &nbsp;Sudah
+                                                                    Diantar&nbsp; </span>
                                                             @endif
                                                         </div>
                                                     </div>
@@ -240,22 +245,29 @@
                                                         <div
                                                             class="col-md-2 text-center d-flex justify-content-center align-items-center">
                                                             <p class="text-muted mb-0 small">
-                                                                <b>Alamat :</b><br>{{ $transaksi->alamat }} ({{ $transaksi->catatan }}), {{ $transaksi->kecamatan }}, {{ $transaksi->kota }}, {{ $transaksi->provinsi }}, {{ $transaksi->kodePos }}
-
+                                                                <b>Berat :</b><br>{{ $transaksi->berat }} Kg
                                                             </p>
                                                         </div>
                                                         <div
-                                                            class="col-md-2 text-center d-flex justify-content-center align-items-center">
-                                                            <button type="button"
-                                                                class="btn btn-info small mt-2 mt-sm-2 mt-md-0 informasi"
-                                                                id="informasi" data-id="{{ $transaksi->idPemilik }}"
-                                                                data-bukti="{{ $transaksi->bukti }}"
-                                                                data-banksampah="{{ $transaksi->name }}"
-                                                                data-alamat="{{ $transaksi->alamat }} ({{ $transaksi->catatan }}), {{ $transaksi->kecamatan }}, {{ $transaksi->kota }}, {{ $transaksi->provinsi }}, {{ $transaksi->kodePos }}"
-                                                                data-lang="{{ $transaksi->lang }}"
-                                                                data-long="{{ $transaksi->long }}">Informasi
-                                                                Lainnya</button>
+                                                            class="col-md-2 mt-3 mt-sm-2 mt-md-0 text-center d-flex justify-content-center align-items-center">
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <button type="button"
+                                                                        class="btn btn-info small mt-2 mt-sm-2 mt-md-0 btn-block informasi"
+                                                                        id="informasi"
+                                                                        data-id="{{ $transaksi->idPemilik }}"
+                                                                        data-jenis="{{ $transaksi->jenisSampah }}"
+                                                                        data-bukti="{{ $transaksi->bukti }}"
+                                                                        data-banksampah="{{ $transaksi->name }}"
+                                                                        data-alamat="{{ $transaksi->alamat }} ({{ $transaksi->catatan }}), {{ $transaksi->kecamatan }}, {{ $transaksi->kota }}, {{ $transaksi->provinsi }}, {{ $transaksi->kodePos }}"
+                                                                        data-lang="{{ $transaksi->lang }}"
+                                                                        data-long="{{ $transaksi->long }}">Informasi
+                                                                        Lainnya</button>
+                                                                </div>
+                                                            </div>
                                                         </div>
+
+
                                                     </div>
                                                     <hr class="mb-4" style="background-color: #e0e0e0; opacity: 1;">
                                                     <div class="row d-flex align-items-center">
@@ -267,19 +279,20 @@
                                                                 style="height: 6px; border-radius: 16px;">
                                                                 <div class="progress-bar" role="progressbar"
                                                                     style="
-                                                                    @if ($transaksi->approved === true && $transaksi->terkirim === false) width: 50%;
-                                                                    @elseif ($transaksi->approved === true && $transaksi->terkirim === true)
-                                                                    width: 100%;
-                                                                    @else
-                                                                    width: 0%; @endif
-                                                                     border-radius: 16px; background-color: #18be55;"
+                                                        @if ($transaksi->diterima == true && $transaksi->terantar == false) width: 50%;
+                                                        @elseif ($transaksi->diterima == true && $transaksi->terantar == true)
+                                                        width: 100%;
+                                                        @else
+                                                        width: 0%; @endif
+                                                         border-radius: 16px; background-color: #18be55;"
                                                                     aria-valuemin="0" aria-valuemax="100">
                                                                 </div>
                                                             </div>
                                                             <div class="d-flex justify-content-around mb-1">
-                                                                <p class="text-muted mt-1 mb-0 small ms-xl-5">Diterima</p>
-                                                                <p class="text-muted mt-1 mb-0 small ms-xl-5">Approved</p>
-                                                                <p class="text-muted mt-1 mb-0 small ms-xl-5">Terkirim</p>
+                                                                <p class="text-muted mt-1 mb-0 small ms-xl-5">Diterima
+                                                                </p>
+                                                                <p class="text-muted mt-1 mb-0 small ms-xl-5">Terkirim
+                                                                </p>
                                                             </div>
                                                         </div>
                                                     </div>

@@ -1,4 +1,4 @@
-@extends('templates.navbar-pengambil')
+@extends('templates.navbar-bank')
 
 @section('title', 'MoneyTrash! - Pengumuman')
 @section('css')
@@ -14,8 +14,8 @@
         <!-- Start Breadcrumb -->
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb" style="background-color: transparent !important">
-                <li class="breadcrumb-item"><a href="pemilik">Pengambil Sampah</a></li>
-                <li class="breadcrumb-item"><a href="/pengambil/dashboard">Dashboard</a></li>
+                <li class="breadcrumb-item"><a href="bank">Bank Sampah</a></li>
+                <li class="breadcrumb-item"><a href="/bank/dashboard">Dashboard</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Pengumuman</li>
             </ol>
         </nav>
@@ -167,7 +167,7 @@
     <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBg-aZ-Iammau9oEl569JVpJu5olD_2rbQ&callback=initMap&libraries=places">
     </script>
-    <script src="/javascript/pengumuman-pengambil.js"></script>
+    <script src="/javascript/pengumuman-bank.js"></script>
 
     @if (session('successSelesai'))
         <script>
