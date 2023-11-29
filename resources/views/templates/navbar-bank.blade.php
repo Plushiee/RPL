@@ -84,7 +84,7 @@
                         </div>
 
                         <!-- item-->
-                        <a href="/pemilik/akun" class="dropdown-item notify-item">
+                        <a href="/bank/akun" class="dropdown-item notify-item">
                             <i class="mdi mdi-settings-outline"></i>
                             <span>Akun</span>
                         </a>
@@ -171,11 +171,11 @@
                             @endif --}}
                         </a>
                     </li>
-                    <li class="@if (request()->is('pemilik/akun*')) active-class @endif">
-                        <a href="/pemilik/akun">
+                    <li class="@if (request()->is('bank/akun*')) active-class @endif">
+                        <a href="/bank/akun">
                             <i
-                                class="mdi mdi-settings-outline noti-ico @if (request()->is('pemilik/akun*')) active-txt @endif"></i>
-                            <span class="@if (request()->is('pemilik/akun*')) active-txt @endif"> Akun </span>
+                                class="mdi mdi-settings-outline noti-ico @if (request()->is('bank/akun*')) active-txt @endif"></i>
+                            <span class="@if (request()->is('bank/akun*')) active-txt @endif"> Akun </span>
                         </a>
                     </li>
                 </ul>

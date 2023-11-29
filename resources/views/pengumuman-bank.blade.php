@@ -105,7 +105,7 @@
                                                 <p class="card-text">{{ $pengumuman->isiPengumuman }}</p>
 
                                                 @if ($pengumuman->aktif == true)
-                                                    <form action="/pengambil/dashboard/pengumuman/selesai" method="POST">
+                                                    <form action="/bank/dashboard/pengumuman/selesai" method="POST">
                                                         @csrf
                                                         <input type="hidden" name="id" value="{{ $pengumuman->id }}">
                                                         <button type="submit" class="btn btn-success float-end">

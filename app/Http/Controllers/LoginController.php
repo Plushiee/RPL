@@ -78,11 +78,20 @@ class LoginController extends Controller
         Auth::guard('bank')->login($userBank, $remember);
         return redirect('/bank/dashboard');
     }
-
-    public function logout()
+    
+    public function logout(Request $request)
     {
-        Auth::guard('pemilik')->logout();
+        $userTypes = ['pengambil', 'bank', 'pemilik'];
+
+        foreach ($userTypes as $userType) {
+            if (Auth::guard($userType)->check()) {
+                Auth::guard($userType)->logout();
+            }
+        }
+
         return redirect('/login');
     }
 }
+
+
 

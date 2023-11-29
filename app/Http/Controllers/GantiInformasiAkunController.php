@@ -115,7 +115,8 @@ class GantiInformasiAkunController extends Controller
         return response()->json(['successGanti' => 'Ganti Data Berhasil']);
     }
 
-    public function simpanDataPengambil(Request $request) {
+    public function simpanDataPengambil(Request $request)
+    {
         $berat = $request->berat;
         $atasNamaBank = $request->atasNamaBank;
         $bank = $request->bank;
@@ -123,7 +124,7 @@ class GantiInformasiAkunController extends Controller
         $ewallet = $request->ewallet;
         $namaewallet = $request->namaewallet;
         $noewallet = $request->noewallet;
-        
+
         $pengambil = UserPengambilModel::find(Auth::id());
 
         $pengambil->berat = $berat;
@@ -178,6 +179,49 @@ class GantiInformasiAkunController extends Controller
         $pengambil->namaewallet = $namaewallet;
         $pengambil->noewallet = $noewallet;
         $pengambil->save();
+
+        return response()->json(['successGanti' => 'Mendaftar Menjadi Agen Berhasil']);
+    }
+
+    public function gantiDataAkunBank(Request $request)
+    {
+        $password = $request->password;
+        $user = UserEmailModel::where('email', Auth::user()->email)->first();
+
+        $user->password = bcrypt($password);
+        $user->save();
+        return response()->json(['successGanti' => 'Ganti Data Berhasil']);
+    }
+
+    public function simpanDataBank(Request $request)
+    {
+        $name = $request->nama;
+        $nomor = $request->nomor;
+        $alamat = $request->alamat;
+        $kecamatan = $request->kecamatan;
+        $kota = $request->kota;
+        $provinsi = $request->provinsi;
+        $kodePos = $request->kodePos;
+        $catatan = $request->catatan;
+        $kapasitas = $request->kapasitas;
+        $lang = $request->lang;
+        $long = $request->long;
+
+        $bankSampah = UserBankSampahModel::find(Auth::id());
+
+        $bankSampah->name = $name;
+        $bankSampah->nomor = $nomor;
+        $bankSampah->alamat = $alamat;
+        $bankSampah->kecamatan = $kecamatan;
+        $bankSampah->kota = $kota;
+        $bankSampah->provinsi = $provinsi;
+        $bankSampah->kodePos = $kodePos;
+        $bankSampah->catatan = $catatan;
+        $bankSampah->kapasitas = $kapasitas;
+        $bankSampah->lang = $lang;
+        $bankSampah->long = $long;
+
+        $bankSampah->save();
 
         return response()->json(['successGanti' => 'Mendaftar Menjadi Agen Berhasil']);
     }

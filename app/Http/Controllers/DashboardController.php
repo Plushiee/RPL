@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PengumumanBankModel;
 use App\Models\PengumumanModel;
 use App\Models\UserTransaksiBankModel;
 use Illuminate\Http\Request;
@@ -17,6 +18,7 @@ class DashboardController extends Controller
     private $hitungPermintaanAprrove;
     private $hitungTransaksiBerjalan;
     private $hitungTransaksiBerjalanPemilik;
+    private $hitungTransaksiBank;
 
     private function getCount()
     {
@@ -35,6 +37,13 @@ class DashboardController extends Controller
             ->count();
         $this->hitungTransaksiBerjalan = UserTransaksiModel::where('idPengambil', Auth::id())
             ->where('diterima', true)->where('terambil', false)
+            ->count();
+    }
+
+    private function getCountBank()
+    {
+        $this->hitungTransaksiBank = UserTransaksiBankModel::where('idBank', Auth::id())
+            ->where('terambil', true)->where('terantar', false)
             ->count();
     }
 
@@ -74,7 +83,12 @@ class DashboardController extends Controller
     public function antar()
     {
         $this->getCount();
+        $daftarPengumuman = PengumumanBankModel::join('banksampahmail', 'pengumuman_bank.idBank', '=', 'banksampahmail.id')
+            ->where('pengumuman_bank.aktif', true)
+            ->orderBy('pengumuman_bank.id', 'desc')
+            ->get();
         return view('antar-pemilik', [
+            'daftarPengumuman' => $daftarPengumuman,
             'hitungBelumTerbayar' => $this->hitungBelumTerbayar,
             'hitungTransaksiBerjalanPemilik' => $this->hitungTransaksiBerjalanPemilik
         ]);
@@ -251,7 +265,8 @@ class DashboardController extends Controller
         ]);
     }
 
-    public function riwayatBank() {
+    public function riwayatBank()
+    {
         $kumpulanTransaksi = UserTransaksiBankModel::join('banksampahmail', 'transaksi_bank.idBank', '=', 'banksampahmail.id')
             ->where('transaksi_bank.diterima', true)
             ->where('transaksi_bank.idBank', Auth::id())
@@ -266,11 +281,21 @@ class DashboardController extends Controller
     public function pengumumanBank()
     {
         // $this->getCountPengambil();
-        $daftarPengumuman = PengumumanModel::orderBy('id', 'desc')->where('idPengambil', Auth::id())->get();
-        $hitungPengumumanAktif = PengumumanModel::where('idPengambil', Auth::id())->where('aktif', true)->count();
+        $daftarPengumuman = PengumumanBankModel::orderBy('id', 'desc')->where('idBank', Auth::id())->get();
+        $hitungPengumumanAktif = PengumumanBankModel::where('idBank', Auth::id())->where('aktif', true)->count();
         return view('pengumuman-bank', [
             'daftarPengumuman' => $daftarPengumuman,
             'hitungPengumumanAktif' => $hitungPengumumanAktif,
         ]);
     }
+
+    public function akunBank()
+    {
+        // $this->getCountPengambil();
+        return view('akun-bank', [
+            // 'hitungPermintaanAprrove' => $this->hitungPermintaanAprrove,
+            // 'hitungTransaksiBerjalan' => $this->hitungTransaksiBerjalan
+        ]);
+    }
+
 }

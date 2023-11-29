@@ -32,18 +32,34 @@ Route::redirect('/pemilik', '/pemilik/dashboard');
 Route::redirect('/pengambil', '/pengambil/dashboard');
 Route::redirect('/bank', '/bank/dashboard');
 
-// Register Controller
-Route::get('/register', [RegisterController::class, 'register']);
-Route::get('/register/auth', [RegisterController::class, 'auth']);
+Route::middleware(['guest'])->group(function () {
+    // Register Controller
+    Route::get('/register', [RegisterController::class, 'register']);
+    Route::get('/register/auth', [RegisterController::class, 'auth']);
 
-Route::post('/register/email', [RegisterController::class, 'email']);
+    Route::post('/register/email', [RegisterController::class, 'email']);
 
-// Login and Logout Controller
-Route::get('/login', [LoginController::class, 'login'])->name('login');
-Route::post('/login/loginCheck', [LoginController::class, 'loginCheck'])->name('loginCheck');
+    // Login and Logout Controller
+    Route::get('/login', [LoginController::class, 'login'])->name('login');
+    Route::post('/login/loginCheck', [LoginController::class, 'loginCheck'])->name('loginCheck');
+});
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+});
+
+
+Route::middleware(['checkRole', 'auth:pemilik'])->group(function () {
+    // Pilih Akun Controller
+    Route::get('/pilih-akun', [PilihAkunController::class, 'pilihAkun']);
+    Route::get('/login/loginPemilik', [LoginController::class, 'loginPemilik'])->name('loginPemilik');
+    Route::post('/login/loginPengambil', [LoginController::class, 'loginPengambil'])->name('loginPengambil');
+    Route::post('/login/loginBank', [LoginController::class, 'loginBank'])->name('loginBank');
+});
 
 Route::middleware(['auth:pemilik'])->group(function () {
     // Pemilik Controller
+    Route::permanentRedirect('/home', '/pemilik/dashboard');
     Route::get('/pemilik/dashboard', [DashboardController::class, 'dashboard']); //default pemilik
     Route::get('/pemilik/dashboard/ambil', [DashboardController::class, 'ambil']); //antar pemilik
     Route::get('/pemilik/dashboard/antar', [DashboardController::class, 'antar']); //ambil pemilik
@@ -82,17 +98,9 @@ Route::middleware(['auth:pemilik'])->group(function () {
     Route::get('/pemilik/bukti/pembayaran/{id}/{gambar}', [AmbilGambarController::class, 'showBuktiPembayaran']); //ambil bukti
 });
 
-Route::middleware(['auth:pemilik','checkRole'])->group(function () {
-    // Pilih Akun Controller
-    Route::get('/pilih-akun', [PilihAkunController::class, 'pilihAkun']);
-    Route::get('/login/loginPemilik', [LoginController::class, 'loginPemilik'])->name('loginPemilik');
-    Route::post('/login/loginPengambil', [LoginController::class, 'loginPengambil'])->name('loginPengambil');
-    Route::post('/login/loginBank', [LoginController::class, 'loginBank'])->name('loginBank');
-    Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
-});
-
 
 Route::middleware(['auth:pengambil'])->group(function () {
+    Route::permanentRedirect('/home', '/pengambil/dashboard');
     // Pengambil Contrroller
     Route::get('/pengambil/dashboard', [DashboardController::class, 'dashboardPengambil']); // default pengambil
     Route::get('/pengambil/pembayaran', [DashboardController::class, 'pembayaranPengambil']); // Pembayaran Pengambil
@@ -117,24 +125,36 @@ Route::middleware(['auth:pengambil'])->group(function () {
     Route::post('/pengambil/akun/gantiDataPemilik', [GantiInformasiAkunController::class, 'gantiDataPemilikPengambil']); // Simpan Data Pemilik
     Route::post('/pengambil/akun/simpanDataPengambil', [GantiInformasiAkunController::class, 'simpanDataPengambil']); // Simpan Data Pengambil
 
-     // Ambil BuktiGambar
-     Route::get('/pengambil/bukti/transaksi/{jenis}/{id}/{gambar}', [AmbilGambarController::class, 'showBuktiSampah']); //ambil bukti
-     Route::get('/pengambil/bukti/pembayaran/{id}/{gambar}', [AmbilGambarController::class, 'showBuktiPembayaran']); //ambil bukti
+    // Ambil BuktiGambar
+    Route::get('/pengambil/bukti/transaksi/{jenis}/{id}/{gambar}', [AmbilGambarController::class, 'showBuktiSampah']); //ambil bukti
+    Route::get('/pengambil/bukti/pembayaran/{id}/{gambar}', [AmbilGambarController::class, 'showBuktiPembayaran']); //ambil bukti
 
 });
 
 
 Route::middleware(['auth:bank'])->group(function () {
+    Route::permanentRedirect('/home', '/bank/dashboard');
     // Pengambil Contrroller
     Route::get('/bank/dashboard', [DashboardController::class, 'dashboardBank']); // default Bank
     Route::get('/bank/riwayat', [DashboardController::class, 'riwayatBank']); // Riwayat Bank
-    Route::get('/bank/akun', [DashboardController::class, 'akunPengambil']); // Riwayat Bank
+    Route::get('/bank/akun', [DashboardController::class, 'akunBank']); // Riwayat Bank
     Route::get('/bank/dashboard/terima', [DashboardController::class, 'terimaBank']); // halaman terima pesanan
     Route::get('/bank/dashboard/pengumuman', [DashboardController::class, 'pengumumanBank']); // halaman pengumuman
 
     // Terima Pesanan
     Route::post('/bank/dashboard/terima', [TerimaPesananController::class, 'terimaBank']); // terima pesanan
     Route::post('/bank/dashboard/terantar', [TerimaPesananController::class, 'terimaBank']); // pesanan terantar
+
+    // Pengumuman
+    Route::post('/bank/dashboard/pengumuman/buatPengumuman', [PengumumanController::class, 'buatPengumumanBank']); // Buat Pengumuman
+    Route::post('/bank/dashboard/pengumuman/selesai', [PengumumanController::class, 'selesaiPengumumanBank']); // Pengumuman Selesai
+    Route::post('/bank/dashboard/pengumuman/editPengumuman', [PengumumanController::class, 'editPengumumanBank']); // Edit Pengumuman
+
+    // Ganti Data Akun
+    Route::post('/bank/akun/passwordCheck', [GantiInformasiAkunController::class, 'passwordCheck']); // Check Password
+    Route::post('/bank/akun/gantiDataAkun', [GantiInformasiAkunController::class, 'gantiDataAkunBank']); // Simpan Data Akun
+    Route::post('/bank/akun/simpanDataBank', [GantiInformasiAkunController::class, 'simpanDataBank']); // Simpan Data Pengamb
+
 
     // Ambil Bukti Gambar
     Route::get('/bank/bukti/antarsendiri/{id}/{gambar}', [AmbilGambarController::class, 'showBuktiKirim']); //ambil bukti

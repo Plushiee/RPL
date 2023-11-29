@@ -128,6 +128,43 @@
                         <div class="card-box">
                             <h5 class="mt-0 font-14">Pengumuman</h5>
                             <div class="accordion accordion-flush" id="accordionFlushExample">
+                                <div class="pagination-container">
+                                    @foreach ($daftarPengumuman as $pengumuman)
+                                        <div class="accordion-item pengumuman-card">
+                                            <h2 class="accordion-header" id="flush-heading{{ $pengumuman->id }}">
+                                                <button class="accordion-button collapsed" type="button"
+                                                    data-bs-toggle="collapse"
+                                                    data-bs-target="#flush-collapse{{ $pengumuman->id }}"
+                                                    aria-expanded="false"
+                                                    aria-controls="flush-collapse{{ $pengumuman->id }}">
+                                                    <b>{{ $pengumuman->judulPengumuman }}</b>
+                                                </button>
+                                            </h2>
+                                            <div id="flush-collapse{{ $pengumuman->id }}"
+                                                class="accordion-collapse collapse"
+                                                aria-labelledby="flush-heading{{ $pengumuman->id }}"
+                                                data-bs-parent="#accordionFlushExample">
+                                                <div class="accordion-body">
+                                                    <h6 class="text-muted">
+                                                        <b>
+                                                            {{ \Carbon\Carbon::parse($pengumuman->tanggal)->locale('id')->isoFormat('dddd') }}<br>
+                                                            {{ \Carbon\Carbon::parse($pengumuman->tanggal)->locale('id')->isoFormat('D MMMM YYYY') }}
+                                                        </b>
+                                                    </h6>
+                                                    <p>{{ $pengumuman->isiPengumuman }}</p>
+                                                    <!-- Add other properties as needed -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                </div>
+                                <div class="pagination mt-2 d-flex justify-content-center">
+                                    <button id="prev-page" class="btn btn-primary"><i
+                                            class="bi bi-caret-left"></i></button>
+                                    &nbsp;
+                                    <button id="next-page" class="btn btn-primary"><i
+                                            class="bi bi-caret-right"></i></button>
+                                </div>
                             </div>
                         </div>
                     </div>

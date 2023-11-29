@@ -103,13 +103,13 @@ $(document).ready(function () {
                 formData.append('isiPengumuman', isiPengumuman);
                 $.ajax({
                     type: 'POST',
-                    url: '/pengambil/dashboard/pengumuman/buatPengumuman',
+                    url: '/bank/dashboard/pengumuman/buatPengumuman',
                     data: formData,
                     contentType: false,
                     processData: false,
                     success: function (response) {
                         console.log(response)
-                        window.location.href = '/pengambil/dashboard/pengumuman';
+                        window.location.href = '/bank/dashboard/pengumuman';
                     },
                     error: function (error) {
                         console.error('Error:', error);
@@ -157,13 +157,13 @@ $(document).ready(function () {
                 formData.append('isiPengumuman', isiPengumuman);
                 $.ajax({
                     type: 'POST',
-                    url: '/pengambil/dashboard/pengumuman/editPengumuman',
+                    url: '/bank/dashboard/pengumuman/editPengumuman',
                     data: formData,
                     contentType: false,
                     processData: false,
                     success: function (response) {
                         console.log(response)
-                        window.location.href = '/pengambil/dashboard/pengumuman';
+                        window.location.href = '/bank/dashboard/pengumuman';
                     },
                     error: function (error) {
                         console.error('Error:', error);
