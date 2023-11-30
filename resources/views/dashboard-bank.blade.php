@@ -83,6 +83,9 @@
                                             <h5 class="card-title text-center">Banyak Sampah Hari Ini</h5>
                                             <h1 class="card-text m-0 p-0 text-center" id="banyakSampah" style="font-weight: bold">
                                                 {{ $sumBerat[0]->totalBerat }}
+                                                @if(!$sumBerat[0]->totalBerat)
+                                                    0
+                                                @endif
                                             </h1>
                                             <h5 class="card-text text-center text-muted">Kilogram</h5>
                                         </div>

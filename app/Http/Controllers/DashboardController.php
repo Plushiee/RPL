@@ -240,8 +240,10 @@ class DashboardController extends Controller
     // Bank Sampah
     public function dashboardBank()
     {
+        $today = now()->toDateString();
         $sumBerat = UserTransaksiBankModel::select(DB::raw('SUM(berat) as totalBerat'))
         ->where('idBank',Auth::user()->id)
+        ->whereDate('created_at', $today)
         ->get();
 
 
