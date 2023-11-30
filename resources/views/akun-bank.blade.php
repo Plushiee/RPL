@@ -14,7 +14,7 @@
         <!-- Start Breadcrumb -->
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb" style="background-color: transparent !important">
-                <li class="breadcrumb-item"><a href="pemilik">Pemilik Sampah</a></li>
+                <li class="breadcrumb-item"><a href="/bank">Bank Sampah</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Akun</li>
             </ol>
         </nav>
