@@ -26,7 +26,7 @@ class DashboardController extends Controller
             ->where('terbayar', false)->where('diterima', true)
             ->count();
         $this->hitungTransaksiBerjalanPemilik = UserTransaksiModel::where('idPemilik', Auth::id())
-            ->where('terbayar', true)->where('diterima', true)
+            ->where('terbayar', true)->where('diterima', true)->where('terambil', false)
             ->count();
     }
 
@@ -86,7 +86,7 @@ class DashboardController extends Controller
         $daftarPengumuman = PengumumanBankModel::join('banksampahmail', 'pengumuman_bank.idBank', '=', 'banksampahmail.id')
             ->where('pengumuman_bank.aktif', true)
             ->orderBy('pengumuman_bank.id', 'desc')
-            ->get();
+            ->get(['banksampahmail.name', 'pengumuman_bank.*']);
         return view('antar-pemilik', [
             'daftarPengumuman' => $daftarPengumuman,
             'hitungBelumTerbayar' => $this->hitungBelumTerbayar,
@@ -183,7 +183,6 @@ class DashboardController extends Controller
         $kumpulanTransaksi = UserTransaksiModel::orderBy('id', 'desc')
             ->whereIn('berat', $allowedBerat)
             ->where('diterima', false)
-            ->where('idPemilik', '!=', Auth::id())
             ->get();
 
         return view('ambil-pengambil', [

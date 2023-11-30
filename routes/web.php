@@ -131,7 +131,6 @@ Route::middleware(['auth:pengambil'])->group(function () {
 
 });
 
-
 Route::middleware(['auth:bank'])->group(function () {
     Route::permanentRedirect('/home', '/bank/dashboard');
     // Pengambil Contrroller
@@ -154,7 +153,6 @@ Route::middleware(['auth:bank'])->group(function () {
     Route::post('/bank/akun/passwordCheck', [GantiInformasiAkunController::class, 'passwordCheck']); // Check Password
     Route::post('/bank/akun/gantiDataAkun', [GantiInformasiAkunController::class, 'gantiDataAkunBank']); // Simpan Data Akun
     Route::post('/bank/akun/simpanDataBank', [GantiInformasiAkunController::class, 'simpanDataBank']); // Simpan Data Pengamb
-
 
     // Ambil Bukti Gambar
     Route::get('/bank/bukti/antarsendiri/{id}/{gambar}', [AmbilGambarController::class, 'showBuktiKirim']); //ambil bukti

@@ -14,7 +14,7 @@ $(document).ready(function () {
 
         Swal.fire({
             title: "Bukti Pembayaran",
-            html: `<img src="${getBuktiPembayaranRoute(id, bukti)}" alt="Bukti Sampah" style="max-width: 100%; height: auto;">`,
+            html: `<img src="${getBuktiPembayaranRoute(id, bukti)}" alt="Bukti Bayar" style="max-width: 100%; height: auto;">`,
             showCancelButton: true,
             showConfirmButton: false,
             cancelButtonText: "Tutup",

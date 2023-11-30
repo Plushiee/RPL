@@ -137,7 +137,8 @@
                                                     data-bs-target="#flush-collapse{{ $pengumuman->id }}"
                                                     aria-expanded="false"
                                                     aria-controls="flush-collapse{{ $pengumuman->id }}">
-                                                    <b>{{ $pengumuman->judulPengumuman }}</b>
+                                                    <b>{{ $pengumuman->judulPengumuman }}</b> 
+                                                    <br> sadad
                                                 </button>
                                             </h2>
                                             <div id="flush-collapse{{ $pengumuman->id }}"

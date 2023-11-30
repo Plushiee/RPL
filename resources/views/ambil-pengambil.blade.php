@@ -31,9 +31,9 @@
                             <h4 class="header-title mb-3">Selamat
                                 <?php
                                 date_default_timezone_set('Asia/Jakarta');
-
+                                
                                 $jam = date('H');
-
+                                
                                 if ($jam >= 5 && $jam < 12) {
                                     $waktu = 'Pagi';
                                 } elseif ($jam >= 12 && $jam < 18) {
@@ -41,7 +41,7 @@
                                 } else {
                                     $waktu = 'Malam';
                                 }
-
+                                
                                 echo $waktu;
                                 ?>
                                 , {{ Auth::user()->name }} </h4>
@@ -55,7 +55,7 @@
                     <div class="card-box widget-inline pt-1" style="border: none !important">
                         <h5 class="mt-0 font-14">Daftar Pesanan</h5>
                         @foreach ($kumpulanTransaksi as $transaksi)
-                            @if ($transaksi->idPemilik != Auth::id())
+                            @if ($transaksi->idPemilik != Auth::user()->idUsermail)
                                 <div class="card shadow-0 border mb-4">
                                     <div class="card-body pt-2">
                                         <div class="row mb-3">
