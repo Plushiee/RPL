@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use App\Models\PengumumanBankModel;
 use App\Models\PengumumanModel;
 use App\Models\UserTransaksiBankModel;
@@ -239,9 +240,13 @@ class DashboardController extends Controller
     // Bank Sampah
     public function dashboardBank()
     {
+        $sumBerat = UserTransaksiBankModel::select(DB::raw('SUM(berat) as totalBerat'))
+        ->where('idBank',Auth::user()->id)
+        ->get();
+
 
         return view('dashboard-bank', [
-
+            'sumBerat' => $sumBerat
         ]);
     }
 

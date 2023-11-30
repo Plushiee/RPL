@@ -81,9 +81,10 @@
                                     <div class="card">
                                         <div class="card-body">
                                             <h5 class="card-title text-center">Banyak Sampah Hari Ini</h5>
-                                            <p class="card-text">With supporting text below as a natural lead-in to
-                                                additional content.</p>
-                                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                                            <h1 class="card-text m-0 p-0 text-center" id="banyakSampah" style="font-weight: bold">
+                                                {{ $sumBerat[0]->totalBerat }}
+                                            </h1>
+                                            <h5 class="card-text text-center text-muted">Kilogram</h5>
                                         </div>
                                     </div>
                                 </div>
@@ -91,29 +92,30 @@
                                     <div class="card">
                                         <div class="card-body">
                                             <h5 class="card-title text-center">Banyak Transaksi Hari Ini</h5>
-                                            <p class="card-text">With supporting text below as a natural lead-in to
-                                                additional content.</p>
-                                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                                            <h1 class="card-text m-0 p-0 text-center" id="transaksiSampah"
+                                                style="font-weight: bold">0</h1>
+                                            <h5 class="card-text text-center text-muted">Transaksi</h5>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-6">
                                     <div class="card">
                                         <div class="card-body">
-                                            <h5 class="card-title text-center">Sampah Dengan Berat Terbanyak</h5>
-                                            <p class="card-text">With supporting text below as a natural lead-in to
-                                                additional content.</p>
-                                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                                            <h5 class="card-title text-center">Pengirim Sampah Dengan Berat Terbanyak</h5>
+                                            <h1 class="card-text text-center ">Transaksi</h1>
+                                            <h5 class="card-text m-0 p-0 text-muted text-center" id="transaksiSampah"
+                                                style="font-weight: bold">Kilogram</h5>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-6">
                                     <div class="card">
                                         <div class="card-body">
-                                            <h5 class="card-title text-center">Sampah Dengan Transaksi Terbanyak</h5>
-                                            <p class="card-text">With supporting text below as a natural lead-in to
-                                                additional content.</p>
-                                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                                            <h5 class="card-title text-center">Pengirim Sampah Dengan Transaksi Terbanyak
+                                            </h5>
+                                            <h1 class="card-text text-center ">Transaksi</h1>
+                                            <h5 class="card-text m-0 p-0 text-muted text-center" id="transaksiSampah"
+                                                style="font-weight: bold"> Transaksi</h5>
                                         </div>
                                     </div>
                                 </div>
