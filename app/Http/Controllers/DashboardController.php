@@ -246,9 +246,14 @@ class DashboardController extends Controller
         ->whereDate('created_at', $today)
         ->get();
 
+        $countTransaksi = UserTransaksiBankModel::where('idBank', Auth::user()->id)
+        ->whereDate('created_at', $today)
+        ->count();
+
 
         return view('dashboard-bank', [
-            'sumBerat' => $sumBerat
+            'sumBerat' => $sumBerat,
+            'countTransaksi' => $countTransaksi
         ]);
     }
 

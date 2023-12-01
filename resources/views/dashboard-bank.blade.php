@@ -96,7 +96,7 @@
                                         <div class="card-body">
                                             <h5 class="card-title text-center">Banyak Transaksi Hari Ini</h5>
                                             <h1 class="card-text m-0 p-0 text-center" id="transaksiSampah"
-                                                style="font-weight: bold">0</h1>
+                                                style="font-weight: bold">{{ $countTransaksi }}</h1>
                                             <h5 class="card-text text-center text-muted">Transaksi</h5>
                                         </div>
                                     </div>
