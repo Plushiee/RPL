@@ -77,13 +77,14 @@
                         <div class="card-box">
                             <h5 class="mt-0 font-14">Rangkuman Data</h5>
                             <div class="row m-0 p-0">
-                                <div class="col-12 col-md-6">
-                                    <div class="card">
-                                        <div class="card-body">
+                                <div class="col-12 col-md-6 d-flex align-items-stretch">
+                                    <div class="card" style="min-width: 100%;">
+                                        <div class="card-body d-flex flex-column justify-content-center align-items-center">
                                             <h5 class="card-title text-center">Banyak Sampah Hari Ini</h5>
-                                            <h1 class="card-text m-0 p-0 text-center" id="banyakSampah" style="font-weight: bold">
+                                            <h1 class="card-text m-0 p-0 text-center" id="banyakSampah"
+                                                style="font-weight: bold">
                                                 {{ $sumBerat[0]->totalBerat }}
-                                                @if(!$sumBerat[0]->totalBerat)
+                                                @if (!$sumBerat[0]->totalBerat)
                                                     0
                                                 @endif
                                             </h1>
@@ -91,9 +92,9 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-12 col-md-6">
-                                    <div class="card">
-                                        <div class="card-body">
+                                <div class="col-12 col-md-6 d-flex align-items-stretch">
+                                    <div class="card" style="min-width: 100%;">
+                                        <div class="card-body d-flex flex-column justify-content-center align-items-center">
                                             <h5 class="card-title text-center">Banyak Transaksi Hari Ini</h5>
                                             <h1 class="card-text m-0 p-0 text-center" id="transaksiSampah"
                                                 style="font-weight: bold">{{ $countTransaksi }}</h1>
@@ -101,22 +102,27 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-12 col-md-6">
-                                    <div class="card">
-                                        <div class="card-body">
+                                <div class="col-12 col-md-6 d-flex align-items-stretch">
+                                    <div class="card" style="min-width: 100%;">
+                                        <div class="card-body d-flex flex-column justify-content-center align-items-center">
                                             <h5 class="card-title text-center">Pengirim Sampah Dengan Berat Terbanyak</h5>
-                                            <h1 class="card-text text-center ">Transaksi</h1>
+                                            <h1 class="card-text text-center ">{{ $userPengirimTerbanyak->namaLengkap }}</h1>
                                             <h5 class="card-text m-0 p-0 text-muted text-center" id="transaksiSampah"
-                                                style="font-weight: bold">Kilogram</h5>
+                                                style="font-weight: bold"> {{ $pengirimTerbanyak->totalBerat }}
+                                                @if (!$pengirimTerbanyak)
+                                                    0
+                                                @endif
+                                                Kilogram
+                                            </h5>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-12 col-md-6">
-                                    <div class="card">
-                                        <div class="card-body">
+                                <div class="col-12 col-md-6 d-flex align-items-stretch">
+                                    <div class="card" style="min-width: 100%;">
+                                        <div class="card-body d-flex flex-column justify-content-center align-items-center">
                                             <h5 class="card-title text-center">Pengirim Sampah Dengan Transaksi Terbanyak
                                             </h5>
-                                            <h1 class="card-text text-center ">Transaksi</h1>
+                                            <h1 class="card-text text-center ">{{ $pengirimTerbanyak->jumlahTransaksi }}</h1>
                                             <h5 class="card-text m-0 p-0 text-muted text-center" id="transaksiSampah"
                                                 style="font-weight: bold"> Transaksi</h5>
                                         </div>

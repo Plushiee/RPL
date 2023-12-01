@@ -171,6 +171,13 @@
                             @endif --}}
                         </a>
                     </li>
+                    <li class="@if (request()->is('bank/laporan*')) active-class @endif">
+                        <a href="/bank/laporan">
+                            <i
+                                class="bi bi-bar-chart @if (request()->is('bank/laporan*')) active-txt @endif"></i>
+                            <span class="@if (request()->is('bank/laporan*')) active-txt @endif"> Laporan </span>
+                        </a>
+                    </li>
                     <li class="@if (request()->is('bank/akun*')) active-class @endif">
                         <a href="/bank/akun">
                             <i

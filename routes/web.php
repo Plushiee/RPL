@@ -136,6 +136,7 @@ Route::middleware(['auth:bank'])->group(function () {
     // Pengambil Contrroller
     Route::get('/bank/dashboard', [DashboardController::class, 'dashboardBank']); // default Bank
     Route::get('/bank/riwayat', [DashboardController::class, 'riwayatBank']); // Riwayat Bank
+    Route::get('/bank/laporan', [DashboardController::class, 'laporanBank']); // Riwayat Bank
     Route::get('/bank/akun', [DashboardController::class, 'akunBank']); // Riwayat Bank
     Route::get('/bank/dashboard/terima', [DashboardController::class, 'terimaBank']); // halaman terima pesanan
     Route::get('/bank/dashboard/pengumuman', [DashboardController::class, 'pengumumanBank']); // halaman pengumuman

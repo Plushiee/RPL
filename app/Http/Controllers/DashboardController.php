@@ -242,18 +242,30 @@ class DashboardController extends Controller
     {
         $today = now()->toDateString();
         $sumBerat = UserTransaksiBankModel::select(DB::raw('SUM(berat) as totalBerat'))
-        ->where('idBank',Auth::user()->id)
-        ->whereDate('created_at', $today)
-        ->get();
+            ->where('idBank', Auth::user()->id)
+            ->whereDate('created_at', $today)
+            ->get();
 
         $countTransaksi = UserTransaksiBankModel::where('idBank', Auth::user()->id)
-        ->whereDate('created_at', $today)
-        ->count();
+            ->whereDate('created_at', $today)
+            ->count();
 
+        $pengirimTerbanyak = UserTransaksiBankModel::select('idPemilik', DB::raw('SUM(berat) as totalBerat'), DB::raw('COUNT(*) as jumlahTransaksi'))
+            ->groupBy('idPemilik')
+            ->orderByDesc('totalBerat')
+            ->first();
+
+        if($pengirimTerbanyak) {
+            $userPengirimTerbanyak = UserEmailModel::find($pengirimTerbanyak->idPemilik);
+        } else {
+            $userPengirimTerbanyak = '-';
+        }
 
         return view('dashboard-bank', [
             'sumBerat' => $sumBerat,
-            'countTransaksi' => $countTransaksi
+            'countTransaksi' => $countTransaksi,
+            'pengirimTerbanyak' => $pengirimTerbanyak,
+            'userPengirimTerbanyak' => $userPengirimTerbanyak,
         ]);
     }
 
@@ -300,6 +312,19 @@ class DashboardController extends Controller
         ]);
     }
 
+    public function laporanBank()
+    {
+        $kumpulanTransaksi = UserTransaksiBankModel::join('banksampahmail', 'transaksi_bank.idBank', '=', 'banksampahmail.id')->join('useremail', 'transaksi_bank.idPemilik', '=', 'useremail.id')
+            ->where('transaksi_bank.idBank', Auth::id())
+            ->orderBy('transaksi_bank.id', 'desc')
+            ->get(['useremail.id', 'useremail.nomor', 'useremail.name', 'useremail.email', 'useremail.namaLengkap', 'transaksi_bank.*']);
+
+        return view('laporan-bank', [
+            'kumpulanTransaksi' => $kumpulanTransaksi
+            // 'hitungPermintaanAprrove' => $this->hitungPermintaanAprrove,
+            // 'hitungTransaksiBerjalan' => $this->hitungTransaksiBerjalan
+        ]);
+    }
     public function akunBank()
     {
         // $this->getCountPengambil();
