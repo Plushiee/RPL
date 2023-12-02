@@ -105,6 +105,7 @@ Route::middleware(['auth:pengambil'])->group(function () {
     Route::get('/pengambil/dashboard', [DashboardController::class, 'dashboardPengambil']); // default pengambil
     Route::get('/pengambil/pembayaran', [DashboardController::class, 'pembayaranPengambil']); // Pembayaran Pengambil
     Route::get('/pengambil/riwayat', [DashboardController::class, 'riwayatPengambil']); // Riwayat Pengambil
+    Route::get('/pengambil/laporan', [DashboardController::class, 'laporanPengambil']); // Riwayat Pengambil
     Route::get('/pengambil/akun', [DashboardController::class, 'akunPengambil']); // Riwayat Pengambil
     Route::get('/pengambil/dashboard/ambil', [DashboardController::class, 'ambilPengambil']); // halaman ambil pesanan
     Route::get('/pengambil/dashboard/pengumuman', [DashboardController::class, 'pengumumanPengambil']); // halaman pengumuman

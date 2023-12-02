@@ -13,6 +13,7 @@ use App\Models\UserTransaksiModel;
 use App\Models\UserBankSampahModel;
 use App\Models\UserPengambilModel;
 
+
 class DashboardController extends Controller
 {
     private $hitungBelumTerbayar;
@@ -58,6 +59,7 @@ class DashboardController extends Controller
             ->where('pengumuman.aktif', true)
             ->orderBy('pengumuman.id', 'desc')
             ->get(['pengumuman.*']);
+
         return view('dashboard-pemilik', [
             'daftarPengumuman' => $daftarPengumuman,
             'hitungBelumTerbayar' => $this->hitungBelumTerbayar,
@@ -74,6 +76,7 @@ class DashboardController extends Controller
             ->where('pengumuman.aktif', true)
             ->orderBy('pengumuman.id', 'desc')
             ->get(['pengumuman.*']);
+
         return view('ambil-pemilik', [
             'daftarPengumuman' => $daftarPengumuman,
             'hitungBelumTerbayar' => $this->hitungBelumTerbayar,
@@ -88,6 +91,7 @@ class DashboardController extends Controller
             ->where('pengumuman_bank.aktif', true)
             ->orderBy('pengumuman_bank.id', 'desc')
             ->get(['banksampahmail.name', 'pengumuman_bank.*']);
+
         return view('antar-pemilik', [
             'daftarPengumuman' => $daftarPengumuman,
             'hitungBelumTerbayar' => $this->hitungBelumTerbayar,
@@ -117,6 +121,7 @@ class DashboardController extends Controller
             ->get(['transaksi_bank.*', 'banksampahmail.name', 'banksampahmail.email', 'banksampahmail.nomor', 'banksampahmail.alamat', 'banksampahmail.kecamatan', 'banksampahmail.kota', 'banksampahmail.provinsi', 'banksampahmail.kodePos', 'banksampahmail.catatan', 'banksampahmail.lang', 'banksampahmail.long']);
 
         $kumpulanTransaksi = UserTransaksiModel::where('idPemilik', Auth::id())->orderBy('id', 'desc')->get();
+
         return view('riwayat-pemilik', [
             'kumpulanTransaksi' => $kumpulanTransaksi,
             'kumpulanBank' => $kumpulanBank,
@@ -129,6 +134,7 @@ class DashboardController extends Controller
     {
         $this->getCount();
         $kumpulanTransaksi = UserTransaksiModel::where('idPemilik', Auth::id())->where('diterima', true)->orderBy('id', 'desc')->get();
+
         return view('pembayaran-pemilik', [
             'kumpulanTransaksi' => $kumpulanTransaksi,
             'hitungBelumTerbayar' => $this->hitungBelumTerbayar,
@@ -228,6 +234,27 @@ class DashboardController extends Controller
         ]);
     }
 
+    public function laporanPengambil()
+    {
+        $this->getCountPengambil();
+        $data = UserTransaksiModel::where('approved', true)
+            ->where('terambil', true)
+            ->groupBy('jenisSampah') // Group by jenisSampah
+            ->select('jenisSampah', \DB::raw('count(*) as totalTransactions')) // Count transactions for each jenisSampah
+            ->get();
+
+        $jenisSampah = $data->pluck('jenisSampah')->toArray();
+        $totalTransactions = $data->pluck('totalTransactions')->toArray();
+
+        return view('laporan-pengambil', [
+            'hitungPermintaanAprrove' => $this->hitungPermintaanAprrove,
+            'hitungTransaksiBerjalan' => $this->hitungTransaksiBerjalan,
+            'jenisSampah' => json_encode($jenisSampah),
+            'totalTransactions' => json_encode($totalTransactions),
+        ]);
+
+    }
+
     public function akunPengambil()
     {
         $this->getCountPengambil();
@@ -255,7 +282,7 @@ class DashboardController extends Controller
             ->orderByDesc('totalBerat')
             ->first();
 
-        if($pengirimTerbanyak) {
+        if ($pengirimTerbanyak) {
             $userPengirimTerbanyak = UserEmailModel::find($pengirimTerbanyak->idPemilik);
         } else {
             $userPengirimTerbanyak = '-';
@@ -314,17 +341,44 @@ class DashboardController extends Controller
 
     public function laporanBank()
     {
+
+        $today = now()->toDateString();
+        $sumBerat = UserTransaksiBankModel::select(DB::raw('SUM(berat) as totalBerat'))
+            ->where('idBank', Auth::user()->id)
+            ->whereDate('created_at', $today)
+            ->get();
+
+        $countTransaksi = UserTransaksiBankModel::where('idBank', Auth::user()->id)
+            ->whereDate('created_at', $today)
+            ->count();
+
+        $pengirimTerbanyak = UserTransaksiBankModel::select('idPemilik', DB::raw('SUM(berat) as totalBerat'), DB::raw('COUNT(*) as jumlahTransaksi'))
+            ->groupBy('idPemilik')
+            ->orderByDesc('totalBerat')
+            ->first();
+
         $kumpulanTransaksi = UserTransaksiBankModel::join('banksampahmail', 'transaksi_bank.idBank', '=', 'banksampahmail.id')->join('useremail', 'transaksi_bank.idPemilik', '=', 'useremail.id')
             ->where('transaksi_bank.idBank', Auth::id())
             ->orderBy('transaksi_bank.id', 'desc')
-            ->get(['useremail.id', 'useremail.nomor', 'useremail.name', 'useremail.email', 'useremail.namaLengkap', 'transaksi_bank.*']);
+            ->get(['useremail.nomor', 'useremail.name', 'useremail.email', 'useremail.namaLengkap', 'useremail.alamat', 'useremail.kecamatan', 'useremail.kota', 'useremail.provinsi', 'useremail.kodePos', 'transaksi_bank.*']);
+
+        if ($pengirimTerbanyak) {
+            $userPengirimTerbanyak = UserEmailModel::find($pengirimTerbanyak->idPemilik);
+        } else {
+            $userPengirimTerbanyak = '-';
+        }
 
         return view('laporan-bank', [
-            'kumpulanTransaksi' => $kumpulanTransaksi
+            'sumBerat' => $sumBerat,
+            'countTransaksi' => $countTransaksi,
+            'pengirimTerbanyak' => $pengirimTerbanyak,
+            'userPengirimTerbanyak' => $userPengirimTerbanyak,
+            'kumpulanTransaksi' => $kumpulanTransaksi,
             // 'hitungPermintaanAprrove' => $this->hitungPermintaanAprrove,
             // 'hitungTransaksiBerjalan' => $this->hitungTransaksiBerjalan
         ]);
     }
+
     public function akunBank()
     {
         // $this->getCountPengambil();

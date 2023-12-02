@@ -132,25 +132,17 @@
                                                             <div
                                                                 class="col-md-2 mt-3 mt-sm-2 mt-md-0 text-center d-flex justify-content-center align-items-center">
                                                                 <div class="row">
-                                                                    <form action="/pengambil/pembayaran/approved"
-                                                                        class="mx-0 px-0" method="POST">
-                                                                        @csrf
-                                                                        <input type="hidden" name="id_transaksi"
-                                                                            value="{{ $transaksi->id }}">
-                                                                        <input type="hidden" name="aksi"
-                                                                            value="diterima">
-                                                                        <div class="col-md-12">
-                                                                            <input type="hidden" name="aksi"
-                                                                                value="approved">
-                                                                            <button type="submit" id="approved"
-                                                                                class="btn btn-info btn-block mb-2 approved
-                                                                                @if (!$transaksi->terbayar) disabled @endif">
-                                                                                Approved
-                                                                            </button>
-                                                                        </div>
-                                                                    </form>
+                                                                    <input type="hidden" name="csrf" id="csrf"
+                                                                        value="{{ csrf_token() }}">
+                                                                    <input type="hidden" name="id_transaksi"
+                                                                        id="id_transaksi" value="{{ $transaksi->id }}">
+                                                                    <input type="hidden" name="aksi" value="diterima">
                                                                     <div class="col-md-12">
-                                                                        <button class="btn btn-info btn-block lihat"
+                                                                        <button class="btn btn-info btn-block @if($transaksi->terbayar == true && $transaksi->approved == false)
+                                                                            setuju
+                                                                        @else
+                                                                            lihat
+                                                                        @endif"
                                                                             data-id="{{ $transaksi->idPemilik }}"
                                                                             data-bukti="{{ $transaksi->buktibayar }}">Tampilkan
                                                                             Bukti</button>

@@ -30,9 +30,9 @@
                             <h4 class="header-title mb-3">Selamat
                                 <?php
                                 date_default_timezone_set('Asia/Jakarta');
-                                
+
                                 $jam = date('H');
-                                
+
                                 if ($jam >= 5 && $jam < 12) {
                                     $waktu = 'Pagi';
                                 } elseif ($jam >= 12 && $jam < 18) {
@@ -40,7 +40,7 @@
                                 } else {
                                     $waktu = 'Malam';
                                 }
-                                
+
                                 echo $waktu;
                                 ?>
                                 , {{ Auth::user()->name }} </h4>
@@ -52,7 +52,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card-box widget-inline pt-1" style="border: none !important">
-                        <h5 class="mt-0 font-14">Riwayat Pesanan</h5>
+                        <h5 class="mt-0 font-14">Riwayat Pembayaran</h5>
                         @foreach ($kumpulanTransaksi as $transaksi)
                             <div class="card shadow-0 border mb-4">
                                 <div class="card-body pt-2">
@@ -112,20 +112,25 @@
                                         <div
                                             class="col-md-2 mt-3 mt-sm-2 mt-md-0 text-center d-flex justify-content-center align-items-center">
                                             <div class="row">
-                                                <form action="{{ route('uploadBukti') }}" method="post"
-                                                    enctype="multipart/form-data" class="mx-0 px-0" id="uploadForm">
-                                                    @csrf
-                                                    <input type="hidden" name="id_transaksi" value="{{ $transaksi->id }}">
-                                                    <div class="col-md-12">
-                                                        <label for="bukti" class="btn btn-info btn-block">
-                                                            Upload Bukti
-                                                            <input type="file" id="bukti" name="bukti"
-                                                                class="d-none bukti" accept="image/*">
-                                                        </label>
-                                                    </div>
-                                                </form>
+                                                @if (!$transaksi->approved)
+                                                    <form action="{{ route('uploadBukti') }}" method="post"
+                                                        enctype="multipart/form-data" class="mx-0 px-0" id="uploadForm">
+                                                        @csrf
+                                                        <input type="hidden" name="id_transaksi"
+                                                            value="{{ $transaksi->id }}">
+                                                        <div class="col-md-12">
+                                                            <label for="bukti" class="btn btn-info btn-block">
+                                                                Upload Bukti
+                                                                <input type="file" id="bukti" name="bukti"
+                                                                    class="d-none bukti" accept="image/*">
+                                                            </label>
+                                                        </div>
+                                                    </form>
+                                                @endif
+
                                                 <div class="col-md-12">
-                                                    <button class="btn btn-info btn-block lihat" data-id="{{ $transaksi->idPemilik }}"
+                                                    <button class="btn btn-info btn-block lihat"
+                                                        data-id="{{ $transaksi->idPemilik }}"
                                                         data-bukti="{{ $transaksi->buktibayar }}">Tampilkan
                                                         Bukti</button>
                                                 </div>

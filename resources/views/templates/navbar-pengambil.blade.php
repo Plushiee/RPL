@@ -180,6 +180,15 @@
                             @endif
                         </a>
                     </li>
+
+                    <li class="@if (request()->is('pengambil/laporan*')) active-class @endif">
+                        <a href="/pengambil/laporan">
+                            <i
+                                class="bi bi-bar-chart @if (request()->is('pengambil/laporan*')) active-txt @endif"></i>
+                            <span class="@if (request()->is('pengambil/laporan*')) active-txt @endif"> Laporan </span>
+                        </a>
+                    </li>
+
                     <li class="@if (request()->is('pengambil/akun*')) active-class @endif">
                         <a href="/pengambil/akun">
                             <i

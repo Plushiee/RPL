@@ -171,6 +171,7 @@
                             @endif --}}
                         </a>
                     </li>
+
                     <li class="@if (request()->is('bank/laporan*')) active-class @endif">
                         <a href="/bank/laporan">
                             <i
@@ -178,6 +179,7 @@
                             <span class="@if (request()->is('bank/laporan*')) active-txt @endif"> Laporan </span>
                         </a>
                     </li>
+
                     <li class="@if (request()->is('bank/akun*')) active-class @endif">
                         <a href="/bank/akun">
                             <i

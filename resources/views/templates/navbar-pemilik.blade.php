@@ -183,6 +183,15 @@
                             @endif
                         </a>
                     </li>
+
+                    <li class="@if (request()->is('pemilik/laporan*')) active-class @endif">
+                        <a href="/pemilik/laporan">
+                            <i
+                                class="bi bi-bar-chart @if (request()->is('pemilik/laporan*')) active-txt @endif"></i>
+                            <span class="@if (request()->is('pemilik/laporan*')) active-txt @endif"> Laporan </span>
+                        </a>
+                    </li>
+
                     <li class="@if (request()->is('pemilik/akun*')) active-class @endif">
                         <a href="/pemilik/akun">
                             <i
