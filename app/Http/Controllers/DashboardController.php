@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\UserTransaksiModel;
 use App\Models\UserBankSampahModel;
 use App\Models\UserPengambilModel;
-
+use Carbon\Carbon;
 
 class DashboardController extends Controller
 {
@@ -237,23 +237,77 @@ class DashboardController extends Controller
     public function laporanPengambil()
     {
         $this->getCountPengambil();
+        $labels = [
+            'Januari',
+            'Februari',
+            'Maret',
+            'April',
+            'Mei',
+            'Juni',
+            'Juli',
+            'Agustus',
+            'September',
+            'Oktober',
+            'November',
+            'Desember'
+        ];
+
+        $currentYear = Carbon::now()->year;
+
+        // Query database untuk mendapatkan data transaksi hanya untuk tahun ini
         $data = UserTransaksiModel::where('approved', true)
             ->where('terambil', true)
-            ->groupBy('jenisSampah') // Group by jenisSampah
-            ->select('jenisSampah', \DB::raw('count(*) as totalTransactions')) // Count transactions for each jenisSampah
+            ->where('idPengambil', Auth::user()->id)
+            ->whereYear('created_at', $currentYear) // Tambahkan kondisi where untuk tahun ini
+            ->rightJoin(DB::raw("(SELECT 1 as month UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION SELECT 5 UNION SELECT 6 UNION SELECT 7 UNION SELECT 8 UNION SELECT 9 UNION SELECT 10 UNION SELECT 11 UNION SELECT 12) as months"), function ($join) {
+                $join->on(DB::raw('MONTH(created_at)'), '=', 'months.month');
+            })
+            ->groupBy('jenisSampah', 'months.month')
+            ->select(
+                'jenisSampah',
+                \DB::raw('count(*) as totalTransactions'),
+                \DB::raw('months.month as month'),
+            )
+            ->orderBy('month')
             ->get();
 
-        $jenisSampah = $data->pluck('jenisSampah')->toArray();
-        $totalTransactions = $data->pluck('totalTransactions')->toArray();
+        // Query database untuk melihat peta penyebaran
+        $userLocations = UserTransaksiModel::where('approved', true)
+            ->where('idPengambil', Auth::user()->id)
+            ->where('terambil', true)
+            ->whereYear('created_at', $currentYear) // Tambahkan kondisi where untuk tahun ini
+            ->get(['nama', 'alamat', 'lang', 'long']);
 
+        // Inisialisasi array untuk setiap bulan
+        $transactionsPerMonth = array_fill(0, 12, 0);
+
+        // Memproses data untuk chart
+        foreach ($data as $entry) {
+            $monthIndex = $entry->month - 1; // Index dimulai dari 0
+            $transactionsPerMonth[$monthIndex] = $entry->totalTransactions;
+        }
+
+        $years = UserTransaksiModel::selectRaw('YEAR(created_at) as year')
+            ->distinct()
+            ->where('terambil', true)
+            ->where('idPengambil', Auth::user()->id)
+            ->orderBy('year')
+            ->get()
+            ->pluck('year');
+
+        // Mengirim data ke view
         return view('laporan-pengambil', [
             'hitungPermintaanAprrove' => $this->hitungPermintaanAprrove,
             'hitungTransaksiBerjalan' => $this->hitungTransaksiBerjalan,
-            'jenisSampah' => json_encode($jenisSampah),
-            'totalTransactions' => json_encode($totalTransactions),
+            'jenisSampah' => json_encode($data->pluck('jenisSampah')->toArray()),
+            'totalTransactions' => json_encode($data->pluck('totalTransactions')->toArray()),
+            'labels' => json_encode($labels),
+            'transactionsPerMonth' => json_encode($transactionsPerMonth),
+            'userLocations' => $userLocations,
+            'years' => $years,
         ]);
-
     }
+
 
     public function akunPengambil()
     {

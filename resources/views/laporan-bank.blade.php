@@ -149,7 +149,7 @@
                                                                 <span class="badge badge-danger"> &nbsp;Respon&nbsp; </span>
                                                             @endif
                                                             @if ($transaksi->diterima == true && $transaksi->terantar == false)
-                                                                <span class="badge badge-warning"> &nbsp;Diterimar&nbsp; </span>
+                                                                <span class="badge badge-warning"> &nbsp;Diterima&nbsp; </span>
                                                             @endif
                                                             @if ($transaksi->diterima == true && $transaksi->terantar == true)
                                                                 <span class="badge badge-success"> &nbsp;Selesai&nbsp; </span>
