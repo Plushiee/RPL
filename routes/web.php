@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AmbilGambarController;
+use App\Http\Controllers\DownloadLaporanController;
 use App\Http\Controllers\GantiInformasiAkunController;
 use App\Http\Controllers\PengumumanController;
 use App\Http\Controllers\TerimaPesananController;
@@ -129,6 +130,9 @@ Route::middleware(['auth:pengambil'])->group(function () {
     // Ambil BuktiGambar
     Route::get('/pengambil/bukti/transaksi/{jenis}/{id}/{gambar}', [AmbilGambarController::class, 'showBuktiSampah']); //ambil bukti
     Route::get('/pengambil/bukti/pembayaran/{id}/{gambar}', [AmbilGambarController::class, 'showBuktiPembayaran']); //ambil bukti
+
+    // Download Laporan
+    Route::get('/pengambil/laporan/download', [DownloadLaporanController::class, 'downloadLaporanPengambil']); // Riwayat Pengambil
 
 });
 

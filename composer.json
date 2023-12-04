@@ -14,6 +14,7 @@
         "laravel/sanctum": "^2.11",
         "laravel/socialite": "*",
         "laravel/tinker": "^2.5",
+        "spatie/browsershot": "^3.60",
         "yajra/laravel-datatables-oracle": "^9.21"
     },
     "require-dev": {

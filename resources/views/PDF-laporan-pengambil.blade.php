@@ -1,4 +1,4 @@
-@extends('templates.navbar-pengambil')
+@extends('templates.laporan-pdf')
 
 @section('title', 'MoneyTrash! - Laporan')
 @section('css')
@@ -8,115 +8,41 @@
 @endsection
 
 @section('contents')
-    <!-- ============================================================== -->
-    <!-- Start Page Content here -->
-    <!-- ============================================================== -->
+    <!-- Your Content Here -->
+    <h2>Laporan Pengambil Sampah Tahun {{ \Carbon\Carbon::now()->year }}</h2>
+    <button id="downloadPdfBtn" class="btn btn-primary d-block d-lg-none mb-3">Download PDF</button>
 
-    <div class="content-page">
-        <!-- Start Breadcrumb -->
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb" style="background-color: transparent !important">
-                <li class="breadcrumb-item"><a href="/bank">Pengambil Sampah</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Laporan</li>
-            </ol>
-        </nav>
-        <!-- End Breadcrumb -->
-
-        <div class="content pt-0 mt-0">
-
-            <!-- Start container-fluid -->
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-12">
-                        <div>
-                            <h4 class="header-title mb-3">Selamat
-                                <?php
-                                date_default_timezone_set('Asia/Jakarta');
-
-                                $jam = date('H');
-
-                                if ($jam >= 5 && $jam < 12) {
-                                    $waktu = 'Pagi';
-                                } elseif ($jam >= 12 && $jam < 18) {
-                                    $waktu = 'Siang';
-                                } else {
-                                    $waktu = 'Malam';
-                                }
-
-                                echo $waktu;
-                                ?>
-                                , {{ Auth::user()->name }} </h4>
-                        </div>
-                    </div>
+    <div class="row">
+        <div class="col-12 col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Grafik Transaksi Pengambilan Sampah</h5>
+                    <canvas id="myChart" width="100%" height="400px"
+                        style="min-height: 200px; max-height: 500px;"></canvas>
                 </div>
-                <div class="row">
-                    <div class="col-12">
-                        <h2>Laporan Pengambil Sampah Tahun {{ \Carbon\Carbon::now()->year }}
-                            <a href="http://" id="downloadPdfBtn" class="btn btn-primary float-right d-none d-lg-block">Download
-                                PDF</a>
-                        </h2>
-                        <button id="downloadPdfBtn" class="btn btn-primary d-block d-lg-none mb-3">Download PDF</button>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-12 col-md-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title">Grafik Transaksi Pengambilan Sampah</h5>
-                                <canvas id="myChart" width="100%" height="400px" style="min-height: 200px; max-height: 500px;"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title">Grafik Transaksi Pengambilan Sampah</h5>
-                                <canvas id="monthlyTransactionsChart" width="100%" height="400px" style=" min-height: 200px; max-height: 500px;"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title">Peta Penyebaran Pengambilan Sampah</h5>
-                                <div id="map" style="width: 100%; height: 500px;"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- end row -->
-
-
-                <!-- end col -->
             </div>
-            <!-- end row -->
-
         </div>
-        <!-- end container-fluid -->
-
-
-
-        <!-- Footer Start -->
-        {{-- <footer class="footer"> --}}
-        {{-- <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-12">
-                        2017 - 2020 &copy; Simple theme by <a href="">Coderthemes</a>
-                    </div>
+        <div class="col-12 col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Grafik Transaksi Pengambilan Sampah</h5>
+                    <canvas id="monthlyTransactionsChart" width="100%" height="400px"
+                        style="min-height: 200px; max-height: 500px;"></canvas>
                 </div>
-            </div> --}}
-        {{-- </footer> --}}
-        <!-- end Footer -->
-
+            </div>
+        </div>
     </div>
-    <!-- end content -->
 
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Peta Penyebaran Pengambilan Sampah</h5>
+                    <div id="map" style="width: 100%; height: 600px;"></div>
+                </div>
+            </div>
+        </div>
     </div>
-    <!-- END content-page -->
 @endsection
 
 @section('scripts')
@@ -129,7 +55,6 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <script>
-        // Jenis sampah
         var jenisSampah = {!! $jenisSampah !!};
         var banyakTransaksi = {!! $totalTransactions !!};
 
@@ -161,7 +86,6 @@
             }
         });
 
-        // Transaksi per tahun
         var labels = {!! $labels !!};
         var transactionsPerMonth = {!! $transactionsPerMonth !!};
 
@@ -191,27 +115,22 @@
             }
         });
 
-        // Map peta penyebaran
         function initMap(latitude, longitude) {
-            // Data lokasi pengambilan dari PHP
             var locations = {!! json_encode($userLocations) !!};
 
-            // Inisialisasi peta dengan nilai zoom dan pusat
             var map = new google.maps.Map(document.getElementById('map'), {
                 center: {
                     lat: latitude,
                     lng: longitude
                 },
-                zoom: 14
+                zoom: 13
             });
 
-            // Menambahkan lingkaran untuk setiap lokasi
             locations.forEach(function(location) {
                 const langs = parseFloat(location.lang);
                 const longs = parseFloat(location.long);
                 var latLng = new google.maps.LatLng(langs, longs);
 
-                // Garis Lingkaran Luar
                 var outlineCircle = new google.maps.Circle({
                     center: latLng,
                     radius: 60,
@@ -222,7 +141,6 @@
                     map: map
                 });
 
-                // Lingkaran dalam
                 var filledCircle = new google.maps.Circle({
                     center: latLng,
                     radius: 60,
@@ -233,8 +151,7 @@
                 });
             });
         }
-
-        // Mendapatkan lokasi pengambil
+l
         function getLocation() {
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(
