@@ -32,9 +32,9 @@
                             <h4 class="header-title mb-3">Selamat
                                 <?php
                                 date_default_timezone_set('Asia/Jakarta');
-
+                                
                                 $jam = date('H');
-
+                                
                                 if ($jam >= 5 && $jam < 12) {
                                     $waktu = 'Pagi';
                                 } elseif ($jam >= 12 && $jam < 18) {
@@ -42,7 +42,7 @@
                                 } else {
                                     $waktu = 'Malam';
                                 }
-
+                                
                                 echo $waktu;
                                 ?>
                                 , {{ Auth::user()->name }} </h4>
@@ -52,10 +52,9 @@
                 <div class="row">
                     <div class="col-12">
                         <h2>Laporan Pengambil Sampah Tahun {{ \Carbon\Carbon::now()->year }}
-                            <a href="http://" id="downloadPdfBtn" class="btn btn-primary float-right d-none d-lg-block">Download
-                                PDF</a>
+                            <button id="downloadPdfBtn" class="btn btn-primary mb-3 download">Download
+                                PDF</button>
                         </h2>
-                        <button id="downloadPdfBtn" class="btn btn-primary d-block d-lg-none mb-3">Download PDF</button>
                     </div>
                 </div>
 
@@ -64,7 +63,8 @@
                         <div class="card">
                             <div class="card-body">
                                 <h5 class="card-title">Grafik Transaksi Pengambilan Sampah</h5>
-                                <canvas id="myChart" width="100%" height="400px" style="min-height: 200px; max-height: 500px;"></canvas>
+                                <canvas id="myChart" width="100%" height="400px"
+                                    style="min-height: 200px; max-height: 500px;"></canvas>
                             </div>
                         </div>
                     </div>
@@ -72,7 +72,8 @@
                         <div class="card">
                             <div class="card-body">
                                 <h5 class="card-title">Grafik Transaksi Pengambilan Sampah</h5>
-                                <canvas id="monthlyTransactionsChart" width="100%" height="400px" style=" min-height: 200px; max-height: 500px;"></canvas>
+                                <canvas id="monthlyTransactionsChart" width="100%" height="400px"
+                                    style=" min-height: 200px; max-height: 500px;"></canvas>
                             </div>
                         </div>
                     </div>
@@ -127,6 +128,18 @@
     <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://unpkg.com/jspdf@latest/dist/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"
+        integrity="sha512-pdCVFUWsxl1A4g0uV6fyJ3nrnTGeWnZN2Tl/56j45UvZ1OMdm9CIbctuIHj+yBIRTUUyv6I9+OivXj4i0LPEYA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <!-- Automatically provides/replaces `Promise` if missing or broken. -->
+    <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.js"></script>
+
+    <!-- Minified version of `es6-promise-auto` below. -->
+    <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"></script>
 
     <script>
         // Jenis sampah
@@ -254,5 +267,27 @@
         }
 
         getLocation();
+
+        $('#downloadPdfBtn').click(function(e) {
+            e.preventDefault();
+            alert();
+
+            html2pdf(document.body, {
+                margin: 15,
+                filename: 'MoneyTrash_Laporan.pdf',
+                image: {
+                    type: 'jpeg',
+                    quality: 0.98
+                },
+                html2canvas: {
+                    scale: 2
+                },
+                jsPDF: {
+                    unit: 'mm',
+                    format: 'a4',
+                    orientation: 'portrait'
+                }
+            });
+        });
     </script>
 @endsection

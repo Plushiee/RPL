@@ -76,19 +76,13 @@ class DownloadLaporanController extends Controller
             ->pluck('year');
 
         // Get the HTML content from the view
-        $htmlContent = view('PDF-laporan-pengambil', [
+        return view('PDF-laporan-pengambil', [
             'jenisSampah' => json_encode($data->pluck('jenisSampah')->toArray()),
             'totalTransactions' => json_encode($data->pluck('totalTransactions')->toArray()),
             'labels' => json_encode($labels),
             'transactionsPerMonth' => json_encode($transactionsPerMonth),
             'userLocations' => $userLocations,
             'years' => $years,
-        ])->render();
-
-        // Generate PDF using Snappy
-        $pdf = PDF::loadHTML($htmlContent);
-        $pdf->save(public_path('laporan-pengambil.pdf'));
-
-        return response()->download(public_path('laporan-pengambil.pdf'))->deleteFileAfterSend(true);
+        ]);
     }
 }
