@@ -52,9 +52,12 @@
                 <div class="row">
                     <div class="col-12">
                         <h2>Laporan Pengambil Sampah Tahun {{ \Carbon\Carbon::now()->year }}
-                            <button id="downloadPdfBtn" class="btn btn-primary mb-3 download">Download
-                                PDF</button>
+                            <a href="/pengambil/laporan/download" target="_blank" rel="noopener noreferrer" class=" d-none d-md-inline btn btn-primary mb-3 float-right">Download
+                                PDF</a>
                         </h2>
+
+                        <a href="/pengambil/laporan/download" target="_blank" rel="noopener noreferrer" class="d-block d-md-none btn btn-primary mb-3 mt-3">Download
+                            PDF</a>
                     </div>
                 </div>
 
