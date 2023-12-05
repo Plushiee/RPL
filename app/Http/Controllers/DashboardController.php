@@ -99,6 +99,20 @@ class DashboardController extends Controller
         ]);
     }
 
+    public function laporanPemilik()
+    {
+        $this->getCount();
+        $kumpulanTransaksi = UserTransaksiModel::where('idPemilik', Auth::id())->orderBy('id', 'desc')->get();
+
+        return view('laporan-pemilik', [
+            'hitungBelumTerbayar' => $this->hitungBelumTerbayar,
+            'hitungTransaksiBerjalanPemilik' => $this->hitungTransaksiBerjalanPemilik,
+            'kumpulanTransaksi' => $kumpulanTransaksi,
+            // 'hitungPermintaanAprrove' => $this->hitungPermintaanAprrove,
+            // 'hitungTransaksiBerjalan' => $this->hitungTransaksiBerjalan
+        ]);
+    }
+
     public function akun()
     {
         $this->getCount();
@@ -339,7 +353,7 @@ class DashboardController extends Controller
         if ($pengirimTerbanyak) {
             $userPengirimTerbanyak = UserEmailModel::find($pengirimTerbanyak->idPemilik);
         } else {
-            $userPengirimTerbanyak = '-';
+            $userPengirimTerbanyak = null;
         }
 
         return view('dashboard-bank', [
@@ -419,7 +433,7 @@ class DashboardController extends Controller
         if ($pengirimTerbanyak) {
             $userPengirimTerbanyak = UserEmailModel::find($pengirimTerbanyak->idPemilik);
         } else {
-            $userPengirimTerbanyak = '-';
+            $userPengirimTerbanyak = null;
         }
 
         return view('laporan-bank', [

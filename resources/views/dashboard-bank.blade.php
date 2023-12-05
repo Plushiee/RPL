@@ -106,11 +106,19 @@
                                     <div class="card" style="min-width: 100%;">
                                         <div class="card-body d-flex flex-column justify-content-center align-items-center">
                                             <h5 class="card-title text-center">Pengirim Sampah Dengan Berat Terbanyak</h5>
-                                            <h1 class="card-text text-center ">{{ $userPengirimTerbanyak->namaLengkap }}</h1>
+                                            <h1 class="card-text text-center ">
+                                                @if ($userPengirimTerbanyak)
+                                                    {{ $userPengirimTerbanyak->namaLengkap }}
+                                                @else
+                                                    -
+                                                @endif
+                                            </h1>
                                             <h5 class="card-text m-0 p-0 text-muted text-center" id="transaksiSampah"
-                                                style="font-weight: bold"> {{ $pengirimTerbanyak->totalBerat }}
+                                                style="font-weight: bold">
                                                 @if (!$pengirimTerbanyak)
                                                     0
+                                                @else
+                                                    {{ $pengirimTerbanyak->totalBerat }}
                                                 @endif
                                                 Kilogram
                                             </h5>
@@ -122,7 +130,13 @@
                                         <div class="card-body d-flex flex-column justify-content-center align-items-center">
                                             <h5 class="card-title text-center">Pengirim Sampah Dengan Transaksi Terbanyak
                                             </h5>
-                                            <h1 class="card-text text-center ">{{ $pengirimTerbanyak->jumlahTransaksi }}</h1>
+                                            <h1 class="card-text text-center ">
+                                                @if (!$pengirimTerbanyak)
+                                                    -
+                                                @else
+                                                    {{ $pengirimTerbanyak->jumlahTransaksi }}
+                                                @endif
+                                            </h1>
                                             <h5 class="card-text m-0 p-0 text-muted text-center" id="transaksiSampah"
                                                 style="font-weight: bold"> Transaksi</h5>
                                         </div>
