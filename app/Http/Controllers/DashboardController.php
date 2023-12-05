@@ -104,12 +104,16 @@ class DashboardController extends Controller
         $this->getCount();
         $kumpulanTransaksi = UserTransaksiModel::where('idPemilik', Auth::id())->orderBy('id', 'desc')->get();
 
+        $jenisSampahCounts = $kumpulanTransaksi->groupBy('jenisSampah')->map->count();
+        $labels = $jenisSampahCounts->keys()->toArray();
+        $data = $jenisSampahCounts->values()->toArray();
+
         return view('laporan-pemilik', [
             'hitungBelumTerbayar' => $this->hitungBelumTerbayar,
             'hitungTransaksiBerjalanPemilik' => $this->hitungTransaksiBerjalanPemilik,
             'kumpulanTransaksi' => $kumpulanTransaksi,
-            // 'hitungPermintaanAprrove' => $this->hitungPermintaanAprrove,
-            // 'hitungTransaksiBerjalan' => $this->hitungTransaksiBerjalan
+            'labels' => json_encode($labels),
+            'data' => json_encode($data),
         ]);
     }
 

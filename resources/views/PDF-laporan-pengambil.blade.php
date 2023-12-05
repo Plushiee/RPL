@@ -31,19 +31,6 @@
             </div>
         </div>
     </div>
-
-    <div style="page-break-before: always;"></div>
-
-    <div class="row">
-        <div class="col-12">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Peta Penyebaran Pengambilan Sampah</h5>
-                    <div id="map" style="width: 100%; height: 1010px;"></div>
-                </div>
-            </div>
-        </div>
-    </div>
 @endsection
 
 @section('scripts')

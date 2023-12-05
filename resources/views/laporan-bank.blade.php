@@ -119,8 +119,8 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-12 col-lg-6">
-                        <div class="card">
+                    <div class="col-12 col-lg-6 d-flex align-items-stretch">
+                        <div class="card" style="min-width: 100%;">
                             <div class="card-body">
                                 <h5 class="card-title">Laporan Transaksi Bank Sampah</h5>
                                 <div class="row mb-3">
@@ -132,9 +132,9 @@
                                         <label for="endDate">Tanggal Akhir :</label>
                                         <input type="date" id="endDate1" class="form-control" name="endDate">
                                     </div>
-                                    <div class="col-6 mt-3 m-md-0 p-md-0  d-flex align-items-center">
-                                        <button id="applyFilter" class="btn btn-primary me-3">Apply Filter</button>
-                                        <button id="resetFilter" class="btn btn-secondary">Reset Filter</button>
+                                    <div class="col-6 mt-3 m-md-0 p-md-0  d-flex align-items-center align-self-end">
+                                        <button id="applyFilter1" class="btn btn-primary me-3">Apply Filter</button>
+                                        <button id="resetFilter1" class="btn btn-secondary">Reset Filter</button>
                                     </div>
                                 </div>
 
@@ -180,8 +180,8 @@
                         </div>
                     </div>
 
-                    <div class="col-12 col-lg-6">
-                        <div class="card">
+                    <div class="col-12 col-lg-6 d-flex align-items-stretch">
+                        <div class="card" style="min-width: 100%;">
                             <div class="card-body">
                                 <h5 class="card-title">Daftar Pengirim Sampah</h5>
                                 <div class="row mb-3">
@@ -193,9 +193,9 @@
                                         <label for="endDate">Tanggal Akhir :</label>
                                         <input type="date" id="endDate2" class="form-control" name="endDate">
                                     </div>
-                                    <div class="col-6 mt-3 m-md-0 p-md-0  d-flex align-items-center">
-                                        <button id="applyFilter" class="btn btn-primary me-3">Apply Filter</button>
-                                        <button id="resetFilter" class="btn btn-secondary">Reset Filter</button>
+                                    <div class="col-6 mt-3 m-md-0 p-md-0  d-flex align-items-center align-self-end">
+                                        <button id="applyFilter2" class="btn btn-primary me-3">Apply Filter</button>
+                                        <button id="resetFilter2" class="btn btn-secondary">Reset Filter</button>
                                     </div>
                                 </div>
 

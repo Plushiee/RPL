@@ -1,16 +1,18 @@
 $(document).ready(function () {
     function initializeDataTable(table, startDateId, endDateId, applyFilterBtnId, resetFilterBtnId, dateColumnTarget) {
-        table.DataTable({
-            columnDefs: [
-                {
-                    targets: [dateColumnTarget],
-                    type: 'date',
-                    render: function (data, type, full, meta) {
-                        return moment(data).format('YYYY-MM-DD');
+        if (!$.fn.DataTable.isDataTable(table)) {
+            $(table).DataTable({
+                columnDefs: [
+                    {
+                        targets: [dateColumnTarget],
+                        type: 'date',
+                        render: function (data, type, full, meta) {
+                            return moment(data).format('YYYY-MM-DD');
+                        }
                     }
-                }
-            ]
-        });
+                ]
+            });
+        }
 
         $.fn.dataTable.ext.search.push(
             function (settings, data, dataIndex) {
@@ -19,7 +21,7 @@ $(document).ready(function () {
                 var columnDate = data[dateColumnTarget];
 
                 if (!startDate && !endDate) {
-                    return true; // No filter applied
+                    return true;
                 }
 
                 var currentDate = moment(columnDate, 'YYYY-MM-DD');
@@ -39,13 +41,13 @@ $(document).ready(function () {
         );
 
         $('#' + applyFilterBtnId).on('click', function () {
-            table.draw();
+            table.DataTable().draw();
         });
 
         $('#' + resetFilterBtnId).on('click', function () {
             $('#' + startDateId).val('');
             $('#' + endDateId).val('');
-            table.draw();
+            table.DataTable().draw();
         });
     }
 
