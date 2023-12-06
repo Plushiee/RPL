@@ -23,10 +23,10 @@
 
 </head>
 
-<body>
+<body style="background-color: white !important">
 
     <div id="wrapper">
-        <div class="navbar-custom">
+        <div class="navbar-custom" style="background-color: white !important">
             <ul class="list-unstyled topnav-menu float-right mb-0">
                 <li class="dropdown notification-list">
                     <a class="nav-link nav-user mr-0" data-toggle="dropdown" href="#"
@@ -51,7 +51,9 @@
             </div>
         </div>
 
-        @yield('contents')
+        <div class="container-fluid px-3 border shadow">
+            @yield('contents')
+        </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"

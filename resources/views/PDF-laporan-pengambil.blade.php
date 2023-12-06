@@ -185,7 +185,7 @@
             function download() {
                 html2pdf(document.body, {
                     margin: 0,
-                    filename: 'MoneyTrash_Laporan.pdf',
+                    filename: 'MoneyTrash_Laporan-Pengambil.pdf',
                     image: {
                         type: 'jpeg',
                         quality: 0.98

@@ -18,6 +18,25 @@ use Spatie\Browsershot\Browsershot;
 
 class DownloadLaporanController extends Controller
 {
+    public function downloadLaporanPemilik(Request $request) {
+        $tanggalMulai = $request->startDate;
+        $tanggalAkhir = $request->endDate;
+    
+        $query = UserTransaksiModel::where('idPemilik', Auth::id())->orderBy('id', 'desc');
+    
+        if ($tanggalMulai && $tanggalAkhir) {
+            $query->whereBetween('created_at', [$tanggalMulai . ' 00:00:00', $tanggalAkhir . ' 23:59:59']);
+        }
+    
+        $kumpulanTransaksi = $query->get();
+    
+        return view('PDF-laporan-pemilik', [
+            'kumpulanTransaksi' => $kumpulanTransaksi,
+            'tanggalMulai' => $tanggalMulai,
+            'tanggalAkhir' => $tanggalAkhir,
+        ]);
+    }
+
     public function downloadLaporanPengambil()
     {
         $labels = [

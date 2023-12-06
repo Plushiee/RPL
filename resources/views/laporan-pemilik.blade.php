@@ -42,9 +42,9 @@
                             <h4 class="header-title mb-3">Selamat
                                 <?php
                                 date_default_timezone_set('Asia/Jakarta');
-
+                                
                                 $jam = date('H');
-
+                                
                                 if ($jam >= 5 && $jam < 12) {
                                     $waktu = 'Pagi';
                                 } elseif ($jam >= 12 && $jam < 18) {
@@ -52,7 +52,7 @@
                                 } else {
                                     $waktu = 'Malam';
                                 }
-
+                                
                                 echo $waktu;
                                 ?>
                                 , {{ Auth::user()->name }} </h4>
@@ -65,24 +65,30 @@
                         <div class="card">
                             <div class="card-body">
                                 <h5 class="card-title">Laporan Transaksi</h5>
-                                <div class="row mb-3">
-                                    <div class="col-md-3">
-                                        <label for="startDate">Tanggal Mulai :</label>
-                                        <input type="date" id="startDate1" class="form-control" name="startDate">
+                                <form action="/pemilik/laporan/download" method="POST" class="d-inline">
+                                    @csrf
+                                    <div class="row mb-3">
+                                        <div class="col-md-3">
+                                            <label for="startDate">Tanggal Mulai :</label>
+                                            <input type="date" id="startDate1" class="form-control" name="startDate">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label for="endDate">Tanggal Akhir :</label>
+                                            <input type="date" id="endDate1" class="form-control" name="endDate">
+                                        </div>
+                                        <div class="col-6 mt-3 m-md-0 p-md-0 d-flex align-items-center align-self-end"
+                                            style="font-weight: bold;">
+                                            <button id="applyFilter" class="btn btn-primary me-3"
+                                                style="font-weight: bold;">Apply Filter</button>
+                                            <button id="resetFilter" class="btn btn-secondary me-3"
+                                                style="font-weight: bold;">Reset Filter</button>
+                                            <button type="submit" class="btn btn-success">
+                                                Unduh Laporan
+                                            </button>
+                                        </div>
+
                                     </div>
-                                    <div class="col-md-3">
-                                        <label for="endDate">Tanggal Akhir :</label>
-                                        <input type="date" id="endDate1" class="form-control" name="endDate">
-                                    </div>
-                                    <div class="col-6 mt-3 m-md-0 p-md-0 d-flex align-items-center align-self-end"
-                                        style="font-weight: bold;">
-                                        <button id="applyFilter" class="btn btn-primary me-3"
-                                            style="font-weight: bold;">Apply Filter</button>
-                                        <button id="resetFilter" class="btn btn-secondary me-3"
-                                            style="font-weight: bold;">Reset Filter</button>
-                                        <button id="downloadLaporan" class="btn btn-success">Unduh Laporan</button>
-                                    </div>
-                                </div>
+                                </form>
 
                                 <div class="row">
                                     <div class="col-12">
@@ -178,53 +184,55 @@
     <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://unpkg.com/html2pdf.js"></script>
 
     <script src="/javascript/laporan-pemilik.js"></script>
 
     <script>
-        var labels = {!! $labels !!};
-        var data = {!! $data !!};
+        $(document).ready(function() {
+            var labels = {!! $labels !!};
+            var data = {!! $data !!};
 
-        var ctx = document.getElementById('jenisSampahChart').getContext('2d');
-        var jenisSampahChart = new Chart(ctx, {
-            type: 'pie',
-            data: {
-                labels: labels,
-                datasets: [{
-                    data: data,
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 0.8)',
-                        'rgba(54, 162, 235, 0.8)',
-                        'rgba(255, 206, 86, 0.8)',
-                    ],
-                }]
-            },
-        });
+            var ctx = document.getElementById('jenisSampahChart').getContext('2d');
+            var jenisSampahChart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        data: data,
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.8)',
+                            'rgba(54, 162, 235, 0.8)',
+                            'rgba(255, 206, 86, 0.8)',
+                        ],
+                    }]
+                },
+            });
 
-        // Pop Up Swall
-        document.addEventListener('DOMContentLoaded', function() {
-            var rows = document.querySelectorAll('#transaksiTable tbody tr');
+            // Pop Up Swall
+            document.addEventListener('DOMContentLoaded', function() {
+                var rows = document.querySelectorAll('#transaksiTable tbody tr');
 
-            rows.forEach(function(row) {
-                row.addEventListener('mouseover', function() {
-                    row.style.backgroundColor = '#a9a9a9';
-                });
+                rows.forEach(function(row) {
+                    row.addEventListener('mouseover', function() {
+                        row.style.backgroundColor = '#a9a9a9';
+                    });
 
-                row.addEventListener('mouseout', function() {
-                    row.style.backgroundColor = '';
-                });
+                    row.addEventListener('mouseout', function() {
+                        row.style.backgroundColor = '';
+                    });
 
-                row.addEventListener('click', function() {
-                    var id = row.cells[0].innerText;
-                    var nama = row.cells[1].innerText;
-                    var alamat = row.cells[2].innerText;
-                    var jenisSampah = row.cells[3].innerText;
-                    var berat = row.cells[4].innerText;
-                    var tanggal = row.cells[5].innerText;
+                    row.addEventListener('click', function() {
+                        var id = row.cells[0].innerText;
+                        var nama = row.cells[1].innerText;
+                        var alamat = row.cells[2].innerText;
+                        var jenisSampah = row.cells[3].innerText;
+                        var berat = row.cells[4].innerText;
+                        var tanggal = row.cells[5].innerText;
 
-                    Swal.fire({
-                        title: 'Informasi Transaksi',
-                        html: `
+                        Swal.fire({
+                            title: 'Informasi Transaksi',
+                            html: `
                         <p><strong>Id Transaksi :</strong><br> ${id}</p>
                         <p><strong>Atas nama :</strong><br> ${nama}</p>
                         <p><strong>Alamat :</strong><br> ${alamat}</p>
@@ -232,8 +240,9 @@
                         <p><strong>Berat :</strong><br> ${berat}</p>
                         <p><strong>Tanggal :</strong><br> ${tanggal}</p>
                     `,
-                        icon: 'info',
-                        confirmButtonText: 'OK'
+                            icon: 'info',
+                            confirmButtonText: 'OK'
+                        });
                     });
                 });
             });
