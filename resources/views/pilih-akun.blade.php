@@ -19,6 +19,14 @@
 
 <body>
     <main>
+        <nav class="navbar" style="background-color: transparent;">
+            <div class="container-fluid">
+                <a class="btn btn-warning text-light" href="/">
+                    <b><i class="bi bi-caret-left"></i> Halaman Login</b>
+                </a>
+            </div>
+        </nav>
+
         <!-- Login -->
         <div class="container-lg rounded d-flex justify-content-center mt-2 pt-0 mt-sm-3 mt-md-4 pt-lg-5 pt-xxl-5">
             <div class="card-group">

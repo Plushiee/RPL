@@ -58,14 +58,10 @@
                         <div class="dropdown-divider"></div>
 
                         <!-- item-->
-                        <form action="/logout" method="POST">
-                            @csrf
-                            <input type="hidden" name="pengguna" value="bank">
-                            <button class="dropdown-item notify-item" type="submit">
-                                <i class="mdi mdi-logout-variant"></i>
-                                <span>Logout</span>
-                            </button>
-                        </form>
+                        <a href="/bank/logout" class="dropdown-item notify-item">
+                            <i class="mdi mdi-logout-variant"></i>
+                            <span>Logout</span>
+                        </a>
                     </div>
                 </li>
             </ul>
@@ -136,18 +132,21 @@
                             <i class="bi bi-clock-history @if (request()->is('bank/riwayat*')) active-txt @endif"></i>
                             <span class="@if (request()->is('bank/riwayat*')) active-txt @endif"> Riwayat </span>
                             @if ($hitungTransaksiBank > 0 && $hitungPermintaanAprroveBank == 0)
-                                <span class="badge badge-warning float-right">{{ $hitungTransaksiBank }}</span>
+                                <span
+                                    class="badge badge-warning float-right">{{ $hitungTransaksiBank }}</span>
                             @endif
 
                             @if ($hitungPermintaanAprroveBank != 0)
-                                <span class="badge badge-danger float-right">{{ $hitungPermintaanAprroveBank }}</span>
+                                    <span
+                                        class="badge badge-danger float-right">{{ $hitungPermintaanAprroveBank }}</span>
                             @endif
                         </a>
                     </li>
 
                     <li class="@if (request()->is('bank/laporan*')) active-class @endif">
                         <a href="/bank/laporan">
-                            <i class="bi bi-bar-chart @if (request()->is('bank/laporan*')) active-txt @endif"></i>
+                            <i
+                                class="bi bi-bar-chart @if (request()->is('bank/laporan*')) active-txt @endif"></i>
                             <span class="@if (request()->is('bank/laporan*')) active-txt @endif"> Laporan </span>
                         </a>
                     </li>

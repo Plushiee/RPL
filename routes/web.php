@@ -43,10 +43,7 @@ Route::middleware(['guest'])->group(function () {
     // Login and Logout Controller
     Route::get('/login', [LoginController::class, 'login'])->name('login');
     Route::post('/login/loginCheck', [LoginController::class, 'loginCheck'])->name('loginCheck');
-});
-
-Route::middleware(['auth'])->group(function () {
-    Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+    Route::get('/lokasiBank', [TransaksiController::class, 'lokasiBankIndex']); // Ambil Data Bank
 });
 
 
@@ -99,6 +96,8 @@ Route::middleware(['auth:pemilik'])->group(function () {
     Route::get('/pemilik/bukti/ambildirumah/{jenis}/{id}/{gambar}', [AmbilGambarController::class, 'showBuktiSampah']); //ambil bukti
     Route::get('/pemilik/bukti/antarsendiri/{id}/{gambar}', [AmbilGambarController::class, 'showBuktiKirim']); //ambil bukti
     Route::get('/pemilik/bukti/pembayaran/{id}/{gambar}', [AmbilGambarController::class, 'showBuktiPembayaran']); //ambil bukti
+
+    Route::get('/pemilik/logout', [LoginController::class, 'logout']);
 });
 
 
@@ -135,6 +134,7 @@ Route::middleware(['auth:pengambil'])->group(function () {
 
     // Download Laporan
     Route::get('/pengambil/laporan/download', [DownloadLaporanController::class, 'downloadLaporanPengambil']); // Riwayat Pengambil
+    Route::get('/pengambil/logout', [LoginController::class, 'logout']);
 
 });
 
@@ -164,4 +164,5 @@ Route::middleware(['auth:bank'])->group(function () {
 
     // Ambil Bukti Gambar
     Route::get('/bank/bukti/antarsendiri/{id}/{gambar}', [AmbilGambarController::class, 'showBuktiKirim']); //ambil bukti
+    Route::get('/bank/logout', [LoginController::class, 'logout']);
 });

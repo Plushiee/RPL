@@ -484,7 +484,7 @@ $(document).ready(function () {
                             <input class="form-control" type="text" name="nomor" placeholder="Nomor Bank Sampah (+62xxx)" required>
                         </div>
                         <div class="mb-3 text-start">
-                            <label for="alamat" class="form-label">Alamat Tempat Tinggal</label>
+                            <label for="alamat" class="form-label">Alamat Bank Sampah</label>
                             <textarea class="form-control" id="alamat" name="alamat" rows="3" required></textarea>
                         </div>
                         <div class="mb-3">

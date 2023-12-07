@@ -58,7 +58,7 @@
                         <div class="dropdown-divider"></div>
 
                         <!-- item-->
-                        <a href="/logout" class="dropdown-item notify-item">
+                        <a href="/pemilik/logout" class="dropdown-item notify-item">
                             <i class="mdi mdi-logout-variant"></i>
                             <span>Logout</span>
                         </a>

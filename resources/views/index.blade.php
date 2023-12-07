@@ -25,9 +25,8 @@
     <main class="main">
         <!-- =========== Start of  Navigation ============ -->
 
-        <nav class="navbar navigation__transparent navbar-expand-lg navbar-light position-absolute">
-            <div class="container position-relative">
-
+        <nav class="navbar navigation__transparent navbar-expand-lg navbar-light position-absolute p-0">
+            <div class="container position-relative align-items-center" style="height: 100%;">
                 <a class="navbar-brand" href="index">
                     <img src="/assets/navbar/logo-long-dark.png" alt="" class="img-fluid" width="230px">
                 </a>
@@ -205,7 +204,7 @@
     <script src="/javascript/number-rush.js"></script>
     <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBg-aZ-Iammau9oEl569JVpJu5olD_2rbQ&callback=initMap&libraries=places"></script>
-    <script src="/javascript/gps-map.js"></script>
+    <script src="/javascript/gps-index.js"></script>
 </body>
 
 </html>
