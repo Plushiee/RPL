@@ -14,16 +14,15 @@ use App\Models\UserBankSampahModel;
 use App\Models\UserPengambilModel;
 use Carbon\Carbon;
 
-class DashboardController extends Controller
-{
+class DashboardController extends Controller {
     private $hitungBelumTerbayar;
     private $hitungPermintaanAprrove;
     private $hitungTransaksiBerjalan;
     private $hitungTransaksiBerjalanPemilik;
     private $hitungTransaksiBank;
+    private $hitungPermintaanAprroveBank;
 
-    private function getCount()
-    {
+    private function getCount() {
         $this->hitungBelumTerbayar = UserTransaksiModel::where('idPemilik', Auth::id())
             ->where('terbayar', false)->where('diterima', true)
             ->count();
@@ -32,8 +31,7 @@ class DashboardController extends Controller
             ->count();
     }
 
-    private function getCountPengambil()
-    {
+    private function getCountPengambil() {
         $this->hitungPermintaanAprrove = UserTransaksiModel::where('idPengambil', Auth::id())
             ->where('terbayar', true)->where('approved', false)
             ->count();
@@ -42,16 +40,17 @@ class DashboardController extends Controller
             ->count();
     }
 
-    private function getCountBank()
-    {
+    private function getCountBank() {
         $this->hitungTransaksiBank = UserTransaksiBankModel::where('idBank', Auth::id())
-            ->where('terambil', true)->where('terantar', false)
+            ->where('diterima', true)->where('terantar', false)
+            ->count();
+        $this->hitungPermintaanAprroveBank = UserTransaksiBankModel::where('idBank', Auth::id())
+            ->where('diterima', false)->where('terantar', false)
             ->count();
     }
 
     // Pemilik
-    public function dashboard()
-    {
+    public function dashboard() {
         $this->getCount();
         $daftarPengumuman = PengumumanModel::join('user_transaksi', 'pengumuman.idPengambil', '=', 'user_transaksi.idPengambil')
             ->where('user_transaksi.idPemilik', Auth::user()->id)
@@ -67,8 +66,7 @@ class DashboardController extends Controller
         ]);
     }
 
-    public function ambil()
-    {
+    public function ambil() {
         $this->getCount();
         $daftarPengumuman = PengumumanModel::join('user_transaksi', 'pengumuman.idPengambil', '=', 'user_transaksi.idPengambil')
             ->where('user_transaksi.idPemilik', Auth::user()->id)
@@ -84,8 +82,7 @@ class DashboardController extends Controller
         ]);
 
     }
-    public function antar()
-    {
+    public function antar() {
         $this->getCount();
         $daftarPengumuman = PengumumanBankModel::join('banksampahmail', 'pengumuman_bank.idBank', '=', 'banksampahmail.id')
             ->where('pengumuman_bank.aktif', true)
@@ -99,8 +96,7 @@ class DashboardController extends Controller
         ]);
     }
 
-    public function laporanPemilik()
-    {
+    public function laporanPemilik() {
         $this->getCount();
         $kumpulanTransaksi = UserTransaksiModel::where('idPemilik', Auth::id())->orderBy('id', 'desc')->get();
 
@@ -117,8 +113,7 @@ class DashboardController extends Controller
         ]);
     }
 
-    public function akun()
-    {
+    public function akun() {
         $this->getCount();
         $isPengambil = UserPengambilModel::where('email', Auth::user()->email)->exists();
         $isBank = UserBankSampahModel::where('email', Auth::user()->email)->exists();
@@ -130,8 +125,7 @@ class DashboardController extends Controller
         ]);
     }
 
-    public function riwayat()
-    {
+    public function riwayat() {
         $this->getCount();
         $kumpulanBank = UserTransaksiBankModel::join('banksampahmail', 'transaksi_bank.idBank', '=', 'banksampahmail.id')
             ->where('transaksi_bank.idPemilik', Auth::id())
@@ -148,8 +142,7 @@ class DashboardController extends Controller
         ]);
     }
 
-    public function pembayaran()
-    {
+    public function pembayaran() {
         $this->getCount();
         $kumpulanTransaksi = UserTransaksiModel::where('idPemilik', Auth::id())->where('diterima', true)->orderBy('id', 'desc')->get();
 
@@ -160,8 +153,7 @@ class DashboardController extends Controller
         ]);
     }
 
-    public function simpanAkunAwal(Request $request)
-    {
+    public function simpanAkunAwal(Request $request) {
         $user = UserEmailModel::find(Auth::id());
         $user->namaLengkap = $request->input('namaLengkap');
         $user->nomor = $request->input('nomor');
@@ -176,8 +168,7 @@ class DashboardController extends Controller
     }
 
     // Pengambil
-    public function dashboardPengambil()
-    {
+    public function dashboardPengambil() {
         $this->getCountPengambil();
         $daftarPengumuman = PengumumanModel::where('idPengambil', Auth::user()->id)
             ->where('aktif', true)->orderBy('id', 'desc')
@@ -189,19 +180,18 @@ class DashboardController extends Controller
         ]);
     }
 
-    public function ambilPengambil()
-    {
+    public function ambilPengambil() {
         $this->getCountPengambil();
 
         $userBerat = Auth::user()->berat;
 
         $allowedBerat = [];
 
-        if ($userBerat == 'medium') {
+        if($userBerat == 'medium') {
             $allowedBerat = ['medium', 'small'];
-        } elseif ($userBerat == 'small') {
+        } elseif($userBerat == 'small') {
             $allowedBerat = ['small'];
-        } elseif ($userBerat == 'large') {
+        } elseif($userBerat == 'large') {
             $allowedBerat = ['medium', 'small', 'large'];
         }
 
@@ -217,8 +207,7 @@ class DashboardController extends Controller
         ]);
     }
 
-    public function riwayatPengambil()
-    {
+    public function riwayatPengambil() {
         $this->getCountPengambil();
         $kumpulanTransaksi = UserTransaksiModel::orderBy('id', 'desc')->where('diterima', true)->get();
         return view('riwayat-pengambil', [
@@ -228,8 +217,7 @@ class DashboardController extends Controller
         ]);
     }
 
-    public function pengumumanPengambil()
-    {
+    public function pengumumanPengambil() {
         $this->getCountPengambil();
         $daftarPengumuman = PengumumanModel::orderBy('id', 'desc')->where('idPengambil', Auth::id())->get();
         $hitungPengumumanAktif = PengumumanModel::where('idPengambil', Auth::id())->where('aktif', true)->count();
@@ -241,8 +229,7 @@ class DashboardController extends Controller
         ]);
     }
 
-    public function pembayaranPengambil()
-    {
+    public function pembayaranPengambil() {
         $this->getCountPengambil();
         $kumpulanTransaksi = UserTransaksiModel::orderBy('id', 'desc')->where('idPengambil', Auth::id())->where('diterima', true)->get();
         return view('pembayaran-pengambil', [
@@ -252,8 +239,7 @@ class DashboardController extends Controller
         ]);
     }
 
-    public function laporanPengambil()
-    {
+    public function laporanPengambil() {
         $this->getCountPengambil();
         $labels = [
             'Januari',
@@ -300,7 +286,7 @@ class DashboardController extends Controller
         $transactionsPerMonth = array_fill(0, 12, 0);
 
         // Memproses data untuk chart
-        foreach ($data as $entry) {
+        foreach($data as $entry) {
             $monthIndex = $entry->month - 1; // Index dimulai dari 0
             $transactionsPerMonth[$monthIndex] = $entry->totalTransactions;
         }
@@ -327,8 +313,7 @@ class DashboardController extends Controller
     }
 
 
-    public function akunPengambil()
-    {
+    public function akunPengambil() {
         $this->getCountPengambil();
         return view('akun-pengambil', [
             'hitungPermintaanAprrove' => $this->hitungPermintaanAprrove,
@@ -337,8 +322,9 @@ class DashboardController extends Controller
     }
 
     // Bank Sampah
-    public function dashboardBank()
-    {
+    public function dashboardBank() {
+        $this->getCountBank();
+
         $today = now()->toDateString();
         $sumBerat = UserTransaksiBankModel::select(DB::raw('SUM(berat) as totalBerat'))
             ->where('idBank', Auth::user()->id)
@@ -354,13 +340,15 @@ class DashboardController extends Controller
             ->orderByDesc('totalBerat')
             ->first();
 
-        if ($pengirimTerbanyak) {
+        if($pengirimTerbanyak) {
             $userPengirimTerbanyak = UserEmailModel::find($pengirimTerbanyak->idPemilik);
         } else {
             $userPengirimTerbanyak = null;
         }
 
         return view('dashboard-bank', [
+            'hitungTransaksiBank' => $this->hitungTransaksiBank,
+            'hitungPermintaanAprroveBank' => $this->hitungPermintaanAprroveBank,
             'sumBerat' => $sumBerat,
             'countTransaksi' => $countTransaksi,
             'pengirimTerbanyak' => $pengirimTerbanyak,
@@ -368,27 +356,42 @@ class DashboardController extends Controller
         ]);
     }
 
-    public function terimaBank()
-    {
+    public function terimaBank() {
+        $this->getCountBank();
 
-        $kapasitas = Auth::user()->kapasitas;
-
-        $allowedBerat = '';
-
+        $kapasitas = UserTransaksiBankModel::where('idBank', Auth::id())
+            ->where('diterima', true)
+            ->sum('berat');
 
         $kumpulanTransaksi = UserTransaksiBankModel::join('banksampahmail', 'transaksi_bank.idBank', '=', 'banksampahmail.id')
             ->where('transaksi_bank.diterima', false)
             ->where('transaksi_bank.idPemilik', '!=', Auth::id())
+            ->where('transaksi_bank.berat', '<=', $kapasitas + floatval('transaksi_bank.berat'))
             ->orderBy('transaksi_bank.id', 'desc')
-            ->get(['transaksi_bank.*', 'banksampahmail.name', 'banksampahmail.email', 'banksampahmail.nomor', 'banksampahmail.alamat', 'banksampahmail.kecamatan', 'banksampahmail.kota', 'banksampahmail.provinsi', 'banksampahmail.kodePos', 'banksampahmail.catatan', 'banksampahmail.lang', 'banksampahmail.long']);
+            ->get([
+                'transaksi_bank.*',
+                'banksampahmail.name',
+                'banksampahmail.email',
+                'banksampahmail.nomor',
+                'banksampahmail.alamat',
+                'banksampahmail.kecamatan',
+                'banksampahmail.kota',
+                'banksampahmail.provinsi',
+                'banksampahmail.kodePos',
+                'banksampahmail.catatan',
+                'banksampahmail.lang',
+                'banksampahmail.long'
+            ]);
 
         return view('terima-bank', [
+            'hitungTransaksiBank' => $this->hitungTransaksiBank,
+            'hitungPermintaanAprroveBank' => $this->hitungPermintaanAprroveBank,
             'kumpulanTransaksi' => $kumpulanTransaksi,
         ]);
     }
 
-    public function riwayatBank()
-    {
+    public function riwayatBank() {
+        $this->getCountBank();
         $kumpulanTransaksi = UserTransaksiBankModel::join('banksampahmail', 'transaksi_bank.idBank', '=', 'banksampahmail.id')
             ->where('transaksi_bank.diterima', true)
             ->where('transaksi_bank.idBank', Auth::id())
@@ -396,23 +399,25 @@ class DashboardController extends Controller
             ->get(['transaksi_bank.*', 'banksampahmail.name', 'banksampahmail.email', 'banksampahmail.nomor', 'banksampahmail.alamat', 'banksampahmail.kecamatan', 'banksampahmail.kota', 'banksampahmail.provinsi', 'banksampahmail.kodePos', 'banksampahmail.catatan', 'banksampahmail.lang', 'banksampahmail.long']);
 
         return view('riwayat-bank', [
+            'hitungTransaksiBank' => $this->hitungTransaksiBank,
+            'hitungPermintaanAprroveBank' => $this->hitungPermintaanAprroveBank,
             'kumpulanTransaksi' => $kumpulanTransaksi,
         ]);
     }
 
-    public function pengumumanBank()
-    {
-        // $this->getCountPengambil();
+    public function pengumumanBank() {
+        $this->getCountBank();
         $daftarPengumuman = PengumumanBankModel::orderBy('id', 'desc')->where('idBank', Auth::id())->get();
         $hitungPengumumanAktif = PengumumanBankModel::where('idBank', Auth::id())->where('aktif', true)->count();
         return view('pengumuman-bank', [
+            'hitungTransaksiBank' => $this->hitungTransaksiBank,
+            'hitungPermintaanAprroveBank' => $this->hitungPermintaanAprroveBank,
             'daftarPengumuman' => $daftarPengumuman,
             'hitungPengumumanAktif' => $hitungPengumumanAktif,
         ]);
     }
 
-    public function laporanBank()
-    {
+    public function laporanBank() {
 
         $today = now()->toDateString();
         $sumBerat = UserTransaksiBankModel::select(DB::raw('SUM(berat) as totalBerat'))
@@ -434,29 +439,28 @@ class DashboardController extends Controller
             ->orderBy('transaksi_bank.id', 'desc')
             ->get(['useremail.nomor', 'useremail.name', 'useremail.email', 'useremail.namaLengkap', 'useremail.alamat', 'useremail.kecamatan', 'useremail.kota', 'useremail.provinsi', 'useremail.kodePos', 'transaksi_bank.*']);
 
-        if ($pengirimTerbanyak) {
+        if($pengirimTerbanyak) {
             $userPengirimTerbanyak = UserEmailModel::find($pengirimTerbanyak->idPemilik);
         } else {
             $userPengirimTerbanyak = null;
         }
 
         return view('laporan-bank', [
+            'hitungTransaksiBank' => $this->hitungTransaksiBank,
+            'hitungPermintaanAprroveBank' => $this->hitungPermintaanAprroveBank,
             'sumBerat' => $sumBerat,
             'countTransaksi' => $countTransaksi,
             'pengirimTerbanyak' => $pengirimTerbanyak,
             'userPengirimTerbanyak' => $userPengirimTerbanyak,
             'kumpulanTransaksi' => $kumpulanTransaksi,
-            // 'hitungPermintaanAprrove' => $this->hitungPermintaanAprrove,
-            // 'hitungTransaksiBerjalan' => $this->hitungTransaksiBerjalan
         ]);
     }
 
-    public function akunBank()
-    {
-        // $this->getCountPengambil();
+    public function akunBank() {
+        $this->getCountBank();
         return view('akun-bank', [
-            // 'hitungPermintaanAprrove' => $this->hitungPermintaanAprrove,
-            // 'hitungTransaksiBerjalan' => $this->hitungTransaksiBerjalan
+            'hitungTransaksiBank' => $this->hitungTransaksiBank,
+            'hitungPermintaanAprroveBank' => $this->hitungPermintaanAprroveBank,
         ]);
     }
 

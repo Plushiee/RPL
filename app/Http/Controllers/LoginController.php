@@ -83,13 +83,14 @@ class LoginController extends Controller
     {
         $userTypes = ['pengambil', 'bank', 'pemilik'];
 
-        foreach ($userTypes as $userType) {
-            if (Auth::guard($userType)->check()) {
-                Auth::guard($userType)->logout();
-            }
-        }
+        // foreach ($userTypes as $userType) {
+            // if (Auth::guard($userType)->check()) {
+                // Auth::guard($userType)->logout();
+            // }
+        // }
+        dd($userTypes);
 
-        return redirect('/login');
+        // return redirect('/login');
     }
 }
 

@@ -9,17 +9,15 @@ use Illuminate\Support\Facades\Storage;
 use App\Models\UserTransaksiModel;
 use App\Models\UserTransaksiBankModel;
 
-class TransaksiController extends Controller
-{
+class TransaksiController extends Controller {
     // File Pembayaran
-    public function simpanbukti(Request $request)
-    {
+    public function simpanbukti(Request $request) {
         //File bukti
-        if ($request->hasFile('bukti')) {
+        if($request->hasFile('bukti')) {
             $file = $request->file('bukti');
             $userId = Auth::id();
             $transaksiId = $request->id_transaksi;
-            $fileName = $userId . '_' . $transaksiId . '_bukti.' . $file->getClientOriginalExtension();
+            $fileName = $userId.'_'.$transaksiId.'_bukti.'.$file->getClientOriginalExtension();
             $directory = $userId;
 
             Storage::disk('secure_bukti')->putFileAs($directory, $file, $fileName);
@@ -28,7 +26,7 @@ class TransaksiController extends Controller
         }
 
         // Simpan data ke database
-        if (Auth::check()) {
+        if(Auth::check()) {
             $transaksi = UserTransaksiModel::where('id', $request->id_transaksi)->first();
             $transaksi->buktibayar = $fileName;
             $transaksi->terbayar = true;
@@ -41,18 +39,17 @@ class TransaksiController extends Controller
 
     //antarSendiri
     public function lokasiBank() {
-        $locations = UserBankSampahModel::all();
+        $locations = UserBankSampahModel::where('id', Auth::id())->get();
 
         return response()->json($locations);
     }
 
-    public function antarSendiri(Request $request)
-    {
+    public function antarSendiri(Request $request) {
         //File bukti
-        if ($request->hasFile('bukti')) {
+        if($request->hasFile('bukti')) {
             $file = $request->file('bukti');
             $userId = Auth::id();
-            $fileName = $userId . '_' . time() . '_' . $file->getClientOriginalName();
+            $fileName = $userId.'_'.time().'_'.$file->getClientOriginalName();
             $directory = $userId;
 
             Storage::disk('secure_antar')->putFileAs($directory, $file, $fileName);
@@ -61,7 +58,7 @@ class TransaksiController extends Controller
         }
 
         // Simpan data ke database
-        if (Auth::check()) {
+        if(Auth::check()) {
             $transaksi = new UserTransaksiBankModel;
             $transaksi->idPemilik = Auth::id();
             $transaksi->idBank = $request->id;
@@ -80,14 +77,13 @@ class TransaksiController extends Controller
         }
     }
 
-    public function organik(Request $request)
-    {
+    public function organik(Request $request) {
         //File bukti
-        if ($request->hasFile('bukti')) {
+        if($request->hasFile('bukti')) {
             $file = $request->file('bukti');
             $userId = Auth::id();
-            $fileName = $userId . '_' . time() . '_' . $file->getClientOriginalName();
-            $directory = 'organik/' . $userId;
+            $fileName = $userId.'_'.time().'_'.$file->getClientOriginalName();
+            $directory = 'organik/'.$userId;
 
             Storage::disk('secure_diRumah')->putFileAs($directory, $file, $fileName);
         } else {
@@ -95,7 +91,7 @@ class TransaksiController extends Controller
         }
 
         // Simpan data ke database
-        if (Auth::check()) {
+        if(Auth::check()) {
             $transaksi = new UserTransaksiModel;
             $transaksi->idPemilik = Auth::id();
             $transaksi->jenisSampah = 'Organik';
@@ -122,14 +118,13 @@ class TransaksiController extends Controller
     }
 
     //Simpan data kertas
-    public function kertas(Request $request)
-    {
+    public function kertas(Request $request) {
         //File bukti
-        if ($request->hasFile('bukti')) {
+        if($request->hasFile('bukti')) {
             $file = $request->file('bukti');
             $userId = Auth::id();
-            $fileName = $userId . '_' . time() . '_' . $file->getClientOriginalName();
-            $directory = 'kertas/' . $userId;
+            $fileName = $userId.'_'.time().'_'.$file->getClientOriginalName();
+            $directory = 'kertas/'.$userId;
 
             Storage::disk('secure_diRumah')->putFileAs($directory, $file, $fileName);
         } else {
@@ -137,7 +132,7 @@ class TransaksiController extends Controller
         }
 
         // Simpan data ke database
-        if (Auth::check()) {
+        if(Auth::check()) {
             $transaksi = new UserTransaksiModel;
             $transaksi->idPemilik = Auth::id();
             $transaksi->jenisSampah = 'Kertas';
@@ -163,14 +158,13 @@ class TransaksiController extends Controller
         }
     }
 
-    public function plastik(Request $request)
-    {
+    public function plastik(Request $request) {
         //File bukti
-        if ($request->hasFile('bukti')) {
+        if($request->hasFile('bukti')) {
             $file = $request->file('bukti');
             $userId = Auth::id();
-            $fileName = $userId . '_' . time() . '_' . $file->getClientOriginalName();
-            $directory = 'plastik/' . $userId;
+            $fileName = $userId.'_'.time().'_'.$file->getClientOriginalName();
+            $directory = 'plastik/'.$userId;
 
             Storage::disk('secure_diRumah')->putFileAs($directory, $file, $fileName);
         } else {
@@ -178,7 +172,7 @@ class TransaksiController extends Controller
         }
 
         // Simpan data ke database
-        if (Auth::check()) {
+        if(Auth::check()) {
             $transaksi = new UserTransaksiModel;
             $transaksi->idPemilik = Auth::id();
             $transaksi->jenisSampah = 'Plastik';
@@ -204,14 +198,13 @@ class TransaksiController extends Controller
         }
     }
 
-    public function kaca(Request $request)
-    {
+    public function kaca(Request $request) {
         //File bukti
-        if ($request->hasFile('bukti')) {
+        if($request->hasFile('bukti')) {
             $file = $request->file('bukti');
             $userId = Auth::id();
-            $fileName = $userId . '_' . time() . '_' . $file->getClientOriginalName();
-            $directory = 'kaca/' . $userId;
+            $fileName = $userId.'_'.time().'_'.$file->getClientOriginalName();
+            $directory = 'kaca/'.$userId;
 
             Storage::disk('secure_diRumah')->putFileAs($directory, $file, $fileName);
         } else {
@@ -219,7 +212,7 @@ class TransaksiController extends Controller
         }
 
         // Simpan data ke database
-        if (Auth::check()) {
+        if(Auth::check()) {
             $transaksi = new UserTransaksiModel;
             $transaksi->idPemilik = Auth::id();
             $transaksi->jenisSampah = 'Kaca';
@@ -245,14 +238,13 @@ class TransaksiController extends Controller
         }
     }
 
-    public function logam(Request $request)
-    {
+    public function logam(Request $request) {
         //File bukti
-        if ($request->hasFile('bukti')) {
+        if($request->hasFile('bukti')) {
             $file = $request->file('bukti');
             $userId = Auth::id();
-            $fileName = $userId . '_' . time() . '_' . $file->getClientOriginalName();
-            $directory = 'logam/' . $userId;
+            $fileName = $userId.'_'.time().'_'.$file->getClientOriginalName();
+            $directory = 'logam/'.$userId;
 
             Storage::disk('secure_diRumah')->putFileAs($directory, $file, $fileName);
         } else {
@@ -260,7 +252,7 @@ class TransaksiController extends Controller
         }
 
         // Simpan data ke database
-        if (Auth::check()) {
+        if(Auth::check()) {
             $transaksi = new UserTransaksiModel;
             $transaksi->idPemilik = Auth::id();
             $transaksi->jenisSampah = 'Logam';
@@ -286,14 +278,13 @@ class TransaksiController extends Controller
         }
     }
 
-    public function lainnya(Request $request)
-    {
+    public function lainnya(Request $request) {
         //File bukti
-        if ($request->hasFile('bukti')) {
+        if($request->hasFile('bukti')) {
             $file = $request->file('bukti');
             $userId = Auth::id();
-            $fileName = $userId . '_' . time() . '_' . $file->getClientOriginalName();
-            $directory = 'lainnya/' . $userId;
+            $fileName = $userId.'_'.time().'_'.$file->getClientOriginalName();
+            $directory = 'lainnya/'.$userId;
 
             Storage::disk('secure_diRumah')->putFileAs($directory, $file, $fileName);
         } else {
@@ -301,7 +292,7 @@ class TransaksiController extends Controller
         }
 
         // Simpan data ke database
-        if (Auth::check()) {
+        if(Auth::check()) {
             $transaksi = new UserTransaksiModel;
             $transaksi->idPemilik = Auth::id();
             $transaksi->jenisSampah = 'Lainnya';

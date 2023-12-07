@@ -81,7 +81,11 @@ $(document).ready(function () {
                                 toast.addEventListener('mouseenter', Swal.stopTimer)
                                 toast.addEventListener('mouseleave', Swal.resumeTimer)
                             }
-                        });
+                        }).then(
+                            function() {
+                                location.reload();
+                            }
+                        );
 
                         toastMixin.fire({
                             animation: true,

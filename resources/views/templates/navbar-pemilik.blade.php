@@ -36,45 +36,11 @@
         <div class="navbar-custom">
             <ul class="list-unstyled topnav-menu float-right mb-0">
                 <li class="dropdown notification-list">
-                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
-                        aria-haspopup="false" aria-expanded="false">
-                        <i class="bi bi-bell-fill"></i>
-                        {{-- <span class="badge badge-danger rounded-circle noti-icon-badge">4</span> --}}
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right dropdown-lg">
-
-                        <!-- item-->
-                        <div class="dropdown-item noti-title">
-                            <h5 class="font-16 m-0">
-                                <span class="float-right">
-                                    <a href="" class="text-dark">
-                                        <small>Clear All</small>
-                                    </a>
-                                </span>Notification
-                            </h5>
-                        </div>
-
-                        <div class="slimscroll noti-scroll">
-
-                            {{-- isi notig --}}
-                        </div>
-
-                        <!-- All-->
-                        <a href="javascript:void(0);"
-                            class="dropdown-item text-primary text-center notify-item notify-all ">
-                            View all
-                            <i class="fi-arrow-right"></i>
-                        </a>
-
-                    </div>
-                </li>
-
-                <li class="dropdown notification-list">
                     <a class="nav-link dropdown-toggle nav-user mr-0" data-toggle="dropdown" href="#"
                         role="button" aria-haspopup="false" aria-expanded="false">
                         <img src="/assets/images/users/user-default.webp" alt="user-image" class="rounded-circle">
                         <span class="pro-user-name ml-1">
-                            {{ Auth::user()->name }} <i class="mdi mdi-chevron-down"></i>
+                            {{ Auth::user()->name }}
                         </span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right profile-dropdown ">

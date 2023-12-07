@@ -7,23 +7,34 @@ $(document).ready(function () {
     $('.lihat').click(function (e) {
         e.preventDefault();
 
-        // Mendapatkan data dari button yang diklik
         const button = $(this);
         const id = button.data('id');
         const bukti = button.data('bukti');
-
+    
         Swal.fire({
             title: "Bukti Pembayaran",
-            html: `<img src="${getBuktiPembayaranRoute(id, bukti)}" alt="Bukti Bayar" style="max-width: 100%; height: auto;">`,
+            html: `
+                <img src="${getBuktiPembayaranRoute(id, bukti)}" alt="Bukti Bayar" style="max-width: 100%; height: auto; margin-bottom: 10px;">
+                <a href="#" id="downloadLink" class="btn btn-primary">Download</a>
+            `,
             showCancelButton: true,
             showConfirmButton: false,
             cancelButtonText: "Tutup",
             focusConfirm: false,
         });
+    
+        $('#downloadLink').click(function () {
+            const downloadLink = document.createElement('a');
+            downloadLink.href = getBuktiPembayaranRoute(id, bukti);
+            downloadLink.download = `bukti_pembayaran_${id}.png`;
+            
+            downloadLink.click();
+        });
     });
-
+    
     function getBuktiPembayaranRoute(id, gambar) {
         return `/pemilik/bukti/pembayaran/${id}/${gambar}`;
     }
+    
 
 });

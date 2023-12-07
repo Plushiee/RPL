@@ -36,48 +36,14 @@
         <div class="navbar-custom">
             <ul class="list-unstyled topnav-menu float-right mb-0">
                 <li class="dropdown notification-list">
-                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
-                        aria-haspopup="false" aria-expanded="false">
-                        <i class="bi bi-bell-fill"></i>
-                        {{-- <span class="badge badge-danger rounded-circle noti-icon-badge">4</span> --}}
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right dropdown-lg">
-
-                        <!-- item-->
-                        <div class="dropdown-item noti-title">
-                            <h5 class="font-16 m-0">
-                                <span class="float-right">
-                                    <a href="" class="text-dark">
-                                        <small>Clear All</small>
-                                    </a>
-                                </span>Notification
-                            </h5>
-                        </div>
-
-                        <div class="slimscroll noti-scroll">
-
-                            {{-- isi notig --}}
-                        </div>
-
-                        <!-- All-->
-                        <a href="javascript:void(0);"
-                            class="dropdown-item text-primary text-center notify-item notify-all ">
-                            View all
-                            <i class="fi-arrow-right"></i>
-                        </a>
-
-                    </div>
-                </li>
-
-                <li class="dropdown notification-list">
                     <a class="nav-link dropdown-toggle nav-user mr-0" data-toggle="dropdown" href="#"
                         role="button" aria-haspopup="false" aria-expanded="false">
                         <img src="/assets/images/users/user-default.webp" alt="user-image" class="rounded-circle">
                         <span class="pro-user-name ml-1">
-                            {{ Auth::user()->name }} <i class="mdi mdi-chevron-down"></i>
+                            {{ Auth::user()->name }}
                         </span>
                     </a>
-                    <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
+                    <div class="dropdown-menu dropdown-menu-right profile-dropdown">
                         <!-- item-->
                         <div class="dropdown-header noti-title">
                             <h6 class="text-overflow m-0">Welcome {{ Auth::user()->name }} !</h6>
@@ -92,10 +58,14 @@
                         <div class="dropdown-divider"></div>
 
                         <!-- item-->
-                        <a href="/logout" class="dropdown-item notify-item">
-                            <i class="mdi mdi-logout-variant"></i>
-                            <span>Logout</span>
-                        </a>
+                        <form action="/logout" method="POST">
+                            @csrf
+                            <input type="hidden" name="pengguna" value="bank">
+                            <button class="dropdown-item notify-item" type="submit">
+                                <i class="mdi mdi-logout-variant"></i>
+                                <span>Logout</span>
+                            </button>
+                        </form>
                     </div>
                 </li>
             </ul>
@@ -165,17 +135,19 @@
                         <a href="/bank/riwayat">
                             <i class="bi bi-clock-history @if (request()->is('bank/riwayat*')) active-txt @endif"></i>
                             <span class="@if (request()->is('bank/riwayat*')) active-txt @endif"> Riwayat </span>
-                            {{-- @if ($hitungTransaksiBerjalanPemilik > 0)
-                                <span
-                                    class="badge badge-warning float-right">{{ $hitungTransaksiBerjalanPemilik }}</span>
-                            @endif --}}
+                            @if ($hitungTransaksiBank > 0 && $hitungPermintaanAprroveBank == 0)
+                                <span class="badge badge-warning float-right">{{ $hitungTransaksiBank }}</span>
+                            @endif
+
+                            @if ($hitungPermintaanAprroveBank != 0)
+                                <span class="badge badge-danger float-right">{{ $hitungPermintaanAprroveBank }}</span>
+                            @endif
                         </a>
                     </li>
 
                     <li class="@if (request()->is('bank/laporan*')) active-class @endif">
                         <a href="/bank/laporan">
-                            <i
-                                class="bi bi-bar-chart @if (request()->is('bank/laporan*')) active-txt @endif"></i>
+                            <i class="bi bi-bar-chart @if (request()->is('bank/laporan*')) active-txt @endif"></i>
                             <span class="@if (request()->is('bank/laporan*')) active-txt @endif"> Laporan </span>
                         </a>
                     </li>

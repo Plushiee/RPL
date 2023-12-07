@@ -216,7 +216,7 @@ $(document).ready(function () {
                                     <h3 style="font-size:12pt; font-weight:bold;">${name}</h3>
                                     <p style="font-size:8pt;">${address}</p>
                                     <button class="btn btn-primary btn-sm data" data-id="${locationData.id}">Select</button>
-                                    <button class="btn btn-info petunjuk float-end">Petunjuk Arah</button>
+                                    <button class="btn btn-info btn-sm petunjuk float-end">Petunjuk Arah</button>
                                 `,
                                 maxWidth: 300
                             });
