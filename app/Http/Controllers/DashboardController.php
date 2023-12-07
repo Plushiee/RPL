@@ -365,7 +365,7 @@ class DashboardController extends Controller {
 
         $kumpulanTransaksi = UserTransaksiBankModel::join('banksampahmail', 'transaksi_bank.idBank', '=', 'banksampahmail.id')
             ->where('transaksi_bank.diterima', false)
-            ->where('transaksi_bank.idPemilik', '!=', Auth::id())
+            // ->where('transaksi_bank.idPemilik', '!=', Auth::id())
             ->where('transaksi_bank.berat', '<=', $kapasitas + floatval('transaksi_bank.berat'))
             ->orderBy('transaksi_bank.id', 'desc')
             ->get([
