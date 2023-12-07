@@ -15,7 +15,7 @@ $(document).ready(function () {
             title: "Bukti Pembayaran",
             html: `
                 <img src="${getBuktiPembayaranRoute(id, bukti)}" alt="Bukti Bayar" style="max-width: 100%; height: auto; margin-bottom: 10px;">
-                <button id="downloadLink" class="btn btn-primary">Download</button>
+                <a id="downloadLink" class="btn btn-primary">Download</a>
             `,
             showCancelButton: true,
             showConfirmButton: false,
