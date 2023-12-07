@@ -30,7 +30,7 @@
         </nav>
         
         <!-- Register -->
-        <div class="container-lg rounded d-flex justify-content-center mt-2 pt-0 mt-sm-3 mt-md-4 pt-lg-5 pt-xxl-5">
+        <div class="container-lg rounded d-flex justify-content-center mt-0 mb-3 pt-0 mt-sm-3 mt-md-4 pt-lg-5 pt-xxl-5">
             <div class="card-group">
                 <div class="card mx-5 d-flex justify-content-center align-item-center">
                     <center>
