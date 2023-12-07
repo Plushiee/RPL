@@ -15,7 +15,7 @@ $(document).ready(function () {
             title: "Bukti Pembayaran",
             html: `
                 <img src="${getBuktiPembayaranRoute(id, bukti)}" alt="Bukti Bayar" style="max-width: 100%; height: auto; margin-bottom: 10px;">
-                <a href="#" id="downloadLink" class="btn btn-primary">Download</a>
+                <button id="downloadLink" class="btn btn-primary">Download</button>
             `,
             showCancelButton: true,
             showConfirmButton: false,
@@ -24,6 +24,7 @@ $(document).ready(function () {
         });
     
         $('#downloadLink').click(function () {
+            e.preventDefault();
             const downloadLink = document.createElement('a');
             downloadLink.href = getBuktiPembayaranRoute(id, bukti);
             downloadLink.download = `bukti_pembayaran_${id}.png`;

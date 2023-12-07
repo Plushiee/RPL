@@ -96,7 +96,7 @@ $(document).ready(function () {
         }).then((result) => {
             if (result.isConfirmed) {
                 Swal.fire('Perubahan Data Akun Berhasil!', '', 'success');
-                setTimeout(window.location.href = '/logout', 4000);
+                setTimeout(window.location.href = '/pemilik/logout', 4000);
             }
         });
     });
@@ -463,7 +463,7 @@ $(document).ready(function () {
                     showConfirmButton: false,
                     allowOutsideClick: false
                 }).then(() => {
-                    window.location.href = '/logout';
+                    window.location.href = '/pemilik/logout';
                 });
             }
         });
@@ -728,7 +728,7 @@ $(document).ready(function () {
                             showConfirmButton: false,
                             allowOutsideClick: false
                         }).then(() => {
-                            window.location.href = '/logout';
+                            window.location.href = '/pemilik/logout';
                         });
                     }
                 })
