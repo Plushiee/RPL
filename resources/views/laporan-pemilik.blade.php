@@ -42,9 +42,9 @@
                             <h4 class="header-title mb-3">Selamat
                                 <?php
                                 date_default_timezone_set('Asia/Jakarta');
-                                
+
                                 $jam = date('H');
-                                
+
                                 if ($jam >= 5 && $jam < 12) {
                                     $waktu = 'Pagi';
                                 } elseif ($jam >= 12 && $jam < 18) {
@@ -52,7 +52,7 @@
                                 } else {
                                     $waktu = 'Malam';
                                 }
-                                
+
                                 echo $waktu;
                                 ?>
                                 , {{ Auth::user()->name }} </h4>
@@ -64,23 +64,21 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                                <h5 class="card-title">Laporan Transaksi</h5>
+                                <h5 class="card-title">Laporan Transaksi Ambil Dirumah</h5>
                                 <form action="/pemilik/laporan/download" method="POST" class="d-inline">
                                     @csrf
                                     <div class="row mb-3">
                                         <div class="col-md-3">
-                                            <label for="startDate">Tanggal Mulai :</label>
+                                            <label for="startDate1">Tanggal Mulai :</label>
                                             <input type="date" id="startDate1" class="form-control" name="startDate">
                                         </div>
                                         <div class="col-md-3">
-                                            <label for="endDate">Tanggal Akhir :</label>
+                                            <label for="endDate1">Tanggal Akhir :</label>
                                             <input type="date" id="endDate1" class="form-control" name="endDate">
                                         </div>
                                         <div class="col-6 mt-3 m-md-0 p-md-0 d-flex align-items-center align-self-end"
                                             style="font-weight: bold;">
-                                            <button id="applyFilter" class="btn btn-primary me-3"
-                                                style="font-weight: bold;">Apply Filter</button>
-                                            <button id="resetFilter" class="btn btn-secondary me-3"
+                                            <button id="resetFilter1" class="btn btn-secondary me-3"
                                                 style="font-weight: bold;">Reset Filter</button>
                                             <button type="submit" class="btn btn-success">
                                                 Unduh Laporan
@@ -92,7 +90,7 @@
 
                                 <div class="row">
                                     <div class="col-12">
-                                        <table id="transaksiTable" class="table table-striped" style="width:100%">
+                                        <table id="transaksiTable1" class="table table-striped" style="width:100%">
                                             <thead>
                                                 <tr>
                                                     <th class="d-none">Id</th>
@@ -137,7 +135,69 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                                <h5 class="card-title">Grafik Perbandingan Transaksi Jenis Sampah</h5>
+                                <h5 class="card-title">Laporan Transaksi Antar Sendiri</h5>
+                                <form action="/pemilik/laporan/download" method="POST" class="d-inline">
+                                    @csrf
+                                    <div class="row mb-3">
+                                        <div class="col-md-3">
+                                            <label for="startDate">Tanggal Mulai :</label>
+                                            <input type="date" id="startDate2" class="form-control" name="startDate">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label for="endDate">Tanggal Akhir :</label>
+                                            <input type="date" id="endDate2" class="form-control" name="endDate">
+                                        </div>
+                                        <div class="col-6 mt-3 m-md-0 p-md-0 d-flex align-items-center align-self-end"
+                                            style="font-weight: bold;">
+                                            <button id="resetFilter2" class="btn btn-secondary me-3"
+                                                style="font-weight: bold;">Reset Filter</button>
+                                            <button type="submit" class="btn btn-success">
+                                                Unduh Laporan
+                                            </button>
+                                        </div>
+
+                                    </div>
+                                </form>
+
+                                <div class="row">
+                                    <div class="col-12">
+                                        <table id="transaksiTable2" class="table table-striped" style="width:100%">
+                                            <thead>
+                                                <tr>
+                                                    <th class="d-none">Id</th>
+                                                    <th class="d-none">IdBank</th>
+                                                    <th>Jenis Sampah</th>
+                                                    <th>Berat</th>
+                                                    <th>Tanggal</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($kumpulanTransaksiBank as $transaksi)
+                                                    <tr>
+                                                        <td class="d-none">{{ $transaksi->name }}</td>
+                                                        <td class="d-none">{{ $transaksi->alamat }}({{ $transaksi->catatan }}),
+                                                            {{ $transaksi->kecamatan }}, {{ $transaksi->kota }},
+                                                            {{ $transaksi->provinsi }}, {{ $transaksi->kodePos }}</td>
+                                                        <td>{{ $transaksi->jenisSampah }}</td>
+                                                        <td>
+                                                            {{ $transaksi->berat }} Kg</td>
+                                                        </td>
+                                                        <td>{{ $transaksi->updated_at }}</td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Grafik Perbandingan Transaksi Jenis Sampah Ambil Dirumah</h5>
                                 <canvas id="jenisSampahChart" width="100%" height="100px"
                                     style="max-height: 400px"></canvas>
                             </div>
@@ -184,7 +244,6 @@
     <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://unpkg.com/html2pdf.js"></script>
 
     <script src="/javascript/laporan-pemilik.js"></script>
 
@@ -214,14 +273,6 @@
                 var rows = document.querySelectorAll('#transaksiTable tbody tr');
 
                 rows.forEach(function(row) {
-                    row.addEventListener('mouseover', function() {
-                        row.style.backgroundColor = '#a9a9a9';
-                    });
-
-                    row.addEventListener('mouseout', function() {
-                        row.style.backgroundColor = '';
-                    });
-
                     row.addEventListener('click', function() {
                         var id = row.cells[0].innerText;
                         var nama = row.cells[1].innerText;

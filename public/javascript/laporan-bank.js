@@ -1,17 +1,19 @@
 $(document).ready(function () {
     function initializeDataTable(table, startDateId, endDateId, applyFilterBtnId, resetFilterBtnId, dateColumnTarget) {
         if (!$.fn.DataTable.isDataTable(table)) {
-            $(table).DataTable({
-                columnDefs: [
-                    {
-                        targets: [dateColumnTarget],
-                        type: 'date',
-                        render: function (data, type, full, meta) {
-                            return moment(data).format('YYYY-MM-DD');
+            if (dateColumnTarget != null) {
+                $(table).DataTable({
+                    columnDefs: [
+                        {
+                            targets: [dateColumnTarget],
+                            type: 'date',
+                            render: function (data, type, full, meta) {
+                                return moment(data).format('YYYY-MM-DD');
+                            }
                         }
-                    }
-                ]
-            });
+                    ]
+                });
+            }
         }
 
         $.fn.dataTable.ext.search.push(
@@ -47,6 +49,10 @@ $(document).ready(function () {
         $('#' + resetFilterBtnId).on('click', function () {
             $('#' + startDateId).val('');
             $('#' + endDateId).val('');
+            table.DataTable().draw();
+        });
+
+        $('#' + startDateId + ', #' + endDateId).on('change', function () {
             table.DataTable().draw();
         });
     }

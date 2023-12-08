@@ -84,7 +84,7 @@ class DashboardController extends Controller {
     }
     public function antar() {
         $this->getCount();
-        $daftarPengumuman = PengumumanBankModel::join('banksampahmail', 'pengumuman_bank.idBank', '=', 'banksampahmail.id')
+        $daftarPengumuman = PengumumanBankModel::join('banksampahmail', 'transaksi_bank.idBank', '=', 'banksampahmail.id')
             ->where('pengumuman_bank.aktif', true)
             ->orderBy('pengumuman_bank.id', 'desc')
             ->get(['banksampahmail.name', 'pengumuman_bank.*']);
@@ -98,7 +98,9 @@ class DashboardController extends Controller {
 
     public function laporanPemilik() {
         $this->getCount();
-        $kumpulanTransaksi = UserTransaksiModel::where('idPemilik', Auth::id())->orderBy('id', 'desc')->get();
+        $kumpulanTransaksi = UserTransaksiModel::where('idPemilik', Auth::id())->orderBy('id', 'asc')->get();
+        $kumpulanTransaksiBank = UserTransaksiBankModel::join('banksampahmail', 'transaksi_bank.idBank', '=', 'banksampahmail.id')
+            -> where('transaksi_bank.idPemilik', Auth::id())->orderBy('transaksi_bank.id', 'asc')->get(['transaksi_bank.jenisSampah', 'transaksi_bank.berat', 'transaksi_bank.updated_at','banksampahmail.*']);
 
         $jenisSampahCounts = $kumpulanTransaksi->groupBy('jenisSampah')->map->count();
         $labels = $jenisSampahCounts->keys()->toArray();
@@ -108,6 +110,7 @@ class DashboardController extends Controller {
             'hitungBelumTerbayar' => $this->hitungBelumTerbayar,
             'hitungTransaksiBerjalanPemilik' => $this->hitungTransaksiBerjalanPemilik,
             'kumpulanTransaksi' => $kumpulanTransaksi,
+            'kumpulanTransaksiBank' => $kumpulanTransaksiBank,
             'labels' => json_encode($labels),
             'data' => json_encode($data),
         ]);
@@ -365,7 +368,6 @@ class DashboardController extends Controller {
 
         $kumpulanTransaksi = UserTransaksiBankModel::join('banksampahmail', 'transaksi_bank.idBank', '=', 'banksampahmail.id')
             ->where('transaksi_bank.diterima', false)
-            // ->where('transaksi_bank.idPemilik', '!=', Auth::id())
             ->where('transaksi_bank.berat', '<=', $kapasitas + floatval('transaksi_bank.berat'))
             ->orderBy('transaksi_bank.id', 'desc')
             ->get([

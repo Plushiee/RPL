@@ -1,4 +1,4 @@
-@extends('templates.laporan-pdf')
+@extends('templates.laporan-pemilik-pdf')
 
 @section('title', 'MoneyTrash! - Laporan')
 @section('css')
@@ -19,47 +19,49 @@
     @endif
     <div class="row">
         <div class="col-12 col-md-12">
-            <div class="card">
-                <div class="card-body">
-                    <div class="col-12">
-                        <table id="transaksiTable" class="table table-striped" style="width:100%">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Nama</th>
-                                    <th>Alamat</th>
-                                    <th>Jenis Sampah</th>
-                                    <th>Berat</th>
-                                    <th>Tanggal</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($kumpulanTransaksi as $transaksi)
-                                    <tr>
-                                        <td>{{ $transaksi->id }}</td>
-                                        <td>{{ $transaksi->nama }}</td>
-                                        <td>
-                                            {{ $transaksi->alamat }}({{ $transaksi->catatan }}),
-                                            {{ $transaksi->kecamatan }}, {{ $transaksi->kota }},
-                                            {{ $transaksi->provinsi }}, {{ $transaksi->kodePos }}</td>
-                                        <td>{{ $transaksi->jenisSampah }}</td>
-                                        <td>
-                                            @if ($transaksi->berat == 'small')
-                                                Small (Maks. 5 Kg)
-                                            @elseif ($transaksi->berat == 'medium')
-                                                Medium (Maks. 20 Kg)
-                                            @elseif ($transaksi->berat == 'large')
-                                                Large (Maks. 100 Kg)
-                                            @endif
-                                        </td>
-                                        <td>{{ $transaksi->updated_at }}</td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
+            <table id="transaksiTable" class="table table-striped" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nama</th>
+                        <th>Alamat</th>
+                        <th>Jenis Sampah</th>
+                        <th>Berat</th>
+                        <th>Tanggal</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($kumpulanTransaksi as $index => $transaksi)
+                        <tr>
+                            <td>{{ $transaksi->id }}</td>
+                            <td>{{ $transaksi->nama }}</td>
+                            <td>
+                                {{ $transaksi->alamat }}({{ $transaksi->catatan }}),
+                                {{ $transaksi->kecamatan }}, {{ $transaksi->kota }},
+                                {{ $transaksi->provinsi }}, {{ $transaksi->kodePos }}</td>
+                            <td>{{ $transaksi->jenisSampah }}</td>
+                            <td>
+                                @if ($transaksi->berat == 'small')
+                                    Small (Maks. 5 Kg)
+                                @elseif ($transaksi->berat == 'medium')
+                                    Medium (Maks. 20 Kg)
+                                @elseif ($transaksi->berat == 'large')
+                                    Large (Maks. 100 Kg)
+                                @endif
+                            </td>
+                            <td>{{ $transaksi->updated_at }}</td>
+                        </tr>
+                        @if (($index + 1) % 8 == 0 && ($index + 1) !== count($kumpulanTransaksi))
+                            <tr>
+                                <td colspan="6">
+                                    {{($index + 1) === count($kumpulanTransaksi)}}
+                                    <div style="page-break-before: always;"></div>
+                                </td>
+                            </tr>
+                        @endif
+                    @endforeach
+                </tbody>
+            </table>
         </div>
     </div>
 @endsection
@@ -86,21 +88,22 @@
     <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"></script>
 
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             function download() {
-                html2pdf(document.body, {
+                var element = document.getElementById('wrapper');
+                html2pdf(element, {
                     margin: 0,
-                    filename: 'MoneyTrash_Laporan-Pengambil.pdf',
+                    filename: 'MoneyTrash_Laporan-Pemilik.pdf',
                     image: {
                         type: 'jpeg',
-                        quality: 0.98
+                        quality: 1
                     },
                     html2canvas: {
-
+                        scale: 2,
                     },
                     jsPDF: {
                         unit: 'mm',
-                        format: 'a3',
+                        format: 'a4',
                         orientation: 'landscape'
                     }
                 });

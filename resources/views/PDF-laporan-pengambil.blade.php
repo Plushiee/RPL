@@ -11,22 +11,19 @@
     <!-- Your Content Here -->
     <h2>Laporan Pengambil Sampah Tahun {{ \Carbon\Carbon::now()->year }}</h2>
     <div class="row">
-        <div class="col-12 col-md-12">
+        <div class="col-6">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">Grafik Transaksi Pengambilan Sampah</h5>
-                    <canvas id="myChart" class="text-center" height="200px" width="300px"
-                        style="min-height: 200px; max-height: 500px; width: 100px;"></canvas>
+                    <h5 class="card-title">Grafik Pengambilan Jenis Sampah</h5>
+                    <canvas id="myChart" height="250px" style="height: 250px; max-height: 250px;"></canvas>
                 </div>
             </div>
         </div>
-        <div style="page-break-before: always;"></div>
-        <div class="col-12 col-md-12">
+        <div class="col-6">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">Grafik Transaksi Pengambilan Sampah</h5>
-                    <canvas id="monthlyTransactionsChart" height="400px"
-                        style="min-height: 200px; max-height: 500px;"></canvas>
+                    <h5 class="card-title">Grafik Transaksi Pengambilan Sampah Per Bulan</h5>
+                    <canvas id="monthlyTransactionsChart" height="250px" style="height: 250px; max-height: 250px;"></canvas>
                 </div>
             </div>
         </div>
@@ -183,19 +180,19 @@
             }
 
             function download() {
-                html2pdf(document.body, {
+                var element = document.getElementById('wrapper');
+                html2pdf(element, {
                     margin: 0,
                     filename: 'MoneyTrash_Laporan-Pengambil.pdf',
                     image: {
                         type: 'jpeg',
-                        quality: 0.98
+                        quality: 1
                     },
                     html2canvas: {
-
                     },
                     jsPDF: {
                         unit: 'mm',
-                        format: 'a3',
+                        format: 'a4',
                         orientation: 'landscape'
                     }
                 });

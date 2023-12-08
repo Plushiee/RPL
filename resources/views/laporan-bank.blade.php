@@ -194,7 +194,6 @@
                                         <input type="date" id="endDate2" class="form-control" name="endDate">
                                     </div>
                                     <div class="col-6 mt-3 m-md-0 p-md-0  d-flex align-items-center align-self-end">
-                                        <button id="applyFilter2" class="btn btn-primary me-3">Apply Filter</button>
                                         <button id="resetFilter2" class="btn btn-secondary">Reset Filter</button>
                                     </div>
                                 </div>
@@ -208,7 +207,7 @@
                                                     <th>Email Pengirim</th>
                                                     <th>Nomor Pengirim</th>
                                                     <th>Alamat</th>
-                                                    <th>Tanggal Transaksi</th>
+                                                    <th class="d-none">Tanggal Transaksi</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -220,7 +219,7 @@
                                                         <td>{{ $transaksi->alamat }}, {{ $transaksi->kecamatan }},
                                                             {{ $transaksi->kota }}, {{ $transaksi->provinsi }}
                                                             {{ $transaksi->kodePos }}</td>
-                                                        <td>{{ $transaksi->updated_at }}</td>
+                                                        <td class="d-none">{{ $transaksi->updated_at }}</td>
                                                     </tr>
                                                 @endforeach
                                             </tbody>

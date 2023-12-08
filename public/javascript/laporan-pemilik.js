@@ -40,18 +40,25 @@ $(document).ready(function () {
             }
         );
 
-        $('#' + applyFilterBtnId).on('click', function () {
-            alert();
+        $('#' + applyFilterBtnId).on('click', function (e) {
+            e.preventDefault();
             table.DataTable().draw();
         });
 
-        $('#' + resetFilterBtnId).on('click', function () {
+        $('#' + resetFilterBtnId).on('click', function (e) {
+            e.preventDefault();
             $('#' + startDateId).val('');
             $('#' + endDateId).val('');
             table.DataTable().draw();
         });
+
+        $('#' + startDateId + ', #' + endDateId).on('change', function () {
+            table.DataTable().draw();
+        });
     }
 
-    var table = $('#transaksiTable');
-    initializeDataTable(table, 'startDate1', 'endDate1', 'applyFilter', 'resetFilter', 5);
+    var table = $('#transaksiTable1');
+    initializeDataTable(table, 'startDate1', 'endDate1', 'applyFilter1', 'resetFilter1', 5);
+    var table2 = $('#transaksiTable2');
+    initializeDataTable(table2, 'startDate2', 'endDate2', 'applyFilter2', 'resetFilter1', 4);
 });

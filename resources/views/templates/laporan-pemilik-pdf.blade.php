@@ -25,7 +25,7 @@
 
 <body style="background-color: white !important">
 
-    <div id="wrapper" style="width: 297mm; height: 210mm;">
+    <div id="wrapper" style="width: 297mm;">
         <div class="navbar-custom" style="background-color: white !important">
             <ul class="list-unstyled topnav-menu float-right mb-0">
                 <li class="dropdown notification-list">
