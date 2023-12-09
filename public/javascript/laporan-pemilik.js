@@ -60,5 +60,5 @@ $(document).ready(function () {
     var table = $('#transaksiTable1');
     initializeDataTable(table, 'startDate1', 'endDate1', 'applyFilter1', 'resetFilter1', 5);
     var table2 = $('#transaksiTable2');
-    initializeDataTable(table2, 'startDate2', 'endDate2', 'applyFilter2', 'resetFilter1', 4);
+    initializeDataTable(table2, 'startDate2', 'endDate2', 'applyFilter2', 'resetFilter1', 6);
 });

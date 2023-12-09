@@ -5,14 +5,14 @@
     <link rel="stylesheet" href="/assets/styles/akun-pengguna.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css">
     <style>
-        #transaksiTable tbody tr:hover {
+        #transaksiTable1 tbody tr.hovered-row {
             background-color: #a9a9a9 !important;
             cursor: pointer;
         }
 
-        /* Gaya saat diklik */
-        #transaksiTable tbody tr.clicked {
+        #transaksiTable2 tbody tr.hovered-row {
             background-color: #a9a9a9 !important;
+            cursor: pointer;
         }
     </style>
 @endsection
@@ -78,6 +78,7 @@
                                         </div>
                                         <div class="col-6 mt-3 m-md-0 p-md-0 d-flex align-items-center align-self-end"
                                             style="font-weight: bold;">
+                                            <input type="hidden" name="laporan" value="ambilDirumah">
                                             <button id="resetFilter1" class="btn btn-secondary me-3"
                                                 style="font-weight: bold;">Reset Filter</button>
                                             <button type="submit" class="btn btn-success">
@@ -149,6 +150,7 @@
                                         </div>
                                         <div class="col-6 mt-3 m-md-0 p-md-0 d-flex align-items-center align-self-end"
                                             style="font-weight: bold;">
+                                            <input type="hidden" name="laporan" value="antarSendiri">
                                             <button id="resetFilter2" class="btn btn-secondary me-3"
                                                 style="font-weight: bold;">Reset Filter</button>
                                             <button type="submit" class="btn btn-success">
@@ -164,8 +166,10 @@
                                         <table id="transaksiTable2" class="table table-striped" style="width:100%">
                                             <thead>
                                                 <tr>
-                                                    <th class="d-none">Id</th>
-                                                    <th class="d-none">IdBank</th>
+                                                    <th class="d-none">ID Transaksi</th>
+                                                    <th class="d-none">Bank</th>
+                                                    <th class="d-none">Nomor Telepon</th>
+                                                    <th class="d-none">Alamat</th>
                                                     <th>Jenis Sampah</th>
                                                     <th>Berat</th>
                                                     <th>Tanggal</th>
@@ -174,15 +178,17 @@
                                             <tbody>
                                                 @foreach ($kumpulanTransaksiBank as $transaksi)
                                                     <tr>
+                                                        <td class="d-none">{{ $transaksi->idTransaksi }}</td>
                                                         <td class="d-none">{{ $transaksi->name }}</td>
-                                                        <td class="d-none">{{ $transaksi->alamat }}({{ $transaksi->catatan }}),
+                                                        <td class="d-none">{{ $transaksi->nomor }}</td>
+                                                        <td class="d-none">
+                                                            {{ $transaksi->alamat }}({{ $transaksi->catatan }}),
                                                             {{ $transaksi->kecamatan }}, {{ $transaksi->kota }},
                                                             {{ $transaksi->provinsi }}, {{ $transaksi->kodePos }}</td>
                                                         <td>{{ $transaksi->jenisSampah }}</td>
-                                                        <td>
-                                                            {{ $transaksi->berat }} Kg</td>
+                                                        <td>{{ $transaksi->berat }} Kg</td>
                                                         </td>
-                                                        <td>{{ $transaksi->updated_at }}</td>
+                                                        <td>{{ $transaksi->tanggalTransaksi }}</td>
                                                     </tr>
                                                 @endforeach
                                             </tbody>
@@ -269,31 +275,74 @@
             });
 
             // Pop Up Swall
-            document.addEventListener('DOMContentLoaded', function() {
-                var rows = document.querySelectorAll('#transaksiTable tbody tr');
+            var rows1 = document.querySelectorAll('#transaksiTable1 tbody tr');
+            var rows2 = document.querySelectorAll('#transaksiTable2 tbody tr');
 
-                rows.forEach(function(row) {
-                    row.addEventListener('click', function() {
-                        var id = row.cells[0].innerText;
-                        var nama = row.cells[1].innerText;
-                        var alamat = row.cells[2].innerText;
-                        var jenisSampah = row.cells[3].innerText;
-                        var berat = row.cells[4].innerText;
-                        var tanggal = row.cells[5].innerText;
+            rows1.forEach(function(row) {
+                row.addEventListener('mouseover', function() {
+                    row.classList.add('hovered-row');
+                });
 
-                        Swal.fire({
-                            title: 'Informasi Transaksi',
-                            html: `
-                        <p><strong>Id Transaksi :</strong><br> ${id}</p>
-                        <p><strong>Atas nama :</strong><br> ${nama}</p>
-                        <p><strong>Alamat :</strong><br> ${alamat}</p>
-                        <p><strong>Jenis Sampah :</strong><br> ${jenisSampah}</p>
-                        <p><strong>Berat :</strong><br> ${berat}</p>
-                        <p><strong>Tanggal :</strong><br> ${tanggal}</p>
-                    `,
-                            icon: 'info',
-                            confirmButtonText: 'OK'
-                        });
+                row.addEventListener('mouseout', function() {
+                    row.classList.remove('hovered-row');
+                });
+
+                row.addEventListener('click', function() {
+                    var id = row.cells[0].innerText;
+                    var nama = row.cells[1].innerText;
+                    var alamat = row.cells[2].innerText;
+                    var jenisSampah = row.cells[3].innerText;
+                    var berat = row.cells[4].innerText;
+                    var tanggal = row.cells[5].innerText;
+
+                    Swal.fire({
+                        title: 'Informasi Transaksi',
+                        html: `
+                    <p><strong>Id Transaksi :</strong><br> ${id}</p>
+                    <p><strong>Atas nama :</strong><br> ${nama}</p>
+                    <p><strong>Alamat :</strong><br> ${alamat}</p>
+                    <p><strong>Jenis Sampah :</strong><br> ${jenisSampah}</p>
+                    <p><strong>Berat :</strong><br> ${berat}</p>
+                    <p><strong>Tanggal :</strong><br> ${tanggal}</p>
+                `,
+                        icon: 'info',
+                        confirmButtonText: 'OK'
+                    });
+                });
+            });
+
+            rows2.forEach(function(row) {
+                row.addEventListener('mouseover', function() {
+                    row.classList.add('hovered-row');
+                });
+
+                row.addEventListener('mouseout', function() {
+                    row.classList.remove('hovered-row');
+                });
+
+                row.addEventListener('click', function() {
+                    console.log(rows2.length);
+                    var id = row.cells[0].innerText;
+                    var nama = row.cells[1].innerText;
+                    var nomor = row.cells[2].innerText;
+                    var alamat = row.cells[3].innerText;
+                    var jenisSampah = row.cells[4].innerText;
+                    var berat = row.cells[5].innerText;
+                    var tanggal = row.cells[6].innerText;
+
+                    Swal.fire({
+                        title: 'Informasi Transaksi',
+                        html: `
+                            <p><strong>ID Transaksi :</strong><br> ${id}</p>
+                            <p><strong>Nama Bank :</strong><br> ${nama}</p>
+                            <p><strong>Nomor Telepon :</strong><br> ${nomor}</p>
+                            <p><strong>Alamat :</strong><br> ${alamat}</p>
+                            <p><strong>Jenis Sampah :</strong><br> ${jenisSampah}</p>
+                            <p><strong>Berat :</strong><br> ${berat}</p>
+                            <p><strong>Tanggal :</strong><br> ${tanggal}</p>
+                        `,
+                        icon: 'info',
+                        confirmButtonText: 'OK'
                     });
                 });
             });

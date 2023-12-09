@@ -22,8 +22,9 @@
             <table id="transaksiTable" class="table table-striped" style="width:100%">
                 <thead>
                     <tr>
-                        <th>ID</th>
-                        <th>Nama</th>
+                        <th>ID Transaksi</th>
+                        <th>Bank</th>
+                        <th>Nomor Telepon</th>
                         <th>Alamat</th>
                         <th>Jenis Sampah</th>
                         <th>Berat</th>
@@ -33,23 +34,17 @@
                 <tbody>
                     @foreach ($kumpulanTransaksi as $index => $transaksi)
                         <tr>
-                            <td>{{ $transaksi->id }}</td>
-                            <td>{{ $transaksi->nama }}</td>
+                            <td>{{ $transaksi->idTransaksi }}</td>
+                            <td>{{ $transaksi->name }}</td>
+                            <td>{{ $transaksi->nomor }}</td>
                             <td>
                                 {{ $transaksi->alamat }}({{ $transaksi->catatan }}),
                                 {{ $transaksi->kecamatan }}, {{ $transaksi->kota }},
                                 {{ $transaksi->provinsi }}, {{ $transaksi->kodePos }}</td>
                             <td>{{ $transaksi->jenisSampah }}</td>
-                            <td>
-                                @if ($transaksi->berat == 'small')
-                                    Small (Maks. 5 Kg)
-                                @elseif ($transaksi->berat == 'medium')
-                                    Medium (Maks. 20 Kg)
-                                @elseif ($transaksi->berat == 'large')
-                                    Large (Maks. 100 Kg)
-                                @endif
+                            <td>{{ $transaksi->berat }} Kg</td>
                             </td>
-                            <td>{{ $transaksi->updated_at }}</td>
+                            <td>{{ $transaksi->tanggalTransaksi }}</td>
                         </tr>
                         @if (($index + 1) % 8 == 0 && ($index + 1) !== count($kumpulanTransaksi))
                             <tr>
@@ -93,7 +88,7 @@
                 var element = document.getElementById('wrapper');
                 html2pdf(element, {
                     margin: 0,
-                    filename: 'MoneyTrash_Laporan-Pemilik.pdf',
+                    filename: 'MoneyTrash_Laporan-Pemilik-Antar-Sendiri.pdf',
                     image: {
                         type: 'jpeg',
                         quality: 1

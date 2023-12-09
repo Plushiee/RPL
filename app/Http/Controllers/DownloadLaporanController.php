@@ -18,23 +18,44 @@ use Spatie\Browsershot\Browsershot;
 
 class DownloadLaporanController extends Controller
 {
-    public function downloadLaporanPemilik(Request $request) {
+    public function downloadLaporanPemilik(Request $request)
+    {
+        $jenisLaporan = $request->laporan;
         $tanggalMulai = $request->startDate;
         $tanggalAkhir = $request->endDate;
-    
-        $query = UserTransaksiModel::where('idPemilik', Auth::id())->orderBy('id', 'desc');
-    
-        if ($tanggalMulai && $tanggalAkhir) {
-            $query->whereBetween('created_at', [$tanggalMulai . ' 00:00:00', $tanggalAkhir . ' 23:59:59']);
+
+        if ($jenisLaporan === "ambilDirumah") {
+            $query = UserTransaksiModel::where('idPemilik', Auth::id())->orderBy('id', 'asc');
+
+            if ($tanggalMulai && $tanggalAkhir) {
+                $query->whereBetween('created_at', [$tanggalMulai . ' 00:00:00', $tanggalAkhir . ' 23:59:59']);
+            }
+
+            $kumpulanTransaksi = $query->get();
+
+            return view('PDF-laporan-pemilik-ambilDirumah', [
+                'kumpulanTransaksi' => $kumpulanTransaksi,
+                'tanggalMulai' => $tanggalMulai,
+                'tanggalAkhir' => $tanggalAkhir,
+            ]);
+        } else {
+            $query = UserTransaksiBankModel::join('banksampahmail', 'transaksi_bank.idBank', '=', 'banksampahmail.id')
+                ->where('transaksi_bank.idPemilik', Auth::id())
+                ->orderBy('transaksi_bank.id', 'asc');
+
+            if ($tanggalMulai && $tanggalAkhir) {
+                $query->whereBetween('created_at', [$tanggalMulai . ' 00:00:00', $tanggalAkhir . ' 23:59:59']);
+            }
+
+            $kumpulanTransaksi = $query->get(['transaksi_bank.jenisSampah', 'transaksi_bank.berat', 'transaksi_bank.id as idTransaksi', 'transaksi_bank.updated_at as tanggalTransaksi', 'banksampahmail.*']);
+
+            return view('PDF-laporan-pemilik-antarSendiri', [
+                'kumpulanTransaksi' => $kumpulanTransaksi,
+                'tanggalMulai' => $tanggalMulai,
+                'tanggalAkhir' => $tanggalAkhir,
+            ]);
         }
-    
-        $kumpulanTransaksi = $query->get();
-    
-        return view('PDF-laporan-pemilik', [
-            'kumpulanTransaksi' => $kumpulanTransaksi,
-            'tanggalMulai' => $tanggalMulai,
-            'tanggalAkhir' => $tanggalAkhir,
-        ]);
+
     }
 
     public function downloadLaporanPengambil()

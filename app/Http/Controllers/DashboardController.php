@@ -100,7 +100,7 @@ class DashboardController extends Controller {
         $this->getCount();
         $kumpulanTransaksi = UserTransaksiModel::where('idPemilik', Auth::id())->orderBy('id', 'asc')->get();
         $kumpulanTransaksiBank = UserTransaksiBankModel::join('banksampahmail', 'transaksi_bank.idBank', '=', 'banksampahmail.id')
-            -> where('transaksi_bank.idPemilik', Auth::id())->orderBy('transaksi_bank.id', 'asc')->get(['transaksi_bank.jenisSampah', 'transaksi_bank.berat', 'transaksi_bank.updated_at','banksampahmail.*']);
+            -> where('transaksi_bank.idPemilik', Auth::id())->orderBy('transaksi_bank.id', 'asc')->get(['transaksi_bank.jenisSampah', 'transaksi_bank.berat', 'transaksi_bank.id as idTransaksi', 'transaksi_bank.updated_at as tanggalTransaksi','banksampahmail.*']);
 
         $jenisSampahCounts = $kumpulanTransaksi->groupBy('jenisSampah')->map->count();
         $labels = $jenisSampahCounts->keys()->toArray();
