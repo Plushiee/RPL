@@ -84,7 +84,7 @@ class DashboardController extends Controller {
     }
     public function antar() {
         $this->getCount();
-        $daftarPengumuman = PengumumanBankModel::join('banksampahmail', 'transaksi_bank.idBank', '=', 'banksampahmail.id')
+        $daftarPengumuman = PengumumanBankModel::join('banksampahmail', 'pengumuman_bank.idBank', '=', 'banksampahmail.id')
             ->where('pengumuman_bank.aktif', true)
             ->orderBy('pengumuman_bank.id', 'desc')
             ->get(['banksampahmail.name', 'pengumuman_bank.*']);
