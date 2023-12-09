@@ -132,13 +132,33 @@
                                                                 {{ $transaksi->kodePos }}</p>
                                                         </div>
                                                         <div
-                                                            class="col-md-2 text-center d-flex justify-content-center align-items-center">
-                                                            <button type="button"
-                                                                class="btn btn-info small mt-2 mt-sm-2 mt-md-0 bukti"
-                                                                id="bukti" data-id="{{ $transaksi->idPemilik }}"
-                                                                data-bukti="{{ $transaksi->bukti }}"
-                                                                data-jenis="{{ $transaksi->jenisSampah }}">Tampilkan
-                                                                Bukti Barang</button>
+                                                            class="col-md-2 text-center justify-content-center align-items-center">
+                                                            <div class="row">
+                                                                <div class="col-12 mt-2 mt-md-0 mb-0 mb-md-2">
+                                                                    <form action="/pemilik/riwayat/notaTransaksi"
+                                                                        method="post">
+                                                                        @csrf
+                                                                        <input type="hidden" name="idTransaksi"
+                                                                            value="{{ $transaksi->id }}">
+                                                                        <input type="hidden" name="jenisTransaksi"
+                                                                            value="ambilDirumah">
+                                                                        <button class="btn btn-info btn-block">Nota
+                                                                            Transaksi</button>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-12">
+                                                                    <button type="button"
+                                                                        class="btn btn-info small mt-2 mt-sm-2 mt-md-0 btn-block bukti"
+                                                                        id="bukti"
+                                                                        data-id="{{ $transaksi->idPemilik }}"
+                                                                        data-bukti="{{ $transaksi->bukti }}"
+                                                                        data-jenis="{{ $transaksi->jenisSampah }}">Tampilkan
+                                                                        Bukti Barang
+                                                                    </button>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     <hr class="mb-4" style="background-color: #e0e0e0; opacity: 1;">

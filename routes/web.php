@@ -64,6 +64,7 @@ Route::middleware(['auth:pemilik'])->group(function () {
     Route::get('/pemilik/laporan', [DashboardController::class, 'laporanPemilik']); //laporan pemilik
     Route::post('/pemilik/laporan/download', [DownloadLaporanController::class, 'downloadLaporanPemilik']); //laporan pemilik
     Route::get('/pemilik/akun', [DashboardController::class, 'akun']); //akun pemilik
+    Route::post('/pemilik/riwayat/notaTransaksi', [DashboardController::class, 'notaTransaksi']); //nota riwayat pemilik
     Route::get('/pemilik/riwayat', [DashboardController::class, 'riwayat']); //riwayat pemilik
     Route::get('/pemilik/pembayaran', [DashboardController::class, 'pembayaran'])->name('pembayaran'); //riwayat pemilik
     Route::post('/pemilik/simpanAkunAwal', [DashboardController::class, 'simpanAkunAwal']); //simpan data awal pemilik
