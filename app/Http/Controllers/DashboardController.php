@@ -45,10 +45,10 @@ class DashboardController extends Controller
 
     private function getCountBank()
     {
-        $this->hitungTransaksiBank = UserTransaksiBankModel::where('idBank', Auth::id())
+        $this->hitungTransaksiBank = UserTransaksiBankModel::where('idBank', Auth::user()->id)
             ->where('diterima', true)->where('terantar', false)
             ->count();
-        $this->hitungPermintaanAprroveBank = UserTransaksiBankModel::where('idBank', Auth::id())
+        $this->hitungPermintaanAprroveBank = UserTransaksiBankModel::where('idBank', Auth::user()->id)
             ->where('diterima', false)->where('terantar', false)
             ->count();
     }
@@ -388,6 +388,7 @@ class DashboardController extends Controller
 
         $pengirimTerbanyak = UserTransaksiBankModel::select('idPemilik', DB::raw('SUM(berat) as totalBerat'), DB::raw('COUNT(*) as jumlahTransaksi'))
             ->groupBy('idPemilik')
+            ->where('diterima', true)
             ->orderByDesc('totalBerat')
             ->first();
 
@@ -415,13 +416,14 @@ class DashboardController extends Controller
     {
         $this->getCountBank();
 
-        $kapasitas = UserTransaksiBankModel::where('idBank', Auth::id())
-            ->where('diterima', true)
-            ->sum('berat');
+        // $kapasitas = UserTransaksiBankModel::where('idBank', Auth::id())
+        //     ->where('diterima', true)
+        //     ->sum('berat');
 
         $kumpulanTransaksi = UserTransaksiBankModel::join('banksampahmail', 'transaksi_bank.idBank', '=', 'banksampahmail.id')
+            ->where('transaksi_bank.idBank', Auth::user()->id)
             ->where('transaksi_bank.diterima', false)
-            ->where('transaksi_bank.berat', '<=', $kapasitas + floatval('transaksi_bank.berat'))
+            ->where('transaksi_bank.berat', '<=', 'transaksi_bank.kapasitas')
             ->orderBy('transaksi_bank.id', 'desc')
             ->get([
                 'transaksi_bank.*',

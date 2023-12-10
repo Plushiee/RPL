@@ -120,7 +120,7 @@
                                         class="bi bi-speedometer2"></i>&nbsp; Dashboard</a></li>
                             <li><a href="/bank/dashboard/terima"
                                     class="@if (request()->is('bank/dashboard/terima*')) active-class active-txt @endif"><i
-                                        class="bi bi-truck"></i>&nbsp; Terima Pesansan
+                                        class="bi bi-truck"></i>&nbsp; Terima Pesanan
                                     @if ($hitungPermintaanAprroveBank != 0)
                                         <span
                                             class="badge badge-danger float-right">{{ $hitungPermintaanAprroveBank }}</span>
