@@ -30,9 +30,9 @@
                             <h4 class="header-title mb-3">Selamat
                                 <?php
                                 date_default_timezone_set('Asia/Jakarta');
-                                
+
                                 $jam = date('H');
-                                
+
                                 if ($jam >= 5 && $jam < 12) {
                                     $waktu = 'Pagi';
                                 } elseif ($jam >= 12 && $jam < 18) {
@@ -40,7 +40,7 @@
                                 } else {
                                     $waktu = 'Malam';
                                 }
-                                
+
                                 echo $waktu;
                                 ?>
                                 , {{ Auth::user()->name }}</h4>
@@ -76,7 +76,7 @@
                 <div class="row">
                     <div class="col-lg-9">
                         <div class="card-box">
-                            <h5 class="mt-0 font-14">Peta</h5>
+                            <h5 class="mt-0 font-14">Peta Bank Sampah</h5>
                             <div class="row m-0 p-0 border">
                                 <div id="map" style="width: 100%; height: 400px;"></div>
                             </div>

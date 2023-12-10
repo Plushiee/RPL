@@ -23,9 +23,8 @@
 
 </head>
 
-<body style="background-color: white !important">
-
-    <div id="wrapper" style="width: 210mm; height: 297mm;" class="border">
+<body style="background-color: white !important;">
+    <div id="wrapper" style="width: 210mm; height: 296mm; max-height: 296mm;" class="border">
         <div class="row h-100">
             <div class="col-1 text-center h-100 border me-0 pe-0">
                 <div class="row">

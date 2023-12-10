@@ -128,7 +128,7 @@
                                 <div class="col-12 col-md-6 d-flex align-items-stretch">
                                     <div class="card" style="min-width: 100%;">
                                         <div class="card-body d-flex flex-column justify-content-center align-items-center">
-                                            <h5 class="card-title text-center">Pengirim Sampah Dengan Transaksi Terbanyak
+                                            <h5 class="card-title text-center">Total Transaksi
                                             </h5>
                                             <h1 class="card-text text-center ">
                                                 @if (!$pengirimTerbanyak)
@@ -152,7 +152,7 @@
                             <h5 class="mt-0 font-14">Pengumuman</h5>
                             <div class="accordion accordion-flush" id="accordionFlushExample">
                                 <div class="pagination-container">
-                                    {{-- @foreach ($daftarPengumuman as $pengumuman)
+                                    @foreach ($daftarPengumuman as $pengumuman)
                                         <div class="accordion-item pengumuman-card">
                                             <h2 class="accordion-header" id="flush-heading{{ $pengumuman->id }}">
                                                 <button class="accordion-button collapsed" type="button"
@@ -179,7 +179,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    @endforeach --}}
+                                    @endforeach
                                 </div>
                                 <div class="pagination mt-2 d-flex justify-content-center">
                                     <button id="prev-page" class="btn btn-primary"><i class="bi bi-caret-left"></i></button>

@@ -4,6 +4,18 @@
 @section('css')
     <link rel="stylesheet" href="/assets/styles/akun-pengguna.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css">
+    <style>
+        #transaksiTable tbody tr.hovered-row {
+            background-color: #a9a9a9 !important;
+            cursor: pointer;
+        }
+
+        #pengirimTable tbody tr.hovered-row {
+            background-color: #a9a9a9 !important;
+            cursor: pointer;
+        }
+    </style>
+
 @endsection
 
 @section('contents')
@@ -101,7 +113,7 @@
                         <div class="col-12 col-md-6 d-flex align-items-stretch">
                             <div class="card" style="min-width: 100%;">
                                 <div class="card-body d-flex flex-column justify-content-center align-items-center">
-                                    <h5 class="card-title text-center">Pengirim Sampah Dengan Transaksi Terbanyak
+                                    <h5 class="card-title text-center">Total Transaksi
                                     </h5>
                                     <h1 class="card-text text-center ">
                                         @if (!$pengirimTerbanyak)
@@ -133,7 +145,6 @@
                                         <input type="date" id="endDate1" class="form-control" name="endDate">
                                     </div>
                                     <div class="col-6 mt-3 m-md-0 p-md-0  d-flex align-items-center align-self-end">
-                                        <button id="applyFilter1" class="btn btn-primary me-3">Apply Filter</button>
                                         <button id="resetFilter1" class="btn btn-secondary">Reset Filter</button>
                                     </div>
                                 </div>
@@ -143,7 +154,11 @@
                                         <table id="transaksiTable" class="table table-striped" style="width:100%">
                                             <thead>
                                                 <tr>
-                                                    <th>ID</th>
+                                                    <th class="d-none">Nama Pemilik</th>
+                                                    <th class="d-none">Nomor Handphone</th>
+                                                    <th class="d-none">Email</th>
+                                                    <th class="d-none">Alamat</th>
+                                                    <th class="d-none">ID</th>
                                                     <th>Jenis Sampah</th>
                                                     <th>Berat</th>
                                                     <th>Tanggal</th>
@@ -153,7 +168,14 @@
                                             <tbody>
                                                 @foreach ($kumpulanTransaksi as $transaksi)
                                                     <tr>
-                                                        <td>{{ $transaksi->id }}</td>
+                                                        <td class="d-none">{{ $transaksi->namaLengkap }}</td>
+                                                        <td class="d-none">{{ $transaksi->nomor }}</td>
+                                                        <td class="d-none">{{ $transaksi->email }}</td>
+                                                        <td class="d-none">
+                                                            {{ $transaksi->alamat }}({{ $transaksi->catatan }}),
+                                                            {{ $transaksi->kecamatan }}, {{ $transaksi->kota }},
+                                                            {{ $transaksi->provinsi }}, {{ $transaksi->kodePos }}</td>
+                                                        <td class="d-none">{{ $transaksi->id }}</td>
                                                         <td>{{ $transaksi->jenisSampah }}</td>
                                                         <td>{{ $transaksi->berat }} kg</td>
                                                         <td>{{ $transaksi->updated_at }}</td>
@@ -211,11 +233,11 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach ($kumpulanTransaksi as $transaksi)
+                                                @foreach ($kumpulanPengirim as $transaksi)
                                                     <tr>
                                                         <td>{{ $transaksi->namaLengkap }}</td>
                                                         <td>{{ $transaksi->email }}</td>
-                                                        <td>{{ $transaksi->nomor }} kg</td>
+                                                        <td>{{ $transaksi->nomor }}</td>
                                                         <td>{{ $transaksi->alamat }}, {{ $transaksi->kecamatan }},
                                                             {{ $transaksi->kota }}, {{ $transaksi->provinsi }}
                                                             {{ $transaksi->kodePos }}</td>
@@ -271,4 +293,48 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
 
     <script src="/javascript/laporan-bank.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            // Pop Up Swall
+            var rows1 = document.querySelectorAll('#transaksiTable tbody tr');
+
+            rows1.forEach(function(row) {
+                row.addEventListener('mouseover', function() {
+                    row.classList.add('hovered-row');
+                });
+
+                row.addEventListener('mouseout', function() {
+                    row.classList.remove('hovered-row');
+                });
+
+                row.addEventListener('click', function() {
+                    var namaLengkap = row.cells[0].innerText;
+                    var nomor = row.cells[1].innerText;
+                    var email = row.cells[2].innerText;
+                    var alamat = row.cells[3].innerText;
+                    var id = row.cells[4].innerText;
+                    var jenisSampah = row.cells[5].innerText;
+                    var berat = row.cells[6].innerText;
+                    var tanggal = row.cells[7].innerText;
+
+                    Swal.fire({
+                        title: 'Informasi Transaksi',
+                        html: `
+                    <p><strong>Id Transaksi :</strong><br> ${id}</p>
+                    <p><strong>Nama Pengirim :</strong><br> ${namaLengkap}</p>
+                    <p><strong>Nomor Telepon :</strong><br> ${nomor}</p>
+                    <p><strong>Email :</strong><br> ${email}</p>
+                    <p><strong>Alamat :</strong><br> ${alamat}</p>
+                    <p><strong>Jenis Sampah :</strong><br> ${jenisSampah}</p>
+                    <p><strong>Berat :</strong><br> ${berat}</p>
+                    <p><strong>Tanggal Transaksi :</strong><br> ${tanggal}</p>
+                `,
+                        icon: 'info',
+                        confirmButtonText: 'OK'
+                    });
+                });
+            });
+        });
+    </script>
 @endsection

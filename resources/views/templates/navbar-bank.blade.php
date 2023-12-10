@@ -120,7 +120,13 @@
                                         class="bi bi-speedometer2"></i>&nbsp; Dashboard</a></li>
                             <li><a href="/bank/dashboard/terima"
                                     class="@if (request()->is('bank/dashboard/terima*')) active-class active-txt @endif"><i
-                                        class="bi bi-truck"></i>&nbsp; Terima Pesansan</a></li>
+                                        class="bi bi-truck"></i>&nbsp; Terima Pesansan
+                                    @if ($hitungPermintaanAprroveBank != 0)
+                                        <span
+                                            class="badge badge-danger float-right">{{ $hitungPermintaanAprroveBank }}</span>
+                                    @endif
+                                </a>
+                            </li>
                             <li><a href="/bank/dashboard/pengumuman"
                                     class="@if (request()->is('bank/dashboard/pengumuman*')) active-class active-txt @endif"><i
                                         class="bi bi-bell"></i>&nbsp; Buat Pengumuman</a></li>
@@ -131,22 +137,15 @@
                         <a href="/bank/riwayat">
                             <i class="bi bi-clock-history @if (request()->is('bank/riwayat*')) active-txt @endif"></i>
                             <span class="@if (request()->is('bank/riwayat*')) active-txt @endif"> Riwayat </span>
-                            @if ($hitungTransaksiBank > 0 && $hitungPermintaanAprroveBank == 0)
-                                <span
-                                    class="badge badge-warning float-right">{{ $hitungTransaksiBank }}</span>
-                            @endif
-
-                            @if ($hitungPermintaanAprroveBank != 0)
-                                    <span
-                                        class="badge badge-danger float-right">{{ $hitungPermintaanAprroveBank }}</span>
+                            @if ($hitungTransaksiBank > 0)
+                                <span class="badge badge-warning float-right">{{ $hitungTransaksiBank }}</span>
                             @endif
                         </a>
                     </li>
 
                     <li class="@if (request()->is('bank/laporan*')) active-class @endif">
                         <a href="/bank/laporan">
-                            <i
-                                class="bi bi-bar-chart @if (request()->is('bank/laporan*')) active-txt @endif"></i>
+                            <i class="bi bi-bar-chart @if (request()->is('bank/laporan*')) active-txt @endif"></i>
                             <span class="@if (request()->is('bank/laporan*')) active-txt @endif"> Laporan </span>
                         </a>
                     </li>
