@@ -39,7 +39,7 @@ class TransaksiController extends Controller {
 
     //antarSendiri
     public function lokasiBank() {
-        $locations = UserBankSampahModel::where('id', '!=', Auth::id())->get();
+        $locations = UserBankSampahModel::where('idUserMail', '!=', Auth::id())->get();
 
         return response()->json($locations);
     }
