@@ -53,6 +53,7 @@ Route::middleware(['checkRole', 'auth:pemilik'])->group(function () {
     Route::get('/login/loginPemilik', [LoginController::class, 'loginPemilik'])->name('loginPemilik');
     Route::post('/login/loginPengambil', [LoginController::class, 'loginPengambil'])->name('loginPengambil');
     Route::post('/login/loginBank', [LoginController::class, 'loginBank'])->name('loginBank');
+    Route::get('/pilih-akun/logout', [LoginController::class, 'logout']);
 });
 
 Route::middleware(['auth:pemilik'])->group(function () {

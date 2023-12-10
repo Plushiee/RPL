@@ -24,7 +24,7 @@
     <main>
         <nav class="navbar" style="background-color: transparent;">
             <div class="container-fluid">
-                <a class="btn btn-warning text-light" href="/">
+                <a class="btn btn-warning text-light" href="/pilih-akun/logout">
                     <b><i class="bi bi-caret-left"></i> Halaman Login</b>
                 </a>
             </div>
