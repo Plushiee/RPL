@@ -4,7 +4,7 @@ $(document).ready(function () {
     const nomor = authData.getAttribute('data-nomor');
     const csrf = authData.getAttribute('data-csrf');
     let id;
-    var beratValue;
+    var beratValue = 0;
 
     function berhasil() {
         var toastMixin = Swal.mixin({
@@ -225,6 +225,7 @@ $(document).ready(function () {
                                     <h3 style="font-size:12pt; font-weight:bold;">${name}</h3>
                                     <p style="font-size:8pt;">${address}</p>
                                     <p class="text-center error-message" style="font-size:8pt; color: red;">Masukan Berat Terlebih Dahulu</p>
+                                    <button class="btn btn-primary btn-sm data d-none" data-id="${locationData.id}">Select</button>
                                     <button class="btn btn-info btn-sm petunjuk float-end">Petunjuk Arah</button>
                                 `,
                                 maxWidth: 300
@@ -232,9 +233,10 @@ $(document).ready(function () {
 
                             beratInput.addEventListener('input', function () {
                                 beratValue = parseFloat(beratInput.value) || 0;
+                                console.log(beratValue)
 
                                 // Check apakah berat melebihi kapasitas
-                                if (beratValue > kapasitas) {
+                                if (beratValue > kapasitas && beratValue !== 0) {
                                     const errorMessage = `<h3 style="font-size:12pt; font-weight:bold;">${name}</h3>
                                         <p style="font-size:8pt;">${address}</p>
                                         <p class="text-center error-message" style="font-size:8pt; color: red;">Sampah Anda Melampaui Kapasitas Maksimum ${locationData.kapasitas} Kg</p>
