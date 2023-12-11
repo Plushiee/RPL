@@ -69,11 +69,11 @@
                                     @csrf
                                     <div class="row mb-3">
                                         <div class="col-md-3">
-                                            <label for="startDate1">Tanggal Mulai :</label>
+                                            <label for="startDate1">Tanggal Mulai</label>
                                             <input type="date" id="startDate1" class="form-control" name="startDate">
                                         </div>
                                         <div class="col-md-3">
-                                            <label for="endDate1">Tanggal Akhir :</label>
+                                            <label for="endDate1">Tanggal Akhir</label>
                                             <input type="date" id="endDate1" class="form-control" name="endDate">
                                         </div>
                                         <div class="col-6 mt-3 m-md-0 p-md-0 d-flex align-items-center align-self-end"
@@ -141,11 +141,11 @@
                                     @csrf
                                     <div class="row mb-3">
                                         <div class="col-md-3">
-                                            <label for="startDate">Tanggal Mulai :</label>
+                                            <label for="startDate">Tanggal Mulai</label>
                                             <input type="date" id="startDate2" class="form-control" name="startDate">
                                         </div>
                                         <div class="col-md-3">
-                                            <label for="endDate">Tanggal Akhir :</label>
+                                            <label for="endDate">Tanggal Akhir</label>
                                             <input type="date" id="endDate2" class="form-control" name="endDate">
                                         </div>
                                         <div class="col-6 mt-3 m-md-0 p-md-0 d-flex align-items-center align-self-end"
