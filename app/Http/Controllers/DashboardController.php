@@ -106,9 +106,13 @@ class DashboardController extends Controller
     public function laporanPemilik()
     {
         $this->getCount();
-        $kumpulanTransaksi = UserTransaksiModel::where('idPemilik', Auth::id())->orderBy('id', 'asc')->get();
+        $kumpulanTransaksi = UserTransaksiModel::where('idPemilik', Auth::id())
+            ->orderBy('id', 'asc')
+            ->get();
         $kumpulanTransaksiBank = UserTransaksiBankModel::join('banksampahmail', 'transaksi_bank.idBank', '=', 'banksampahmail.id')
-            ->where('transaksi_bank.idPemilik', Auth::id())->orderBy('transaksi_bank.id', 'asc')->get(['transaksi_bank.jenisSampah', 'transaksi_bank.berat', 'transaksi_bank.id as idTransaksi', 'transaksi_bank.updated_at as tanggalTransaksi', 'banksampahmail.*']);
+            ->where('transaksi_bank.idPemilik', Auth::id())
+            ->orderBy('transaksi_bank.id', 'asc')
+            ->get(['transaksi_bank.jenisSampah', 'transaksi_bank.berat', 'transaksi_bank.id as idTransaksi', 'transaksi_bank.updated_at as tanggalTransaksi', 'banksampahmail.*']);
 
         $jenisSampahCounts = $kumpulanTransaksi->groupBy('jenisSampah')->map->count();
         $labels = $jenisSampahCounts->keys()->toArray();
@@ -502,13 +506,15 @@ class DashboardController extends Controller
             ->orderByDesc('totalBerat')
             ->first();
 
-        $kumpulanTransaksi = UserTransaksiBankModel::join('banksampahmail', 'transaksi_bank.idBank', '=', 'banksampahmail.id')->join('useremail', 'transaksi_bank.idPemilik', '=', 'useremail.id')
-            ->where('transaksi_bank.idBank', Auth::id())
+        $kumpulanTransaksi = UserTransaksiBankModel::join('banksampahmail', 'transaksi_bank.idBank', '=', 'banksampahmail.id')
+            ->join('useremail', 'transaksi_bank.idPemilik', '=', 'useremail.id')
+            ->where('transaksi_bank.idBank', Auth::user()->id)
             ->orderBy('transaksi_bank.id', 'desc')
             ->get(['useremail.id as idUser','useremail.nomor', 'useremail.email', 'useremail.namaLengkap', 'useremail.alamat', 'useremail.kecamatan', 'useremail.kota', 'useremail.provinsi', 'useremail.kodePos', 'transaksi_bank.*']);
 
-        $kumpulanPengirim = UserTransaksiBankModel::join('banksampahmail', 'transaksi_bank.idBank', '=', 'banksampahmail.id')->join('useremail', 'transaksi_bank.idPemilik', '=', 'useremail.id')
-            ->where('transaksi_bank.idBank', Auth::id())
+        $kumpulanPengirim = UserTransaksiBankModel::join('banksampahmail', 'transaksi_bank.idBank', '=', 'banksampahmail.id')
+            ->join('useremail', 'transaksi_bank.idPemilik', '=', 'useremail.id')
+            ->where('transaksi_bank.idBank', Auth::user()->id)
             ->orderBy('transaksi_bank.id', 'desc')
             ->distinct('useremail.id')
             ->get(['useremail.id as idUser','useremail.nomor', 'useremail.email', 'useremail.namaLengkap', 'useremail.alamat', 'useremail.kecamatan', 'useremail.kota', 'useremail.provinsi', 'useremail.kodePos']);

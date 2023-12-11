@@ -33,6 +33,7 @@ class UserBankSampahModel extends Model implements Authenticatable
         'kodePos',
         'catatan',
         'kapasitas',
+        // 'tampung',
         'lang',
         'long',
     ];
