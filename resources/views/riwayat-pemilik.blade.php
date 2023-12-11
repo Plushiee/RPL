@@ -300,7 +300,7 @@
                                                                             <input type="hidden" name="idTransaksi"
                                                                                 value="{{ $transaksi->id }}">
                                                                             <input type="hidden" name="jenisTransaksi"
-                                                                                value="ambilDirumah">
+                                                                                value="antarSendiri">
                                                                             <button class="btn btn-info btn-block">Nota
                                                                                 Transaksi</button>
                                                                         </form>

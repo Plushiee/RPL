@@ -56,7 +56,7 @@
                 <div class="navbar-custom" style="background-color: white !important">
                     <ul class="list-unstyled topnav-menu float-right mb-0">
                         <li class="dropdown notification-list">
-                            <a class="nav-link nav-user mr-0" data-toggle="dropdown" href="#" role="button"
+                            <a class="nav-link nav-user mr-0" data-toggle="dropdown" role="button"
                                 aria-haspopup="false" aria-expanded="false">
                                 <img src="/assets/images/users/user-default.webp" alt="user-image"
                                     class="rounded-circle">
@@ -68,7 +68,7 @@
                     </ul>
 
                     <div class="logo-box">
-                        <a href="/" class="logo text-center logo-dark">
+                        <a class="logo text-center logo-dark">
                             <span class="logo-lg">
                                 <img src="/assets/navbar/logo-long.png" alt="" height="40">
                             </span>
