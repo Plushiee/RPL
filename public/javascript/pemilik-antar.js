@@ -236,7 +236,7 @@ $(document).ready(function () {
                                 if (beratValue > kapasitas - berat && beratValue !== 0) {
                                     const errorMessage = `<h3 style="font-size:12pt; font-weight:bold;">${name}</h3>
                                         <p style="font-size:8pt;">${address}</p>
-                                        <p class="text-center error-message" style="font-size:8pt; color: red;">Sampah Anda Melampaui Kapasitas Maksimum ${locationData.kapasitas - locationData.berat} Kg</p>
+                                        <p class="text-center error-message" style="font-size:8pt; color: red;">Sampah Anda Melampaui Kapasitas Maksimum ${kapasitas - berat} Kg</p>
                                         <button class="btn btn-info btn-sm petunjuk float-end">Petunjuk Arah</button>
                                         `;
 
