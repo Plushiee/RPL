@@ -253,7 +253,10 @@ class DashboardController extends Controller
     public function riwayatPengambil()
     {
         $this->getCountPengambil();
-        $kumpulanTransaksi = UserTransaksiModel::orderBy('id', 'desc')->where('diterima', true)->get();
+        $kumpulanTransaksi = UserTransaksiModel::orderBy('id', 'desc')
+            ->where('diterima', true)
+            ->where('idPengambil', Auth::user()->id);
+            ->get();
         return view('riwayat-pengambil', [
             'kumpulanTransaksi' => $kumpulanTransaksi,
             'hitungPermintaanAprrove' => $this->hitungPermintaanAprrove,
