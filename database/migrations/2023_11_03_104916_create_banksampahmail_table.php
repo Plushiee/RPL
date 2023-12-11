@@ -29,6 +29,7 @@ class CreateBanksampahmailTable extends Migration
             $table->string('kodePos', 50)->nullable();
             $table->text('catatan')->nullable();
             $table->string('kapasitas');
+            $table->string('tampung')->nullable()->default(0);
             $table->string('lang');
             $table->string('long');
             $table->rememberToken();

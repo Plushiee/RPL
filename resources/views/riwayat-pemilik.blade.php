@@ -144,8 +144,7 @@
                                                                                 value="{{ $transaksi->id }}">
                                                                             <input type="hidden" name="jenisTransaksi"
                                                                                 value="ambilDirumah">
-                                                                            <button class="btn btn-info btn-block">Nota
-                                                                                Transaksi</button>
+                                                                            <button class="btn btn-info btn-block">Unduh Nota</button>
                                                                         </form>
                                                                     </div>
                                                                 </div>
@@ -301,8 +300,7 @@
                                                                                 value="{{ $transaksi->id }}">
                                                                             <input type="hidden" name="jenisTransaksi"
                                                                                 value="antarSendiri">
-                                                                            <button class="btn btn-info btn-block">Nota
-                                                                                Transaksi</button>
+                                                                            <button class="btn btn-info btn-block">Unduh Nota</button>
                                                                         </form>
                                                                     </div>
                                                                 </div>
