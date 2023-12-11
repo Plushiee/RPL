@@ -486,15 +486,18 @@ class DashboardController extends Controller
         $today = now()->toDateString();
         $sumBerat = UserTransaksiBankModel::select(DB::raw('SUM(berat) as totalBerat'))
             ->where('idBank', Auth::user()->id)
+            ->where('diterima', true)
             ->whereDate('created_at', $today)
             ->get();
 
         $countTransaksi = UserTransaksiBankModel::where('idBank', Auth::user()->id)
             ->whereDate('created_at', $today)
+            ->where('diterima', true)
             ->count();
 
         $pengirimTerbanyak = UserTransaksiBankModel::select('idPemilik', DB::raw('SUM(berat) as totalBerat'), DB::raw('COUNT(*) as jumlahTransaksi'))
             ->where('idBank', Auth::user()->id)
+            ->where('diterima', true)
             ->groupBy('idPemilik')
             ->orderByDesc('totalBerat')
             ->first();
