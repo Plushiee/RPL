@@ -274,6 +274,11 @@ $(document).ready(function () {
                                     selectedButton = selectButton;
                                 });
 
+                                $('.data').click(function (e) { 
+                                    e.preventDefault();
+                                    
+                                });
+
                                 const petunjukButton = document.querySelector('.petunjuk');
                                 petunjukButton.addEventListener('click', function (e) {
                                     e.preventDefault();
