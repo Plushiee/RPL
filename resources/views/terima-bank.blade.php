@@ -116,6 +116,8 @@
                                                             @csrf
                                                             <input type="hidden" name="id_transaksi"
                                                                 value="{{ $transaksi->id }}">
+                                                            <input type="hidden" name="berat"
+                                                                value="{{ $transaksi->berat }}">
                                                             @if ($transaksi->diterima == false && $transaksi->terantar == false)
                                                                 <input type="hidden" name="aksi" value="diterima">
                                                                 <button type="submit" id="terima"

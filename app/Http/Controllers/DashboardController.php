@@ -112,7 +112,7 @@ class DashboardController extends Controller
         $kumpulanTransaksiBank = UserTransaksiBankModel::join('banksampahmail', 'transaksi_bank.idBank', '=', 'banksampahmail.id')
             ->where('transaksi_bank.idPemilik', Auth::id())
             ->orderBy('transaksi_bank.id', 'asc')
-            ->get(['transaksi_bank.jenisSampah', 'transaksi_bank.berat', 'transaksi_bank.id as idTransaksi', 'transaksi_bank.updated_at as tanggalTransaksi', 'banksampahmail.*']);
+            ->get(['transaksi_bank.jenisSampah', 'transaksi_bank.berat', 'transaksi_bank.id as idTransaksi', 'transaksi_bank.created_at as tanggalTransaksi', 'banksampahmail.*']);
 
         $jenisSampahCounts = $kumpulanTransaksi->groupBy('jenisSampah')->map->count();
         $labels = $jenisSampahCounts->keys()->toArray();
@@ -159,7 +159,7 @@ class DashboardController extends Controller
                 ->where('transaksi_bank.idPemilik', Auth::id())
                 ->where('transaksi_bank.id', $idTransaksi)
                 ->orderBy('transaksi_bank.id', 'asc')
-                ->get(['transaksi_bank.jenisSampah', 'transaksi_bank.berat', 'transaksi_bank.id as idTransaksi', 'transaksi_bank.updated_at as tanggalTransaksi', 'banksampahmail.*']);
+                ->get(['transaksi_bank.jenisSampah', 'transaksi_bank.berat', 'transaksi_bank.id as idTransaksi', 'transaksi_bank.created_at as tanggalTransaksi', 'banksampahmail.*']);
 
             return view('PDF-laporan-pemilik-notaTransaksi-antarSendiri', [
                 'kumpulanTransaksi' => $kumpulanTransaksi,

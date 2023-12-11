@@ -162,7 +162,6 @@ $(document).ready(function () {
 
                 function initMap(latitude, longitude) {
                     const initialLocation = { lat: latitude, lng: longitude };
-                    let maxCapacity = 0;
 
                     const map = new google.maps.Map(document.getElementById('mapSwoll'), {
                         center: initialLocation,
@@ -192,10 +191,8 @@ $(document).ready(function () {
                             type: 'GET',
                             dataType: 'json',
                             success: function (response) {
-                                maxCapacity = response[0].kapasitas;
                                 performTextSearch(response);
                                 console.log(response)
-                                console.log(maxCapacity)
                             },
                             error: function (error) {
                                 console.error('Error fetching location data:', error);
@@ -219,6 +216,7 @@ $(document).ready(function () {
 
                             const beratInput = Swal.getPopup().querySelector("input[name='berat']");
                             const kapasitas = locationData.kapasitas;
+                            const berat = locationData.tampung;
 
                             infoWindow = new google.maps.InfoWindow({
                                 content: `
@@ -233,13 +231,12 @@ $(document).ready(function () {
 
                             beratInput.addEventListener('input', function () {
                                 beratValue = parseFloat(beratInput.value) || 0;
-                                console.log(beratValue)
 
                                 // Check apakah berat melebihi kapasitas
-                                if (beratValue > kapasitas && beratValue !== 0) {
+                                if (beratValue > kapasitas - berat && beratValue !== 0) {
                                     const errorMessage = `<h3 style="font-size:12pt; font-weight:bold;">${name}</h3>
                                         <p style="font-size:8pt;">${address}</p>
-                                        <p class="text-center error-message" style="font-size:8pt; color: red;">Sampah Anda Melampaui Kapasitas Maksimum ${locationData.kapasitas} Kg</p>
+                                        <p class="text-center error-message" style="font-size:8pt; color: red;">Sampah Anda Melampaui Kapasitas Maksimum ${locationData.kapasitas - locationData.berat} Kg</p>
                                         <button class="btn btn-info btn-sm petunjuk float-end">Petunjuk Arah</button>
                                         `;
 
@@ -261,22 +258,24 @@ $(document).ready(function () {
 
                             google.maps.event.addListener(infoWindow, 'domready', function () {
                                 const selectButton = document.querySelector('.data');
-                                selectButton.addEventListener('click', function (e) {
+                                if (selectButton) {
+                                    selectButton.addEventListener('click', function (e) {
+                                        e.preventDefault();
+                                        id = selectButton.getAttribute('data-id');
+                                        console.log(id)
+
+                                        selectButton.setAttribute('disabled', 'true');
+
+                                        if (selectedButton && selectedButton !== selectButton) {
+                                            selectedButton.removeAttribute('disabled');
+                                        }
+                                        selectedButton = selectButton;
+                                    });
+                                }
+
+                                $('.data').click(function (e) {
                                     e.preventDefault();
-                                    id = selectButton.getAttribute('data-id');
-                                    console.log(id)
 
-                                    selectButton.setAttribute('disabled', 'true');
-
-                                    if (selectedButton && selectedButton !== selectButton) {
-                                        selectedButton.removeAttribute('disabled');
-                                    }
-                                    selectedButton = selectButton;
-                                });
-
-                                $('.data').click(function (e) { 
-                                    e.preventDefault();
-                                    
                                 });
 
                                 const petunjukButton = document.querySelector('.petunjuk');
