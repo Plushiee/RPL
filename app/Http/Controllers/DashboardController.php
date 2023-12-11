@@ -387,6 +387,7 @@ class DashboardController extends Controller
             ->count();
 
         $pengirimTerbanyak = UserTransaksiBankModel::select('idPemilik', DB::raw('SUM(berat) as totalBerat'), DB::raw('COUNT(*) as jumlahTransaksi'))
+            ->where('idBank', Auth::user()->id)
             ->groupBy('idPemilik')
             ->where('diterima', true)
             ->orderByDesc('totalBerat')
