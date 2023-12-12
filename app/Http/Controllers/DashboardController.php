@@ -244,6 +244,7 @@ class DashboardController extends Controller
 
         $kumpulanTransaksi = UserTransaksiModel::orderBy('id', 'desc')
             ->whereIn('berat', $allowedBerat)
+            ->where('idPemilik', '!=', Auth::user()->id)
             ->where('diterima', false)
             ->get();
 
