@@ -413,9 +413,9 @@ class DashboardController extends Controller
             ->first();
 
         $daftarPengumuman = PengumumanBankModel::orderBy('id', 'desc')->where('idBank', Auth::id())->get();
-
-        if ($pengirimTerbanyak) {
-            $userPengirimTerbanyak = UserEmailModel::find($akunPengirimTerbanyak->idPemilik);
+        
+        if ($akunPengirimTerbanyak) {
+            $userPengirimTerbanyak = UserEmailModel::find($pengirimTerbanyak->idPemilik);
         } else {
             $userPengirimTerbanyak = null;
         }
@@ -539,7 +539,7 @@ class DashboardController extends Controller
             ->get();
         
 
-        if ($pengirimTerbanyak) {
+        if ($akunPengirimTerbanyak) {
             $userPengirimTerbanyak = UserEmailModel::find($akunPengirimTerbanyak->idPemilik);
         } else {
             $userPengirimTerbanyak = null;
