@@ -103,7 +103,7 @@
                                         @if (!$pengirimTerbanyak)
                                             0
                                         @else
-                                            {{ $pengirimTerbanyak->totalBerat }}
+                                            {{ $akunPengirimTerbanyak->totalBerat }}
                                         @endif
                                         Kilogram
                                     </h5>

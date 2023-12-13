@@ -401,17 +401,21 @@ class DashboardController extends Controller
             ->where('diterima', true)
             ->count();
 
-        $pengirimTerbanyak = UserTransaksiBankModel::select('idPemilik', DB::raw('SUM(berat) as totalBerat'), DB::raw('COUNT(*) as jumlahTransaksi'))
+        $pengirimTerbanyak = UserTransaksiBankModel::select(DB::raw('SUM(berat) as totalBerat'), DB::raw('COUNT(id) as jumlahTransaksi'))
             ->where('idBank', Auth::user()->id)
-            ->groupBy('idPemilik')
-            ->where('diterima', true)
             ->orderByDesc('totalBerat')
             ->first();
 
-            $daftarPengumuman = PengumumanBankModel::orderBy('id', 'desc')->where('idBank', Auth::id())->get();
+        $akunPengirimTerbanyak = UserTransaksiBankModel::select('idPemilik', DB::raw('SUM(berat) as totalBerat'), DB::raw('COUNT(*) as jumlahTransaksi'))
+            ->where('idBank', Auth::user()->id)
+            ->groupBy('idPemilik')
+            ->orderByDesc('totalBerat')
+            ->first();
+
+        $daftarPengumuman = PengumumanBankModel::orderBy('id', 'desc')->where('idBank', Auth::id())->get();
 
         if ($pengirimTerbanyak) {
-            $userPengirimTerbanyak = UserEmailModel::find($pengirimTerbanyak->idPemilik);
+            $userPengirimTerbanyak = UserEmailModel::find($akunPengirimTerbanyak->idPemilik);
         } else {
             $userPengirimTerbanyak = null;
         }
@@ -425,6 +429,7 @@ class DashboardController extends Controller
             'pengirimTerbanyak' => $pengirimTerbanyak,
             'userPengirimTerbanyak' => $userPengirimTerbanyak,
             'daftarPengumuman' => $daftarPengumuman,
+            'akunPengirimTerbanyak' => $akunPengirimTerbanyak,
         ]);
     }
 
@@ -507,7 +512,12 @@ class DashboardController extends Controller
             ->where('diterima', true)
             ->count();
 
-        $pengirimTerbanyak = UserTransaksiBankModel::select('idPemilik', DB::raw('SUM(berat) as totalBerat'), DB::raw('COUNT(id) as jumlahTransaksi'))
+        $pengirimTerbanyak = UserTransaksiBankModel::select(DB::raw('SUM(berat) as totalBerat'), DB::raw('COUNT(id) as jumlahTransaksi'))
+            ->where('idBank', Auth::user()->id)
+            ->orderByDesc('totalBerat')
+            ->first();
+
+        $akunPengirimTerbanyak = UserTransaksiBankModel::select('idPemilik', DB::raw('SUM(berat) as totalBerat'), DB::raw('COUNT(*) as jumlahTransaksi'))
             ->where('idBank', Auth::user()->id)
             ->groupBy('idPemilik')
             ->orderByDesc('totalBerat')
@@ -530,7 +540,7 @@ class DashboardController extends Controller
         
 
         if ($pengirimTerbanyak) {
-            $userPengirimTerbanyak = UserEmailModel::find($pengirimTerbanyak->idPemilik);
+            $userPengirimTerbanyak = UserEmailModel::find($akunPengirimTerbanyak->idPemilik);
         } else {
             $userPengirimTerbanyak = null;
         }
@@ -544,6 +554,7 @@ class DashboardController extends Controller
             'userPengirimTerbanyak' => $userPengirimTerbanyak,
             'kumpulanTransaksi' => $kumpulanTransaksi,
             'kumpulanPengirim' => $kumpulanPengirim,
+            'akunPengirimTerbanyak' => $akunPengirimTerbanyak,
         ]);
     }
 

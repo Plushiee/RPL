@@ -115,10 +115,10 @@
                                             </h1>
                                             <h5 class="card-text m-0 p-0 text-muted text-center" id="transaksiSampah"
                                                 style="font-weight: bold">
-                                                @if (!$pengirimTerbanyak)
+                                                @if (!$akunPengirimTerbanyak)
                                                     0
                                                 @else
-                                                    {{ $pengirimTerbanyak->totalBerat }}
+                                                    {{ $akunPengirimTerbanyak->totalBerat }}
                                                 @endif
                                                 Kilogram
                                             </h5>
