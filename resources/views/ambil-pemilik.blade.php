@@ -169,7 +169,7 @@
         {{-- </footer> --}}
         <!-- end Footer -->
         <!-- Auth Data Share -->
-        <div id="authData" data-name="{{ Auth::user()->name }}" data-nomor="{{ Auth::user()->nomor }}"
+        <div id="authData" data-name="{{ Auth::user()->namaLengkap }}" data-nomor="{{ Auth::user()->nomor }}"
             data-alamat="{{ Auth::user()->alamat }}" data-kecamatan="{{ Auth::user()->kecamatan }}"
             data-kota="{{ Auth::user()->kota }}" data-provinsi="{{ Auth::user()->provinsi }}"
             data-kodepos="{{ Auth::user()->kodePos }}" data-catatan="{{ Auth::user()->catatan }}"

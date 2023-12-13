@@ -102,7 +102,7 @@
                                                                 <div
                                                                     class="col-md-2 text-center d-flex justify-content-center align-items-center">
                                                                     <h5 class="text-muted mb-0 mt-0 pt-0">
-                                                                        {{ $transaksi->nama }}
+                                                                        {{ $transaksi->namaLengkap }}
                                                                     </h5>
                                                                 </div>
                                                                 <div
@@ -269,7 +269,7 @@
                                                                 <div
                                                                     class="col-md-2 text-center d-flex justify-content-center align-items-center">
                                                                     <h5 class="text-muted mb-0 mt-0 pt-0">
-                                                                        {{ $transaksi->nama }}
+                                                                        {{ $transaksi->namaLengkap }}
                                                                     </h5>
                                                                 </div>
                                                                 <div

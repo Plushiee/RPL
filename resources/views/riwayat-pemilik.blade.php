@@ -99,7 +99,7 @@
                                                             </div>
                                                         </div>
                                                         <div class="row">
-                                                            <div class="col-md-2 text-center">
+                                                            <div class="col-md-2 text-center d-md-flex align-items-center">
                                                                 <img src="\assets\sampah\{{ $transaksi->jenisSampah }}.png"
                                                                     alt="{{ $transaksi->jenisSampah }}.png" width="80"
                                                                     class="img-fluid">
@@ -264,12 +264,13 @@
                                                             </div>
                                                             <div
                                                                 class="col-md-2 text-center d-flex justify-content-center align-items-center">
-                                                                <p>Nama Pengantar</p>
+                                                                <p>Nama Pengantar</p><br>
                                                                 <h5 class="text-muted mb-0 mt-0 pt-0">
                                                                     {{ $transaksi->nama }}
                                                                 </h5>
                                                             </div>
-                                                            <div
+                                                            <div>
+                                                                <b>Nomor Bank</b><br>
                                                                 class="col-md-2 text-center d-flex justify-content-center align-items-center">
                                                                 <p class="text-muted mb-0 small">{{ $transaksi->nomor }}
                                                                 </p>

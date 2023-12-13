@@ -194,7 +194,7 @@
         {{-- </footer> --}}
         <!-- end Footer -->
         <!-- Auth Data Share -->
-        <div id="authData" data-name="{{ Auth::user()->name }}" data-nomor="{{ Auth::user()->nomor }}"
+        <div id="authData" data-name="{{ Auth::user()->namaLengkap }}" data-nomor="{{ Auth::user()->nomor }}"
             data-csrf="{{ csrf_token() }}"></div>
         <!-- EndAuth Data Share -->
 
