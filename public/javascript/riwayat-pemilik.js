@@ -7,10 +7,34 @@ $(document).ready(function () {
         const id = button.data('id');
         const bukti = button.data('bukti');
         const jenis = button.data('jenis');
+        const namaLegkap = button.data('namaLegkap');
+        const nomor = button.data('nomor');
 
         Swal.fire({
-            title: "Bukti Barang",
-            html: `<img src="${getBuktiSampahAmbilRoute(jenis, id, bukti)}" alt="Bukti Sampah" style="max-width: 100%; height: auto;">`,
+            title: "Informasi Lainnya",
+            html: `
+            <div class="container-fluid">
+                <h4>Bukti Barang</h4>
+                <img src="${getBuktiSampahAmbilRoute(jenis, id, bukti)}" alt="Bukti Sampah" style="max-width: 100%; height: auto;">
+                <div class="row mt-1">
+                    <div class="col-6">
+                        <b>Nama Pengambil</b>
+                    </div>
+                    <div class="col-6">
+                        <b>Nomor Telepon</b>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-6">
+                        ${namaLegkap}
+                    </div>
+                    <div class="col-6">
+                        ${nomor}                  
+                    </div>
+                </div>
+            </div>
+            `,
             showCancelButton: true,
             showConfirmButton: false,
             cancelButtonText: "Tutup",

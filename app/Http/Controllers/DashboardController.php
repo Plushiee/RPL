@@ -175,7 +175,10 @@ class DashboardController extends Controller
             ->orderBy('transaksi_bank.id', 'desc')
             ->get(['transaksi_bank.*', 'banksampahmail.name', 'banksampahmail.email', 'banksampahmail.nomor', 'banksampahmail.alamat', 'banksampahmail.kecamatan', 'banksampahmail.kota', 'banksampahmail.provinsi', 'banksampahmail.kodePos', 'banksampahmail.catatan', 'banksampahmail.lang', 'banksampahmail.long']);
 
-        $kumpulanTransaksi = UserTransaksiModel::where('idPemilik', Auth::id())->orderBy('id', 'desc')->get();
+            $kumpulanTransaksi = UserTransaksiModel::leftJoin('pengambilmail', 'user_transaksi.idPengambil', '=', 'pengambilmail.id')
+            ->where('idPemilik', Auth::id())
+            ->orderBy('id', 'desc')
+            ->get(['user_transaksi.*', 'pengambilmail.namaLengkap', 'pengambilmail.nomor as nomorPengambil']);
 
         return view('riwayat-pemilik', [
             'kumpulanTransaksi' => $kumpulanTransaksi,

@@ -155,8 +155,9 @@
                                                                             id="bukti"
                                                                             data-id="{{ $transaksi->idPemilik }}"
                                                                             data-bukti="{{ $transaksi->bukti }}"
-                                                                            data-jenis="{{ $transaksi->jenisSampah }}">Tampilkan
-                                                                            Bukti Barang
+                                                                            data-jenis="{{ $transaksi->jenisSampah }}"
+                                                                            data-namaLengkap="{{ $transaksi->namaLengkap }}"
+                                                                            data-nomor="{{ $transaksi->nomorPengambil }}">Informasi Lainnya
                                                                         </button>
                                                                     </div>
                                                                 </div>
@@ -263,6 +264,7 @@
                                                             </div>
                                                             <div
                                                                 class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                                                                <p>Nama Pengantar</p>
                                                                 <h5 class="text-muted mb-0 mt-0 pt-0">
                                                                     {{ $transaksi->nama }}
                                                                 </h5>
