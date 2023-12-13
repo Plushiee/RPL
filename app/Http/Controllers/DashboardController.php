@@ -523,9 +523,12 @@ class DashboardController extends Controller
         $kumpulanPengirim = UserTransaksiBankModel::join('banksampahmail', 'transaksi_bank.idBank', '=', 'banksampahmail.id')
             ->join('useremail', 'transaksi_bank.idPemilik', '=', 'useremail.id')
             ->where('transaksi_bank.idBank', Auth::user()->id)
-            ->orderBy('transaksi_bank.id', 'desc')
-            ->distinct('useremail.id')
-            ->get(['useremail.id as idUser','useremail.nomor', 'useremail.email', 'useremail.namaLengkap', 'useremail.alamat', 'useremail.kecamatan', 'useremail.kota', 'useremail.provinsi', 'useremail.kodePos']);
+            ->orderByDesc('transaksi_bank.id')
+            ->groupBy('useremail.id', 'useremail.nomor', 'useremail.email', 'useremail.namaLengkap', 'useremail.alamat', 'useremail.kecamatan', 'useremail.kota', 'useremail.provinsi', 'useremail.kodePos')
+            ->select('useremail.id as idUser', 'useremail.nomor', 'useremail.email', 'useremail.namaLengkap', 'useremail.alamat', 'useremail.kecamatan', 'useremail.kota', 'useremail.provinsi', 'useremail.kodePos')
+            ->selectRaw('COUNT(transaksi_bank.id) as hitungTransaksi')
+            ->get();
+        
 
         if ($pengirimTerbanyak) {
             $userPengirimTerbanyak = UserEmailModel::find($pengirimTerbanyak->idPemilik);

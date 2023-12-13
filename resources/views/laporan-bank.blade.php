@@ -228,7 +228,8 @@
                                                     <th>Nama Pengirim</th>
                                                     <th>Email Pengirim</th>
                                                     <th>Nomor Pengirim</th>
-                                                    <th>Alamat</th>
+                                                    <th>Banyak Transaksi</th>
+                                                    <th class="d-none">Alamat</th>
                                                     <th class="d-none">Tanggal Transaksi</th>
                                                 </tr>
                                             </thead>
@@ -238,7 +239,8 @@
                                                         <td>{{ $transaksi->namaLengkap }}</td>
                                                         <td>{{ $transaksi->email }}</td>
                                                         <td>{{ $transaksi->nomor }}</td>
-                                                        <td>{{ $transaksi->alamat }}, {{ $transaksi->kecamatan }},
+                                                        <td class="text-end">{{ $transaksi->hitungTransaksi }}</td>
+                                                        <td class="d-none">{{ $transaksi->alamat }}, {{ $transaksi->kecamatan }},
                                                             {{ $transaksi->kota }}, {{ $transaksi->provinsi }}
                                                             {{ $transaksi->kodePos }}</td>
                                                         <td class="d-none">{{ $transaksi->updated_at }}</td>

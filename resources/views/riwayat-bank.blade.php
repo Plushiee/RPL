@@ -402,4 +402,29 @@
     <script src="/javascript/gps-map.js"></script>
     <script src="/javascript/riwayat-bank.js"></script>
     <script src="/javascript/pagination.js"></script>
+    @if (session('approved'))
+    <script>
+        $(document).ready(function() {
+            // Alert
+            var toastMixin = Swal.mixin({
+                toast: true,
+                icon: 'success',
+                title: 'General Title',
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            });
+
+            toastMixin.fire({
+                animation: true,
+                title: 'Pesanan Sudah Terantar'
+            });
+        });
+    </script>
+@endif
 @endsection
