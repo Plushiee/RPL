@@ -509,7 +509,6 @@ class DashboardController extends Controller
 
         $pengirimTerbanyak = UserTransaksiBankModel::select('idPemilik', DB::raw('SUM(berat) as totalBerat'), DB::raw('COUNT(id) as jumlahTransaksi'))
             ->where('idBank', Auth::user()->id)
-            ->where('diterima', true)
             ->groupBy('idPemilik')
             ->orderByDesc('totalBerat')
             ->first();
