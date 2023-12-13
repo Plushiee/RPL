@@ -89,12 +89,12 @@
                                             </div>
                                             <div
                                                 class="col-md-2 text-center d-flex justify-content-center align-items-center">
-                                                <h5 class="text-muted mb-0 mt-0 pt-0">{{ $transaksi->nama }}
+                                                <h5 class="text-muted mb-0 mt-0 pt-0">{{ $transaksi->namaLengkap }}
                                                 </h5>
                                             </div>
                                             <div
                                                 class="col-md-2 text-center d-flex justify-content-center align-items-center">
-                                                <p class="text-muted mb-0 small">{{ $transaksi->nomor }}</p>
+                                                <p class="text-muted mb-0 small">{{ $transaksi->nomorPengambil }}</p>
                                             </div>
                                             <div
                                                 class="col-md-2 text-center d-flex justify-content-center align-items-center">
@@ -110,11 +110,21 @@
                                             </div>
                                             <div
                                                 class="col-md-2 text-center d-flex justify-content-center align-items-center">
-                                                <p class="text-muted mb-0 small">{{ $transaksi->alamat }}
-                                                    ({{ $transaksi->catatan }})
-                                                    , {{ $transaksi->kecamatan }},
-                                                    {{ $transaksi->kota }}, {{ $transaksi->provinsi }},
-                                                    {{ $transaksi->kodePos }}</p>
+                                                <p class="text-muted mb-0 small">
+                                                    <b>
+                                                        Nomor Rekening <br>
+                                                    </b>
+                                                    {{ $transaksi->norek }} - Bank {{ $transaksi->bank }} <br>
+                                                    (A/N. {{ $transaksi->atasNamaBank }}) 
+                                                    @if ($transaksi->ewallet)
+                                                        <br>
+                                                        <b>
+                                                            E-Wallet <br>
+                                                        </b>
+                                                        {{ $transaksi->noewallet }} - {{ $transaksi->ewallet }} <br>
+                                                        (A/N. {{ $transaksi->namaewallet }})
+                                                    @endif
+                                                </p>
                                             </div>
                                             <div
                                                 class="col-md-2 mt-3 mt-sm-2 mt-md-0 text-center d-flex justify-content-center align-items-center">

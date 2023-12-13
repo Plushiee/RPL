@@ -188,7 +188,11 @@ class DashboardController extends Controller
     public function pembayaran()
     {
         $this->getCount();
-        $kumpulanTransaksi = UserTransaksiModel::where('idPemilik', Auth::id())->where('diterima', true)->orderBy('id', 'desc')->get();
+        $kumpulanTransaksi = UserTransaksiModel::join('pengambilmail', 'user_transaksi.idPengambil', '=', 'pengambilmail.id')
+            ->where('idPemilik', Auth::id())
+            ->where('diterima', true)
+            ->orderBy('id', 'desc')
+            ->get(['user_transaksi.*', 'pengambilmail.namaLengkap', 'pengambilmail.nomor as nomorPengambil', 'pengambilmail.atasNamaBank', 'pengambilmail.bank','pengambilmail.norek', 'pengambilmail.ewallet', 'pengambilmail.namaewallet', 'pengambilmail.noewallet']);
 
         return view('pembayaran-pemilik', [
             'kumpulanTransaksi' => $kumpulanTransaksi,
