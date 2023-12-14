@@ -264,15 +264,15 @@
                                                             </div>
                                                             <div
                                                                 class="col-md-2 text-center d-flex justify-content-center align-items-center">
-                                                                <p>Nama Pengantar</p><br>
-                                                                <h5 class="text-muted mb-0 mt-0 pt-0">
+                                                                <p class="text-muted mb-0 small">
+                                                                    <b>Nama Pengantar</b><br>    
                                                                     {{ $transaksi->nama }}
-                                                                </h5>
+                                                                </p>
                                                             </div>
-                                                            <div>
-                                                                <b>Nomor Bank</b><br>
-                                                                class="col-md-2 text-center d-flex justify-content-center align-items-center">
-                                                                <p class="text-muted mb-0 small">{{ $transaksi->nomor }}
+                                                            <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                                                                <p class="text-muted mb-0 small">
+                                                                    <b>Nomor Bank</b><br>    
+                                                                    {{ $transaksi->nomor }}
                                                                 </p>
                                                             </div>
                                                             <div
