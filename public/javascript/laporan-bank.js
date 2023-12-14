@@ -58,8 +58,8 @@ $(document).ready(function () {
     }
 
     var table1 = $('#transaksiTable');
-    initializeDataTable(table1, 'startDate1', 'endDate1', 'applyFilter1', 'resetFilter1', 3);
+    initializeDataTable(table1, 'startDate1', 'endDate1', 'applyFilter1', 'resetFilter1', 7);
 
     var table2 = $('#pengirimTable');
-    initializeDataTable(table2, 'startDate2', 'endDate2', 'applyFilter2', 'resetFilter2', 4);
+    initializeDataTable(table2, 'startDate2', 'endDate2', 'applyFilter2', 'resetFilter2', 5);
 });

@@ -243,7 +243,7 @@
                                                         <td class="d-none">{{ $transaksi->alamat }}, {{ $transaksi->kecamatan }},
                                                             {{ $transaksi->kota }}, {{ $transaksi->provinsi }}
                                                             {{ $transaksi->kodePos }}</td>
-                                                        <td class="d-none">{{ $transaksi->updated_at }}</td>
+                                                        <td class="d-none">{{ $transaksi->created_at }}</td>
                                                     </tr>
                                                 @endforeach
                                             </tbody>

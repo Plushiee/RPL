@@ -415,7 +415,7 @@ class DashboardController extends Controller
         $daftarPengumuman = PengumumanBankModel::orderBy('id', 'desc')->where('idBank', Auth::id())->get();
         
         if ($akunPengirimTerbanyak) {
-            $userPengirimTerbanyak = UserEmailModel::find($pengirimTerbanyak->idPemilik);
+            $userPengirimTerbanyak = UserEmailModel::find($akunPengirimTerbanyak->idPemilik);
         } else {
             $userPengirimTerbanyak = null;
         }
@@ -529,13 +529,14 @@ class DashboardController extends Controller
             ->orderBy('transaksi_bank.id', 'desc')
             ->get(['useremail.id as idUser','useremail.nomor', 'useremail.email', 'useremail.namaLengkap', 'useremail.alamat', 'useremail.kecamatan', 'useremail.kota', 'useremail.provinsi', 'useremail.kodePos', 'transaksi_bank.*']);
 
-        $kumpulanPengirim = UserTransaksiBankModel::join('banksampahmail', 'transaksi_bank.idBank', '=', 'banksampahmail.id')
+            $kumpulanPengirim = UserTransaksiBankModel::join('banksampahmail', 'transaksi_bank.idBank', '=', 'banksampahmail.id')
             ->join('useremail', 'transaksi_bank.idPemilik', '=', 'useremail.id')
             ->where('transaksi_bank.idBank', Auth::user()->id)
+            ->groupBy('useremail.id', 'useremail.nomor', 'useremail.email', 'useremail.namaLengkap', 'useremail.alamat', 'useremail.kecamatan', 'useremail.kota', 'useremail.provinsi', 'useremail.kodePos', 'useremail.created_at')
             ->orderByDesc('transaksi_bank.id')
-            ->groupBy('useremail.id', 'useremail.nomor', 'useremail.email', 'useremail.namaLengkap', 'useremail.alamat', 'useremail.kecamatan', 'useremail.kota', 'useremail.provinsi', 'useremail.kodePos')
-            ->select('useremail.id as idUser', 'useremail.nomor', 'useremail.email', 'useremail.namaLengkap', 'useremail.alamat', 'useremail.kecamatan', 'useremail.kota', 'useremail.provinsi', 'useremail.kodePos')
+            ->select('useremail.id as idUser', 'useremail.nomor', 'useremail.email', 'useremail.namaLengkap', 'useremail.alamat', 'useremail.kecamatan', 'useremail.kota', 'useremail.provinsi', 'useremail.kodePos', 'useremail.created_at')
             ->selectRaw('COUNT(transaksi_bank.id) as hitungTransaksi')
+            ->distinct('idUser')
             ->get();
         
 
